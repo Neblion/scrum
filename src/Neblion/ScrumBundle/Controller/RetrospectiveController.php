@@ -58,11 +58,13 @@ class RetrospectiveController extends Controller
             array('label' => 'Sprint retrospective', 'url' => ''),
         );
         
-        $members = $em->getRepository('NeblionScrumBundle:Project')
-                ->getMembers($project->getId());
+        // Get Members of the team
+        $members = $em->getRepository('NeblionScrumBundle:Member')
+                    ->getTeamMembers($project->getTeam()->getId());
         
         $retrospectives = $em->getRepository('NeblionScrumBundle:Retrospective')
                 ->getForSprint($sprint->getId());
+        
         $memberRetro = array();
         foreach ($retrospectives as $retrospective) {
             $memberRetro[$retrospective->getUser()->getId()] = $retrospective;
