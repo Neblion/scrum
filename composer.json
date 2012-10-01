@@ -1,6 +1,6 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "name": "neblion/scrum",
+    "description": "Neblion scrum symfony app",
     "autoload": {
         "psr-0": { "": "src/" }
     },
