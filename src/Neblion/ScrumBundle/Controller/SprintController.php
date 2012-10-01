@@ -844,9 +844,10 @@ class SprintController extends Controller
         );
         
         // Initialize end date
-        $end = new \DateTime();
-        if (date('Y-m-d') >= $sprint->getEnd()) {
-            $end = $sprint->getEnd();
+        $end    = new \DateTime($sprint->getEnd()->format('Y-m-d'));
+        $today  = new \DateTime();
+        if ($today < $end) {
+            $end = $today;
         }
         
         // Get initial Hours of task
