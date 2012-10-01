@@ -301,6 +301,9 @@ class StoryController extends Controller
 
     /**
      * Deletes a Story entity.
+     * 
+     * Only product owner and admin could delete a story
+     * Only story not assign to a sprint could be deleted
      *
      * @Route("/{id}/delete", name="story_delete")
      * @Template()
@@ -325,16 +328,17 @@ class StoryController extends Controller
         // Check if user is really a member of this project
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $project->getId());
-        if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            throw new AccessDeniedException();
+        if (!$member or $member->getRole()->getId() !=  1) {
+            if (!$member->getAdmin()) {
+                throw new AccessDeniedException();
+            }
         }
         
         // Check if story could be deleted
         // Only story not assign to a sprint could be deleted
-        // Check status
         if ($story->getSprint()) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Story could not be deleted!');
+            $this->get('session')->setFlash('error', 'Story could not be deleted !');
             return $this->redirect($this->generateUrl('neblion_scrum_backlog'));
         }
         
@@ -350,7 +354,7 @@ class StoryController extends Controller
             }
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Story was deleted with success!');
+            $this->get('session')->setFlash('success', 'Story was deleted with success !');
             return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
         }
         

@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="page-header">
-    <h1>{{ 'Story delete:'|trans }} {{ project.name }}</h1>
+    <h1>{{ 'Story deletion'|trans }}</h1>
 </div>
 
 <div class="row-fluid">
@@ -12,11 +12,14 @@
         {% include 'NeblionScrumBundle:Project:menu.html.twig' with {'project': project} %}
     </div><!--/span-->
     
-    
     <div class="span9">
+        <div class="alert alert-danger">{{ 'Do you really want to delete this story: %story% ?'|trans({ '%story%': story.name }) }}</div>
         <form action="{{ path('story_delete', { 'id': story.id }) }}" method="post">
             {{ form_widget(form) }}
-            <button type="submit">{{ 'Delete'|trans }}</button>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Delete'|trans }}</button>
+                <a class="btn btn-primary" href="{{ path('neblion_scrum_backlog', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
+            </div>
         </form>
     </div><!--/span-->
 </div><!--/row-->
