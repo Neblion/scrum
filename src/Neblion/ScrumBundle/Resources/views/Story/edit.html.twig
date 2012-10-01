@@ -16,7 +16,12 @@
         <form action="{{ path('story_update', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
             {{ form_widget(form) }}
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary">{{ 'Edit'|trans }}</button>
+                <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
+                {% if story.sprint is null %}
+                    <a class="btn btn-primary" href="{{ path('neblion_scrum_backlog', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('sprint_show', {'id': story.sprint.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                {% endif %}
             </div>
         </form>
     </div><!--/span-->
