@@ -1,0 +1,18 @@
+{% block subject %}
+{% autoescape false %}
+{{ 'NeblionScrum %project_name% project notification'|trans({'%project_name%': project.name}) }}
+{% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+{{ 'Hello'|trans }}
+
+{{ 'You receive this email because %firstname% %lastname% (%email%) decide to remove you as a member on project %project_name%'|trans({'%firstname%': from.profile.firstname, '%lastname%': from.profile.lastname, '%email%': from.email, '%project_name%': project.name }) }}
+
+{{ 'See you soon on Neblion Scrum!'|trans }}
+
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}{% endblock %}

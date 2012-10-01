@@ -1,0 +1,28 @@
+{% block subject %}
+{% autoescape false %}
+{{ 'NeblionScrum invitation to %project_name% project'|trans({'%project_name%': project.name}) }}
+{% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+{% autoescape false %}
+{{ 'Hello'|trans }}
+
+{{ 'You receive this email because %firstname% %lastname% (%email%) invit you to join his team as a member on project %project_name%'|trans({'%firstname%': from.profile.firstname, '%lastname%': from.profile.lastname, '%email%': from.email, '%project_name%': project.name }) }}
+
+{{ 'I am very pleased and honored to welcome you as one of the members of the Neblion Scrum fast growing community..'|trans }}
+
+{{ 'In order to validate your subscription free of charge and without any engagement, please click the following link %confirmInvitationUrl% to complete your registration.'|trans({'%confirmInvitationUrl%': confirmationUrl}) }}
+
+{{ 'The stored private data will be accessible in your registered profile and will not be transmitted or re-used outside of Neblion Scrum, in strict compliancy with the French privacy legislation according to the law deposited January 6th 1978 by the French administration CNIL.'|trans }}
+
+{{ 'In confirming your registration by clicking on the previous link, you acknowledge having read and accepted our General Terms and Conditions.'|trans }}
+
+{{ 'We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.'|trans }}
+
+{{ 'See you soon on Neblion Scrum!'|trans }}
+
+{% endautoescape %}
+{% endblock %}
+
+{% block body_html %}{% endblock %}

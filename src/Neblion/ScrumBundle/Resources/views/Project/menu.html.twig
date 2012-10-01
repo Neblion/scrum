@@ -1,0 +1,9 @@
+<ul class="nav nav-tabs nav-stacked">
+    <li {% if app.request.attributes.get('_route') == 'project_edit' %}class="active"{% endif %}><a href="{{ path('project_edit', { 'id': project.id }) }}">{{ 'Edit'|trans }}</a></li>
+    <li {% if app.request.attributes.get('_route')|slice(0, 4) == 'team' or app.request.attributes.get('_route')|slice(0, 6) == 'member'%}class="active"{% endif %}><a href="{{ path('team_show', { 'id': project.id }) }}">{{ 'Team'|trans }}</a></li>
+    <li {% if app.request.attributes.get('_route')|slice(0, 7) == 'feature' %}class="active"{% endif %}><a href="{{ path('feature_list', { 'id': project.id }) }}">{{ 'Features'|trans }}</a></li>
+    <li {% if app.request.attributes.get('_route')|slice(0, 7) == 'release' %}class="active"{% endif %}><a href="{{ path('release_list', {'id': project.id }) }}">{{ 'Releases'|trans }}</a></li>
+    <li {% if app.request.attributes.get('_route') == 'project_delete' %}class="active"{% endif %}><a href="{{ path('project_delete', { 'id': project.id }) }}">{{ 'Delete'|trans }}</a></li>
+</ul>
+
+

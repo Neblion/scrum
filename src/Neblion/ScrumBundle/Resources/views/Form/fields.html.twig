@@ -1,0 +1,46 @@
+{% block field_rows %}
+{% spaceless %}
+    {% if form.vars.errors|length > 0 %}
+        <div class="alert alert-error">{{ form_errors(form) }}</div>
+    {% endif %}
+    {% for child in form %}
+        {{ form_row(child) }}
+    {% endfor %}
+{% endspaceless %}
+{% endblock field_rows %}
+
+{% block field_row %}
+    {% if form.vars.errors|length > 0 %}
+        <div class="control-group error">
+    {% else %}
+        <div class="control-group">
+    {% endif %}
+    {{ form_label(form) }}
+    <div class="controls">
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </div>
+    </div>
+{% endblock field_row %}
+                
+{% block field_label %}
+    {# custom field label output #}
+    {% spaceless %}
+        <label class="control-label{% if required %} required{% endif %}" for="{{ id }}">
+            {{ name|replace({'_':' '})|capitalize|trans }}
+            {% if required %}
+                <span class="required" title="{{ 'This field is required'|trans }}">*</span>
+            {% endif %}
+        </label>
+    {% endspaceless %}
+{% endblock field_label %}
+        
+{% block field_errors %}
+    {% spaceless %}
+    {% if errors is defined and errors|length > 0 %}
+        {% for error in errors %}
+            <span class="help-inline">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</span>
+        {% endfor %}
+    {% endif %}
+    {% endspaceless %}
+{% endblock field_errors %}

@@ -1,0 +1,25 @@
+{% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>{{ 'Feature creation:'|trans }} {{ project.name }}</h3>
+</div>
+
+<div id="modal-body" class="modal-body">
+    {% if success %}
+        <div class="alert alert-success">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <h4 class="alert-heading">{{ 'Success!'|trans }}</h4>
+            Blabla blabla.....
+        </div>
+    {% endif %}
+    
+    <form id="modal-form" action="{{ path('feature_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+            {{ form_widget(form) }}
+    </form>
+</div>
+
+<div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <a id="modal-submit-form" href="" class="btn btn-primary">Save changes</a>
+</div>

@@ -1,0 +1,56 @@
+<div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Neblion Scrum</a>
+          {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <div class="btn-group pull-right">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i>{{ app.user.username }}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ path('profile_edit') }}">{{ 'Edit profile'|trans }}</a></li>
+                    <li><a href="{{ path('fos_user_change_password') }}">{{ 'Change password'|trans }}</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">{{ 'Sign Out'|trans }}</a></li>
+                </ul>
+            </div>
+            
+          
+          {% else %}
+            <div class="btn-group pull-right">
+                <a class="btn btn-primary" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+                <a class="btn btn-success" href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+            </div>
+          {% endif %}
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+</div>
+
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+
+<div class="subnav subnav-fixed">
+    <ul class="nav nav-pills">
+      <li><a href="{{ path('neblion_scrum_projects') }}">{{ 'Projects'|trans }}</a></li>
+      
+      {% if project is defined %}
+        <li><a href="{{ path('project_show', { 'id': project.id }) }}">{{ project.name }} {{ 'Dasboard'|trans }}</a></li>
+        <li><a href="{{ path('neblion_scrum_backlog', { 'id': project.id }) }}">{{ 'Backlog'|trans }}</a></li>
+        <li><a href="{{ path('sprint_list', { 'id': project.id }) }}">{{ 'Sprints'|trans }}</a></li>
+      {% endif %}
+    </ul>
+</div>
+
+{% endif %}

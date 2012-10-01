@@ -1,0 +1,12 @@
+{# Breadcrumb #}
+{% if pathes|length > 0 %}
+    <ul class="breadcrumb">
+    {% for path in pathes %}
+        {% if loop.last %}
+            <li class="active">{{ path.label|trans }}</li>
+        {% else %}
+            <li><a href="{{ path.url }}">{{ path.label|trans }}</a> <span class="divider">/</span></li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endif %}

@@ -1,0 +1,156 @@
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+	#backlog ul { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+	#backlog li { display:block; margin: 2px; padding: 0.4em; font-size: 1.4em; /*height: 18px;*/ }
+    </style>
+{% endblock %}
+
+
+
+{% block body %}
+{% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
+    
+<div class="page-header">
+    <h1>{{ 'Project backlog'|trans }}</h1>
+</div>
+
+<div class="row-fluid">
+    <div class="span3">
+        <p>Current velocity is <span class="label label-info">{{ velocity }}</span></p>
+        <p><a href="{{ path('story_new', { 'id': project.id }) }}" class="btn btn-primary add-story">{{ 'Add a story'|trans }}</a></p>
+        <div class="modal hide" id="myModal">
+            <div id="modal-content"></div>
+        </div>
+    </div><!--/span-->
+
+    <div class="span9">
+        
+        
+        <form class="hide" id="backlog-sort-order" action="{{ path('backlog_sort_order', {'id': project.id}) }}" method="post">
+            <input id="story-sort-order" name="story-sort-order" type="hidden">
+            <button class="btn btn-primary" type="submit">Save story sort order</button>
+        </form>
+
+        
+        <div id="backlog">
+            {% include 'NeblionScrumBundle:Project:backlog-stories-partial.html.twig' with 
+    { 'nextSprint': nextSprint, 'backlog': backlog,  'startOfNextSprint': startOfNextSprint, 
+      'endOfNextSprint': endOfNextSprint, 'sprintDuration': sprintDuration, 
+      'project': project } %}
+        </div>
+    </div><!--/span-->
+</div><!--/row-->
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $("a[rel=popover]").popover();
+        $("div[rel=popover]").popover();
+        
+        $("#nextsprint, #otherstories").sortable({
+            items: "li",
+            connectWith: ["#nextsprint, #otherstories"],
+            axis: "y",
+            containment: "#backlog",
+            cursor: "move",
+            stop:function(event, ui) {
+                // Check where story has been drop (nextsprint or otherstories)
+                if (ui.item.parent().attr('id') == 'next-sprint-stories' && ui.item.attr('value') == 0) {
+                    alert('You can not add a story not estimate in next sprint !');
+                    $(ui.sender).sortable('cancel');
+                    return false;
+                }
+                
+                    var nextestimate = 0;
+                    var otherestimate = 0;
+                    $('#story-sort-order').val('');
+                    var val = '';
+                    $('.sortable-story').each(function(){
+                        if ($(this).attr('id')) {
+                            if (val != '') {
+                                val = val + ',';
+                            }
+                            val = val + $(this).attr('id');
+                            if ($(this).parent().attr('id') == 'next-sprint-stories') {
+                                nextestimate += $(this).attr('value');
+                            } else {
+                                otherestimate += $(this).attr('value');
+                            }
+                        }
+                    });
+                    $('#story-sort-order').val(val);
+                    
+                    var form = $("#backlog-sort-order");
+                    $.ajax({
+                        url: form.attr('action'),
+                        type: form.attr('method'),
+                        data: form.serialize(), 
+                        success: function(html) { 
+                            $("#next-sprint-estimate").text(nextestimate);
+                            $("#other-stories-estimate").text(otherestimate);
+                            
+                            var lastStory = $("#next-sprint-stories li:last-child").attr('id');
+                            var link = $("#start-next-sprint").attr("href");
+                            $("#start-next-sprint").attr("href", link.replace(/\d+$/, lastStory));
+                        }
+                    });
+                    
+                }
+        });
+    
+        $("a.story-estimate").live("click", function() {
+            //var story_id    = $(this).attr('id').replace('story-estimate-', '');
+            var url         = $(this).attr('href');    
+
+            //alert(story_id);
+            //alert(url);
+
+            $.ajax({
+                url: url,
+                success: function(data){
+                    $("#modal-content").html(data);
+                    $('#myModal').modal('toggle')
+                }
+            });
+
+            return false;
+            //var splitter = $(this).attr('id').split('-');
+            //alert('id: ' + splitter[2]);
+        });
+        
+        $("a.add-story").click(function() {
+            var url = $(this).attr('href');    
+
+            $.ajax({
+                url: url,
+                success: function(data) {
+                    $("#modal-content").html(data);
+                    $('#myModal').modal('toggle')
+                }
+            });
+
+            return false;
+        });
+
+        $("#modal-submit-form").live("click", function() {
+            var form = $("#modal-form");
+            //alert(form.attr('action'));
+            //alert('totototototo');
+
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: form.serialize(),
+                success: function(data){
+                    $("#modal-content").html(data);
+                }
+            });
+
+            return false;
+        });
+    </script>
+{% endblock %}

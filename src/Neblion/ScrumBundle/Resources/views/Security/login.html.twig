@@ -1,0 +1,48 @@
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% block body %}
+<div class="row-fluid">
+    <div class="span3">
+    </div><!--/span-->
+    
+    <div class="span9">
+        <h2>{{ 'Sign in'|trans }}</h2>
+            <div id="login">
+
+                <div id="block-login">
+                    {% if error %}
+                        <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+                    {% endif %}
+
+                    <form action="{{ path("fos_user_security_check") }}" method="post" class="well form-horizontal">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+                        <div class="control-group">
+                            <label class="control-label" for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                            <div class="controls">
+                                <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <label class="control-label" for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                            <div class="controls">
+                                <input type="password" id="password" name="_password" /> <a href="{{ path("fos_user_resetting_request") }}" class="btn btn-success">Forgot your password ?</a>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            
+
+                            <label for="remember_me" class="checkbox">
+                                <input type="checkbox" id="remember_me" name="_remember_me" value="on" /> {{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}
+                            </label>
+
+                            <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>
+{% endblock body %}

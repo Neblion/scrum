@@ -1,0 +1,23 @@
+
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% block body %}
+     <div class="row-fluid">
+        <div class="span3">
+            <ul class="nav nav-tabs nav-stacked">
+                {% for project in projects %}
+                    <li><a href="{{ path('project_show', { 'id': project.id }) }}">{{ project.name }}</a></li>
+                {% endfor %}
+            </ul>
+            <p><a href="{{ path('project_new') }}" class="btn btn-primary">{{ 'New project'|trans }}</a></p>
+        </div><!--/span-->
+        
+        <div class="span9">
+          <div class="hero-unit">
+            <h1>Dashboard</h1>
+          </div>
+          
+          
+        </div><!--/span-->
+      </div><!--/row-->
+{% endblock body %}

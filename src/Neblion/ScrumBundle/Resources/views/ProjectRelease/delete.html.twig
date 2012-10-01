@@ -1,0 +1,31 @@
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
+
+{% block body %}
+{% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
+
+<div class="page-header">
+    <h1>{{ 'Release delete:'|trans }} {{ project.name }}</h1>
+</div>
+
+<div class="row-fluid">
+    <div class="span3">
+        {% include 'NeblionScrumBundle:Project:menu.html.twig' with {'project': project} %}
+    </div><!--/span-->
+    
+    
+    <div class="span9">
+        <div class="alert alert-danger">{{ 'Do you really want to delete this release: %release% ?'|trans({ '%release%': release.name }) }}</div>
+        <form action="{{ path('release_delete', { 'id': release.id }) }}" method="post">
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Delete'|trans }}</button>
+            <a class="btn btn-primary" href="{{ path('release_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
+        </form>
+    </div><!--/span-->
+</div><!--/row-->
+
+{% endblock body %}
+
+
+

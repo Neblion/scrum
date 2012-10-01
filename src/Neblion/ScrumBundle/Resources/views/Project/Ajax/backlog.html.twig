@@ -1,0 +1,61 @@
+{% include 'NeblionScrumBundle:Project:backlog-stories-partial.html.twig' with 
+    { 'nextSprint': nextSprint, 'backlog': backlog,  'startOfNextSprint': startOfNextSprint, 
+      'endOfNextSprint': endOfNextSprint, 'sprintDuration': sprintDuration, 
+      'project': project } %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $("#nextsprint, #otherstories").sortable({
+            items: "li:not(.sortable-story-disabled)",
+            connectWith: ["#nextsprint, #otherstories"],
+            axis: "y",
+            containment: "#backlog",
+            cursor: "move",
+            stop:function(event, ui) {
+                // Check where story has been drop (nextsprint or otherstories)
+                if (ui.item.parent().attr('id') == 'next-sprint-stories' && ui.item.attr('value') == 0) {
+                    alert('You can not add a story not estimate in next sprint !');
+                    $(ui.sender).sortable('cancel');
+                    return false;
+                }
+                
+                    var nextestimate = 0;
+                    var otherestimate = 0;
+                    $('#story-sort-order').val('');
+                    var val = '';
+                    $('.sortable-story').each(function(){
+                        if ($(this).attr('id')) {
+                            if (val != '') {
+                                val = val + ',';
+                            }
+                            val = val + $(this).attr('id');
+                            if ($(this).parent().attr('id') == 'next-sprint-stories') {
+                                nextestimate += $(this).attr('value');
+                            } else {
+                                otherestimate += $(this).attr('value');
+                            }
+                        }
+                    });
+                    $('#story-sort-order').val(val);
+                    
+                    var form = $("#backlog-sort-order");
+                    $.ajax({
+                        url: form.attr('action'),
+                        type: form.attr('method'),
+                        data: form.serialize(), 
+                        success: function(html) { 
+                            $("#next-sprint-estimate").text(nextestimate);
+                            $("#other-stories-estimate").text(otherestimate);
+                            
+                            var lastStory = $("#next-sprint-stories li:last-child").attr('id');
+                            var link = $("#start-next-sprint").attr("href");
+                            $("#start-next-sprint").attr("href", link.replace(/\d+$/, lastStory));
+                        }
+                    });
+                    
+                }
+        });
+    </script>
+{% endblock %}
+            
+        

@@ -1,0 +1,18 @@
+<div id="story-box-{{ story.id }}" class="story-box" style="background-color: {{ story.feature.color }}">
+    <span class="story-estimate">Estimate: {{ story.estimate }}</span>
+    <span id="story-hours-remaining-{{ story.id }}" class="story-hours-remaining">Remaining Hours:{{ story.remainingHours }}</span>
+    <span class="">{{ story.status }}</span>
+    <p><a href="#" rel="popover" data-content="{{ story.description }}" data-original-title="{{ 'Description'|trans }}">{{ story.name }}</a></p>
+    
+    {% if sprint.status.id != 3 %}
+        <ul class="story-box-actions nav nav-pills">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Actions <b class="caret"></b></a>
+                <ul id="menu1" class="dropdown-menu">
+                    <li><a href="{{ path('story_edit', { 'id': story.id } ) }}">{{ 'Update'|trans }}</a></li>
+                    <li><a class="story-add-task" href="{{ path('task_new', {'id': story.id } ) }}">{{ 'Add task'|trans }}</a></li>
+                </ul>
+            </li>
+        </ul>
+    {% endif %}
+</div>

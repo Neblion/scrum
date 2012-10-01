@@ -1,0 +1,25 @@
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% block body %}
+<div class="page-header">
+    <h1>{{ 'Project dashboard:'|trans }}</h1>
+</div>
+
+<div class="row-fluid">
+    <div class="span3">
+        {% include 'NeblionScrumBundle:Project:menu.html.twig' with {'project': project} %}
+    </div><!--/span-->
+    
+    <div class="span9">
+        <p>{{ project.name }}</p>
+        
+        {% if currentSprint is not null %}
+            <p><a href="{{ path('sprint_show', { 'id': currentSprint.id }) }}">Current Sprint</a></p>
+        {% endif %}
+    </div><!--/span-->
+</div><!--/row-->
+
+{% endblock body %}
+
+
+

@@ -1,0 +1,36 @@
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
+{% form_theme form_account 'NeblionScrumBundle:Form:fields.html.twig' %}
+
+{% block body %}
+{% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
+    
+<div class="page-header">
+    <h1>{{ 'Profile edition'|trans }}:</h1>
+</div>
+
+<div class="row-fluid">
+    <div class="span3">
+    </div><!--/span-->
+    
+    <div class="span9">
+        <form action="{{ path('profile_update') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+            {{ form_widget(form) }}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
+                <a class="btn btn-primary" href=""><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+            </div>
+        </form>
+            
+        <form action="{{ path('fos_user_profile_edit') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+            {{ form_widget(form_account) }}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
+                <a class="btn btn-primary" href=""><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+            </div>
+        </form>
+    </div><!--/span-->
+</div><!--/row-->
+
+{% endblock body %}

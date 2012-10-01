@@ -1,0 +1,43 @@
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% block body %}
+{% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
+
+<div class="page-header">
+    <h1>{{ 'Sprint retrospective'|trans }}</h1>
+</div>
+
+<div class="row-fluid">
+    <div class="span3">
+        <p>sprint infos</p>
+    </div>
+        
+    <div class="span9">
+        {% for member in members %}
+            <div class="review-story">
+                <h2>{{ member.account.profile.firstname }} {{ member.account.profile.lastname }} ({{ member.account.username }}) - {{ member.role.name }}</h2>
+                {% if app.user.id == member.account.id %}
+                    {% if retrospectives[member.account.id] is defined %}
+                        <form action="{{ path('retrospective_update', { 'id': retrospectives[member.account.id].id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                            {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-primary">{{ 'Update'|trans }}</button>
+                        </form>
+                    {% else %}
+                        <form action="{{ path('retrospective_create', { 'id': sprint.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                            {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-primary">{{ 'Create'|trans }}</button>
+                        </form>
+                    {% endif %}
+                {% else %}
+                    {% if retrospectives[member.account.id] is defined %}
+                        <p>{{ retrospectives[member.account.id].comment }}
+                    {% else %}
+                        <p>no retro...</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div><!--/row-->   
+
+{% endblock body %}

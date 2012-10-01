@@ -1,0 +1,25 @@
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
+
+{% block body %}
+<div class="page-header">
+    <h1>{{ 'Story edition:'|trans }} {{ project.name }}</h1>
+</div>
+
+<div class="row-fluid">
+    <div class="span3">
+        {% include 'NeblionScrumBundle:Project:menu.html.twig' with {'project': project} %}
+    </div><!--/span-->
+    
+    <div class="span9">
+        <form action="{{ path('story_update', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+            {{ form_widget(form) }}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">{{ 'Edit'|trans }}</button>
+            </div>
+        </form>
+    </div><!--/span-->
+</div><!--/row-->
+
+{% endblock body %}

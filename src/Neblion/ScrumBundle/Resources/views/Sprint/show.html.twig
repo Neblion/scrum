@@ -1,0 +1,145 @@
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% block stylesheets %}
+     {{ parent() }}
+     
+    <style type="text/css">
+        .story-box { 
+            border: 1px solid black;
+            padding: 3px; margin: 3px; 
+        }
+        
+        .task-box { 
+            border: 1px solid black;
+            padding: 3px; margin: 3px;
+        }
+        
+        .sprint-view-column {
+            border-top: 3px solid #005580;
+            border-right: 3px solid #005580;
+            border-left: 3px solid #005580;
+        }
+    </style>
+{% endblock stylesheets %}
+
+{% block body %}
+{% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}    
+    
+<div class="modal hide" id="myModal">
+    <div id="modal-content"></div>
+</div>
+    
+<div class="page-header">
+    <h1>{{ sprint.name }} <small>Done: {{ sprintInfos.estimate.done }} / {{ sprintInfos.estimate.done + sprintInfos.estimate.todo }} Remaining Hours: <span id="total-hours-remaining">{{ sprintInfos.hours }}</span> - {{ sprint.start|date('d/m/Y') }} > {{ sprint.end|date('d/m/Y') }}</small></h1>
+</div>
+
+<div class="row-fluid">
+    <div class="span3">
+        {% if sprint.status.id == 1 %}
+            <a href="{{ path('sprint_start', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Start sprint' }}</button></a>
+        {% elseif sprint.status.id == 2 %}
+            <a href="{{ path('sprint_report', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Reports' }}</button></a>
+            <a href="{{ path('review_list', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Review' }}</button></a>
+            <a href="{{ path('retrospective_list', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Retrospective' }}</button></a>
+            <a href="{{ path('sprint_close', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Close sprint' }}</button></a>
+        {% else %}
+            <a href="{{ path('sprint_report', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Reports' }}</button></a>
+            <a href="{{ path('review_list', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Review' }}</button></a>
+            <a href="{{ path('retrospective_list', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Retrospective' }}</button></a>
+        {% endif %}
+    </div>
+    <div class="span9">
+        <div class="progress progress-striped">
+            <div class="bar"
+                style="width: {{ (sprintInfos.estimate.done / (sprintInfos.estimate.done + sprintInfos.estimate.todo))*100 }}%;"></div>
+        </div>
+    </div>
+</div><!--/row-->   
+
+<div class="row-fluid">
+    <div class="span3 sprint-view-column"><h3>{{ 'Story'|trans }}</h3></div>
+    <div class="span3 sprint-view-column"><h3>{{ 'ToDo'|trans }}</h3></div>
+    <div class="span3 sprint-view-column"><h3>{{ 'In Progress'|trans }}</h3></div>
+    <div class="span3 sprint-view-column"><h3>{{ 'Done'|trans }}</h3></div>
+</div><!--/row-->
+
+{% for story in storyAndTasksByStatus %}
+    <div id="sprint-story-row-{{ story.id }}" class="row-fluid sprint-story-row" style="border: 1px solid black; margin-bottom: 3px;">
+        <div class="span3">
+            {% include 'NeblionScrumBundle:Story:story-box-partial.html.twig' with { 'story': story, 'sprint': sprint } %}
+        </div>
+        <div id="tasks-todo-{{ story.id }}" class="span3"><!-- ToDo -->
+            {% for task in story.tasks.1 %}
+                {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
+            {% endfor %}
+        </div><!-- ToDo -->
+        <div id="tasks-inprogress-{{ story.id }}" class="span3"><!-- In Progress -->
+            {% for task in story.tasks.2 %}
+                {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
+            {% endfor %}
+        </div><!-- In Progress -->
+        <div id="tasks-done-{{ story.id }}" class="span3"><!-- Done -->
+            {% for task in story.tasks.3 %}
+                {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
+            {% endfor %}
+        </div><!-- Done -->
+    </div><!--/row-->
+{% endfor %}
+
+{% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        $('.dropdown-toggle').dropdown();
+        $("a[rel=popover]").popover();
+        
+        $("a.task-hours").click(function() {
+            var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
+            var url         = $(this).attr('href');    
+        
+            $.ajax({
+                url: url,
+                success: function(data){
+                    //$(data).insertAfter("#task-hours-upd-" + task_id);
+                    $("#modal-content").html(data);
+                    $('#myModal').modal('toggle')
+                }
+            });
+        
+            return false;
+        });
+        
+        $("a.story-add-task").click(function() {
+            //var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
+            var url         = $(this).attr('href');    
+        
+            $.ajax({
+                url: url,
+                success: function(data){
+                    //$(data).insertAfter("#task-hours-upd-" + task_id);
+                    $("#modal-content").html(data);
+                    $('#myModal').modal('toggle')
+                }
+            });
+        
+            return false;
+        });
+        
+        $("#modal-submit-form").live("click", function() {
+            var form = $("#modal-form");
+        
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: form.serialize(),
+                success: function(data){
+                    $("#modal-content").html(data);
+                }
+            });
+        
+            return false;
+        });
+    </script>
+{% endblock javascripts %}
+    

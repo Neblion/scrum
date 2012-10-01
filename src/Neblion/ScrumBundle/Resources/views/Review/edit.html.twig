@@ -1,0 +1,25 @@
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
+
+{% block body %}
+<div class="page-header">
+    <h1>{{ 'Sprint review:'|trans }} {{ review.story.sprint.name }}</h1>
+</div>
+
+<div class="row-fluid">
+    <div class="span3">
+    </div>
+    <div class="span9">
+        <h2>{{ review.story.name }}</h2>
+        <form action="{{ path('review_update', { 'id': review.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+            {{ form_widget(form) }}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">{{ 'Edit'|trans }}</button>
+            </div>
+        </form>
+    </div>
+</div><!--/row-->   
+
+{% endblock body %}
+

@@ -1,0 +1,24 @@
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% form_theme form theme %}
+
+{% block body %}
+     <div class="row-fluid">
+        <div class="span3">
+          
+        </div><!--/span-->
+        
+        <div class="span9">
+          <div class="hero-unit">
+            <form action="{{ path('scrum_invitation_confirm', {'token': token}) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+            {{ form_widget(form) }}
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">{{ 'Edit'|trans }}</button>
+            </div>
+        </form>
+          </div>
+         
+          
+        </div><!--/span-->
+      </div><!--/row-->
+{% endblock body %}

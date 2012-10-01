@@ -1,0 +1,27 @@
+{% for task in tasks %}
+    {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task } %}
+{% endfor %}
+
+<script type="text/javascript">
+    // Update total hours remaining
+    var remaining = 0;
+    $(".task-hours-remaining").each(function(index) {
+        remaining += parseInt($(this).text());
+    });
+    $("#total-hours-remaining").text(remaining);
+    
+    // Update hours remaining in story box
+    $(".story-box").each(function(item) {
+        var story_id    = $(this).attr('id').replace('story-box-', '');
+        var storyRemainingHours = 0;
+        $("#tasks-todo-" + story_id + " span.task-hours-remaining").each(function(item) {
+            storyRemainingHours += parseInt($(this).text());
+        });
+        
+        $("#tasks-inprogress-" + story_id + " span.task-hours-remaining").each(function(item) {
+            storyRemainingHours += parseInt($(this).text());
+        });
+        
+        $("#story-hours-remaining-" + story_id).text('Remaining Hours:' + storyRemainingHours);
+    });
+</script>

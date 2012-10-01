@@ -1,0 +1,25 @@
+{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+
+{% block body %}
+    {% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
+
+    <div class="page-header">
+        <h1>{{ 'Member show'|trans }}:</h1>
+    </div>
+
+<div class="row-fluid">
+    <div class="span3">
+        {% include 'NeblionScrumBundle:Project:menu.html.twig' with {'project': project} %}
+    </div>
+        
+    <div class="span9">
+        {% if member.account.profile is defined %}
+            <h2>{{ member.account.profile.firstname }} {{ member.account.profile.lastname }}</h2>
+            <p>{{ member.account.username }}</p>
+        {% else %}
+            <h2>{{ member.account.username }}</h2>
+        {% endif %}
+    </div>
+</div><!--/row-->   
+
+{% endblock body %}

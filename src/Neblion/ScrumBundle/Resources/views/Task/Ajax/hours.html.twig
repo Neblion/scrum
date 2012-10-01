@@ -1,0 +1,62 @@
+{% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>{{ 'Task hours remaining edition:'|trans }} {{ task.name }}</h3>
+</div>
+
+<div id="modal-body" class="modal-body">
+    {% if error %}
+        <div class="alert alert-error">
+            {{ error|trans }}
+        </div>
+    {% else %}
+        {% if success %}
+            <div class="alert alert-success">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <h4 class="alert-heading">{{ 'Success'|trans }} !</h4>
+                {{ ''|trans }}
+            </div>
+        {% endif %}
+    
+        <form id="modal-form" action="{{ path('task_hours', { 'id': task.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+            {{ form_widget(form) }}
+        </form>
+    {% endif %}
+</div>
+
+<div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">{{ 'Close'|trans }}</a>
+    {% if error == false %}
+        <a id="modal-submit-form" href="" class="btn btn-primary">{{ 'Save changes'|trans }}</a>
+    {% endif %}
+</div>
+
+
+{% if success %}
+    <script type="text/javascript">
+        $("#task-hours-remaining-{{ task.id }}").text("{{ remainingHours }}");
+        
+        // Update total hours remaining
+        var remaining = 0;
+        $(".task-hours-remaining").each(function(index) {
+            remaining += parseInt($(this).text());
+        });
+        $("#total-hours-remaining").text(remaining);
+
+        // Update hours remaining in story box
+        $(".story-box").each(function(item) {
+            var story_id    = $(this).attr('id').replace('story-box-', '');
+            var storyRemainingHours = 0;
+            $("#tasks-todo-" + story_id + " span.task-hours-remaining").each(function(item) {
+                storyRemainingHours += parseInt($(this).text());
+            });
+
+            $("#tasks-inprogress-" + story_id + " span.task-hours-remaining").each(function(item) {
+                storyRemainingHours += parseInt($(this).text());
+            });
+
+            $("#story-hours-remaining-" + story_id).text('Remaining Hours:' + storyRemainingHours);
+        });
+    </script>
+{% endif %}

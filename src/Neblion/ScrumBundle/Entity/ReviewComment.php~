@@ -1,0 +1,113 @@
+<?php
+
+namespace Neblion\ScrumBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Neblion\ScrumBundle\Entity\ReviewComment
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Neblion\ScrumBundle\Entity\ReviewCommentRepository")
+ */
+class ReviewComment
+{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\Review", inversedBy="comments")
+     * @ORM\JoinColumn(name="review_id", referencedColumnName="id")
+     */
+    private $review;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\Story", inversedBy="comments")
+     * @ORM\JoinColumn(name="story_id", referencedColumnName="id")
+     */
+    private $story;
+
+    /**
+     * @var text $comment
+     *
+     * @ORM\Column(name="comment", type="text")
+     */
+    private $comment;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param text $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return text 
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * Set review
+     *
+     * @param Neblion\ScrumBundle\Entity\Review $review
+     */
+    public function setReview(\Neblion\ScrumBundle\Entity\Review $review)
+    {
+        $this->review = $review;
+    }
+
+    /**
+     * Get review
+     *
+     * @return Neblion\ScrumBundle\Entity\Review 
+     */
+    public function getReview()
+    {
+        return $this->review;
+    }
+
+    /**
+     * Set story
+     *
+     * @param Neblion\ScrumBundle\Entity\Story $story
+     */
+    public function setStory(\Neblion\ScrumBundle\Entity\Story $story)
+    {
+        $this->story = $story;
+    }
+
+    /**
+     * Get story
+     *
+     * @return Neblion\ScrumBundle\Entity\Story 
+     */
+    public function getStory()
+    {
+        return $this->story;
+    }
+}

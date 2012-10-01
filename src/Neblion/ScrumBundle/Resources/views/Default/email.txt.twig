@@ -1,0 +1,11 @@
+{% block subject %}
+{% autoescape false %}
+{{ 'test subject' }}
+{% endautoescape %}
+{% endblock %}
+{% block body_text %}
+{% autoescape false %}
+{{ 'this is a test template' }}
+{% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}

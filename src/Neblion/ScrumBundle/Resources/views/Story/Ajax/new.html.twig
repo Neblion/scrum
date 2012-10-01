@@ -1,0 +1,31 @@
+{% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3>{{ 'Create a new story'|trans }}</h3>
+</div>
+
+<div id="modal-body" class="modal-body">
+        {% if success %}
+            <div class="alert alert-success">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <h4 class="alert-heading">{{ 'Success!'|trans }}</h4>
+                {{ ''|trans }}
+            </div>
+        {% endif %}
+    
+        <form id="modal-form" action="{{ path('story_create', { 'id': project.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+            {{ form_widget(form) }}
+        </form>
+</div>
+
+<div class="modal-footer">
+    <a href="#" class="btn" data-dismiss="modal">{{ 'Close'|trans }}</a>
+    <a id="modal-submit-form" href="" class="btn btn-primary">{{ 'Save changes'|trans }}</a>
+</div>
+
+{% if success %}
+    <script type="text/javascript">
+        $('#backlog').load("{{ path('neblion_scrum_backlog', { 'id': project.id }) }}");
+    </script>
+{% endif %}
