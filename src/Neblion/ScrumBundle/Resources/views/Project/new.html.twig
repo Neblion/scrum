@@ -14,10 +14,10 @@
     <div class="span9">
         <form action="{{ path('project_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
             {{ form_widget(form) }}
-
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">{{ 'Create'|trans }}</button>
-                </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> {{ 'Create'|trans }}</button>
+                <a class="btn btn-primary" href="{{ path('neblion_scrum_projects') }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+            </div>
             </form>
 
         </div><!--/span-->
