@@ -37,9 +37,8 @@ class ChangePasswordController extends BaseController
 
         $process = $formHandler->process($user);
         if ($process) {
-            $this->setFlash('fos_user_success', 'change_password.flash.success');
-
-            return $this->redirect($this->generateUrl('neblion_scrum_welcome'));
+            $this->container->get('session')->setFlash('success', 'The password has been changed with success !');
+            return new RedirectResponse($this->container->get('router')->generate('neblion_scrum_welcome'));
         }
 
         return $this->container->get('templating')->renderResponse(
