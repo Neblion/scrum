@@ -53,7 +53,8 @@ $command = new LoadDataFixturesDoctrineCommand();
 $application->add($command);
 $input = new ArrayInput(array(
     'command' => 'doctrine:fixtures:load',
-    '--fixtures'   => 'src/Neblion/ScrumBundle/DataFixtures/Tests'
+    '--fixtures'   => 'src/Neblion/ScrumBundle/DataFixtures/Tests',
 ));
+$input->setInteractive(false);
 $command->run($input, new ConsoleOutput());
  
