@@ -11,7 +11,7 @@
     </div><!--/span-->
     
     <div class="span9">
-        <p>{{ project.name }}</p>
+        <h1>{{ project.name }}</h1>
         
         {% if currentSprint is not null %}
             <p><a href="{{ path('sprint_show', { 'id': currentSprint.id }) }}">Current Sprint</a></p>
