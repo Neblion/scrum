@@ -85,7 +85,7 @@
                         <td>{{ member.status.name|trans }}</td>
                         <td>
                             {% if member.status.id == 2 %}
-                                <a class="btn btn-mini btn-info" href="{{ path('member_show', { 'id': member.id }) }}"><i class="icon-eye-open icon-white"></i> {{ 'Show'|trans }}</a>
+                                <!--<a class="btn btn-mini btn-info" href="{# path('member_show', { 'id': member.id }) #}"><i class="icon-eye-open icon-white"></i> {# 'Show'|trans #}</a>-->
                                 <a class="btn btn-mini btn-primary" href="{{ path('member_edit', { 'id': member.id }) }}"><i class="icon-edit icon-white"></i> {{ 'Edit'|trans }}</a>
                                 {% if member.account.id != app.user.id %}<a class="btn btn-mini btn-danger" href="{{ path('member_remove', { 'id': member.id }) }}"><i class="icon-trash icon-white"></i> {{ 'Remove'|trans }}</a>{% endif %}
                             {% elseif member.status.id == 1 and member.account.id == app.user.id %}
