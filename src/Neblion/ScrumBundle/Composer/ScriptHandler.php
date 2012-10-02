@@ -19,7 +19,7 @@ class ScriptHandler
             return;
         }
 
-        copy($appDir.'/config/parametes.yml.dist', $appDir.'/config/parameters.yml');
+        copy($appDir.'/config/parameters.yml.dist', $appDir.'/config/parameters.yml');
     }
 
     protected static function getOptions($event)
