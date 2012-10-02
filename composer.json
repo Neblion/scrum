@@ -25,6 +25,7 @@
     },
     "scripts": {
         "post-install-cmd": [
+            "Neblion\\ScrumBundle\\Composer\\ScriptHandler::installParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
