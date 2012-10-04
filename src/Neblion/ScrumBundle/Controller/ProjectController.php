@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Neblion\ScrumBundle\Entity\Project;
 use Neblion\ScrumBundle\Form\ProjectType;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 /**
  * Project controller.
  *
@@ -130,11 +132,20 @@ class ProjectController extends Controller
             throw new AccessDeniedException();
         }
         
+        $user = $this->get('security.context')->getToken()->getUser();
+        
         $em = $this->getDoctrine()->getEntityManager();
 
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
         if (!$project) {
             throw $this->createNotFoundException('Unable to find Project entity.');
+        }
+        
+        // Check if user is really a member of this project
+        $member = $em->getRepository('NeblionScrumBundle:Member')
+                ->isMemberOfProject($user->getId(), $project->getId());
+        if (!$member) {
+            throw new AccessDeniedException();
         }
 
         // Get the current sprint
