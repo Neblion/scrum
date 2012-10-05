@@ -19,16 +19,12 @@
             
 {% if backlog.stories is defined %}
     <div id="otherstories"  class="well well-large">
-        <p class="lead">
-            Backlog - Estimate: <span id="other-stories-estimate">{{ backlog.estimate }}</span>
-            <span class="pull-right"><a href="{{ path('story_new', { 'id': project.id }) }}" class="btn btn-primary add-story">{{ 'Add a story'|trans }}</a></span>
-        </p>
+        <p class="lead">Backlog - Estimate: <span id="other-stories-estimate">{{ backlog.estimate }}</span></p>
         <ul id="backlog-other-stories" class="sprint-stories">
             {% for story in backlog.stories %}
                 {% include 'NeblionScrumBundle:Story:story-backlog-partial.html.twig' with { 'story': story } %}
             {% endfor %}
         </ul>
-        <p><span class="pull-right"><a href="{{ path('story_new', { 'id': project.id }) }}" class="btn btn-primary add-story">{{ 'Add a story'|trans }}</a></span></p>
     </div>
 {% endif %}
             
