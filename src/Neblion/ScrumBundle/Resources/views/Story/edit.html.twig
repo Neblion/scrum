@@ -3,28 +3,31 @@
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
 {% block body %}
-<div class="page-header">
-    <h1>{{ 'Story edition:'|trans }} {{ project.name }}</h1>
-</div>
+    <div class="row">
+       {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'backlog'} %}
+    </div><!--/row-->
 
-<div class="row-fluid">
-    <div class="span3">
-        {% include 'NeblionScrumBundle:Project:menu.html.twig' with {'project': project} %}
-    </div><!--/span-->
-    
-    <div class="span9">
-        <form action="{{ path('story_update', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-            {{ form_widget(form) }}
-            <div class="form-actions">
-                <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
-                {% if story.sprint is null %}
-                    <a class="btn btn-primary" href="{{ path('neblion_scrum_backlog', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
-                {% else %}
-                    <a class="btn btn-primary" href="{{ path('sprint_show', {'id': story.sprint.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
-                {% endif %}
+    <div class="row">
+        <div class="span3">
+            <p>Help...</p>
+        </div><!--/span-->
+
+        <div class="span9">
+            <div class="page-header">
+                <h1>{{ 'Story edition'|trans }}</h1>
             </div>
-        </form>
-    </div><!--/span-->
-</div><!--/row-->
-
+            
+            <form action="{{ path('story_update', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
+                    {% if story.sprint is null %}
+                        <a class="btn btn-primary" href="{{ path('neblion_scrum_backlog', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                    {% else %}
+                        <a class="btn btn-primary" href="{{ path('sprint_show', {'id': story.sprint.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                    {% endif %}
+                </div>
+            </form>
+        </div><!--/span-->
+    </div><!--/row-->
 {% endblock body %}

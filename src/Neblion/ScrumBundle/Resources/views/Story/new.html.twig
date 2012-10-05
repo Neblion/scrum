@@ -3,24 +3,28 @@
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
 {% block body %}
-<div class="page-header">
-    <h1>{{ 'Story creation:'|trans }} {{ project.name }}</h1>
-</div>
+    <div class="row">
+       {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'backlog'} %}
+    </div><!--/row-->
 
-<div class="row-fluid">
-    <div class="span3">
-        
-    </div><!--/span-->
-    
-    
-    <div class="span9">
-        <form action="{{ path('story_create', {'id': project.id}) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
-            {{ form_widget(form) }}
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">{{ 'Create'|trans }}</button>
+    <div class="row">
+        <div class="span3">
+            <p>Help...</p>
+        </div><!--/span-->
+
+
+        <div class="span9">
+            <div class="page-header">
+                <h1>{{ 'Story creation'|trans }}</h1>
             </div>
-        </form>
-    </div><!--/span-->
-</div><!--/row-->
 
+            <form action="{{ path('story_create', {'id': project.id}) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> {{ 'Create'|trans }}</button>
+                    <a class="btn btn-primary" href="{{ path('neblion_scrum_backlog', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                </div>
+            </form>
+        </div><!--/span-->
+    </div><!--/row-->
 {% endblock body %}
