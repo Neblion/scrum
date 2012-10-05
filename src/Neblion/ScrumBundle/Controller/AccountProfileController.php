@@ -83,18 +83,12 @@ class AccountProfileController extends Controller
             return $this->redirect($this->generateUrl('profile_edit', array('id' => $account->getProfile()->getId())));
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Complete your profile', 'url' => ''),
-        );
-        
         $profile = new Profile();
         $profile->setAccount($account);
         $form   = $this->createForm(new ProfileType(), $profile);
         
         return array(
             'entity'    => $profile,
-            'pathes'    => $pathes,
             'form'      => $form->createView()
         );
     }
@@ -124,11 +118,6 @@ class AccountProfileController extends Controller
             return $this->redirect($this->generateUrl('profile_edit', array('id' => $account->getProfile()->getId())));
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Complete your profile', 'url' => ''),
-        );
-        
         $entity  = new Profile();
         $entity->setAccount($account);
         $request = $this->getRequest();
@@ -146,7 +135,6 @@ class AccountProfileController extends Controller
 
         return array(
             'entity' => $entity,
-            'pathes' => $pathes,
             'form'   => $form->createView()
         );
     }
@@ -176,11 +164,6 @@ class AccountProfileController extends Controller
             return $this->redirect($this->generateUrl('profile_new'));
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Edit your profile', 'url' => ''),
-        );
-        
         $form           = $this->createForm(new ProfileType(), $profile);
         $form_account   = $this->container->get('fos_user.profile.form');
         $formHandler = $this->container->get('fos_user.profile.form.handler');
@@ -188,7 +171,6 @@ class AccountProfileController extends Controller
 
         return array(
             'profile'   => $profile,
-            'pathes'    => $pathes,
             'form'      => $form->createView(),
             'form_account'      => $form_account->createView()
         );
@@ -219,11 +201,6 @@ class AccountProfileController extends Controller
             $this->get('session')->setFlash('notice', 'You have not a profile, create it!');
             return $this->redirect($this->generateUrl('profile_new'));
         }
-        
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Edit your profile', 'url' => ''),
-        );
         
         $form    = $this->createForm(new ProfileType(), $profile);
         $request = $this->getRequest();

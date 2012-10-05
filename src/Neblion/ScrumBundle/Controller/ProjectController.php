@@ -102,13 +102,6 @@ class ProjectController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Backlog', 'url' => ''),
-        );
-        
         // Load the current release
         $projectRelease = $em->getRepository('NeblionScrumBundle:ProjectRelease')
                 ->getCurrentForProject($project->getId());
@@ -167,7 +160,6 @@ class ProjectController extends Controller
                 'sprintDuration'    => $this->container->getParameter('sprint_duration'),
                 'startOfNextSprint' => $startOfNextSprint,
                 'endOfNextSprint'   => $endOfNextSprint,
-                'pathes'            => $pathes,
             );
         }
     }

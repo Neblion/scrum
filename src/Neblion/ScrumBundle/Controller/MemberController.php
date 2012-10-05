@@ -53,18 +53,9 @@ class MemberController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
-            array('label' => 'Show member', 'url' => ''),
-        );
-
         return array(
             'project'   => $project,
             'member'    => $member,
-            'pathes'    => $pathes,
         );
     }
 
@@ -102,21 +93,12 @@ class MemberController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
-            array('label' => 'Invit a new member', 'url' => ''),
-        );
-        
         //$userManager = $this->container->get('fos_user.user_manager');
         //$account = $userManager->createUser();
         $form = $this->createForm(new InvitationType());
         
         return array(
             'project'   => $project,
-            'pathes'    => $pathes,
             'team'      => $team,
             'form'      => $form->createView()
         );
@@ -157,14 +139,6 @@ class MemberController extends Controller
         if (!$member or  !$member->getAdmin()) {
             throw new AccessDeniedException();
         }
-        
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
-            array('label' => 'Invit a new member', 'url' => ''),
-        );
         
         $form = $this->createForm(new InvitationType());
         $request = $this->getRequest();
@@ -245,7 +219,6 @@ class MemberController extends Controller
 
         return array(
             'project'           => $project,
-            'pathes'            => $pathes,
             'team'              => $team,
             'form'              => $form->createView(),
         );
@@ -283,19 +256,10 @@ class MemberController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
-            array('label' => 'Edit member', 'url' => ''),
-        );
-        
         $editForm = $this->createForm(new MemberType(), $member);
 
         return array(
             'project'   => $project,
-            'pathes'    => $pathes,
             'member'    => $member,
             'form'      => $editForm->createView(),
         );
@@ -334,14 +298,6 @@ class MemberController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
-            array('label' => 'Edit member', 'url' => ''),
-        );
-
         $editForm   = $this->createForm(new MemberType(), $member);
 
         $request = $this->getRequest();
@@ -359,7 +315,6 @@ class MemberController extends Controller
 
         return array(
             'member'      => $member,
-            'pathes'      => $pathes,
             'edit_form'   => $editForm->createView(),
         );
     }
@@ -389,13 +344,7 @@ class MemberController extends Controller
         
         $hash = md5('thomas.bibard@neblion.net');
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Invitations list', 'url' => ''),
-        );
-        
         return array(
-            'pathes'        => $pathes,
             'invitations'   => $invitations,
             'hash'          => $hash,
         );
@@ -580,14 +529,6 @@ class MemberController extends Controller
             return $this->redirect($this->generateUrl('team_show', array('id' => $project->getId())));
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
-            array('label' => 'Remove member', 'url' => ''),
-        );
-        
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -609,7 +550,6 @@ class MemberController extends Controller
 
         return array(
             'project'   => $project,
-            'pathes'    => $pathes,
             'member'    => $member,
             'form'      => $form->createView(),
         );

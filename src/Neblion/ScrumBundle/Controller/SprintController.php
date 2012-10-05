@@ -55,17 +55,9 @@ class SprintController extends Controller
         $velocity = $em->getRepository('NeblionScrumBundle:Project')->getVelocity(1);
         //echo 'velocity=' . floor($velocity) . '<br />';
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Sprint list', 'url' => ''),
-        );
-        
         return array(
             'project'       => $project,
             'sprints'       => $sprints,
-            'pathes'        => $pathes,
         );
     }
 
@@ -99,14 +91,6 @@ class SprintController extends Controller
         if (!$member) {
             throw new AccessDeniedException();
         }
-        
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Sprints list', 'url' => $this->generateUrl('sprint_list', array('id' => $project->getId()))),
-            array('label' => 'Sprint show', 'url' => ''),
-        );
         
         $sprintDetails = $em->getRepository('NeblionScrumBundle:Story')->getSprintDetails($id);
         $sprintInfos = array(
@@ -172,7 +156,6 @@ class SprintController extends Controller
             'sprint'                    => $sprint,
             'storyAndTasksByStatus'     => $storyAndTasksByStatus,
             'sprintInfos'               => $sprintInfos,
-            'pathes'                    => $pathes,
         );
     }
 
@@ -258,13 +241,6 @@ class SprintController extends Controller
         $entity->setVelocity(0);
         $form   = $this->createForm(new SprintType(), $entity);
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Sprint list', 'url' => ''),
-        );
-
         return array(
             'project'   => $project,
             'entity'    => $entity,
@@ -272,7 +248,6 @@ class SprintController extends Controller
             'estimate'  => $estimate,
             'count'     => count($stories),
             'lastStory' => $lastStory->getId(),
-            'pathes'    => $pathes,
         );
     }
 
@@ -630,15 +605,6 @@ class SprintController extends Controller
             }
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Sprints list', 'url' => $this->generateUrl('sprint_list', array('id' => $project->getId()))),
-            array('label' => $sprint->getName(), 'url' => $this->generateUrl('sprint_show', array('id' => $sprint->getId()))),
-            array('label' => 'Sprint close', 'url' => ''),
-        );
-        
         $velocity = $em->getRepository('NeblionScrumBundle:Story')
                 ->getVelocityForSprint($sprint->getId());
         
@@ -690,7 +656,6 @@ class SprintController extends Controller
             'maxVelocity'       => $maxVelocity,
             'storiesDone'       => $storiesDone,
             'storiesTotal'      => count($stories),
-            'pathes'            => $pathes,
         );
         
     }
@@ -734,13 +699,6 @@ class SprintController extends Controller
                 throw new AccessDeniedException();
             }
         }
-        
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Sprint delete', 'url' => ''),
-        );
         
         /*
         echo '<pre>';
@@ -788,7 +746,6 @@ class SprintController extends Controller
             'project'   => $project,
             'sprint'    => $sprint,
             'form'      => $form->createView(),
-            'pathes'    => $pathes,
         );
     }
 
@@ -834,14 +791,6 @@ class SprintController extends Controller
         if (!$member) {
             throw new AccessDeniedException();
         }
-        
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => $sprint->getName(), 'url' => $this->generateUrl('sprint_show', array('id' => $sprint->getId()))),
-            array('label' => 'Sprint report', 'url' => ''),
-        );
         
         // Initialize end date
         $end    = new \DateTime($sprint->getEnd()->format('Y-m-d'));
@@ -919,7 +868,6 @@ class SprintController extends Controller
             'estimateInitialHours'  => $estimateInitialHours,
             'strHours'              => $strHours,
             'strTickY'              => $strTickY,
-            'pathes'                => $pathes,
         );
     }
 }

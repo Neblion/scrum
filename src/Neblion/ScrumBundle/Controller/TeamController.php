@@ -53,13 +53,6 @@ class TeamController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Team list', 'url' => ''),
-        );
-        
         $admin = false;
         $members = $membersDisabled = array();
         
@@ -91,7 +84,6 @@ class TeamController extends Controller
         */
         return array(
             'project'           => $project,
-            'pathes'            => $pathes,
             'team'              => $project->getTeam(),
             //'pagination'    => $pagination,
             'members'           => $members,

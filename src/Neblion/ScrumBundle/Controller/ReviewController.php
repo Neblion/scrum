@@ -47,15 +47,6 @@ class ReviewController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Sprint list', 'url' => $this->generateUrl('sprint_list', array('id' => $project->getId()))),
-            array('label' => $sprint->getName(), 'url' => $this->generateUrl('sprint_show', array('id' => $sprint->getId()))),
-            array('label' => 'Sprint review', 'url' => ''),
-        );
-        
         // Check if user is really a member of this project
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $project->getId());
@@ -83,7 +74,6 @@ class ReviewController extends Controller
             'review'        => $review,
             'stories'       => $stories,
             'forms'         => $forms,
-            'pathes'        => $pathes,
         );
     }
 

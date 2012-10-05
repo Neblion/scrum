@@ -52,16 +52,8 @@ class FeatureController extends Controller
         $features = $em->getRepository('NeblionScrumBundle:Feature')
                 ->getListForProject($project->getId());
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Features list', 'url' => ''),
-        );
-
         return array(
             'project'       => $project,
-            'pathes'        => $pathes,
             'role'          => $role,
             'features'      => $features,
         );
@@ -97,14 +89,6 @@ class FeatureController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Features list', 'url' => $this->generateUrl('feature_list', array('id' => $project->getId()))),
-            array('label' => 'New feature', 'url' => ''),
-        );
-        
         $success = false;
         $feature = new Feature();
         $feature->setProject($project);
@@ -113,7 +97,6 @@ class FeatureController extends Controller
         if ($this->getRequest()->isXmlHttpRequest()) {
             return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Feature:new.html.twig', array(
                 'project'   => $project,
-                'pathes'    => $pathes,
                 'feature'   => $feature,
                 'form'      => $form->createView(),
                 'success'   => $success,
@@ -121,7 +104,6 @@ class FeatureController extends Controller
         } else {
             return array(
                 'project'   => $project,
-                'pathes'    => $pathes,
                 'feature'   => $feature,
                 'form'      => $form->createView(),
                 'success'   => $success,
@@ -160,14 +142,6 @@ class FeatureController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Features list', 'url' => $this->generateUrl('feature_list', array('id' => $project->getId()))),
-            array('label' => 'New feature', 'url' => ''),
-        );
-        
         $success = false;
         $feature  = new Feature();
         $feature->setProject($project);
@@ -199,7 +173,6 @@ class FeatureController extends Controller
         } else {
             return array(
                 'project'   => $project,
-                'pathes'    => $pathes,
                 'feature'   => $feature,
                 'form'      => $form->createView(),
                 'success'   => $success,
@@ -242,19 +215,10 @@ class FeatureController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Features list', 'url' => $this->generateUrl('feature_list', array('id' => $project->getId()))),
-            array('label' => 'Edit feature', 'url' => ''),
-        );
-
         $editForm = $this->createForm(new FeatureType(), $feature);
 
         return array(
             'project'   => $project,
-            'pathes'    => $pathes,
             'feature'   => $feature,
             'form'      => $editForm->createView(),
         );
@@ -296,14 +260,6 @@ class FeatureController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Features list', 'url' => $this->generateUrl('feature_list', array('id' => $project->getId()))),
-            array('label' => 'Edit feature', 'url' => ''),
-        );
-
         $editForm   = $this->createForm(new FeatureType(), $feature);
         $request = $this->getRequest();
         $editForm->bindRequest($request);
@@ -319,7 +275,6 @@ class FeatureController extends Controller
 
         return array(
             'project'   => $project,
-            'pathes'    => $pathes,
             'feature'   => $feature,
             'form'      => $editForm->createView(),
         );
@@ -367,14 +322,6 @@ class FeatureController extends Controller
             return $this->redirect($this->generateUrl('feature_list', array('id' => $project->getId())));
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Features list', 'url' => $this->generateUrl('feature_list', array('id' => $project->getId()))),
-            array('label' => 'Delete feature', 'url' => ''),
-        );
-        
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -393,7 +340,6 @@ class FeatureController extends Controller
         
         return array(
             'project'   => $project,
-            'pathes'    => $pathes,
             'feature'   => $feature,
             'form'      => $form->createView(),
         );

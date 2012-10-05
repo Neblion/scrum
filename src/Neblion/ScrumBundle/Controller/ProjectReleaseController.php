@@ -95,20 +95,11 @@ class ProjectReleaseController extends Controller
             return $this->redirect($this->generateUrl('release_list', array('id' => $project->getId())));
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Releases list', 'url' => $this->generateUrl('release_list', array('id' => $project->getId()))),
-            array('label' => 'New release', 'url' => '')
-        );
-        
         $release = new ProjectRelease();
         $form   = $this->createForm(new ProjectReleaseType(), $release);
 
         return array(
             'project'   => $project,
-            'pathes'    => $pathes,
             'release'   => $release,
             'form'      => $form->createView()
         );
@@ -144,14 +135,6 @@ class ProjectReleaseController extends Controller
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
             throw new AccessDeniedException();
         }
-        
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Releases list', 'url' => $this->generateUrl('release_list', array('id' => $project->getId()))),
-            array('label' => 'New release', 'url' => '')
-        );
         
         // Load process status
         $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(1);
@@ -189,7 +172,6 @@ class ProjectReleaseController extends Controller
 
         return array(
             'project'   => $project,
-            'pathes'    => $pathes,
             'release'   => $release,
             'form'      => $form->createView()
         );
@@ -224,19 +206,10 @@ class ProjectReleaseController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $release->getProject()->getName(), 'url' => $this->generateUrl('project_show', array('id' => $release->getProject()->getId()))),
-            array('label' => 'Releases list', 'url' => $this->generateUrl('release_list', array('id' => $release->getProject()->getId()))),
-            array('label' => 'Edit release', 'url' => '')
-        );
-
         $form = $this->createForm(new ProjectReleaseType(), $release);
 
         return array(
             'project'   => $release->getProject(),
-            'pathes'    => $pathes,
             'release'   => $release,
             'form'      => $form->createView(),
         );
@@ -273,14 +246,6 @@ class ProjectReleaseController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $release->getProject()->getName(), 'url' => $this->generateUrl('project_show', array('id' => $release->getProject()->getId()))),
-            array('label' => 'Releases list', 'url' => $this->generateUrl('release_list', array('id' => $release->getProject()->getId()))),
-            array('label' => 'Edit release', 'url' => '')
-        );
-
         $form   = $this->createForm(new ProjectReleaseType(), $release);
         $request = $this->getRequest();
         $form->bindRequest($request);
@@ -301,7 +266,6 @@ class ProjectReleaseController extends Controller
 
         return array(
             'project'   => $release->getProject(),
-            'pathes'    => $pathes,
             'release'   => $release,
             'form'      => $form->createView(),
         );
@@ -344,14 +308,6 @@ class ProjectReleaseController extends Controller
             return $this->redirect($this->generateUrl('release_list', array('id' => $release->getProject()->getId())));
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
-            array('label' => $release->getProject()->getName(), 'url' => $this->generateUrl('project_show', array('id' => $release->getProject()->getId()))),
-            array('label' => 'Releases list', 'url' => $this->generateUrl('release_list', array('id' => $release->getProject()->getId()))),
-            array('label' => 'Delete release', 'url' => '')
-        );
-        
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -370,7 +326,6 @@ class ProjectReleaseController extends Controller
 
         return array(
             'project'   => $release->getProject(),
-            'pathes'    => $pathes,
             'release'   => $release,
             'form'      => $form->createView(),
         );
