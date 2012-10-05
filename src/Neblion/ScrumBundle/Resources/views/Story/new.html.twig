@@ -14,10 +14,6 @@
 
 
         <div class="span9">
-            <div class="page-header">
-                <h1>{{ 'Story creation'|trans }}</h1>
-            </div>
-
             <form action="{{ path('story_create', {'id': project.id}) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
                 {{ form_widget(form) }}
                 <div class="form-actions">

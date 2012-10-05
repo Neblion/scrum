@@ -11,10 +11,6 @@
         </div>
 
         <div class="span9">
-            <div class="page-header">
-                <h1>{{ 'Sprint reviews'|trans }}</h1>
-            </div>
-            
             {% for story in stories %}
                 <div class="review-story">
                     <h2>{{ story.name }} Estimate: {{ story.estimate }} Status: {% if story.status.id == 3 %}Done{% else %}Not done{% endif %}</h2>

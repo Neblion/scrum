@@ -19,10 +19,6 @@
         </div><!--/span-->
 
         <div class="span9">
-            <div class="page-header">
-                <h1>{{ 'Sprint edition'|trans }}</h1>
-            </div>
-                
             <form action="{{ path('sprint_update', { 'id': sprint.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
                 {{ form_widget(form) }}
                 <div class="form-actions">
