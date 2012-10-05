@@ -15,7 +15,12 @@ class LoadProjectData implements FixtureInterface
         $this->manager = $manager;
         
         $entities = array(
-            array('name' => 'Test', 'description' => 'This is a test.'),
+            array(
+                'name'              => 'Test', 
+                'description'       => 'This is a test.', 
+                'sprint_start_day'  => 3,
+                'sprint_duration'   => 13,
+            ),
         );
      
         foreach ($entities as $entity) {
@@ -35,6 +40,8 @@ class LoadProjectData implements FixtureInterface
         $entity = new Project();
         $entity->setName($params['name']);
         $entity->setDescription($params['description']);
+        $entity->setSprintStartDay($params['sprint_start_day']);
+        $entity->setSprintDuration($params['sprint_duration']);
         $this->manager->persist($entity);
     }
     

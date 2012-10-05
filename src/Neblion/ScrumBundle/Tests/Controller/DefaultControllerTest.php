@@ -14,10 +14,5 @@ class DefaultControllerTest extends WebTestCase
         $this->assertTrue($crawler->filter('html:contains("Hello, world!")')->count() == 1);
     }
     
-    public function testProjects()
-    {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/projects');
-        $this->assertTrue($client->getResponse()->isRedirect());
-    }
+    
 }
