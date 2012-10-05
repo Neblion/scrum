@@ -3,29 +3,35 @@
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
 {% block body %}
-{% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
+    <div class="row">
+       {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'sprints'} %}
+    </div><!--/row-->
 
-<div class="page-header">
-    <h1>{{ 'Sprint close'|trans }}</h1>
-</div>
+    <div class="row">
+        <div class="span3">
+            <p>Sprint infos</p>
+        </div><!--/span-->
 
-<div class="row-fluid">
-    <div class="span3">
-        <p>Sprint infos</p>
-    </div><!--/span-->
-    
-    
-    <div class="span9">
-        <p>Are you sure you want close this sprint ?</p>
-        <p>Member could not edit their task and retrospective and sprint review edition will be close.</p>
-        <p>Velocity will be {{ currentVelocity }} (max: {{ maxVelocity }}) stories done {{ storiesDone }} / {{ storiesTotal }}</p>
-        <form action="{{ path('sprint_close', { 'id': sprint.id }) }}" method="post">
-            {{ form_widget(form) }}
-            <button type="submit">{{ 'Close'|trans }}</button>
-        </form>
-    </div><!--/span-->
-</div><!--/row-->
 
+        <div class="span9">
+            <div class="page-header">
+                <h1>{{ 'Sprint close'|trans }}</h1>
+            </div>
+
+            <div class="alert alert-warning">
+                <p>{{ 'Are you sure you want close this sprint ?'|trans }}</p>
+                <p>{{ 'Member could not edit their task and retrospective and sprint review edition will be close.'|trans }}</p>
+                <p>Velocity will be {{ currentVelocity }} (max: {{ maxVelocity }}) stories done {{ storiesDone }} / {{ storiesTotal }}</p>
+            </div>
+            <form action="{{ path('sprint_close', { 'id': sprint.id }) }}" method="post">
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-warning"><i class="icon-stop icon-white"></i> {{ 'Close'|trans }}</button>
+                    <a class="btn btn-primary" href="{{ path('sprint_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                </div>
+            </form>
+        </div><!--/span-->
+    </div><!--/row-->
 {% endblock body %}
 
 

@@ -37,7 +37,7 @@
     </div>
 
     <div class="row">
-        <div class="span3">
+        <div class="span4">
             {% if sprint.status.id == 1 %}
                 <a href="{{ path('sprint_start', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Start sprint' }}</button></a>
             {% elseif sprint.status.id == 2 %}
@@ -51,7 +51,7 @@
                 <a href="{{ path('retrospective_list', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Retrospective' }}</button></a>
             {% endif %}
         </div>
-        <div class="span9">
+        <div class="span8">
             <div class="progress progress-striped">
                 <div class="bar"
                     style="width: {{ (sprintInfos.estimate.done / (sprintInfos.estimate.done + sprintInfos.estimate.todo))*100 }}%;"></div>
