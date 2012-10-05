@@ -20,7 +20,7 @@ class ProjectController extends Controller
 {
     
     /**
-     * @Route("/{id}/backlog", name="neblion_scrum_backlog")
+     * @Route("/{id}/backlog", name="project_backlog")
      * @Template()
      */
     public function backlogAction($id)
@@ -441,7 +441,7 @@ class ProjectController extends Controller
                 // redirect + flash mesg + log
                 // Set flash message
                 $this->get('session')->setFlash('notice', 'Noting to sort in the Backlog!');
-                return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+                return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
             }
             
             $tabsort = explode(',', $storySortOrder);
@@ -457,7 +457,7 @@ class ProjectController extends Controller
                     // TODO: log + alert
                     // Set flash message
                     $this->get('session')->setFlash('error', 'You try to sort a story who not in the Backlog!');
-                    return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+                    return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
                 }
             }
                 
@@ -473,7 +473,7 @@ class ProjectController extends Controller
             } else {
                 // Set flash message
                 $this->get('session')->setFlash('success', 'Backlog was successfully sorted!');
-                return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+                return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
             }
         }
     }

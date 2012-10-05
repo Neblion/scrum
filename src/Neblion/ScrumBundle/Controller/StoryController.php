@@ -122,7 +122,7 @@ class StoryController extends Controller
             if (!$this->getRequest()->isXmlHttpRequest()) {
                 // Set flash message
                 $this->get('session')->setFlash('success', 'Story was created with success!');
-                return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+                return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
             }
         }
 
@@ -222,7 +222,7 @@ class StoryController extends Controller
             
             // Set flash message
             $this->get('session')->setFlash('success', 'Story was updated with success!');
-            return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+            return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
 
         return array(
@@ -278,7 +278,7 @@ class StoryController extends Controller
                 if (!$this->getRequest()->isXmlHttpRequest()) {
                     // Set flash message
                     $this->get('session')->setFlash('success', 'Story was updated with success!');
-                    return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+                    return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
                 }
             }
         }
@@ -339,7 +339,7 @@ class StoryController extends Controller
         if ($story->getSprint()) {
             // Set flash message
             $this->get('session')->setFlash('error', 'Story could not be deleted !');
-            return $this->redirect($this->generateUrl('neblion_scrum_backlog'));
+            return $this->redirect($this->generateUrl('project_backlog'));
         }
         
         $form = $this->createDeleteForm($id);
@@ -355,7 +355,7 @@ class StoryController extends Controller
 
             // Set flash message
             $this->get('session')->setFlash('success', 'Story was deleted with success !');
-            return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+            return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         
         return array(

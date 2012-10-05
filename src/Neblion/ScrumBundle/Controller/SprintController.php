@@ -222,7 +222,7 @@ class SprintController extends Controller
         if ($lastStory->getProject() != $project) {
             // Set flash message
             $this->get('session')->setFlash('error', 'Story was not belong to this project!');
-            return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+            return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         
         // Load the current release
@@ -240,7 +240,7 @@ class SprintController extends Controller
             if ($story->getEstimate() == 0) {
                 // Set flash message
                 $this->get('session')->setFlash('error', 'You could not start this sprint, a story was not estimated!');
-                return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+                return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
             }
             $estimate += $story->getEstimate();
         }
@@ -311,7 +311,7 @@ class SprintController extends Controller
         if ($em->getRepository('NeblionScrumBundle:Sprint')->getCurrentForProject($project->getId())) {
             // Set flash message
             $this->get('session')->setFlash('error', 'There is already a current sprint for this project!');
-            return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+            return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         
         // Load the last story for sprint
@@ -323,7 +323,7 @@ class SprintController extends Controller
         if ($lastStory->getProject() != $project) {
             // Set flash message
             $this->get('session')->setFlash('error', 'Story was not belong to this project!');
-            return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+            return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         
         // Load default sprint status
@@ -352,7 +352,7 @@ class SprintController extends Controller
             if ($story->getEstimate() == 0) {
                 // Set flash message
                 $this->get('session')->setFlash('error', 'You could not start this sprint, a story was not estimated!');
-                return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+                return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
             }
             $estimate += $story->getEstimate();
         }

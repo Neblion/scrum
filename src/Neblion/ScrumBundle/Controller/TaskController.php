@@ -57,7 +57,7 @@ class TaskController extends Controller
         if (!$sprint) {
             // Set flash message
             $this->get('session')->setFlash('error', 'You could not add a task to this story, it was not included in a sprint!');
-            return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+            return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         if ($sprint->getStatus()->getId() == 3) {
             // Set flash message
@@ -131,7 +131,7 @@ class TaskController extends Controller
         if (!$sprint) {
             // Set flash message
             $this->get('session')->setFlash('error', 'You could not add a task to this story, it was not included in a sprint!');
-            return $this->redirect($this->generateUrl('neblion_scrum_backlog', array('id' => $project->getId())));
+            return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         
         // Load initial status

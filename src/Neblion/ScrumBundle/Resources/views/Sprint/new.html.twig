@@ -24,7 +24,7 @@
             {{ form_widget(form) }}
             <div class="form-actions">
                 <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> {{ 'Create'|trans }}</button>
-                <a class="btn btn-primary" href="{{ path('neblion_scrum_backlog', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                <a class="btn btn-primary" href="{{ path('project_backlog', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
             </div>
         </form>
     </div><!--/span-->

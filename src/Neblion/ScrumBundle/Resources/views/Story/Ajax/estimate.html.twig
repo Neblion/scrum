@@ -27,6 +27,6 @@
 {% if success %}
     <script type="text/javascript">
         $("#story-estimate-{{ story.id }}").text("{{ story.estimate }}");
-        $('#backlog').load("{{ path('neblion_scrum_backlog', { 'id': project.id }) }}");
+        $('#backlog').load("{{ path('project_backlog', { 'id': project.id }) }}");
     </script>
 {% endif %}
