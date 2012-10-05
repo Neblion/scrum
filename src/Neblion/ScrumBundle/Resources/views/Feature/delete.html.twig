@@ -3,29 +3,28 @@
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
 {% block body %}
-{% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
+    <div class="row">
+        {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'admin'} %}
+            
+        {% include 'NeblionScrumBundle:Layout:navbar-admin.html.twig' with { 'project': project, 'active': 'features'} %} 
+    </div><!--/row-->
 
-<div class="page-header">
-    <h1>{{ 'Feature delete:'|trans }}</h1>
-</div>
+    <div class="row">
+        <div class="span3">
+            <p>Help...</p>
+        </div><!--/span-->
 
-<div class="row-fluid">
-    <div class="span3">
-        {% include 'NeblionScrumBundle:Project:menu.html.twig' with {'project': project} %}
-    </div><!--/span-->
-    
-    <div class="span9">
-        <div class="alert alert-danger">{{ 'Do you really want to delete this feature: %feature% ?'|trans({ '%feature%': feature.name }) }}</div>
-        <form action="{{ path('feature_delete', { 'id': feature.id }) }}" method="post">
-            {{ form_widget(form) }}
-            <div class="form-actions">
-                <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Delete'|trans }}</button>
-                <a class="btn btn-primary" href="{{ path('feature_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
-            </div>
-        </form>
-    </div><!--/span-->
-</div><!--/row-->
-
+        <div class="span9">
+            <div class="alert alert-danger">{{ 'Do you really want to delete this feature: %feature% ?'|trans({ '%feature%': feature.name }) }}</div>
+            <form action="{{ path('feature_delete', { 'id': feature.id }) }}" method="post">
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Delete'|trans }}</button>
+                    <a class="btn btn-primary" href="{{ path('feature_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
+                </div>
+            </form>
+        </div><!--/span-->
+    </div><!--/row-->
 {% endblock body %}
 
 

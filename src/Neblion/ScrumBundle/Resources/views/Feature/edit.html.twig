@@ -8,28 +8,27 @@
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
 {% block body %}
-{% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
-    
-<div class="page-header">
-    <h1>{{ 'Edit feature'|trans }}:</h1>
-</div>
+    <div class="row">
+        {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'admin'} %}
+            
+        {% include 'NeblionScrumBundle:Layout:navbar-admin.html.twig' with { 'project': project, 'active': 'features'} %} 
+    </div><!--/row-->
 
-<div class="row-fluid">
-    <div class="span3">
-        {% include 'NeblionScrumBundle:Project:menu.html.twig' with {'project': project} %}
-    </div><!--/span-->
-    
-    <div class="span9">
-        <form action="{{ path('feature_update', { 'id': feature.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-            {{ form_widget(form) }}
-            <div class="form-actions">
-                <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
-                <a class="btn btn-primary" href="{{ path('feature_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
-            </div>
-        </form>
-    </div><!--/span-->
-</div><!--/row-->
+    <div class="row">
+        <div class="span3">
+            <p>Help...</p>
+        </div><!--/span-->
 
+        <div class="span9">
+            <form action="{{ path('feature_update', { 'id': feature.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
+                    <a class="btn btn-primary" href="{{ path('feature_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                </div>
+            </form>
+        </div><!--/span-->
+    </div><!--/row-->
 {% endblock body %}
 
 {% block javascripts %}

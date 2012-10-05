@@ -85,7 +85,8 @@ class DefaultController extends Controller
         */
         
         return array(
-            'projects' => $projects
+            'projects' => $projects,
+            'user'      => $user,
         );
     }
     

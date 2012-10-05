@@ -3,28 +3,30 @@
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
 {% block body %}
-{% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
+    <div class="row">
+       {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'sprints'} %}
+    </div><!--/row-->
 
-<div class="page-header">
-    <h1>{{ 'Sprint delete:'|trans }}</h1>
-</div>
+    <div class="row">
+        <div class="span3">
+            <p>Help...</p>
+        </div><!--/span-->
 
-<div class="row-fluid">
-    <div class="span3">
-        <p>Blabla bla bla</p>
-    </div><!--/span-->
-    
-    <div class="span9">
-        <div class="alert alert-danger">{{ 'Do you really want to delete this sprint: %sprint% ?'|trans({ '%sprint%': sprint.name }) }}</div>
-        <form action="{{ path('sprint_delete', { 'id': sprint.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-            {{ form_widget(form) }}
-            <div class="form-actions">
-                <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Delete'|trans }}</button>
-                <a class="btn btn-primary" href="{{ path('sprint_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
+        <div class="span9">
+            <div class="page-header">
+                <h1>{{ 'Sprint deletion'|trans }}</h1>
             </div>
-        </form>
-    </div><!--/span-->
-</div><!--/row-->
+            
+            <div class="alert alert-danger">{{ 'Do you really want to delete this sprint: %sprint% ?'|trans({ '%sprint%': sprint.name }) }}</div>
+            <form action="{{ path('sprint_delete', { 'id': sprint.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Delete'|trans }}</button>
+                    <a class="btn btn-primary" href="{{ path('sprint_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
+                </div>
+            </form>
+        </div><!--/span-->
+    </div><!--/row-->
 
 {% endblock body %}
 

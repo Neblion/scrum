@@ -1,28 +1,32 @@
 {% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
 
 {% block body %}
-<div class="page-header">
-    <h1>{{ 'Project dashboard:'|trans }}</h1>
-</div>
+    <div class="row">
+        {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'admin'} %}
+            
+        {% include 'NeblionScrumBundle:Layout:navbar-admin.html.twig' with { 'project': project, 'active': 'deletion'} %} 
+    </div><!--/row-->
 
-<div class="row-fluid">
-    <div class="span3">
-        {% include 'NeblionScrumBundle:Project:menu.html.twig' with {'project': project} %}
-    </div><!--/span-->
-    
-    <div class="span9">
-        <div class="alert alert-warning">
-            <p>{{ 'Do you really want to remove this project'|trans }}: <strong>{{ project.name }}</strong> ?</p>
-            <p>{{ 'If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !'|trans }}</p>
-        </div>
-        
-        <form action="{{ path('project_delete', { 'id': project.id }) }}" method="post">
-            {{ form_widget(form) }}
-            <button class="btn btn-danger" type="submit">{{ 'Delete this project'|trans }}</button>
-        </form>
-    </div><!--/span-->
-</div><!--/row-->
+    <div class="row">
+        <div class="span3">
+            <p>Help...</p>
+        </div><!--/span-->
 
+        <div class="span9">
+            <div class="alert alert-warning">
+                <p>{{ 'Do you really want to remove this project'|trans }}: <strong>{{ project.name }}</strong> ?</p>
+                <p>{{ 'If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !'|trans }}</p>
+            </div>
+
+            <form action="{{ path('project_delete', { 'id': project.id }) }}" method="post">
+                {{ form_widget(form) }}
+                <div class="form-actions">
+                    <button class="btn btn-danger" type="submit"><i class="icon-trash icon-white"></i> {{ 'Delete this project'|trans }}</button>
+                    <a class="btn btn-primary" href="{{ path('project_show', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                </div>
+            </form>
+        </div><!--/span-->
+    </div><!--/row-->
 {% endblock body %}
 
 

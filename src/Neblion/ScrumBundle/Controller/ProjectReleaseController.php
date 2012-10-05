@@ -47,19 +47,11 @@ class ProjectReleaseController extends Controller
             throw new AccessDeniedException();
         }
         
-        $pathes = array(
-            array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
-            array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
-            array('label' => 'Releases list', 'url' => ''),
-        );
-
         $releases = $em->getRepository('NeblionScrumBundle:ProjectRelease')
                 ->getListForProject($project);
         
         return array(
             'project'       => $project,
-            'pathes'        => $pathes,
             'releases'      => $releases,
         );
     }

@@ -6,26 +6,24 @@
 {% endblock stylesheets %}
 
 {% block body %}
-{% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
-    
-<div class="page-header">
-    <h1>{{ 'Sprint report'|trans }}</h1>
-</div>
+    <div class="row">
+       {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'sprints'} %}
+    </div><!--/row-->
 
-<div class="row-fluid">
-    <div class="span3">
-        <h2>{{ 'Sprint informations'|trans  }}:</h2>
-        <p>{{ sprint.description }}</p>
-    </div><!--/span-->
-    
-    
-    <div class="span9">
-        <h2>{{ 'Reports'|trans }}</h2>
-        
-        <div id="chartdiv" style="height:400px;width:600px; "></div>
-    </div><!--/span-->
-</div><!--/row-->
+    <div class="row">
+        <div class="span3">
+           <p>{{ sprint.description }}</p>
+        </div><!--/span-->
 
+
+        <div class="span9">
+            <div class="page-header">
+                <h1>{{ 'Sprint reports'|trans }}</h1>
+            </div>
+
+            <div id="chartdiv" style="height:400px;width:600px; "></div>
+        </div><!--/span-->
+    </div><!--/row-->
 {% endblock body %}
 
 {% block javascripts %}

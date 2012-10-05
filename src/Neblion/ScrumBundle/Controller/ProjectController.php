@@ -147,16 +147,9 @@ class ProjectController extends Controller
         if (!$member) {
             throw new AccessDeniedException();
         }
-
+        
         // Get the current sprint
         $currentSprint = $em->getRepository('NeblionScrumBundle:Sprint')->getCurrentForProject($project->getId());
-        
-        /*
-        $story = $em->getRepository('NeblionScrumBundle:Story')->load(1);
-        echo '<pre>';
-        print_r($story);
-        echo '</pre>';
-        */
         
         return array(
             'project'       => $project,

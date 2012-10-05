@@ -8,15 +8,15 @@
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
 {% block body %}
-    {% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
-    
-    <div class="page-header">
-        <h1>{{ 'Feature creation:'|trans }} {{ project.name }}</h1>
-    </div>
+    <div class="row">
+        {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'admin'} %}
+            
+        {% include 'NeblionScrumBundle:Layout:navbar-admin.html.twig' with { 'project': project, 'active': 'features'} %} 
+    </div><!--/row-->
 
-    <div class="row-fluid">
+    <div class="row">
         <div class="span3">
-            {% include 'NeblionScrumBundle:Project:menu.html.twig' with {'project': project} %}
+            <p>Help...</p>
         </div><!--/span-->
     
         <div class="span9">

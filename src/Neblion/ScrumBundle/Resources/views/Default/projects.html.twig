@@ -2,22 +2,32 @@
 {% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
 
 {% block body %}
-     <div class="row-fluid">
+     <div class="row">
         <div class="span3">
-            <ul class="nav nav-tabs nav-stacked">
+            <div class="user-profile">
+                <ul class="thumbnails">
+                    <li class="span3">
+                        <div class="thumbnail">
+                            <img src="{{ gravatar(user.email, 210) }}" alt="" />
+                            <h3>{{ user.profile.firstname }} {{ user.profile.lastname }}</h3>
+                            <p>{{ user.username }}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+                
+            <ul class="nav nav-tabs nav-stacked project-list">
+                <li class="active"><a href="#">{{ 'Your projects'|trans }}</a></li>
                 {% for project in projects %}
-                    <li><a href="{{ path('project_show', { 'id': project.id }) }}">{{ project.name }}</a></li>
+                    <li><a href="{{ path('project_show', { 'id': project.id }) }}">{{ project.name }}</a></a></li>
                 {% endfor %}
             </ul>
-            <p><a href="{{ path('project_new') }}" class="btn btn-primary">{{ 'New project'|trans }}</a></p>
-        </div><!--/span-->
+                
+            <a href="{{ path('project_new') }}"><button class="btn btn-success"> <i class="icon-plus-sign icon-white"></i> {{ 'Create project'|trans }}</button></a>
+        </div><!--/span3 -->
         
         <div class="span9">
-          <div class="hero-unit">
-            <h1>Dashboard</h1>
-          </div>
-          
-          
-        </div><!--/span-->
+            
+        </div><!--/span9 -->
       </div><!--/row-->
 {% endblock body %}

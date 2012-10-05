@@ -8,41 +8,34 @@
     </style>
 {% endblock %}
 
-
-
 {% block body %}
-{% include 'NeblionScrumBundle:Layout:breadcrumb.html.twig' with {'pathes': pathes} %}
-    
-<div class="page-header">
-    <h1>{{ 'Project backlog'|trans }}</h1>
-</div>
+    <div class="row">
+       {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'backlog'} %}
+    </div><!--/row-->
 
-<div class="row-fluid">
-    <div class="span3">
-        <p>Current velocity is <span class="label label-info">{{ velocity }}</span></p>
-        <p><a href="{{ path('story_new', { 'id': project.id }) }}" class="btn btn-primary add-story">{{ 'Add a story'|trans }}</a></p>
-        <div class="modal hide" id="myModal">
-            <div id="modal-content"></div>
-        </div>
-    </div><!--/span-->
+    <div class="row">
+        <div class="span3">
+            <p>Current velocity is <span class="label label-info">{{ velocity }}</span></p>
+            <p><a href="{{ path('story_new', { 'id': project.id }) }}" class="btn btn-primary add-story">{{ 'Add a story'|trans }}</a></p>
+            <div class="modal hide" id="myModal">
+                <div id="modal-content"></div>
+            </div>
+        </div><!--/span-->
 
-    <div class="span9">
-        
-        
-        <form class="hide" id="backlog-sort-order" action="{{ path('backlog_sort_order', {'id': project.id}) }}" method="post">
-            <input id="story-sort-order" name="story-sort-order" type="hidden">
-            <button class="btn btn-primary" type="submit">Save story sort order</button>
-        </form>
+        <div class="span9">
+            <form class="hide" id="backlog-sort-order" action="{{ path('backlog_sort_order', {'id': project.id}) }}" method="post">
+                <input id="story-sort-order" name="story-sort-order" type="hidden">
+                <button class="btn btn-primary" type="submit">Save story sort order</button>
+            </form>
 
-        
-        <div id="backlog">
-            {% include 'NeblionScrumBundle:Project:backlog-stories-partial.html.twig' with 
-    { 'nextSprint': nextSprint, 'backlog': backlog,  'startOfNextSprint': startOfNextSprint, 
-      'endOfNextSprint': endOfNextSprint, 'sprintDuration': sprintDuration, 
-      'project': project } %}
-        </div>
-    </div><!--/span-->
-</div><!--/row-->
+            <div id="backlog">
+                {% include 'NeblionScrumBundle:Project:backlog-stories-partial.html.twig' with 
+        { 'nextSprint': nextSprint, 'backlog': backlog,  'startOfNextSprint': startOfNextSprint, 
+        'endOfNextSprint': endOfNextSprint, 'sprintDuration': sprintDuration, 
+        'project': project } %}
+            </div>
+        </div><!--/span-->
+    </div><!--/row-->
 {% endblock body %}
 
 {% block javascripts %}
