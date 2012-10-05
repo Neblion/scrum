@@ -54,7 +54,7 @@ class FeatureController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Features list', 'url' => ''),
         );
@@ -99,7 +99,7 @@ class FeatureController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Features list', 'url' => $this->generateUrl('feature_list', array('id' => $project->getId()))),
             array('label' => 'New feature', 'url' => ''),
@@ -162,7 +162,7 @@ class FeatureController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Features list', 'url' => $this->generateUrl('feature_list', array('id' => $project->getId()))),
             array('label' => 'New feature', 'url' => ''),
@@ -244,7 +244,7 @@ class FeatureController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Features list', 'url' => $this->generateUrl('feature_list', array('id' => $project->getId()))),
             array('label' => 'Edit feature', 'url' => ''),
@@ -298,7 +298,7 @@ class FeatureController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Features list', 'url' => $this->generateUrl('feature_list', array('id' => $project->getId()))),
             array('label' => 'Edit feature', 'url' => ''),
@@ -369,7 +369,7 @@ class FeatureController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Features list', 'url' => $this->generateUrl('feature_list', array('id' => $project->getId()))),
             array('label' => 'Delete feature', 'url' => ''),

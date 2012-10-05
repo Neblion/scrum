@@ -97,7 +97,7 @@ class ProjectReleaseController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Releases list', 'url' => $this->generateUrl('release_list', array('id' => $project->getId()))),
             array('label' => 'New release', 'url' => '')
@@ -147,7 +147,7 @@ class ProjectReleaseController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Releases list', 'url' => $this->generateUrl('release_list', array('id' => $project->getId()))),
             array('label' => 'New release', 'url' => '')
@@ -226,7 +226,7 @@ class ProjectReleaseController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $release->getProject()->getName(), 'url' => $this->generateUrl('project_show', array('id' => $release->getProject()->getId()))),
             array('label' => 'Releases list', 'url' => $this->generateUrl('release_list', array('id' => $release->getProject()->getId()))),
             array('label' => 'Edit release', 'url' => '')
@@ -275,7 +275,7 @@ class ProjectReleaseController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $release->getProject()->getName(), 'url' => $this->generateUrl('project_show', array('id' => $release->getProject()->getId()))),
             array('label' => 'Releases list', 'url' => $this->generateUrl('release_list', array('id' => $release->getProject()->getId()))),
             array('label' => 'Edit release', 'url' => '')
@@ -346,7 +346,7 @@ class ProjectReleaseController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $release->getProject()->getName(), 'url' => $this->generateUrl('project_show', array('id' => $release->getProject()->getId()))),
             array('label' => 'Releases list', 'url' => $this->generateUrl('release_list', array('id' => $release->getProject()->getId()))),
             array('label' => 'Delete release', 'url' => '')

@@ -17,7 +17,7 @@
 
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <ul class="nav pull-right">
-                        <li><a href="{{ path('neblion_scrum_projects') }}">{{ 'Your projects'|trans }}</a></li>
+                        <li><a href="{{ path('project_list') }}">{{ 'Your projects'|trans }}</a></li>
                         <li class="divider-vertical"></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> {{ app.user.username }} <b class="caret"></b></a>

@@ -57,7 +57,7 @@ class SprintController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Sprint list', 'url' => ''),
         );
@@ -102,7 +102,7 @@ class SprintController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Sprints list', 'url' => $this->generateUrl('sprint_list', array('id' => $project->getId()))),
             array('label' => 'Sprint show', 'url' => ''),
@@ -260,7 +260,7 @@ class SprintController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Sprint list', 'url' => ''),
         );
@@ -632,7 +632,7 @@ class SprintController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Sprints list', 'url' => $this->generateUrl('sprint_list', array('id' => $project->getId()))),
             array('label' => $sprint->getName(), 'url' => $this->generateUrl('sprint_show', array('id' => $sprint->getId()))),
@@ -737,7 +737,7 @@ class SprintController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Sprint delete', 'url' => ''),
         );
@@ -837,7 +837,7 @@ class SprintController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => $sprint->getName(), 'url' => $this->generateUrl('sprint_show', array('id' => $sprint->getId()))),
             array('label' => 'Sprint report', 'url' => ''),

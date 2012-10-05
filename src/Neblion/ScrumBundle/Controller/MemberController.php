@@ -55,7 +55,7 @@ class MemberController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
             array('label' => 'Show member', 'url' => ''),
@@ -104,7 +104,7 @@ class MemberController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
             array('label' => 'Invit a new member', 'url' => ''),
@@ -160,7 +160,7 @@ class MemberController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
             array('label' => 'Invit a new member', 'url' => ''),
@@ -285,7 +285,7 @@ class MemberController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
             array('label' => 'Edit member', 'url' => ''),
@@ -336,7 +336,7 @@ class MemberController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
             array('label' => 'Edit member', 'url' => ''),
@@ -582,7 +582,7 @@ class MemberController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Team members list', 'url' => $this->generateUrl('team_show', array('id' => $project->getId()))),
             array('label' => 'Remove member', 'url' => ''),

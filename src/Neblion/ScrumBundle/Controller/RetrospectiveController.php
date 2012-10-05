@@ -51,7 +51,7 @@ class RetrospectiveController extends Controller
         
         $pathes = array(
             array('label' => 'Home', 'url' => $this->generateUrl('neblion_scrum_welcome')),
-            array('label' => 'Projects', 'url' => $this->generateUrl('neblion_scrum_projects')),
+            array('label' => 'Projects', 'url' => $this->generateUrl('project_list')),
             array('label' => $project->getName(), 'url' => $this->generateUrl('project_show', array('id' => $project->getId()))),
             array('label' => 'Sprint list', 'url' => $this->generateUrl('sprint_list', array('id' => $project->getId()))),
             array('label' => $sprint->getName(), 'url' => $this->generateUrl('sprint_show', array('id' => $sprint->getId()))),

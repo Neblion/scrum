@@ -38,59 +38,6 @@ class DefaultController extends Controller
     }
     
     /**
-     * @Route("/projects", name="neblion_scrum_projects")
-     * @Template()
-     */
-    public function projectsAction()
-    {
-        // Check if user is authorized
-        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            return $this->redirect($this->generateUrl('fos_user_security_login'));
-        }
-        
-        $em = $this->getDoctrine()->getEntityManager();
-        
-        $user = $this->get('security.context')->getToken()->getUser();
-        
-        if (!$user->getProfile()) {
-            // Set flash message
-            $this->get('session')->setFlash('notice', 'You have not completed your profile, please complete it!');
-            return $this->redirect($this->generateUrl('profile_new'));
-        }
-        
-        // Check if the user has a pending invitation
-        if ($em->getRepository('NeblionScrumBundle:Member')->hasPendingInvitation($user)) {
-            return $this->redirect($this->generateUrl('member_invitation'));
-        }
-        
-        $projects = $em->getRepository('NeblionScrumBundle:Project')
-                ->getListForUser($user->getId());
-        
-        // Set the locale (preferred language only)
-        // FIXME: we dont have to make it every time !!!!
-        //$this->get('session')->setLocale($user->getProfile()->getPreferredLanguage()->getIso2());
-        
-        /*
-        $dql = "SELECT r FROM NeblionScrumBundle:Role r ORDER BY r.id";
-        $query = $em->createQuery($dql)
-                       ->setFirstResult(2)
-                       ->setMaxResults(2);
-        
-        $paginator = new Paginator($query, $fetchJoinCollection = false);
-        
-        echo 'count:' . count($paginator) . '<br />';
-        foreach ($paginator as $post) {
-            echo $post->getName() . "<br />";
-        }
-        */
-        
-        return array(
-            'projects' => $projects,
-            'user'      => $user,
-        );
-    }
-    
-    /**
      * @Route("/invitation/confirm/{token}", name="scrum_invitation_confirm")
      * @Template()
      */
