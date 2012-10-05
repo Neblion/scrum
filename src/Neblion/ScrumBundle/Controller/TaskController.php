@@ -879,11 +879,12 @@ class TaskController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
         
-        $story = $em->getRepository('NeblionScrumBundle:Story')->find($id);
+        $story = $em->getRepository('NeblionScrumBundle:Story')->load($id, Query::HYDRATE_OBJECT);
         if (!$story) {
             throw $this->createNotFoundException('Unable to find Story entity.');
         }
         $project = $story->getProject();
+        $sprint = $story->getSprint();
         
         // Check if user is really a member of this project
         $member = $em->getRepository('NeblionScrumBundle:Member')
@@ -894,6 +895,8 @@ class TaskController extends Controller
         
         // Load tasks
         $tasks = $em->getRepository('NeblionScrumBundle:Task')->loadToDo($story->getId());
+        
+        $sprint = $story->getSprint();
         
         // Prepare results
         $resultTasks = array();
@@ -921,7 +924,7 @@ class TaskController extends Controller
         }
         
         return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Task/Ajax:loadToDo.html.twig', array(
-            'tasks' => $resultTasks,
+            'tasks' => $resultTasks, 'sprint' => $sprint
         ));
     }
     

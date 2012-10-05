@@ -1,5 +1,5 @@
 {% for task in tasks %}
-    {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task } %}
+    {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
 {% endfor %}
 
 <script type="text/javascript">
