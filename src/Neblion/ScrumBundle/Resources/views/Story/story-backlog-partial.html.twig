@@ -1,5 +1,4 @@
 <li id="{{ story.id }}" value="{{ story.estimate }}" class="sortable-story row well well-small">
-    <!--<div class="story-backlog-estimate" style="float: right; width: 120px; margin:0; border: 0px solid black;">-->
     <div class="span2" rel="popover" data-placement="top" data-content="{{ story.feature.description }}" data-original-title="{{ 'Feature'|trans }}: {{ story.feature.name }}" style="background-color: {{ story.feature.color }};"></div>
     <div class="span8">
         <a href="#" rel="popover" data-content="{{ story.description }}" data-original-title="{{ 'Description'|trans }}">{{ story.name }}</a>

@@ -1,36 +1,35 @@
-            {% if nextSprint.stories %}
-            
-            <div id="nextsprint" class="well well-large">
-                <p class="lead">Next Sprint</p>
-                <ul id="next-sprint-stories" class="sprint-stories">
-                    {% set lastStory = 0 %}
-                    {% for story in nextSprint.stories %}
-                        {% include 'NeblionScrumBundle:Story:story-backlog-partial.html.twig' with { 'story': story } %}
-                        {% if loop.last %}
-                            {% set lastStory = story.id %}
-                        {% endif %}
-                    {% endfor %}
-                </ul>
+{% if nextSprint.stories %}
+    <div id="nextsprint" class="well well-large">
+        <p class="lead">{{ 'Next Sprint'|trans }}</p>
+        <ul id="next-sprint-stories" class="sprint-stories">
+            {% set lastStory = 0 %}
+            {% for story in nextSprint.stories %}
+                {% include 'NeblionScrumBundle:Story:story-backlog-partial.html.twig' with { 'story': story } %}
+                {% if loop.last %}
+                    {% set lastStory = story.id %}
+                {% endif %}
+            {% endfor %}
+        </ul>
                 
-                <p class="lead">Release: {{ projectRelease.name }} - {{ startOfNextSprint|date('d/m/Y') }} > {{ endOfNextSprint|date('d/m/Y') }} - Duration: {{ sprintDuration }} days - Estimate <span id="next-sprint-estimate">{{ nextSprint.estimate }}</span>
-                    <a class="btn btn-success" id="start-next-sprint" href="{{ path('sprint_new', { 'id': project.id, 'story': lastStory }) }}"><strong>{{ 'Create Next Sprint'|trans }}</strong></a>
-                </p>
-            </div>
-            {% endif %}
+        <p class="lead">Release: {{ projectRelease.name }} - {{ startOfNextSprint|date('d/m/Y') }} > {{ endOfNextSprint|date('d/m/Y') }} - Duration: {{ sprintDuration }} days - Estimate <span id="next-sprint-estimate">{{ nextSprint.estimate }}</span>
+            <a class="btn btn-success" id="start-next-sprint" href="{{ path('sprint_new', { 'id': project.id, 'story': lastStory }) }}"><strong>{{ 'Create Next Sprint'|trans }}</strong></a>
+        </p>
+    </div>
+{% endif %}
             
-            {% if backlog.stories is defined %}
-            <div id="otherstories"  class="well well-large">
-                <p class="lead">
-                    Backlog - Estimate: <span id="other-stories-estimate">{{ backlog.estimate }}</span>
-                    <span class="pull-right"><a href="{{ path('story_new', { 'id': project.id }) }}" class="btn btn-primary add-story">{{ 'Add a story'|trans }}</a></span>
-                </p>
-                <ul id="backlog-other-stories" class="sprint-stories">
-                    {% for story in backlog.stories %}
-                        {% include 'NeblionScrumBundle:Story:story-backlog-partial.html.twig' with { 'story': story } %}
-                    {% endfor %}
-                </ul>
-                <p><span class="pull-right"><a href="{{ path('story_new', { 'id': project.id }) }}" class="btn btn-primary add-story">{{ 'Add a story'|trans }}</a></span></p>
-            </div>
-            {% endif %}
+{% if backlog.stories is defined %}
+    <div id="otherstories"  class="well well-large">
+        <p class="lead">
+            Backlog - Estimate: <span id="other-stories-estimate">{{ backlog.estimate }}</span>
+            <span class="pull-right"><a href="{{ path('story_new', { 'id': project.id }) }}" class="btn btn-primary add-story">{{ 'Add a story'|trans }}</a></span>
+        </p>
+        <ul id="backlog-other-stories" class="sprint-stories">
+            {% for story in backlog.stories %}
+                {% include 'NeblionScrumBundle:Story:story-backlog-partial.html.twig' with { 'story': story } %}
+            {% endfor %}
+        </ul>
+        <p><span class="pull-right"><a href="{{ path('story_new', { 'id': project.id }) }}" class="btn btn-primary add-story">{{ 'Add a story'|trans }}</a></span></p>
+    </div>
+{% endif %}
             
         

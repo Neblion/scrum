@@ -13,7 +13,7 @@
        {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'backlog'} %}
     </div><!--/row-->
 
-    <div class="row">
+    <div class="row-fluid">
         <div class="span3">
             <p>Current velocity is <span class="label label-info">{{ velocity }}</span></p>
             <p><a href="{{ path('story_new', { 'id': project.id }) }}" class="btn btn-primary add-story">{{ 'Add a story'|trans }}</a></p>
