@@ -12,6 +12,11 @@ class ProjectType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
+            ->add('sprint_start_day', 'choice', array(
+                'choices' => array(0 => 'Sunday', 1 => 'Monday', 2 => 'Tuesday',
+                    3 => 'Wednesday', 4 => 'Thursday', 5 => 'Friday', 6 => 'Saturday')
+            ))
+            ->add('sprint_duration')
         ;
     }
 

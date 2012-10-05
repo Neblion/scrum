@@ -59,6 +59,20 @@ class Project
     private $description;
     
     /**
+     * @var smallint $sprint_start_day
+     *
+     * @ORM\Column(name="sprint_start_day", type="smallint")
+     */
+    private $sprint_start_day;
+    
+    /**
+     * @var smallint $sprint_duration
+     *
+     * @ORM\Column(name="sprint_duration", type="smallint")
+     */
+    private $sprint_duration;
+    
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime")
      */
@@ -299,5 +313,53 @@ class Project
     public function removeStorie(\Neblion\ScrumBundle\Entity\Story $stories)
     {
         $this->stories->removeElement($stories);
+    }
+
+    
+
+    /**
+     * Set sprint_start_day
+     *
+     * @param integer $sprintStartDay
+     * @return Project
+     */
+    public function setSprintStartDay($sprintStartDay)
+    {
+        $this->sprint_start_day = $sprintStartDay;
+    
+        return $this;
+    }
+
+    /**
+     * Get sprint_start_day
+     *
+     * @return integer 
+     */
+    public function getSprintStartDay()
+    {
+        return $this->sprint_start_day;
+    }
+
+    /**
+     * Set sprintDuration
+     *
+     * @param integer $sprintDuration
+     * @return Project
+     */
+    public function setSprintDuration($sprintDuration)
+    {
+        $this->sprint_duration = $sprintDuration;
+    
+        return $this;
+    }
+
+    /**
+     * Get sprintDuration
+     *
+     * @return integer 
+     */
+    public function getSprintDuration()
+    {
+        return $this->sprint_duration;
     }
 }
