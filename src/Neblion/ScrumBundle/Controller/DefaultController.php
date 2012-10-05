@@ -31,7 +31,7 @@ class DefaultController extends Controller
             }
             
             
-            return $this->forward('NeblionScrumBundle:Default:projects');
+            return $this->forward('NeblionScrumBundle:Project:projects');
         }
 
         return array();

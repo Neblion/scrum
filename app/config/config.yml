@@ -82,6 +82,7 @@ parameters:
   from_email: scrum@neblion.net
   sprint_duration: 13
   sprint_start_day: 3 # mercredi
+  default_velocity: 15
   
 services:
     neblion_mailer:

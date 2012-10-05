@@ -78,8 +78,6 @@ class ProjectController extends Controller
      */
     public function backlogAction($id)
     {
-        $velocity = 10;
-
         // Check if user is authorized
         if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             throw new AccessDeniedException();
@@ -116,6 +114,13 @@ class ProjectController extends Controller
         $acceptNextSprint = true;
         $capacity = $estimate = 0;
         
+        // Init velocity
+        $velocity = $em->getRepository('NeblionScrumBundle:Project')
+                ->getVelocity($project->getId());
+        if (empty($velocity)) {
+            $velocity = $this->container->getParameter('default_velocity');
+        }
+        
         if (!empty($stories)) {
             foreach ($stories as $story) {
                 if ($capacity + $story['estimate'] <= $velocity and $acceptNextSprint 
@@ -135,7 +140,7 @@ class ProjectController extends Controller
         }
         
         $startOfNextSprint = $em->getRepository('NeblionScrumBundle:Sprint')
-                ->getStartOfNextSprint($project->getId(), $this->container->getParameter('sprint_duration'));
+                ->getStartOfNextSprint($project->getId(), $this->container->getParameter('sprint_start_day'));
         $endOfNextSprint = new \DateTime($startOfNextSprint->format('Y-m-d'));
         $endOfNextSprint->modify('+' . $this->container->getParameter('sprint_duration') . ' day');
         

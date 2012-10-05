@@ -62,33 +62,48 @@ class SprintRepository extends EntityRepository
     
     
     
+    /**
+     * Look for the next sprint start day
+     * 
+     * First look if a sprint is in progress, 
+     * if true take the end day and look for the next startDay, 
+     * if not take the now date and look for the next start day
+     * 
+     * @param type $project_id
+     * @param type $startDay
+     * @return \DateTime 
+     */
     public function getStartOfNextSprint($project_id, $startDay)
     {
+        $date = null;
         $currentSprint = $this->getEntityManager()
                 ->createQuery('
                     SELECT s FROM NeblionScrumBundle:Sprint s
                     INNER JOIN s.projectRelease pr
                     INNER JOIN pr.project p
                     INNER JOIN s.status ss 
-                    WHERE p.id = :project_id AND ss.id IN (2)')
+                    WHERE p.id = :project_id AND ss.id = 2')
                 ->setParameter('project_id', $project_id)
                 ->getOneOrNullResult();
         
-        if ($currentSprint) {
+        if (!is_null($currentSprint)) {
             $date = new \DateTime($currentSprint->getEnd()->format('Y-m-d'));
             $date->modify('+1 day');
-            return $date;
-        } else {
-            $date = new \DateTime('now');
-            $i = 1;
-            while ($i <= 7) {
-                if ($date->format('N') == 3) {
-                    return $date;
-                }
-                $date->modify('+1 day');
-                $i++;
-            }
         }
+         
+        if (is_null($date) or $date < \DateTime('now')) {
+            $date = new \DateTime('now');
+        }
+        
+        $i = 1;
+        while ($i <= 7) {
+            if ($date->format('N') == $startDay) {
+                return $date;
+            }
+            $date->modify('+1 day');
+            $i++;
+        }
+        return $date;
     }
     
     public function getForRelease($release_id)
