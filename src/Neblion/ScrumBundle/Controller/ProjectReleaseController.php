@@ -83,7 +83,9 @@ class ProjectReleaseController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $project->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            throw new AccessDeniedException();
+            if ($member->getAdmin()) {
+                throw new AccessDeniedException();
+            }
         }
         
         // Check if there is a release with no due date
@@ -133,7 +135,9 @@ class ProjectReleaseController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $project->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            throw new AccessDeniedException();
+            if ($member->getAdmin()) {
+                throw new AccessDeniedException();
+            }
         }
         
         // Load process status
@@ -203,7 +207,9 @@ class ProjectReleaseController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $release->getProject()->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            throw new AccessDeniedException();
+            if ($member->getAdmin()) {
+                throw new AccessDeniedException();
+            }
         }
         
         $form = $this->createForm(new ProjectReleaseType(), $release);
@@ -243,7 +249,9 @@ class ProjectReleaseController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $release->getProject()->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            throw new AccessDeniedException();
+            if ($member->getAdmin()) {
+                throw new AccessDeniedException();
+            }
         }
         
         $form   = $this->createForm(new ProjectReleaseType(), $release);
@@ -297,7 +305,9 @@ class ProjectReleaseController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $release->getProject()->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            throw new AccessDeniedException();
+            if ($member->getAdmin()) {
+                throw new AccessDeniedException();
+            }
         }
         
         // Check if there is a sprint attached to this release
