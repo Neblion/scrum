@@ -76,6 +76,7 @@ class SprintRepository extends EntityRepository
     public function getStartOfNextSprint($project_id, $startDay)
     {
         $date = null;
+        
         $currentSprint = $this->getEntityManager()
                 ->createQuery('
                     SELECT s FROM NeblionScrumBundle:Sprint s
@@ -90,8 +91,9 @@ class SprintRepository extends EntityRepository
             $date = new \DateTime($currentSprint->getEnd()->format('Y-m-d'));
             $date->modify('+1 day');
         }
-         
-        if (is_null($date) or $date < \DateTime('now')) {
+        
+        
+        if (is_null($date) or $date < new \DateTime('now')) {
             $date = new \DateTime('now');
         }
         
