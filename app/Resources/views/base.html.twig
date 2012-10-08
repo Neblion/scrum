@@ -1,13 +1,84 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <meta charset="utf-8">
+        <title>Neblion Scrum1</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="Neblion">
+        {% block headoptions %}
+        
+        {% endblock %}
+        <!-- styles -->
+        {% block stylesheets %}
+        {% stylesheets '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+            <!--<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>-->
+            <style type="text/css">
+              body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+              }
+            </style>
+        {% endstylesheets %}
+        {% endblock stylesheets %}
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        
+        {# } 
+        <link rel="shortcut icon" href="ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+        { #}
     </head>
+
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% include 'NeblionScrumBundle:Layout:navbar.html.twig' %}
+        
+        <div class="container">
+        
+            {% if app.session.hasFlash('error') %}
+                <div class="alert alert-error">
+                    <button class="close" data-dismiss="alert">×</button>
+                    {{ app.session.flash('error')|trans }}
+                </div>
+            {% endif %}
+
+            {% if app.session.hasFlash('success') %}
+                <div class="alert alert-success">
+                    <button class="close" data-dismiss="alert">×</button>
+                    {{ app.session.flash('success')|trans }}
+                </div>
+            {% endif %}
+
+            {% if app.session.hasFlash('info') %}
+                <div class="alert alert-info">
+                    <button class="close" data-dismiss="alert">×</button>
+                    {{ app.session.flash('info')|trans }}
+                </div>
+            {% endif %}
+
+            {% if app.session.hasFlash('notice') %}
+                <div class="alert alert-notice">
+                    <button class="close" data-dismiss="alert">×</button>
+                    {{ app.session.flash('notice')|trans }}
+                </div>
+            {% endif %}
+            
+            {% block fos_user_content %}{% endblock fos_user_content %}
+
+            {% block body %}{% endblock %}
+        </div>
+
+        {% block javascripts %}
+            {% javascripts 
+                '%kernel.root_dir%/../vendor/jquery/jquery/*.js'
+            %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock javascripts %}
     </body>
 </html>
+

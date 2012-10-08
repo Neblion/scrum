@@ -1,9 +1,13 @@
-{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel='stylesheet' href="{{ asset('bundles/neblionscrum/bgrins-spectrum/spectrum.css') }}" />
-{% endblock stylesheets %}
+    {% stylesheets 
+        '%kernel.root_dir%/../vendor/eyecon/bootstrap-colorpicker/less/*.less' 
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}        
 
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
@@ -33,15 +37,16 @@
 
 {% block javascripts %}
     {{ parent() }}
-
-    <script src={{ asset('bundles/neblionscrum/bgrins-spectrum/spectrum.js') }}></script>
+    {% javascripts 
+        '%kernel.root_dir%/../vendor/eyecon/bootstrap-colorpicker/js/*.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
     <script type="text/javascript">
-        $(".color-picker").spectrum({
-            showInitial: true,
-            showInput: true,
+        $("#neblion_scrumbundle_featuretype_color").colorpicker({
+            format: 'hex'
         });
-        $(".color-picker").show();
     </script>
+    {% endjavascripts %}
 {% endblock javascripts %}
 
 

@@ -22,8 +22,10 @@
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "*",
         "ornicar/gravatar-bundle" : "dev-master",
+        "jquery/jquery": "1.8.2",
         "twitter/bootstrap": "v2.1.0",
-        "leafo/lessphp": "dev-master"
+        "leafo/lessphp": "dev-master",
+        "eyecon/bootstrap-colorpicker": "29.09.2012"
     },
     "repositories": [
         {
@@ -35,6 +37,28 @@
                     "type": "git",
                     "url": "https://github.com/twitter/bootstrap",
                     "reference": "v2.1.0"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/jquery",
+                "version": "1.8.2",
+                "dist": {
+                    "url": "http://code.jquery.com/jquery-1.8.2.min.js",
+                    "type": "file"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "eyecon/bootstrap-colorpicker",
+                "version": "29.09.2012",
+                "dist": {
+                    "url": "http://www.eyecon.ro/bootstrap-colorpicker/colorpicker.zip",
+                    "type": "zip"
                 }
             }
         }

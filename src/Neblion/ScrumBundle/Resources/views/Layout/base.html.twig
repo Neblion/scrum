@@ -71,10 +71,10 @@
             {% block body %}{% endblock %}
         </div>
 
-        {% block javascripts %}
-            <script src="{{ asset('bundles/neblionscrum/js/jquery.js') }}"></script>
-            <script src="{{ asset('bundles/neblionscrum/js/bootstrap.js') }}"></script>
-            <script src="{{ asset('bundles/neblionscrum/js/jquery-ui.js') }}"></script>
-        {% endblock %}
+        {% javascripts 
+            '%kernel.root_dir%/../vendor/jquery/jquery/*.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
     </body>
 </html>

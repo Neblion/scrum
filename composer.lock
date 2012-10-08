@@ -1,5 +1,5 @@
 {
-    "hash": "6cf0a5dc04e59ceb5c5c73ae66e696d4",
+    "hash": "64b70b805257884236ad21f9b507f111",
     "packages": [
         {
             "name": "doctrine/common",
@@ -364,6 +364,18 @@
                 "database",
                 "orm"
             ]
+        },
+        {
+            "name": "eyecon/bootstrap-colorpicker",
+            "version": "29.09.2012",
+            "dist": {
+                "type": "zip",
+                "url": "http://www.eyecon.ro/bootstrap-colorpicker/colorpicker.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "installation-source": "dist"
         },
         {
             "name": "friendsofsymfony/user-bundle",
@@ -749,6 +761,18 @@
                 "secure",
                 "expression"
             ]
+        },
+        {
+            "name": "jquery/jquery",
+            "version": "1.8.2",
+            "dist": {
+                "type": "file",
+                "url": "http://code.jquery.com/jquery-1.8.2.min.js",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "installation-source": "dist"
         },
         {
             "name": "kriswallsmith/assetic",
