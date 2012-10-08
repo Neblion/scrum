@@ -11,7 +11,10 @@
         {% endblock %}
         <!-- styles -->
         {% block stylesheets %}
-        {% stylesheets '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less' %}
+        {% stylesheets 
+            '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less'
+            '%kernel.root_dir%/../vendor/twitter/bootstrap/less/responsive.less' 
+        %}
             <link rel="stylesheet" href="{{ asset_url }}" />
             <!--<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>-->
             <style type="text/css">
