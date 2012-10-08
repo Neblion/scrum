@@ -10,18 +10,16 @@
         
         {% endblock %}
         <!-- styles -->
-        {% block stylesheets %}
-            <link href="{{ asset('bundles/neblionscrum/css/bootstrap.css') }}" rel="stylesheet" />
-            <link href="{{ asset('bundles/neblionscrum/css/nblscrum.css') }}" rel="stylesheet" />
-            <!--<link href="{# asset('bundles/neblionscrum/css/bootstrap-responsive.css') #}" rel="stylesheet">-->
+        {% stylesheets '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
             <!--<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>-->
             <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-    </style>
-        {% endblock %}
+              body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+              }
+            </style>
+        {% endstylesheets %}
 
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
