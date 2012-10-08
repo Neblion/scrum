@@ -21,8 +21,24 @@
         "stof/doctrine-extensions-bundle": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
         "friendsofsymfony/user-bundle": "*",
-        "ornicar/gravatar-bundle" : "dev-master"
+        "ornicar/gravatar-bundle" : "dev-master",
+        "twitter/bootstrap": "v2.1.0",
+        "leafo/lessphp": "dev-master"
     },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "twitter/bootstrap",
+                "version": "2.1.0",
+                "source": {
+                    "type": "git",
+                    "url": "https://github.com/twitter/bootstrap",
+                    "reference": "v2.1.0"
+                }
+            }
+        }
+    ],
     "scripts": {
         "post-install-cmd": [
             "Neblion\\ScrumBundle\\Composer\\ScriptHandler::installParameters",
