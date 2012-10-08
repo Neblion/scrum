@@ -19,7 +19,7 @@
             <ul class="nav nav-tabs nav-stacked project-list">
                 <li class="active"><a href="#">{{ 'Your projects'|trans }}</a></li>
                 {% for project in projects %}
-                    <li><a href="{{ path('project_show', { 'id': project.id }) }}">{{ project.name }}</a></a></li>
+                    <li><a href="{{ path('project_dashboard', { 'id': project.id }) }}">{{ project.name }}</a></a></li>
                 {% endfor %}
             </ul>
                 

@@ -19,7 +19,7 @@
                 {{ form_widget(edit_form) }}
                 <div class="form-actions">
                     <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
-                    <a class="btn btn-primary" href="{{ path('project_show', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                    <a class="btn btn-primary" href="{{ path('project_dashboard', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
                 </div>
             </form>
         </div><!--/span-->
