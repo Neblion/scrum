@@ -1,9 +1,13 @@
-{% extends 'NeblionScrumBundle:Layout:base.html.twig' %}
+{% extends '::base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/neblionscrum/js/jqplot/jquery.jqplot.css') }}" />
-{% endblock stylesheets %}
+    {% stylesheets 
+        '%kernel.root_dir%/../vendor/cleonello/jqplot/jquery.jqplot.min.css' 
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %} 
 
 {% block body %}
     <div class="row">
@@ -24,10 +28,13 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <!--[if lt IE 9]><script language="javascript" type="text/javascript" src="{{ asset('bundles/neblionscrum/js/jqplot/excanvas.js') }}"></script><![endif]-->
-    <script language="javascript" type="text/javascript" src="{{ asset('bundles/neblionscrum/js/jqplot/jquery.jqplot.min.js') }}"></script>
-    <script language="javascript" type="text/javascript" src="{{ asset('bundles/neblionscrum/js/jqplot/plugins/jqplot.dateAxisRenderer.min.js') }}"></script>
-    <script language="javascript" type="text/javascript" src="{{ asset('bundles/neblionscrum/js/jqplot/plugins/jqplot.highlighter.min.js') }}"></script>
+    {% javascripts
+        '%kernel.root_dir%/../vendor/cleonello/jqplot/jquery.jqplot.min.js'
+        '%kernel.root_dir%/../vendor/cleonello/jqplot/plugins/jqplot.dateAxisRenderer.min.js'
+        '%kernel.root_dir%/../vendor/cleonello/jqplot/plugins/jqplot.highlighter.min.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <script type="text/javascript">
     $(function() {
         var burndown_hours  = [{{ strHours|raw }}];

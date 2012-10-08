@@ -26,7 +26,8 @@
         "twitter/bootstrap": "v2.1.0",
         "leafo/lessphp": "dev-master",
         "eyecon/bootstrap-colorpicker": "29.09.2012",
-        "eyecon/bootstrap-datepicker": "29.09.2012"
+        "eyecon/bootstrap-datepicker": "29.09.2012",
+        "cleonello/jqplot": "1.0.4"
     },
     "repositories": [
         {
@@ -70,6 +71,17 @@
                 "version": "29.09.2012",
                 "dist": {
                     "url": "http://www.eyecon.ro/bootstrap-datepicker/datepicker.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "cleonello/jqplot",
+                "version": "1.0.4",
+                "dist": {
+                    "url": "https://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.1.0.4r1121.zip",
                     "type": "zip"
                 }
             }

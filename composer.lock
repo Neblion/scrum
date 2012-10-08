@@ -1,6 +1,18 @@
 {
-    "hash": "8b68df9aa976f1a3ca3c3b25e284cec8",
+    "hash": "275997477cd59ea236912ce17a64f2b4",
     "packages": [
+        {
+            "name": "cleonello/jqplot",
+            "version": "1.0.4",
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.1.0.4r1121.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "installation-source": "dist"
+        },
         {
             "name": "doctrine/common",
             "version": "2.3.x-dev",
