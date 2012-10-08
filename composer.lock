@@ -1,5 +1,5 @@
 {
-    "hash": "64b70b805257884236ad21f9b507f111",
+    "hash": "8b68df9aa976f1a3ca3c3b25e284cec8",
     "packages": [
         {
             "name": "doctrine/common",
@@ -371,6 +371,18 @@
             "dist": {
                 "type": "zip",
                 "url": "http://www.eyecon.ro/bootstrap-colorpicker/colorpicker.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library",
+            "installation-source": "dist"
+        },
+        {
+            "name": "eyecon/bootstrap-datepicker",
+            "version": "29.09.2012",
+            "dist": {
+                "type": "zip",
+                "url": "http://www.eyecon.ro/bootstrap-datepicker/datepicker.zip",
                 "reference": null,
                 "shasum": null
             },

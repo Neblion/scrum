@@ -25,7 +25,8 @@
         "jquery/jquery": "1.8.2",
         "twitter/bootstrap": "v2.1.0",
         "leafo/lessphp": "dev-master",
-        "eyecon/bootstrap-colorpicker": "29.09.2012"
+        "eyecon/bootstrap-colorpicker": "29.09.2012",
+        "eyecon/bootstrap-datepicker": "29.09.2012"
     },
     "repositories": [
         {
@@ -58,6 +59,17 @@
                 "version": "29.09.2012",
                 "dist": {
                     "url": "http://www.eyecon.ro/bootstrap-colorpicker/colorpicker.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "eyecon/bootstrap-datepicker",
+                "version": "29.09.2012",
+                "dist": {
+                    "url": "http://www.eyecon.ro/bootstrap-datepicker/datepicker.zip",
                     "type": "zip"
                 }
             }
