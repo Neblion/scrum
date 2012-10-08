@@ -2,13 +2,19 @@
 namespace Neblion\ScrumBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+
 use Neblion\ScrumBundle\Entity\MemberStatus;
 
-class LoadMemberStatusData implements FixtureInterface
+class LoadMemberStatusData extends AbstractFixture implements OrderedFixtureInterface
 {
     private $manager; 
     
+    /**
+     * {@inheritDoc}
+     */
     public function load(ObjectManager $manager)
     {
         $this->manager = $manager;
@@ -27,9 +33,12 @@ class LoadMemberStatusData implements FixtureInterface
         $this->manager->flush();
     }
     
+    /**
+     * {@inheritDoc}
+     */
     public function getOrder()
     {
-        return 1; 
+        return 3; 
     }
     
     private function newEntity($params)
