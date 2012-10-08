@@ -37,7 +37,7 @@
                 "version": "2.1.0",
                 "source": {
                     "type": "git",
-                    "url": "http://github.com/twitter/bootstrap",
+                    "url": "https://github.com/twitter/bootstrap",
                     "reference": "v2.1.0"
                 }
             }
@@ -81,7 +81,7 @@
                 "name": "cleonello/jqplot",
                 "version": "1.0.4",
                 "dist": {
-                    "url": "http://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.1.0.4r1121.zip",
+                    "url": "https://bitbucket.org/cleonello/jqplot/downloads/jquery.jqplot.1.0.4r1121.zip",
                     "type": "zip"
                 }
             }
