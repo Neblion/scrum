@@ -175,7 +175,7 @@ class ProjectController extends Controller
      * @Route("/{id}/dashboard", name="project_dashboard")
      * @Template()
      */
-    public function showAction($id)
+    public function dashboardAction($id)
     {
         // Check if user is authorized
         if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
