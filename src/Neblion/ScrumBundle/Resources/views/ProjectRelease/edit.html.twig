@@ -1,14 +1,5 @@
 {% extends '::base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    {% stylesheets 
-        '%kernel.root_dir%/../vendor/eyecon/bootstrap-datepicker/css/*.css' 
-    %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
-    {% endstylesheets %}
-{% endblock stylesheets %}
-
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
 {% block body %}
@@ -34,18 +25,4 @@
         </div><!--/span-->
     </div><!--/row-->
 {% endblock body %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {% javascripts 
-        '%kernel.root_dir%/../vendor/eyecon/bootstrap-datepicker/js/*.js'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    <script type="text/javascript">
-        $(".date-picker").datepicker({
-            format: 'dd/mm/yyyy'
-        });
-    </script>
-    {% endjavascripts %}
-{% endblock javascripts %}
 
