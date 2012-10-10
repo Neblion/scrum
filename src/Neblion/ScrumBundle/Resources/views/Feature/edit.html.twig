@@ -41,12 +41,12 @@
         '%kernel.root_dir%/../vendor/eyecon/bootstrap-colorpicker/js/*.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <script type="text/javascript">
         $("#neblion_scrumbundle_featuretype_color").colorpicker({
             format: 'hex'
         });
     </script>
-    {% endjavascripts %}
 {% endblock javascripts %}
 
 

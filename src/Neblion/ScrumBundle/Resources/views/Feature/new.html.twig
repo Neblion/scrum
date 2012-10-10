@@ -2,8 +2,12 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    <link rel='stylesheet' href="{{ asset('bundles/neblionscrum/bgrins-spectrum/spectrum.css') }}" />
-{% endblock stylesheets %}
+    {% stylesheets 
+        '%kernel.root_dir%/../vendor/eyecon/bootstrap-colorpicker/less/*.less' 
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}     
 
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
@@ -23,7 +27,7 @@
             <form action="{{ path('feature_create', { 'id': project.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
                 {{ form_widget(form) }}
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> {{ 'Create'|trans }}</button>
+                    <button type="submit" class="btn btn-success"><i class="icon-plus-sign icon-white"></i> {{ 'Create'|trans }}</button>
                     <a class="btn btn-primary" href="{{ path('feature_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
                 </div>
             </form>
@@ -33,15 +37,15 @@
 
 {% block javascripts %}
     {{ parent() }}
-
-    <script src={{ asset('bundles/neblionscrum/bgrins-spectrum/spectrum.js') }}></script>
+    {% javascripts 
+        '%kernel.root_dir%/../vendor/eyecon/bootstrap-colorpicker/js/*.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <script type="text/javascript">
-        $(".color-picker").spectrum({
-            color: "#fff",
-            showInitial: true,
-            showInput: true,
+        $("#neblion_scrumbundle_featuretype_color").colorpicker({
+            format: 'hex'
         });
-        $(".color-picker").show();
     </script>
 {% endblock javascripts %}
 
