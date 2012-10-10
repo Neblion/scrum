@@ -2,6 +2,15 @@
 
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+        '@NeblionScrumBundle/Resources/public/css/ui-lightness/jquery-ui-1.9.0.custom.min.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}     
+
 {% block body %}
     <div class="row">
         {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'admin'} %}
@@ -26,3 +35,21 @@
     </div><!--/row-->
 {% endblock body %}
 
+    {% block javascripts %}
+    {{ parent() }}
+    {% javascripts 
+        '@NeblionScrumBundle/Resources/public/js/jquery-ui-1.9.0.custom.min.js'
+        '@NeblionScrumBundle/Resources/public/js/i18n/jquery.ui.datepicker-fr.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $(function(){
+            $.datepicker.setDefaults($.datepicker.regional['fr']);
+            //$.datepicker.setDefaults( $.datepicker.regional[ "" ] );
+            // Datepicker
+            $('.date-picker').datepicker( $.datepicker.regional[ "fr" ] );
+            //$('.date-picker').datepicker();
+        });
+    </script>
+{% endblock javascripts %}
