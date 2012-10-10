@@ -20,6 +20,22 @@ class ScriptHandler
         }
 
         copy($appDir.'/config/parameters.yml.dist', $appDir.'/config/parameters.yml');
+        mkdir('src/Neblion/ScrumBundle/Resources/public/img');
+        //copy('vendor/twitter/bootstrap/img/*', 'src/Neblion/ScrumBundle/Resources/public/img');
+    }
+    
+    public static function CopyImgTwitterBootstrapToScrumBundle($event)
+    {
+        if (!is_dir('web/img')) {
+            mkdir('web/img');
+        }
+        
+        foreach (glob('vendor/twitter/bootstrap/img/*') as $file) {
+            if (is_file($file)) {
+                copy($file, 'web/img/' . basename($file));
+            }
+        }
+        
     }
 
     protected static function getOptions($event)

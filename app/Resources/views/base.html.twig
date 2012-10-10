@@ -13,17 +13,12 @@
         {% block stylesheets %}
         {% stylesheets 
             '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less'
-            '%kernel.root_dir%/../vendor/twitter/bootstrap/less/responsive.less' 
+            '%kernel.root_dir%/../vendor/twitter/bootstrap/less/responsive.less'
+            '@NeblionScrumBundle/Resources/public/css/nblscrum.css'
         %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-            <!--<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>-->
-            <style type="text/css">
-              body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-              }
-            </style>
+        <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
+            <!--<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>-->
         {% endblock stylesheets %}
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
