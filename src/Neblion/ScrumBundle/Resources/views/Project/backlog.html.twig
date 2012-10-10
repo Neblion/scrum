@@ -40,6 +40,11 @@
 
 {% block javascripts %}
     {{ parent() }}
+    {% javascripts 
+        '@NeblionScrumBundle/Resources/public/js/jquery-ui-1.9.0.custom.min.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <script type="text/javascript">
         $("a[rel=popover]").popover();
         $("div[rel=popover]").popover();

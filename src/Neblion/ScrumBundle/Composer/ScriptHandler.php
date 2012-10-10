@@ -24,7 +24,7 @@ class ScriptHandler
         //copy('vendor/twitter/bootstrap/img/*', 'src/Neblion/ScrumBundle/Resources/public/img');
     }
     
-    public static function CopyImgTwitterBootstrapToScrumBundle($event)
+    public static function CopyImgTwitterBootstrapToWebImg($event)
     {
         if (!is_dir('web/img')) {
             mkdir('web/img');
@@ -37,7 +37,21 @@ class ScriptHandler
         }
         
     }
-
+    
+    public static function CopyImgJqueryUIToWebCss($event)
+    {
+        if (!is_dir('web/css/images')) {
+            mkdir('web/css/images');
+        }
+        
+        foreach (glob('src/Neblion/ScrumBundle/Resources/public/css/ui-lightness/images/*') as $file) {
+            if (is_file($file)) {
+                copy($file, 'web/css/images/' . basename($file));
+            }
+        }
+        
+    }
+    
     protected static function getOptions($event)
     {
         $options = array_merge(array(

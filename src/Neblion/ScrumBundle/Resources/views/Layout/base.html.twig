@@ -10,7 +10,10 @@
         
         {% endblock %}
         <!-- styles -->
-        {% stylesheets '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less' %}
+        {% stylesheets 
+            '%kernel.root_dir%/../vendor/twitter/bootstrap/css/bootstrap.min.css'
+            '%kernel.root_dir%/../vendor/twitter/bootstrap/css/bootstrap-responsive.min.css'
+        %}
             <link rel="stylesheet" href="{{ asset_url }}" />
             <!--<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>-->
             <style type="text/css">
@@ -74,7 +77,7 @@
         {% javascripts 
             '%kernel.root_dir%/../vendor/jquery/jquery/*.js'
         %}
-            <script type="text/javascript" src="{{ asset_url }}"></script>
+        <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
     </body>
 </html>

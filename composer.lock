@@ -1,5 +1,5 @@
 {
-    "hash": "95d7f4208593836be141cfc0a15813eb",
+    "hash": "63c8f90bbd25bb365f7dc667df98cf3d",
     "packages": [
         {
             "name": "cleonello/jqplot",
@@ -383,18 +383,6 @@
             "dist": {
                 "type": "zip",
                 "url": "http://www.eyecon.ro/bootstrap-colorpicker/colorpicker.zip",
-                "reference": null,
-                "shasum": null
-            },
-            "type": "library",
-            "installation-source": "dist"
-        },
-        {
-            "name": "eyecon/bootstrap-datepicker",
-            "version": "29.09.2012",
-            "dist": {
-                "type": "zip",
-                "url": "http://www.eyecon.ro/bootstrap-datepicker/datepicker.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -863,42 +851,6 @@
                 "compression",
                 "minification"
             ]
-        },
-        {
-            "name": "leafo/lessphp",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "http://github.com/leafo/lessphp",
-                "reference": "4ce20058d651a73702bb9be5d299d0e2eb0687f0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://github.com/leafo/lessphp/zipball/4ce20058d651a73702bb9be5d299d0e2eb0687f0",
-                "reference": "4ce20058d651a73702bb9be5d299d0e2eb0687f0",
-                "shasum": ""
-            },
-            "time": "1348713472",
-            "type": "library",
-            "installation-source": "source",
-            "autoload": {
-                "classmap": [
-                    "lessc.inc.php"
-                ]
-            },
-            "license": [
-                "MIT",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Leaf Corcoran",
-                    "email": "leafot@gmail.com",
-                    "homepage": "http://leafo.net"
-                }
-            ],
-            "description": "lessphp is a compiler for LESS written in PHP.",
-            "homepage": "http://leafo.net/lessphp/"
         },
         {
             "name": "monolog/monolog",
@@ -1625,14 +1577,15 @@
         },
         {
             "name": "twitter/bootstrap",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twitter/bootstrap",
-                "reference": "v2.1.0"
+            "version": "dev-master-zip",
+            "dist": {
+                "type": "zip",
+                "url": "http://twitter.github.com/bootstrap/assets/bootstrap.zip",
+                "reference": null,
+                "shasum": null
             },
             "type": "library",
-            "installation-source": "source"
+            "installation-source": "dist"
         }
     ],
     "packages-dev": null,
@@ -1644,6 +1597,6 @@
         "stof/doctrine-extensions-bundle": 20,
         "doctrine/doctrine-fixtures-bundle": 20,
         "ornicar/gravatar-bundle": 20,
-        "leafo/lessphp": 20
+        "twitter/bootstrap": 20
     }
 }

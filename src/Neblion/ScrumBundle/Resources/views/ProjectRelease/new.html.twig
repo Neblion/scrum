@@ -1,5 +1,14 @@
 {% extends '::base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+        '@NeblionScrumBundle/Resources/public/css/ui-lightness/jquery-ui-1.9.0.custom.min.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}     
+
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
 {% block body %}
@@ -25,3 +34,19 @@
         </div><!--/span-->
     </div><!--/row-->
 {% endblock body %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts 
+        '@NeblionScrumBundle/Resources/public/js/jquery-ui-1.9.0.custom.min.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $(function(){
+            $.datepicker.setDefaults( $.datepicker.regional[ "" ] );
+            // Datepicker
+            $('.date-picker').datepicker( $.datepicker.regional[ "fr" ] );
+        });
+    </script>
+{% endblock javascripts %}
