@@ -1,0 +1,115 @@
+'hours remaining': '__hours remaining'
+Description: __Description
+'Set Done': '__Set Done'
+'Set In Progress': '__Set In Progress'
+Update: __Update
+Take: __Take
+Delete: __Delete
+'Task creation:': '__Task creation:'
+Create: __Create
+'Create a new task:': '__Create a new task:'
+Success!: __Success!
+'': __
+Close: __Close
+'Save changes': '__Save changes'
+'Task hours remaining edition:': '__Task hours remaining edition:'
+Success: __Success
+Cancel: Annuler
+Edit: Editer
+'Your projects': '__Your projects'
+'Create project': '__Create project'
+'Project creation': '__Project creation'
+'Add a story': '__Add a story'
+'Do you really want to remove this project': '__Do you really want to remove this project'
+'If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !': '__If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !'
+'Delete this project': '__Delete this project'
+'Next Sprint': '__Next Sprint'
+'Create Next Sprint': '__Create Next Sprint'
+'Invit member': '__Invit member'
+Accept: __Accept
+Refuse: __Refuse
+'No invitation': '__No invitation'
+'Do you really want to remove this member': '__Do you really want to remove this member'
+Remove: __Remove
+No: __No
+Help: __Help
+Contact: __Contact
+'Edit profile': '__Edit profile'
+'Change password': '__Change password'
+'Sign Out': '__Sign Out'
+'Project admin': '__Project admin'
+Edition: __Edition
+Features: __Features
+Releases: __Releases
+Team: __Team
+Deletion: __Deletion
+Dashboard: __Dashboard
+Backlog: __Backlog
+Sprints: __Sprints
+Admin: __Admin
+'Review creation:': '__Review creation:'
+'Sprint review:': '__Sprint review:'
+'NeblionScrum %project_name% project notification': '__NeblionScrum %project_name% project notification'
+Hello: __Hello
+'You receive this email because %firstname% %lastname% (%email%) decide to remove you as a member on project %project_name%': '__You receive this email because %firstname% %lastname% (%email%) decide to remove you as a member on project %project_name%'
+'See you soon on Neblion Scrum!': '__See you soon on Neblion Scrum!'
+'NeblionScrum invitation to %project_name% project': '__NeblionScrum invitation to %project_name% project'
+'You receive this email because %firstname% %lastname% (%email%) invit you to join his team as a member on project %project_name%': '__You receive this email because %firstname% %lastname% (%email%) invit you to join his team as a member on project %project_name%'
+'I am very pleased and honored to welcome you as one of the members of the Neblion Scrum fast growing community..': '__I am very pleased and honored to welcome you as one of the members of the Neblion Scrum fast growing community..'
+'In order to validate your subscription free of charge and without any engagement, please click the following link %confirmInvitationUrl% to complete your registration.': '__In order to validate your subscription free of charge and without any engagement, please click the following link %confirmInvitationUrl% to complete your registration.'
+'The stored private data will be accessible in your registered profile and will not be transmitted or re-used outside of Neblion Scrum, in strict compliancy with the French privacy legislation according to the law deposited January 6th 1978 by the French administration CNIL.': '__The stored private data will be accessible in your registered profile and will not be transmitted or re-used outside of Neblion Scrum, in strict compliancy with the French privacy legislation according to the law deposited January 6th 1978 by the French administration CNIL.'
+'In confirming your registration by clicking on the previous link, you acknowledge having read and accepted our General Terms and Conditions.': '__In confirming your registration by clicking on the previous link, you acknowledge having read and accepted our General Terms and Conditions.'
+'We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.': '__We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.'
+'In order to confirm your invitation, please login on NeblionScrum and accept invitation.': '__In order to confirm your invitation, please login on NeblionScrum and accept invitation.'
+'Sign in': '__Sign in'
+'Sprint creation:': '__Sprint creation:'
+'Current Release': '__Current Release'
+Stories: __Stories
+Story: __Story
+ToDo: __ToDo
+'In Progress': '__In Progress'
+Done: __Done
+'Are you sure you want close this sprint ?': '__Are you sure you want close this sprint ?'
+'Member could not edit their task and retrospective and sprint review edition will be close.': '__Member could not edit their task and retrospective and sprint review edition will be close.'
+Name: __Name
+Release: __Release
+Status: __Status
+'Start > End': '__Start > End'
+Estimate: __Estimate
+View: __View
+'No sprint': '__No sprint'
+'Do you really want to delete this sprint: %sprint% ?': '__Do you really want to delete this sprint: %sprint% ?'
+Actions: __Actions
+'No release': '__No release'
+'New release': '__New release'
+'Do you really want to delete this release: %release% ?': '__Do you really want to delete this release: %release% ?'
+Lastname: __Lastname
+Firstname: __Firstname
+username: __username
+Role: __Role
+Administrator: __Administrator
+Enabled: __Enabled
+Me: __Me
+Yes: __Yes
+Invit: __Invit
+'No Member': '__No Member'
+'Invit a new Member': '__Invit a new Member'
+'Welcome on Neblion Scrum!': '__Welcome on Neblion Scrum!'
+'Hello %username%,': '__Hello %username%,'
+Register: __Register
+'Sprint retrospective:': '__Sprint retrospective:'
+'Sprint retro:': '__Sprint retro:'
+'Profile creation:': '__Profile creation:'
+'Profile edition:': '__Profile edition:'
+Feature: __Feature
+'Story estimate': '__Story estimate'
+'Add task': '__Add task'
+'Create a new story': '__Create a new story'
+'Story estimate edition:': '__Story estimate edition:'
+'Do you really want to delete this story: %story% ?': '__Do you really want to delete this story: %story% ?'
+'This field is required': '__This field is required'
+'Feature creation:': '__Feature creation:'
+'No feature': '__No feature'
+'New feature': '__New feature'
+'Do you really want to delete this feature: %feature% ?': '__Do you really want to delete this feature: %feature% ?'
+'Symfony2 is great': 'J''aime Symfony2'
