@@ -91,3 +91,8 @@ services:
     neblion_mailer:
       class:  Neblion\ScrumBundle\Mailer\Mailer
       arguments: [@mailer, @router, @templating, { from_email: %from_email% }]
+    kernel.listener.neblion_locale:
+        class: Neblion\ScrumBundle\Listener\RequestListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+      
