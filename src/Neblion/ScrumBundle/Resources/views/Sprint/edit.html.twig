@@ -2,9 +2,12 @@
 
 {% block stylesheets %}
     {{ parent() }}
-    
-    <link rel='stylesheet' href="{{ asset('bundles/neblionscrum/jquery-ui/css/ui-lightness/jquery-ui-1.8.21.custom.css') }}" />
-{% endblock stylesheets %}
+    {% stylesheets 
+        '@NeblionScrumBundle/Resources/public/css/ui-lightness/jquery-ui-1.9.0.custom.min.css'
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}    
 
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
@@ -36,15 +39,17 @@
 
 {% block javascripts %}
     {{ parent() }}
-
-    <script src={{ asset('bundles/neblionscrum/jquery-ui/js/jquery-ui-1.8.21.custom.min.js') }}></script>
-    <script src={{ asset('bundles/neblionscrum/jquery-ui/js/jquery.ui.datepicker-fr.js') }}></script>
-    
+    {% javascripts 
+        '@NeblionScrumBundle/Resources/public/js/jquery-ui-1.9.0.custom.min.js'
+        '@NeblionScrumBundle/Resources/public/js/i18n/jquery.ui.datepicker-fr.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
     <script type="text/javascript">
-			$(function(){
-                                $.datepicker.setDefaults( $.datepicker.regional[ "" ] );
-				// Datepicker
-				$('.date-picker').datepicker( $.datepicker.regional[ "fr" ] );
-                         });
-		</script>
+        $(function(){
+            // Datepicker
+            $.datepicker.setDefaults($.datepicker.regional[""]);
+            $('.date-picker').datepicker( $.datepicker.regional[ "{{ app.request.locale }}" ] );
+        });
+    </script>
 {% endblock javascripts %}

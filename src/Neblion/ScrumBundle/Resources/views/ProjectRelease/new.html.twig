@@ -45,9 +45,9 @@
     {% endjavascripts %}
     <script type="text/javascript">
         $(function(){
-            $.datepicker.setDefaults( $.datepicker.regional[ "" ] );
             // Datepicker
-            $('.date-picker').datepicker( $.datepicker.regional[ "fr" ] );
+            $.datepicker.setDefaults($.datepicker.regional[""]);
+            $('.date-picker').datepicker( $.datepicker.regional[ "{{ app.request.locale }}" ] );
         });
     </script>
 {% endblock javascripts %}
