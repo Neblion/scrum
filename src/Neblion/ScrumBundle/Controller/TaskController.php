@@ -441,6 +441,7 @@ class TaskController extends Controller
                 $remainingHours = $hour->getHour();
                 // if the Hour object has not the today date so create a new Hour
                 if ($hour->getDate()->format('Y-m-d') != date('Y-m-d')) {
+                    // Re-init last hour record to this previous value
                     $em->refresh($hour);
                     
                     $hourNew  = new \Neblion\ScrumBundle\Entity\Hour();
@@ -448,6 +449,13 @@ class TaskController extends Controller
                     $hourNew->setDate(new \DateTime());
                     $hourNew->setHour($remainingHours);
                     $em->persist($hourNew);
+                }
+                
+                // Update task status if hour = 0
+                if ($remainingHours == 0) {
+                    // Load done status
+                    $status = $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(3);
+                    $task->setStatus($status);
                 }
                 
                 $em->flush();

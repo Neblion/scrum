@@ -1,0 +1,19 @@
+
+<div class="span3">
+    {% include 'NeblionScrumBundle:Story:story-box-partial.html.twig' with { 'story': story, 'sprint': sprint } %}
+</div>
+<div id="tasks-todo-{{ story.id }}" class="span3"><!-- ToDo -->
+{% for task in story.tasks.1 %}
+    {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
+{% endfor %}
+</div><!-- ToDo -->
+<div id="tasks-inprogress-{{ story.id }}" class="span3"><!-- In Progress -->
+{% for task in story.tasks.2 %}
+    {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
+{% endfor %}
+</div><!-- In Progress -->
+<div id="tasks-done-{{ story.id }}" class="span3"><!-- Done -->
+{% for task in story.tasks.3 %}
+    {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
+{% endfor %}
+</div><!-- Done -->

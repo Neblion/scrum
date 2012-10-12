@@ -10,6 +10,7 @@ use Neblion\ScrumBundle\Entity\Story;
 use Neblion\ScrumBundle\Form\StoryType;
 use Neblion\ScrumBundle\Form\EstimateType;
 
+use Doctrine\ORM\Query;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -374,8 +375,6 @@ class StoryController extends Controller
     }
     
     /**
-     * Load Tasks for a story
-     * 
      * Load tasks for a story
      *
      * @Route("/{id}/tasks", name="story_tasks")
@@ -394,7 +393,7 @@ class StoryController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
         
-        $story = $em->getRepository('NeblionScrumBundle:Story')->find($id);
+        $story = $em->getRepository('NeblionScrumBundle:Story')->load($id, Query::HYDRATE_OBJECT);
         if (!$story) {
             throw $this->createNotFoundException('Unable to find Story entity.');
         }
@@ -407,11 +406,25 @@ class StoryController extends Controller
             throw new AccessDeniedException();
         }
         
+        // Prepare results
+        $storyDetails['id']               = $story->getId();
+        $storyDetails['name']             = $story->getName();
+        $storyDetails['description']      = $story->getDescription();
+        $storyDetails['estimate']         = $story->getEstimate();
+        $storyDetails['position']         = $story->getPosition();
+        $storyDetails['feature']          = array('name' => $story->getFeature()->getName(), 'color' => $story->getFeature()->getColor());
+        $storyDetails['status']           = $story->getStatus()->getName();
+        $storyDetails['remainingHours']   = 0;
+        $storyDetails['tasks']            = array(
+            1 => array(),
+            2 => array(),
+            3 => array(),
+        );
+        
         // Load tasks
         $tasks = $em->getRepository('NeblionScrumBundle:Task')->loadForStory($story->getId());
         
-        // Prepare results
-        $resultTasks = array();
+        $remainingHours = 0;
         foreach ($tasks as $task) {
                 $taskArray = array(
                     'id' => $task['id'],
@@ -431,13 +444,14 @@ class StoryController extends Controller
                 } else {
                     $taskArray['remaining_hour'] = $task['hours'][0]['hour'];
                 }
-                
-                $resultTasks[$task['status']['id']][] = $taskArray;
+                $remainingHours += $taskArray['remaining_hour'];
+                $storyDetails['tasks'][$task['status']['id']][] = $taskArray;
         }
+        $storyDetails['remainingHours'] = $remainingHours;
         
-        return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Task/Ajax:loadToDo.html.twig', array(
-            'tasks' => $resultTasks,
-        ));
+        return $this->container->get('templating')
+                ->renderResponse('NeblionScrumBundle:Story/Ajax:loadTasks.html.twig', 
+                        array('story' => $storyDetails, 'sprint' => $story->getSprint()));
     }
     
 }

@@ -49,7 +49,7 @@
     </div><!--/row-->
     <div class="row">
         <div class="span3">
-            {{ 'Remaining hours'|trans }}: {{ sprintInfos.hours }} / XXXX
+            {{ 'Remaining hours'|trans }}: <span id="total-hours-remaining">{{ sprintInfos.hours }}</span> / XXXX
         </div>
         <div class="span9">
             <div class="progress progress-striped">
@@ -68,24 +68,7 @@
 
     {% for story in storyAndTasksByStatus %}
         <div id="sprint-story-row-{{ story.id }}" class="row-fluid sprint-story-row" style="border: 1px solid black; margin-bottom: 3px;">
-            <div class="span3">
-                {% include 'NeblionScrumBundle:Story:story-box-partial.html.twig' with { 'story': story, 'sprint': sprint } %}
-            </div>
-            <div id="tasks-todo-{{ story.id }}" class="span3"><!-- ToDo -->
-                {% for task in story.tasks.1 %}
-                    {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
-                {% endfor %}
-            </div><!-- ToDo -->
-            <div id="tasks-inprogress-{{ story.id }}" class="span3"><!-- In Progress -->
-                {% for task in story.tasks.2 %}
-                    {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
-                {% endfor %}
-            </div><!-- In Progress -->
-            <div id="tasks-done-{{ story.id }}" class="span3"><!-- Done -->
-                {% for task in story.tasks.3 %}
-                    {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
-                {% endfor %}
-            </div><!-- Done -->
+            {% include 'NeblionScrumBundle:Story:sprint-story-row-partial.html.twig' with { 'story': story, 'sprint': sprint } %}
         </div><!--/row-->
     {% endfor %}
 {% endblock body %}
@@ -96,7 +79,7 @@
         $('.dropdown-toggle').dropdown();
         $("a[rel=popover]").popover();
         
-        $("a.task-hours").click(function() {
+        $("a.task-hours").live("click", function() {
             var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
             var url         = $(this).attr('href');    
         
@@ -112,7 +95,7 @@
             return false;
         });
         
-        $("a.story-add-task").click(function() {
+        $("a.story-add-task").live("click", function() {
             //var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
             var url         = $(this).attr('href');    
         

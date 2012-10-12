@@ -35,7 +35,17 @@
 
 {% if success %}
     <script type="text/javascript">
-        $("#task-hours-remaining-{{ task.id }}").text("{{ remainingHours }}");
+        {% if task.status.id == 3 %}
+            $("#sprint-story-row-{{ task.story.id }}").load("{{ path('story_tasks', { 'id': task.story.id }) }}");
+        {% else %}
+            $("#task-hours-remaining-{{ task.id }}").text("{{ remainingHours }}");
+            
+            var remainingStory = 0;
+            $("div#sprint-story-row-{{ task.story.id }} .task-hours-remaining").each(function(index) {
+            remainingStory += parseInt($(this).text());
+            });
+            $("#story-hours-remaining-{{ task.story.id }}").text(remainingStory);
+        {% endif %}
         
         // Update total hours remaining
         var remaining = 0;
@@ -43,20 +53,5 @@
             remaining += parseInt($(this).text());
         });
         $("#total-hours-remaining").text(remaining);
-
-        // Update hours remaining in story box
-        $(".story-box").each(function(item) {
-            var story_id    = $(this).attr('id').replace('story-box-', '');
-            var storyRemainingHours = 0;
-            $("#tasks-todo-" + story_id + " span.task-hours-remaining").each(function(item) {
-                storyRemainingHours += parseInt($(this).text());
-            });
-
-            $("#tasks-inprogress-" + story_id + " span.task-hours-remaining").each(function(item) {
-                storyRemainingHours += parseInt($(this).text());
-            });
-
-            $("#story-hours-remaining-" + story_id).text('Remaining Hours:' + storyRemainingHours);
-        });
     </script>
 {% endif %}
