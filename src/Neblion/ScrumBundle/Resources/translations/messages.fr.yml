@@ -37,6 +37,13 @@ Contact: __Contact
 'Edit profile': '__Edit profile'
 'Change password': '__Change password'
 'Sign Out': '__Sign Out'
+'Sprint %name%': '__Sprint %name%'
+Taskboard: __Taskboard
+Start: __Start
+Reports: __Reports
+Review: __Review
+Retrospective: __Retrospective
+Re-start: __Re-start
 'Project admin': '__Project admin'
 Edition: __Edition
 Features: __Features
@@ -65,6 +72,8 @@ Hello: __Hello
 'Sprint creation:': '__Sprint creation:'
 'Current Release': '__Current Release'
 Stories: __Stories
+'Story estimate': '__Story estimate'
+'Remaining hours': '__Remaining hours'
 Story: __Story
 ToDo: __ToDo
 'In Progress': '__In Progress'
@@ -102,7 +111,6 @@ Register: __Register
 'Profile creation:': '__Profile creation:'
 'Profile edition:': '__Profile edition:'
 Feature: __Feature
-'Story estimate': '__Story estimate'
 'Add task': '__Add task'
 'Create a new story': '__Create a new story'
 'Story estimate edition:': '__Story estimate edition:'
