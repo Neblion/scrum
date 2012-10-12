@@ -12,6 +12,8 @@
     <div class="row">
        {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'sprints'} %}
     </div><!--/row-->
+    
+    {% include 'NeblionScrumBundle:Layout:navbar-sprint.html.twig' with { 'sprint': sprint, 'active': ''} %}
 
     <div class="row">
         <div class="span3">
