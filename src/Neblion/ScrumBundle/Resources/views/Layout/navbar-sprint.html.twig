@@ -1,0 +1,20 @@
+<div class="navbar">
+    <div class="navbar-inner">
+        <a class="brand" href="#">{{ 'Sprint %name%'|trans({ '%name%': sprint.name }) }} {{ sprint.start|date('d/m/Y') }} > {{ sprint.end|date('d/m/Y') }}</a>
+        <ul class="nav">
+            <li {% if active == 'taskboard' %}class="active"{% endif %}><a href="{{ path('sprint_show', { 'id': sprint.id }) }}">{{ 'Taskboard'|trans }}</a></li>
+            {% if sprint.status.id == 1 %}
+                <li {% if active == 'start' %}class="active"{% endif %}><a href="{{ path('sprint_start', { 'id': sprint.id }) }}">{{ 'Start'|trans }}</a></li>
+            {% else %}
+                <li {% if active == 'reports' %}class="active"{% endif %}><a href="{{ path('sprint_report', { 'id': sprint.id }) }}">{{ 'Reports'|trans }}</a></li>
+                <li {% if active == 'review' %}class="active"{% endif %}><a href="{{ path('review_list', { 'id': sprint.id }) }}">{{ 'Review'|trans }}</a></li>
+                <li {% if active == 'retrospective' %}class="active"{% endif %}><a href="{{ path('retrospective_list', { 'id': sprint.id }) }}">{{ 'Retrospective'|trans }}</a></li>
+                {% if sprint.status.id == 2 %}
+                    <li {% if active == 'close' %}class="active"{% endif %}><a href="{{ path('sprint_close', { 'id': sprint.id }) }}">{{ 'Close'|trans }}</a></li>
+                {% else %}
+                    <li {% if active == 'restart' %}class="active"{% endif %}><a href="#">{{ 'Re-start'|trans }}</a></li>
+                {% endif %}
+            {% endif %}
+        </ul>
+    </div><!--/navbar-inner-->
+</div><!--/navbar-->

@@ -32,32 +32,32 @@
        {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'sprints'} %}
     </div><!--/row-->
     
-    <div class="page-header">
-        <h1>{{ sprint.name }} <small>Done: {{ sprintInfos.estimate.done }} / {{ sprintInfos.estimate.done + sprintInfos.estimate.todo }} Remaining Hours: <span id="total-hours-remaining">{{ sprintInfos.hours }}</span> - {{ sprint.start|date('d/m/Y') }} > {{ sprint.end|date('d/m/Y') }}</small></h1>
-    </div>
-
     <div class="row">
-        <div class="span4">
-            {% if sprint.status.id == 1 %}
-                <a href="{{ path('sprint_start', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Start sprint' }}</button></a>
-            {% elseif sprint.status.id == 2 %}
-                <a href="{{ path('sprint_report', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Reports' }}</button></a>
-                <a href="{{ path('review_list', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Review' }}</button></a>
-                <a href="{{ path('retrospective_list', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Retrospective' }}</button></a>
-                <a href="{{ path('sprint_close', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Close sprint' }}</button></a>
-            {% else %}
-                <a href="{{ path('sprint_report', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Reports' }}</button></a>
-                <a href="{{ path('review_list', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Review' }}</button></a>
-                <a href="{{ path('retrospective_list', { 'id': sprint.id }) }}"><button class="btp btn-mini btn-primary">{{ 'Retrospective' }}</button></a>
-            {% endif %}
+       {% include 'NeblionScrumBundle:Layout:navbar-sprint.html.twig' with { 'sprint': sprint, 'active': 'taskboard'} %}
+    </div><!--/row-->
+    
+    <div class="row">
+        <div class="span3">
+            {{ 'Story estimate'|trans }}: {{ sprintInfos.estimate.done }} / {{ sprintInfos.estimate.done + sprintInfos.estimate.todo }}
         </div>
-        <div class="span8">
+        <div class="span9">
             <div class="progress progress-striped">
                 <div class="bar"
                     style="width: {{ (sprintInfos.estimate.done / (sprintInfos.estimate.done + sprintInfos.estimate.todo))*100 }}%;"></div>
             </div>
         </div>
-    </div><!--/row-->   
+    </div><!--/row-->
+    <div class="row">
+        <div class="span3">
+            {{ 'Remaining hours'|trans }}: {{ sprintInfos.hours }} / XXXX
+        </div>
+        <div class="span9">
+            <div class="progress progress-striped">
+                <div class="bar"
+                    style="width: {{ (sprintInfos.estimate.done / (sprintInfos.estimate.done + sprintInfos.estimate.todo))*100 }}%;"></div>
+            </div>
+        </div>
+    </div><!--/row-->  
 
     <div class="row">
         <div class="span3 sprint-view-column"><h3>{{ 'Story'|trans }}</h3></div>
