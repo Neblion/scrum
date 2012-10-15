@@ -1,4 +1,4 @@
-<div id="story-box-{{ story.id }}" class="story-box" style="background-color: {{ story.feature.color }}">
+<div id="story-box-{{ story.id }}" class="story-box" {% if story.type.id != 4%}style="background-color: {{ story.feature.color }}{% endif %}">
     <span class="story-estimate">Estimate: {{ story.estimate }}</span>
     Remaining Hours:<span id="story-hours-remaining-{{ story.id }}" class="story-hours-remaining">{{ story.remainingHours }}</span>
     <span class="">{{ story.status }}</span>

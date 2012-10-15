@@ -192,6 +192,183 @@ class TaskController extends Controller
             );
         }
     }
+    
+    /**
+     * Displays a form to create a storyless new task
+     *
+     * @Route("/{id}/newstoryless", name="task_new_storyless")
+     * @Template()
+     * @param integer $id Sprint id
+     */
+    public function newStorylessAction($id)
+    {
+        // Check if user is authorized
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw new AccessDeniedException();
+        }
+        
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->load($id, Query::HYDRATE_OBJECT);
+        if (!$sprint) {
+            throw $this->createNotFoundException('Unable to find Sprint entity.');
+        }
+        $project = $sprint->getProjectRelease()->getProject();
+        
+        // Check if user is really a member of this project
+        $member = $em->getRepository('NeblionScrumBundle:Member')
+                ->isMemberOfProject($user->getId(), $project->getId());
+        if (!$member or $member->getRole()->getId() == 4) {
+            throw new AccessDeniedException();
+        }
+
+        // Check sprint status
+        if ($sprint->getStatus()->getId() == 3) {
+            // Set flash message
+            $this->get('session')->setFlash('error', 'You could not add a task to this story, the associated sprint is done !');
+            return $this->redirect($this->generateUrl('sprint_show', array('id' => $sprint->getId())));
+        }
+        
+        // Load initial status
+        $status = $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(1);
+        
+        $success = false;
+        $entity = new Task();
+        //$entity->setStory($story);
+        $entity->setStatus($status);
+        $form   = $this->createForm(new TaskType(), $entity);
+        
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Task/Ajax:newStoryless.html.twig', array(
+                'project'   => $project,
+                'sprint'    => $sprint,
+                //'story'     => $story,
+                'entity'    => $entity,
+                'form'      => $form->createView(),
+                'success'   => $success,
+            ));
+        } else {
+            return array(
+                'project'   => $project,
+                'sprint'    => $sprint,
+                'story'     => $story,
+                'entity'    => $entity,
+                'form'      => $form->createView()
+            );
+        }
+    }
+    
+    /**
+     * Creates a new Task entity.
+     *
+     * @Route("/{id}/createstoryless", name="task_create_storyless")
+     * @Method("post")
+     * @Template("NeblionScrumBundle:Task:newStoryless.html.twig")
+     * @param integer $id Sprint id
+     */
+    public function createStorylessAction($id)
+    {
+        // Check if user is authorized
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw new AccessDeniedException();
+        }
+        
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->load($id, Query::HYDRATE_OBJECT);
+        if (!$sprint) {
+            throw $this->createNotFoundException('Unable to find Sprint entity.');
+        }
+        $project = $sprint->getProjectRelease()->getProject();
+        
+        // Check if user is really a member of this project
+        $member = $em->getRepository('NeblionScrumBundle:Member')
+                ->isMemberOfProject($user->getId(), $project->getId());
+        if (!$member or $member->getRole()->getId() == 4) {
+            throw new AccessDeniedException();
+        }
+        
+        // Load initial status
+        $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(1);
+        
+        // Load the storyless story for this sprint
+        $storyless = $em->getRepository('NeblionScrumBundle:Story')->getStoryLessForSprint($sprint);
+        // Create the storyless story
+        if (!$storyless) {
+            // Load storyType 'Story less'
+            $type = $em->getRepository('NeblionScrumBundle:StoryType')->find(4);
+            
+            $storyless = new \Neblion\ScrumBundle\Entity\Story();
+            $storyless->setProject($project);
+            $storyless->setSprint($sprint);
+            $storyless->setStatus($status);
+            $storyless->setType($type);
+            $storyless->setName($type->getName());
+            $storyless->setDescription($type->getName());
+            $storyless->setPosition(0);
+            $storyless->setEstimate(0);
+            $em->persist($storyless);
+        }
+        
+        $success = false;
+        $entity  = new Task();
+        $entity->setStory($storyless);
+        $entity->setStatus($status);
+        $request = $this->getRequest();
+        $form    = $this->createForm(new TaskType(), $entity);
+        $form->bindRequest($request);
+
+        if ($form->isValid()) {
+            $em->persist($entity);
+            
+            // Add initial hour record
+            $hour = new \Neblion\ScrumBundle\Entity\Hour();
+            $hour->setTask($entity);
+            $hour->setDate(new \DateTime());
+            $hour->setHour($entity->getHour());
+            $em->persist($hour);
+            
+            // Update story's status if it was done, update to in progress
+            if ($storyless->getStatus()->getId() == 3) {
+                // Load initial status
+                $status = $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(2);
+                $storyless->setStatus($status);
+            }
+            
+            $em->flush();
+
+            $success = true;
+
+            if (!$this->getRequest()->isXmlHttpRequest()) {
+                // Set flash message
+                $this->get('session')->setFlash('success', 'Task was successfully created!');
+                return $this->redirect($this->generateUrl('sprint_show', array('id' => $story->getSprint()->getId())));
+            }
+        }
+
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Task/Ajax:new.html.twig', array(
+                'project'   => $project,
+                'sprint'    => $sprint,
+                'story'     => $storyless,
+                'entity'    => $entity,
+                'form'      => $form->createView(),
+                'success'   => $success,
+            ));
+        } else {
+            return array(
+                'project'   => $project,
+                'sprint'    => $sprint,
+                'story'     => $storyless,
+                'entity'    => $entity,
+                'form'      => $form->createView()
+            );
+        }
+    }
 
     /**
      * Displays a form to edit an existing Task entity.

@@ -133,10 +133,11 @@ class StoryRepository extends EntityRepository
     {
         $query = $this->getEntityManager()
                 ->createQuery(
-                    'SELECT s, ss, f, t, m, a, p, ts, h, r
+                    'SELECT s, ss, f, t, m, a, p, ts, h, r, ty
                     FROM NeblionScrumBundle:Story s
                     INNER JOIN s.status ss
                     INNER JOIN s.sprint sp
+                    INNER JOIN s.type ty
                     LEFT JOIN s.feature f
                     LEFT JOIN s.tasks t
                     LEFT JOIN t.hours h
@@ -216,6 +217,21 @@ class StoryRepository extends EntityRepository
                 ->setParameter('sprint_id', $sprint_id)
                 ->getArrayResult();
         
+    }
+    
+    
+    public function getStoryLessForSprint(\Neblion\ScrumBundle\Entity\Sprint $sprint)
+    {
+        return $this->getEntityManager()
+                ->createQuery('
+                    SELECT s, st, sp
+                    FROM NeblionScrumBundle:Story s
+                    INNER JOIN s.type st
+                    INNER JOIN s.sprint sp
+                    WHERE sp.id = :id
+                    AND st.id = 4')
+                ->setParameter('id', $sprint->getId())
+                ->getOneOrNullResult();
     }
     
     

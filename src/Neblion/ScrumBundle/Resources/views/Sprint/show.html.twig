@@ -37,21 +37,24 @@
     </div><!--/row-->
     
     <div class="row">
+        <div class="span3"><a href="{{ path('task_new_storyless', { 'id': sprint.id }) }}" id="new-task-storyless" class="btn btn-success">{{ 'Create storyless task'|trans }}</a></div>
         <div class="span3">
             {{ 'Story estimate'|trans }}: {{ sprintInfos.estimate.done }} / {{ sprintInfos.estimate.done + sprintInfos.estimate.todo }}
         </div>
-        <div class="span9">
+        <div class="span6">
             <div class="progress progress-striped">
                 <div class="bar"
                     style="width: {{ (sprintInfos.estimate.done / (sprintInfos.estimate.done + sprintInfos.estimate.todo))*100 }}%;"></div>
             </div>
         </div>
     </div><!--/row-->
+    
     <div class="row">
+        <div class="span3"></div>
         <div class="span3">
             {{ 'Remaining hours'|trans }}: <span id="total-hours-remaining">{{ sprintInfos.hours }}</span> / XXXX
         </div>
-        <div class="span9">
+        <div class="span6">
             <div class="progress progress-striped">
                 <div class="bar"
                     style="width: {{ (sprintInfos.estimate.done / (sprintInfos.estimate.done + sprintInfos.estimate.todo))*100 }}%;"></div>
@@ -96,6 +99,22 @@
         });
         
         $("a.story-add-task").live("click", function() {
+            //var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
+            var url         = $(this).attr('href');    
+        
+            $.ajax({
+                url: url,
+                success: function(data){
+                    //$(data).insertAfter("#task-hours-upd-" + task_id);
+                    $("#modal-content").html(data);
+                    $('#myModal').modal('toggle')
+                }
+            });
+        
+            return false;
+        });
+        
+        $("a#new-task-storyless").live("click", function() {
             //var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
             var url         = $(this).attr('href');    
         

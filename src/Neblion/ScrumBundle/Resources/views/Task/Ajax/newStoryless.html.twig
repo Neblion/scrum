@@ -14,7 +14,7 @@
             </div>
         {% endif %}
     
-        <form id="modal-form" action="{{ path('task_create', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+        <form id="modal-form" action="{{ path('task_create_storyless', { 'id': sprint.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
             {{ form_widget(form) }}
         </form>
 </div>
