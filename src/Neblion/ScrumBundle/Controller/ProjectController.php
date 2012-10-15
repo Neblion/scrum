@@ -115,8 +115,7 @@ class ProjectController extends Controller
         $capacity = $estimate = 0;
         
         // Init velocity
-        $velocity = $em->getRepository('NeblionScrumBundle:Project')
-                ->getVelocity($project->getId());
+        $velocity = $em->getRepository('NeblionScrumBundle:Project')->getVelocity($project->getId());
         if (empty($velocity)) {
             $velocity = $this->container->getParameter('default_velocity');
         }
