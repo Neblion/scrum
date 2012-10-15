@@ -23,6 +23,7 @@ class LoadStoryTypeData extends AbstractFixture implements OrderedFixtureInterfa
             array('name' => 'User story'),
             array('name' => 'Technical story'),
             array('name' => 'Issue story'),
+            array('name' => 'Story less'),
         );
      
         foreach ($entities as $entity) {
