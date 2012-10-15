@@ -30,6 +30,12 @@ class Story
     private $project;
     
     /**
+     * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\StoryType", inversedBy="stories")
+     * @ORM\JoinColumn(name="story_type_id", referencedColumnName="id")
+     */
+    private $type;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\Feature", inversedBy="stories")
      * @ORM\JoinColumn(name="feature_id", referencedColumnName="id", nullable=true)
      */
@@ -367,5 +373,28 @@ class Story
     public function removeTask(\Neblion\ScrumBundle\Entity\Task $tasks)
     {
         $this->tasks->removeElement($tasks);
+    }
+
+    /**
+     * Set type
+     *
+     * @param Neblion\ScrumBundle\Entity\StoryType $type
+     * @return Story
+     */
+    public function setType(\Neblion\ScrumBundle\Entity\StoryType $type = null)
+    {
+        $this->type = $type;
+    
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return Neblion\ScrumBundle\Entity\StoryType 
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }
