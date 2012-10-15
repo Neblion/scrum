@@ -27,8 +27,8 @@ class StoryRepository extends EntityRepository
                     SELECT s, ss, f, pj, sp
                     FROM NeblionScrumBundle:Story s
                     INNER JOIN s.status ss
-                    INNER JOIN s.feature f
                     INNER JOIN s.project pj
+                    LEFT JOIN s.feature f
                     LEFT JOIN s.sprint sp
                     LEFT JOIN s.tasks t
                     LEFT JOIN t.status ts

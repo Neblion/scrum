@@ -412,8 +412,14 @@ class StoryController extends Controller
         $storyDetails['description']      = $story->getDescription();
         $storyDetails['estimate']         = $story->getEstimate();
         $storyDetails['position']         = $story->getPosition();
-        $storyDetails['feature']          = array('name' => $story->getFeature()->getName(), 'color' => $story->getFeature()->getColor());
+        if (!is_null($story->getFeature())) {
+            $storyDetails['feature']          = array('name' => $story->getFeature()->getName(), 'color' => $story->getFeature()->getColor());
+        } else {
+            $storyDetails['feature']            = array('name' => null, 'color' => '#ffffff');
+        }
         $storyDetails['status']           = $story->getStatus()->getName();
+        $storyDetails['type']['id']       = $story->getType()->getId();
+        $storyDetails['type']['name']     = $story->getType()->getName();
         $storyDetails['remainingHours']   = 0;
         $storyDetails['tasks']            = array(
             1 => array(),
