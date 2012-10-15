@@ -66,6 +66,7 @@ class StoryType
     {
         return $this->name;
     }
+    
     /**
      * Constructor
      */
@@ -105,5 +106,10 @@ class StoryType
     public function getStories()
     {
         return $this->stories;
+    }
+    
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

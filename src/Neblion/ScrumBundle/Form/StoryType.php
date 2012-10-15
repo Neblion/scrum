@@ -31,7 +31,8 @@ class StoryType extends AbstractType
                 }
             ))
             ->add('name')
-            ->add('description');
+            ->add('description')
+            ->add('type');
         
         if (!$options['new']) {
             $builder->add('estimate');
