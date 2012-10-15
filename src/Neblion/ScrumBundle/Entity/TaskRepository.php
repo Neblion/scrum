@@ -28,7 +28,7 @@ class TaskRepository extends EntityRepository
                     INNER JOIN sp.status sps
                     INNER JOIN sp.projectRelease pr
                     INNER JOIN s.project p
-                    INNER JOIN s.feature f
+                    LEFT JOIN s.feature f
                     LEFT JOIN t.hours h 
                     WHERE t.id = :id'
                 )
