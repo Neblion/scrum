@@ -199,11 +199,39 @@ class ProjectController extends Controller
         }
         
         // Get the current sprint
-        $currentSprint = $em->getRepository('NeblionScrumBundle:Sprint')->getCurrentForProject($project->getId());
+        //$currentSprint = $em->getRepository('NeblionScrumBundle:Sprint')->getCurrentForProject($project->getId());
+        
+        // Get Data for burn up points / sprint chart
+        $datas = $em->getRepository('NeblionScrumBundle:Project')->getDataBurnUpPoints($project);
+        /*
+        echo '<pre>';
+        print_r($datas);
+        echo '</pre>';
+        */
+        
+        $strTotal = $strDone = '';
+        foreach ($datas['data'] as $sprint => $values) {
+            if (!empty($strTotal)) {
+                $strTotal .= ',';
+                $strDone .= ',';
+            }
+            $strTotal .= '[\'' . $sprint . '\',' . $values['total'] . ']';
+            $strDone .= '[\'' . $sprint . '\',' . $values['done'] . ']';
+        }
+        $strXTicks = '';
+        foreach ($datas['ticks'] as $value => $label) {
+            if (!empty($strXTicks)) {
+                $strXTicks .= ',';
+            }
+            $strXTicks .= '[' . $value . ',\'' . $label . '\']';
+        }
         
         return array(
             'project'       => $project,
-            'currentSprint' => $currentSprint,
+            //'currentSprint' => $currentSprint,
+            'strDone'   => $strDone,
+            'strTotal'   => $strTotal,
+            'strXTicks' => $strXTicks,
         );
     }
 

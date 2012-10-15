@@ -80,4 +80,61 @@ class ProjectRepository extends EntityRepository
         
         return 0;
     }
+    
+    /**
+     * getDataBurnUpPoints
+     * 
+     * Get number of points total/done per release/sprint
+     * 
+     * @param \Neblion\ScrumBundle\Entity\Project $project
+     * @return type 
+     */
+    public function getDataBurnUpPoints(\Neblion\ScrumBundle\Entity\Project $project)
+    {
+        // Initialisation
+        $response = array();
+        $datas = array(0 => array('total' => 0, 'done' => 0));
+        $ticks = array(0 => 'R0S0');
+        $releaseIndex = $sprintIndex = $index = 1;
+        $total = $done = 0;
+        
+        // Query
+        $results = $this->getEntityManager()
+                ->createQuery('SELECT p, pr, sp, st, sts
+                    FROM NeblionScrumBundle:Project p
+                    INNER JOIN p.releases pr
+                    INNER JOIN pr.sprints sp
+                    INNER JOIN sp.stories st
+                    INNER JOIN st.status sts
+                    WHERE p.id = :id
+                    ORDER BY pr.start, sp.start')
+                ->setParameter('id', $project->getId())
+                ->getArrayResult();
+        
+        if (!empty($results)) {
+            foreach ($results[0]['releases'] as $release) {
+                foreach ($release['sprints'] as $sprint) {
+                    // Initialisation
+                    $ticks[$index] = 'R' . $releaseIndex . 'S' . $sprintIndex;
+                    foreach ($sprint['stories'] as $story) {
+                        if ($story['status']['id'] == 3) {
+                            $done += $story['estimate'];
+                        }
+                        $total += $story['estimate'];
+                    }
+                    $datas[$index]['total'] = $total;
+                    $datas[$index]['done']  = $done;
+                    $sprintIndex++;
+                    $index++;
+                }
+                $releaseIndex++;
+                $sprintIndex = 1;
+            }
+        }
+        
+        return $reponse = array(
+            'data'  => $datas,
+            'ticks' => $ticks
+        );
+    }
 }

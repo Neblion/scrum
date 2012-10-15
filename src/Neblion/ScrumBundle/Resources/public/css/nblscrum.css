@@ -2,3 +2,46 @@ body {
     padding-top: 60px;
     padding-bottom: 40px;
 }
+
+.widget-box {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border: 1px solid #CDCDCD;
+    clear: both;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.widget-title {
+    background-color: #EFEFEF;
+    background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#FDFDFD), to(#EAEAEA));
+    background-image: -webkit-linear-gradient(top, #FDFDFD 0%, #EAEAEA 100%);
+    background-image: -moz-linear-gradient(top, #FDFDFD 0%, #EAEAEA 100%);
+    background-image: -ms-linear-gradient(top, #FDFDFD 0%, #EAEAEA 100%);
+    background-image: -o-linear-gradient(top, #FDFDFD 0%, #EAEAEA 100%);
+    background-image: -linear-gradient(top, #FDFDFD 0%, #EAEAEA 100%);
+    border-bottom: 1px solid #CDCDCD;
+    height: 36px;
+}
+
+.widget-title span.icon {
+    border-right: 1px solid #CDCDCD;
+    padding: 9px 10px 7px 11px;
+    float: left;
+    opacity: .7;
+}
+
+.widget-title h5 {
+    color: #666;
+    text-shadow: 0 1px 0 white;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px;
+    line-height: 12px;
+    margin: 0;
+}
+
+.widget-content {
+    padding: 12px 15px;
+}

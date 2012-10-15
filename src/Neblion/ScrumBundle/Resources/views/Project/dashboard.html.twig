@@ -1,20 +1,122 @@
 {% extends '::base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+        '%kernel.root_dir%/../vendor/cleonello/jqplot/jquery.jqplot.min.css' 
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}
+
 {% block body %}
     <div class="row">
        {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'dashboard'} %}
-            
-       <div class="alert alert-block">
-            <button type="button" class="close" data-dismiss="alert">×</button>
-            <h4>Warning!</h4>
-            Best check yo self, you're not...
+    </div>
+
+    <div class="row" class="notifications">
+       <div class="span4">
+            <div class="alert alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>Warning!</h4>
+                Best check yo self, you're not...
+            </div>
        </div>
-                        
-       {% if currentSprint is not null %}
-        <p><a href="{{ path('sprint_show', { 'id': currentSprint.id }) }}">Current Sprint</a></p>
-       {% endif %}
+            
+       <div class="span4">
+            <div class="alert alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>Warning!</h4>
+                Best check yo self, you're not...
+            </div>
+       </div>
+            
+       <div class="span4">
+            <div class="alert alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <h4>Warning!</h4>
+                Best check yo self, you're not...
+            </div>
+       </div>
+    </div> 
+
+    <div class="row">
+       <div class="span4">
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Project description'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p>{{ project.description }}</p>
+               </div>
+           </div>
+               
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Latest activities'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p>lklklklk mkmlm l mlm lmlmlmlm lml m lm</p>
+               </div>
+           </div>
+       </div>
+            
+       <div class="span8">
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Reports'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <div id="chartdiv" style="height:400px;"></div>
+               </div>
+           </div>
+       </div>
     </div><!--/row-->
 {% endblock body %}
+    
+{% block javascripts %}
+    {{ parent() }}
+    {% javascripts
+        '%kernel.root_dir%/../vendor/cleonello/jqplot/jquery.jqplot.min.js'
+        '%kernel.root_dir%/../vendor/cleonello/jqplot/plugins/jqplot.highlighter.min.js'
+    %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+    $(function() {
+        var burnup_total    = [{{ strTotal|raw }}];
+        var burnup_done     = [{{ strDone|raw }}];
+        $.jqplot('chartdiv', [burnup_total, burnup_done], {
+            title: 'Burnup  chart points',
+            //seriesColors: [ "#cccccc", "#eeeeee"],
+            series:[{label:'Total'},{label:'Done'}],
+            legend: {
+                show: true,
+                placement: 'outsideGrid'
+            },
+            highlighter: {
+                show: true,
+            },
+            axes: {
+                xaxis: {
+                    min: 0,
+                    max: 5,
+                    label: "Release / Sprint",
+                    ticks: [{{ strXTicks|raw }}]
+                },
+                yaxis: {
+                    min: 0,
+                    label: "Points"
+                }
+            }
+        });
+    });
+    
+    </script>
+{% endblock javascripts %}
 
 
 
