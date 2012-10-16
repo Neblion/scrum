@@ -223,7 +223,11 @@ class StoryController extends Controller
             
             // Set flash message
             $this->get('session')->setFlash('success', 'Story was updated with success!');
-            return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
+            if (is_null($story->getSprint())) {
+                return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
+            } else {
+                return $this->redirect($this->generateUrl('sprint_show', array('id' => $story->getSprint()->getId())));
+            }
         }
 
         return array(
