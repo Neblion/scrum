@@ -631,8 +631,21 @@ class TaskController extends Controller
                 // Update task status if hour = 0
                 if ($remainingHours == 0) {
                     // Load done status
-                    $status = $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(3);
+                    $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(3);
                     $task->setStatus($status);
+                    
+                    // Check if all the task of the story are done
+                    $all = true;
+                    foreach ($task->getStory()->getTasks() as $tk) {
+                        if ($tk->getStatus()->getId() != 3) {
+                            $all = false;
+                            break;
+                        }
+                    }
+                    // If all task are done, set story status to done
+                    if ($all) {
+                        $task->getStory()->setStatus($status);
+                    }
                 }
                 
                 $em->flush();
