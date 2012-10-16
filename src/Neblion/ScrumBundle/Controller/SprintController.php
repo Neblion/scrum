@@ -95,7 +95,7 @@ class SprintController extends Controller
         $sprintDetails = $em->getRepository('NeblionScrumBundle:Story')->getSprintDetails($id);
         $sprintInfos = array(
             'estimate'  => array('todo' => 0, 'done' => 0),
-            'hours'     => 0,
+            'hours'     => array('total' => 0, 'remaining' => 0),
         );
         $storyAndTasksByStatus = array();
         foreach ($sprintDetails as $story) {
@@ -149,7 +149,8 @@ class SprintController extends Controller
                 $storyAndTasksByStatus[$story['id']]['tasks'][$task['status']['id']][] = $taskArray;
                 
                 // sprintInfos
-                $sprintInfos['hours'] += $taskArray['remaining_hour'];
+                $sprintInfos['hours']['total']      += $task['hour'];
+                $sprintInfos['hours']['remaining']  += $taskArray['remaining_hour'];
             }
         }
         

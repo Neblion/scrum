@@ -52,12 +52,12 @@
     <div class="row">
         <div class="span3"></div>
         <div class="span3">
-            {{ 'Remaining hours'|trans }}: <span id="total-hours-remaining">{{ sprintInfos.hours }}</span> / XXXX
+            {{ 'Remaining hours'|trans }}: <span id="total-hours-remaining">{{ sprintInfos.hours.remaining }}</span> / {{ sprintInfos.hours.total }}
         </div>
         <div class="span6">
-            <div class="progress progress-striped">
+            <div class="progress progress-success progress-striped">
                 <div class="bar"
-                    style="width: {{ (sprintInfos.estimate.done / (sprintInfos.estimate.done + sprintInfos.estimate.todo))*100 }}%;"></div>
+                    style="width: {{ (sprintInfos.hours.remaining / (sprintInfos.hours.remaining + sprintInfos.hours.total))*100 }}%;"></div>
             </div>
         </div>
     </div><!--/row-->  
@@ -80,7 +80,9 @@
     {{ parent() }}
     <script type="text/javascript">
         $('.dropdown-toggle').dropdown();
-        $("a[rel=popover]").popover();
+        $("a[rel=popover]").popover().click(function(e) {
+            e.preventDefault()
+        });
         
         $("a.task-hours").live("click", function() {
             var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
