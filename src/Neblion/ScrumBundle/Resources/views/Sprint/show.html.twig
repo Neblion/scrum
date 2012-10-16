@@ -39,11 +39,11 @@
     <div class="row">
         <div class="span3"><a href="{{ path('task_new_storyless', { 'id': sprint.id }) }}" id="new-task-storyless" class="btn btn-success">{{ 'Create storyless task'|trans }}</a></div>
         <div class="span3">
-            {{ 'Story estimate'|trans }}: {{ sprintInfos.estimate.done }} / {{ sprintInfos.estimate.done + sprintInfos.estimate.todo }}
+            <p>{{ 'Story estimate'|trans }}: <span id="total-sprint-estimate">{{ sprintInfos.estimate.done }}</span> / {{ sprintInfos.estimate.done + sprintInfos.estimate.todo }}</span></p>
         </div>
         <div class="span6">
             <div class="progress progress-striped">
-                <div class="bar"
+                <div id="progress-bar-sprint-estimate" class="bar"
                     style="width: {{ (sprintInfos.estimate.done / (sprintInfos.estimate.done + sprintInfos.estimate.todo))*100 }}%;"></div>
             </div>
         </div>
@@ -52,12 +52,12 @@
     <div class="row">
         <div class="span3"></div>
         <div class="span3">
-            {{ 'Remaining hours'|trans }}: <span id="total-hours-remaining">{{ sprintInfos.hours.remaining }}</span> / {{ sprintInfos.hours.total }}
+            <p>{{ 'Remaining hours'|trans }}: <span id="total-hours-remaining">{{ sprintInfos.hours.remaining }}</span> / <span id="sprint-total-hours">{{ sprintInfos.hours.total }}</span></p>
         </div>
         <div class="span6">
             <div class="progress progress-success progress-striped">
-                <div class="bar"
-                    style="width: {{ (sprintInfos.hours.remaining / (sprintInfos.hours.remaining + sprintInfos.hours.total))*100 }}%;"></div>
+                <div id="progress-bar-hours-remaining" class="bar"
+                    style="width: {{ (sprintInfos.hours.remaining / sprintInfos.hours.total)*100 }}%;"></div>
             </div>
         </div>
     </div><!--/row-->  

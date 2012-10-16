@@ -36,7 +36,20 @@
 {% if success %}
     <script type="text/javascript">
         {% if task.status.id == 3 %}
-            $("#sprint-story-row-{{ task.story.id }}").load("{{ path('story_tasks', { 'id': task.story.id }) }}");
+            $("#sprint-story-row-{{ task.story.id }}").load("{{ path('story_tasks', { 'id': task.story.id }) }}", function (){
+                // Update total hours remaining
+                var remaining = 0;
+                $(".task-hours-remaining").each(function(index) {
+                    remaining += parseInt($(this).text());
+                });
+                alert('remaining:' + remaining);
+                $("#total-hours-remaining").text(remaining);
+
+                // Update progress-bar-hours
+                var sprintTotalHours = $("#sprint-total-hours").text();
+                var width = Math.floor(remaining / sprintTotalHours * 100);
+                $("#progress-bar-hours-remaining").css("width", width + '%');
+             });
         {% else %}
             $("#task-hours-remaining-{{ task.id }}").text("{{ remainingHours }}");
             
@@ -45,13 +58,19 @@
             remainingStory += parseInt($(this).text());
             });
             $("#story-hours-remaining-{{ task.story.id }}").text(remainingStory);
-        {% endif %}
         
-        // Update total hours remaining
-        var remaining = 0;
-        $(".task-hours-remaining").each(function(index) {
-            remaining += parseInt($(this).text());
-        });
-        $("#total-hours-remaining").text(remaining);
+            // Update total hours remaining
+            var remaining = 0;
+            $(".task-hours-remaining").each(function(index) {
+                remaining += parseInt($(this).text());
+            });
+            alert('remaining:' + remaining);
+            $("#total-hours-remaining").text(remaining);
+
+            // Update progress-bar-hours
+            var sprintTotalHours = $("#sprint-total-hours").text();
+            var width = Math.floor(remaining / sprintTotalHours * 100);
+            $("#progress-bar-hours-remaining").css("width", width + '%');
+        {% endif %}
     </script>
 {% endif %}

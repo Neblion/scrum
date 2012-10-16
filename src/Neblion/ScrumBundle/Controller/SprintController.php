@@ -109,6 +109,7 @@ class SprintController extends Controller
             $storyAndTasksByStatus[$story['id']]['type']['id'] = $story['type']['id'];
             $storyAndTasksByStatus[$story['id']]['type']['name'] = $story['type']['name'];
             $storyAndTasksByStatus[$story['id']]['remainingHours']     = 0;
+            $storyAndTasksByStatus[$story['id']]['totalHours']     = 0;
             $storyAndTasksByStatus[$story['id']]['tasks'] = array(
                 1 => array(),
                 2 => array(),
@@ -145,6 +146,7 @@ class SprintController extends Controller
                 if (in_array($task['status']['id'], array(1, 2))) {
                     $storyAndTasksByStatus[$story['id']]['remainingHours'] += $taskArray['remaining_hour'];
                 }
+                $storyAndTasksByStatus[$story['id']]['totalHours'] += $task['hour'];
                 
                 $storyAndTasksByStatus[$story['id']]['tasks'][$task['status']['id']][] = $taskArray;
                 

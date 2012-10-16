@@ -1,6 +1,6 @@
 <div id="story-box-{{ story.id }}" class="story-box" {% if story.type.id != 4%}style="background-color: {{ story.feature.color }}{% endif %}">
-    <span class="story-estimate">Estimate: {{ story.estimate }}</span>
-    Remaining Hours:<span id="story-hours-remaining-{{ story.id }}" class="story-hours-remaining">{{ story.remainingHours }}</span>
+    <span class="story-estimate">{{ 'Estimate'|trans }}: {{ story.estimate }}</span>
+    {{ 'Remaining Hours'|trans }}:<span id="story-hours-remaining-{{ story.id }}" class="story-hours-remaining">{{ story.remainingHours }}</span> / {{ story.totalHours }}
     <span class="">{{ story.status }}</span>
     <p><a href="#" rel="popover" data-content="{{ story.description }}" data-original-title="{{ 'Description'|trans }}">{{ story.name }}</a></p>
     
