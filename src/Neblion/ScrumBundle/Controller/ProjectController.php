@@ -470,7 +470,8 @@ class ProjectController extends Controller
     }
     
     /**
-     *
+     * backlogSortOrderAction
+     * 
      * @Route("/{id}/backlog/sort/order", name="backlog_sort_order")
      * @Method("post")
      * 
@@ -500,11 +501,7 @@ class ProjectController extends Controller
         foreach($stories as $story) {
             $checkStories[$story->getId()] = $story->getId();
         }
-        /*
-        echo '<pre>';
-        print_r($checkStories);
-        echo '</pre>';
-        */
+
         $storySortOrder = null;
         
         $request = $this->getRequest();
@@ -522,12 +519,7 @@ class ProjectController extends Controller
             }
             
             $tabsort = explode(',', $storySortOrder);
-            /*
-            echo '<pre>';
-            print_r($tabsort);
-            echo '</pre>';
-            exit;
-            */
+            
             foreach ($tabsort as $story_id) {
                 if (!array_key_exists($story_id, $checkStories)) {
                     // Detect a story not in backlog !!!
