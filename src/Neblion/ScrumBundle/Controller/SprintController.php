@@ -188,7 +188,7 @@ class SprintController extends Controller
         // Check if user is really a member of this project
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $project->getId());
-        if (!$member or !in_array($member->getRole()->getId(), array(1, 3))) {
+        if (!$member or ($member->getRole()->getId() != 2 and !$member->getAdmin())) {
             throw new AccessDeniedException();
         }
         
@@ -233,7 +233,7 @@ class SprintController extends Controller
         
         // Look for sprint date
         $start = $em->getRepository('NeblionScrumBundle:Sprint')
-                ->getStartOfNextSprint($project->getId(), $this->container->getParameter('sprint_duration'));
+                ->getStartOfNextSprint($project->getId(), $project->getSprintStartDay());
         $end = new \DateTime($start->format('Y-m-d'));
         $end->modify('+' . $this->container->getParameter('sprint_duration') . ' day');
         

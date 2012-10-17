@@ -139,7 +139,7 @@ class ProjectController extends Controller
         }
         
         $startOfNextSprint = $em->getRepository('NeblionScrumBundle:Sprint')
-                ->getStartOfNextSprint($project->getId(), $this->container->getParameter('sprint_start_day'));
+                ->getStartOfNextSprint($project->getId(), $project->getSprintStartDay());
         $endOfNextSprint = new \DateTime($startOfNextSprint->format('Y-m-d'));
         $endOfNextSprint->modify('+' . $this->container->getParameter('sprint_duration') . ' day');
         
