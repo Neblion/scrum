@@ -119,9 +119,8 @@ class SprintController extends Controller
             // sprintInfos
             if ($story['status']['id'] == 3) {
                 $sprintInfos['estimate']['done'] += $story['estimate'];
-            } else {
-                $sprintInfos['estimate']['todo'] += $story['estimate'];
             }
+            $sprintInfos['estimate']['todo'] += $story['estimate'];
             
             foreach ($story['tasks'] as $task) {
                 $taskArray = array(

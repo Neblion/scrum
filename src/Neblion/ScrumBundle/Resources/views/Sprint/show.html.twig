@@ -39,7 +39,7 @@
     <div class="row">
         <div class="span3"><a href="{{ path('task_new_storyless', { 'id': sprint.id }) }}" id="new-task-storyless" class="btn btn-success">{{ 'Create storyless task'|trans }}</a></div>
         <div class="span3">
-            <p>{{ 'Story estimate'|trans }}: <span id="total-sprint-estimate">{{ sprintInfos.estimate.done }}</span> / {{ sprintInfos.estimate.done + sprintInfos.estimate.todo }}</span></p>
+            <p>{{ 'Story estimate'|trans }}: <span id="total-sprint-estimate">{{ sprintInfos.estimate.done }}</span> / {{ sprintInfos.estimate.todo }}</span></p>
         </div>
         <div class="span6">
             <div class="progress progress-striped">
