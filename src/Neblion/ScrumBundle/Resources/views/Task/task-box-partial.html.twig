@@ -4,8 +4,8 @@
             {{ task.member.account.profile.firstname }} {{ task.member.account.profile.lastname }}
         {% endif %}
     </span>
-    <span id="task-hours-{{ task.id }}" class="task-hours">{{ task.hour }}</span> => 
-    <span id="task-hours-remaining-{{ task.id }}" class="task-hours-remaining">{% if task.remaining_hour is defined %}{{ task.remaining_hour }}{% else %}{{ task.hour }}{% endif %}</span>
+    <span id="task-hours-remaining-{{ task.id }}" class="task-hours-remaining">{% if task.remaining_hour is defined %}{{ task.remaining_hour }}{% else %}{{ task.hour }}{% endif %}</span> /
+    <span id="task-hours-{{ task.id }}" class="task-hours">{{ task.hour }}</span>
     {% if task.status.id == 2 %}
         <a id="task-hours-upd-{{ task.id }}" class="task-hours" href="{{ path('task_hours', { 'id': task.id }) }}">{{ 'hours remaining'|trans }}</a>
     {% else %}

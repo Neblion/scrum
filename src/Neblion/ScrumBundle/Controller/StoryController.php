@@ -425,6 +425,7 @@ class StoryController extends Controller
         $storyDetails['type']['id']       = $story->getType()->getId();
         $storyDetails['type']['name']     = $story->getType()->getName();
         $storyDetails['remainingHours']   = 0;
+        $storyDetails['totalHours']   = 0;
         $storyDetails['tasks']            = array(
             1 => array(),
             2 => array(),
@@ -456,6 +457,7 @@ class StoryController extends Controller
                 }
                 $remainingHours += $taskArray['remaining_hour'];
                 $storyDetails['tasks'][$task['status']['id']][] = $taskArray;
+                $storyDetails['totalHours'] = $task['hour'];
         }
         $storyDetails['remainingHours'] = $remainingHours;
         
