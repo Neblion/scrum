@@ -10,10 +10,18 @@
     });
     $("#total-hours-remaining").text(remaining);
     
+    // Update sprint total hours
+    var sprintTotalHours = 0;
+    $(".task-hours").each(function(index) {
+        sprintTotalHours += parseInt($(this).text());
+    });
+    $("#sprint-total-hours").text(sprintTotalHours);
+    
     // Update hours remaining in story box
     $(".story-box").each(function(item) {
         var story_id    = $(this).attr('id').replace('story-box-', '');
         var storyRemainingHours = 0;
+        
         $("#tasks-todo-" + story_id + " span.task-hours-remaining").each(function(item) {
             storyRemainingHours += parseInt($(this).text());
         });
@@ -22,6 +30,12 @@
             storyRemainingHours += parseInt($(this).text());
         });
         
-        $("#story-hours-remaining-" + story_id).text('Remaining Hours:' + storyRemainingHours);
+        var storyTotalHours = storyRemainingHours;
+        $("#tasks-done-" + story_id + " span.task-hours").each(function(item) {
+            storyTotalHours += parseInt($(this).text());
+        });
+        
+        $("#story-hours-remaining-" + story_id).text(storyRemainingHours);
+        $("#story-hours-" + story_id).text(storyTotalHours);
     });
 </script>
