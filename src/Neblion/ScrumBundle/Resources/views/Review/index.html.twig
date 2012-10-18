@@ -11,24 +11,39 @@
 
     <div class="row">
         <div class="span3">
-            <p>sprint infos</p>
+            <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Project description'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p>{{ project.description }}</p>
+               </div>
+           </div>
         </div>
 
         <div class="span9">
             {% for story in stories %}
-                <div class="review-story">
-                    <h2>{{ story.name }} Estimate: {{ story.estimate }} Status: {% if story.status.id == 3 %}Done{% else %}Not done{% endif %}</h2>
-                    {% set form = forms[story.id] %}
-                    {% if story.review.id is defined %}
-                        <form action="{{ path('review_update', { 'id': story.review.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
-                        {{ form_widget(form) }}
-                        <button type="submit" class="btn btn-primary">{{ 'Update'|trans }}</button>
-                    {% else  %}
-                        <form action="{{ path('review_create', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
-                        {{ form_widget(form) }}
-                        <button type="submit" class="btn btn-primary">{{ 'Create'|trans }}</button>
-                    {% endif %}
-                    </form>
+                <div class="widget-box review-story">
+                    <div class="widget-title">
+                        <span class="icon"><i class="icon-file"></i></span>
+                        <h5>{{ 'Review'|trans }}: {{ story.name }}</h5>
+                    </div>
+                        
+                    <div class="widget-content">
+                        <p>Estimate: {{ story.estimate }} Status: {% if story.status.id == 3 %}Done{% else %}Not done{% endif %}</p>
+                        {% set form = forms[story.id] %}
+                        {% if story.review.id is defined %}
+                            <form action="{{ path('review_update', { 'id': story.review.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                            {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-primary">{{ 'Update'|trans }}</button>
+                        {% else  %}
+                            <form action="{{ path('review_create', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                            {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-primary">{{ 'Create'|trans }}</button>
+                        {% endif %}
+                        </form>
+                    </div>
                 </div>
             {% endfor %}
         </div>
