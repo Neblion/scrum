@@ -16,36 +16,43 @@ Close: Fermer
 Success: Succès
 Cancel: Annuler
 Edit: Editer
+'Project description': 'Description du projet'
+Sprint: Sprint
+'Delete a task': 'Supprimer une tâche'
+'Do you really want to delete this task: %task% ?': '__Do you really want to delete this task: %task% ?'
+No: Non
 'Your projects': 'Vos projets'
 'Create project': 'Créer un projet'
 'Project creation': '__Project creation'
-'Current velocity': 'Vélocité actuelle'
+Velocity: Vélocité
+'Current average velocity is': 'La vélocité moyenne courante est de'
 'Add a story': 'Ajouter une story'
-'Project description': 'Description du projet'
+Help: Aide
+'Priorize stories with drag''n drop.': '__Priorize stories with drag''n drop.'
+'Estimate stories by clicking ....': '__Estimate stories by clicking ....'
+'Save story sort order': '__Save story sort order'
 'Latest activities': 'Activités récentes'
-Reports: Rapportss
+Reports: Rapports
 'Do you really want to remove this project': '__Do you really want to remove this project'
 'If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !': '__If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !'
 'Delete this project': '__Delete this project'
 'Next Sprint': 'Prochain sprint'
 Release: Release
 Duration: Durée
-days: __days
+days: jours
 Estimate: Points
-'Create Next Sprint': 'Créer le prochain sprint'
-'Backlog - Estimate: <span id="other-stories-estimate">%backlog_estimate%': '__Backlog - Estimate: <span id="other-stories-estimate">%backlog_estimate%'
+'Create next sprint': 'Créer le prochain sprint'
+Backlog: Backlog
 'Invit member': 'Inviter un nouveau membre'
-Accept: Accpeter
+Accept: Accepter
 Refuse: Refuser
-'No invitation': '__No invitation'
+'No invitation': 'Aucune invitation'
 'Do you really want to remove this member': 'Voulez-vous vraiment retirer ce membre'
 Remove: Enlever
-No: Non
-Help: Aide
 Contact: Contact
 'Edit profile': 'Editer votre profil'
 'Change password': 'Changer votre mot de passe'
-'Sign Out': 'Déconnexion'
+'Sign Out': Déconnexion
 'Sprint %name%': '__Sprint %name%'
 Edition: Edition
 Taskboard: Taskboard
@@ -59,7 +66,6 @@ Releases: Releases
 Team: Equipe
 Deletion: Suppression
 Dashboard: 'Tableau de bord'
-Backlog: Backlog
 Sprints: Sprints
 Admin: Admin
 'Review creation:': '__Review creation:'
@@ -76,7 +82,7 @@ Hello: __Hello
 'In confirming your registration by clicking on the previous link, you acknowledge having read and accepted our General Terms and Conditions.': '__In confirming your registration by clicking on the previous link, you acknowledge having read and accepted our General Terms and Conditions.'
 'We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.': '__We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.'
 'In order to confirm your invitation, please login on NeblionScrum and accept invitation.': '__In order to confirm your invitation, please login on NeblionScrum and accept invitation.'
-'Sign in': 'Connexion'
+'Sign in': Connexion
 'Sprint creation:': '__Sprint creation:'
 'Current Release': 'Release courante'
 Stories: Stories
@@ -114,10 +120,12 @@ Invit: __Invit
 'Hello %username%,': '__Hello %username%,'
 Register: __Register
 'Sprint retrospective:': '__Sprint retrospective:'
+'Release description': '__Release description'
 'Sprint retro:': '__Sprint retro:'
 'Profile creation:': '__Profile creation:'
 'Profile edition:': '__Profile edition:'
 Feature: Feature
+'Remaining Hours': '__Remaining Hours'
 'Add task': 'Ajouter une tâche'
 'Create a new story': 'Creér une nouvelle story'
 'Story estimate edition:': '__Story estimate edition:'
@@ -127,6 +135,9 @@ Feature: Feature
 'No feature': 'Pas de fonctionnalité'
 'New feature': 'Nouvelle fonctionnalité'
 'Do you really want to delete this feature: %feature% ?': '__Do you really want to delete this feature: %feature% ?'
+'Current velocity': 'Vélocité actuelle'
+'Create Next Sprint': 'Créer le prochain sprint'
+'Backlog - Estimate: <span id="other-stories-estimate">%backlog_estimate%': '__Backlog - Estimate: <span id="other-stories-estimate">%backlog_estimate%'
 'Task hours remaining edition:': 'Edition des heures restantes'
 'Create a new task:': 'Créer une nouvelle tâche'
 'Symfony2 is great': 'J''aime Symfony2'

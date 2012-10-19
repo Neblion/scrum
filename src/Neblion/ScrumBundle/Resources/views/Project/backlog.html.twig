@@ -18,14 +18,25 @@
             <div class="widget-box">
                 <div class="widget-title">
                     <span class="icon"><i class="icon-file"></i></span>
-                    <h5>{{ 'Current velocity'|trans }}</h5>
+                    <h5>{{ 'Velocity'|trans }}</h5>
                 </div>
                 <div class="widget-content">
-                    <p>Current velocity is <span class="label label-info">{{ velocity }}</span></p>
+                    <p>{{ 'Current average velocity is'|trans }} <span class="label label-info">{{ velocity }}</span></p>
                 </div>
              </div>
                 
             <p><a href="{{ path('story_new', { 'id': project.id }) }}" class="btn btn-success add-story"><i class="icon-plus-sign icon-white"></i> {{ 'Add a story'|trans }}</a></p>
+            
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Help'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    <p>{{ 'Priorize stories with drag\'n drop.'|trans }}</p>
+                    <p>{{ 'Estimate stories by clicking ....'|trans }}</p>
+                </div>
+             </div>
             
             <div class="modal hide" id="myModal">
                 <div id="modal-content"></div>
@@ -35,7 +46,7 @@
         <div class="span9">
             <form class="hide" id="backlog-sort-order" action="{{ path('backlog_sort_order', {'id': project.id}) }}" method="post">
                 <input id="story-sort-order" name="story-sort-order" type="hidden">
-                <button class="btn btn-primary" type="submit">Save story sort order</button>
+                <button class="btn btn-primary" type="submit">{{ 'Save story sort order'|trans }}</button>
             </form>
 
             <div id="backlog">

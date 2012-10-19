@@ -15,8 +15,8 @@
                 {% endfor %}
             </ul>
                 
-            <p class="lead">{{ 'Release'|trans }}: {{ projectRelease.name }} - {{ startOfNextSprint|date('d/m/Y') }} > {{ endOfNextSprint|date('d/m/Y') }} - {{ 'Duration'|trans }}: {{ sprintDuration }} {{ 'days'|trans }} - {{ 'Estimate'|trans }}: <span id="next-sprint-estimate">{{ nextSprint.estimate }}</span></p>
-            <p><a class="btn btn-success" id="start-next-sprint" href="{{ path('sprint_new', { 'id': project.id, 'story': lastStory }) }}"><i class="icon-plus-sign icon-white"></i> <strong>{{ 'Create Next Sprint'|trans }}</strong></a></p>
+            <p><em>{{ 'Release'|trans }}: {{ projectRelease.name }} - {{ startOfNextSprint|date('d/m/Y') }} > {{ endOfNextSprint|date('d/m/Y') }} - {{ 'Duration'|trans }}: {{ sprintDuration }} {{ 'days'|trans }} - {{ 'Estimate'|trans }}: <span id="next-sprint-estimate" class="label label-info">{{ nextSprint.estimate }}</span></em></p>
+            <p><a class="btn btn-success" id="start-next-sprint" href="{{ path('sprint_new', { 'id': project.id, 'story': lastStory }) }}"><i class="icon-plus-sign icon-white"></i> {{ 'Create next sprint'|trans }}</a></p>
         </div>
     </div>
 {% endif %}
@@ -25,7 +25,7 @@
     <div id="otherstories"  class="widget-box">
         <div class="widget-title">
             <span class="icon"><i class="icon-file"></i></span>
-            <h5>{{ 'Backlog - Estimate: <span id="other-stories-estimate">%backlog_estimate%'|trans({ '%backlog_estimate%': backlog.estimate })|raw }}</span></h5>
+            <h5>{{ 'Backlog'|trans }} - {{ 'Estimate'|trans }}: <span id="other-stories-estimate">{{ backlog.estimate }}</span></h5>
         </div>
         <div class="widget-content">
             <ul id="backlog-other-stories" class="sprint-stories">
