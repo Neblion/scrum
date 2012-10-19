@@ -295,6 +295,8 @@ class TaskController extends Controller
         // Load initial status
         $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(1);
         
+        $new = false;
+        
         // Load the storyless story for this sprint
         $storyless = $em->getRepository('NeblionScrumBundle:Story')->getStoryLessForSprint($sprint);
         // Create the storyless story
@@ -312,6 +314,7 @@ class TaskController extends Controller
             $storyless->setPosition(0);
             $storyless->setEstimate(0);
             $em->persist($storyless);
+            $new = true;
         }
         
         $success = false;
@@ -351,13 +354,14 @@ class TaskController extends Controller
         }
 
         if ($this->getRequest()->isXmlHttpRequest()) {
-            return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Task/Ajax:new.html.twig', array(
+            return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Task/Ajax:newStoryless.html.twig', array(
                 'project'   => $project,
                 'sprint'    => $sprint,
                 'story'     => $storyless,
                 'entity'    => $entity,
                 'form'      => $form->createView(),
                 'success'   => $success,
+                'new'       => $new,
             ));
         } else {
             return array(

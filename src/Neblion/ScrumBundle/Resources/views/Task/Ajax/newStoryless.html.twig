@@ -2,7 +2,7 @@
 
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">×</button>
-    <h3>{{ 'Create a new task:'|trans }}</h3>
+    <h3>{{ 'Create a new storyless task:'|trans }}</h3>
 </div>
 
 <div id="modal-body" class="modal-body">
@@ -26,6 +26,27 @@
 
 {% if success %}
     <script type="text/javascript">
-        $("#tasks-todo-{{ story.id }}").load("{{ path('task_todo', { 'id': story.id }) }}");
+    {% if new %}
+        $("#row-column-label").after('<div id="sprint-story-row-{{ story.id }}" class="row-fluid sprint-story-row" style="border: 1px solid black; margin-bottom: 3px;"></div>');
+    {% endif %}
+    $("#sprint-story-row-{{ story.id }}").load("{{ path('story_tasks', { 'id': story.id }) }}", function (){
+                // Update total hours remaining
+                var remaining = 0;
+                $(".task-hours-remaining").each(function(index) {
+                    remaining += parseInt($(this).text());
+                });
+                $("#total-hours-remaining").text(remaining);
+                
+                var totalHours = 0;
+                $("span.task-hours").each(function(item) {
+                    totalHours += parseInt($(this).text());
+                });
+                $("#sprint-total-hours").text(totalHours);
+
+                // Update progress-bar-hours
+                var sprintTotalHours = $("#sprint-total-hours").text();
+                var width = Math.floor(remaining / totalHours * 100);
+                $("#progress-bar-hours-remaining").css("width", width + '%');
+             });
     </script>
 {% endif %}
