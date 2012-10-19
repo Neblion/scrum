@@ -9,21 +9,47 @@
 
     <div class="row">
         <div class="span3">
-            <p>Help...</p>
+            <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Project description'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p>{{ project.description }}</p>
+               </div>
+           </div>
+                
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-info-sign"></i></span>
+                   <h5>{{ 'Informations'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p>Aide</p>
+               </div>
+           </div>
         </div><!--/span-->
 
         <div class="span9">
-            <form action="{{ path('story_update', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-                {{ form_widget(form) }}
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
-                    {% if story.sprint is null %}
-                        <a class="btn btn-primary" href="{{ path('project_backlog', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
-                    {% else %}
-                        <a class="btn btn-primary" href="{{ path('sprint_show', {'id': story.sprint.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
-                    {% endif %}
+            <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Story edition'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                    <form action="{{ path('story_update', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                        {{ form_widget(form) }}
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
+                            {% if story.sprint is null %}
+                                <a class="btn btn-primary" href="{{ path('project_backlog', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                            {% else %}
+                                <a class="btn btn-primary" href="{{ path('sprint_show', {'id': story.sprint.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                            {% endif %}
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div><!--/span-->
     </div><!--/row-->
 {% endblock body %}
