@@ -1,59 +1,67 @@
-'hours remaining': '__hours remaining'
-Description: __Description
-'Set Done': '__Set Done'
-'Set In Progress': '__Set In Progress'
-Update: __Update
-Take: __Take
-Delete: __Delete
+'hours remaining': 'heures restantes'
+Description: Description
+'Set Done': Fait
+'Set In Progress': 'En cours'
+Update: 'Mettre à jour'
+Take: Prendre
+Delete: Supprimer
 'Task creation:': '__Task creation:'
-Create: __Create
-'Create a new task:': '__Create a new task:'
+Create: Créer
+'Create a new task': 'Créer une nouvelle tâche'
 Success!: __Success!
 '': __
-Close: __Close
+Close: Fermer
 'Save changes': '__Save changes'
-'Task hours remaining edition:': '__Task hours remaining edition:'
-Success: __Success
+'Task hours remaining edition': 'Edition des heures restantes'
+Success: Succès
 Cancel: Annuler
 Edit: Editer
-'Your projects': '__Your projects'
-'Create project': '__Create project'
+'Your projects': 'Vos projets'
+'Create project': 'Créer un projet'
 'Project creation': '__Project creation'
-'Add a story': '__Add a story'
+'Current velocity': 'Vélocité actuelle'
+'Add a story': 'Ajouter une story'
+'Project description': 'Description du projet'
+'Latest activities': 'Activités récentes'
+Reports: Rapportss
 'Do you really want to remove this project': '__Do you really want to remove this project'
 'If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !': '__If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !'
 'Delete this project': '__Delete this project'
-'Next Sprint': '__Next Sprint'
-'Create Next Sprint': '__Create Next Sprint'
-'Invit member': '__Invit member'
-Accept: __Accept
-Refuse: __Refuse
+'Next Sprint': 'Prochain sprint'
+Release: Release
+Duration: Durée
+days: __days
+Estimate: Points
+'Create Next Sprint': 'Créer le prochain sprint'
+'Backlog - Estimate: <span id="other-stories-estimate">%backlog_estimate%': '__Backlog - Estimate: <span id="other-stories-estimate">%backlog_estimate%'
+'Invit member': 'Inviter un nouveau membre'
+Accept: Accpeter
+Refuse: Refuser
 'No invitation': '__No invitation'
-'Do you really want to remove this member': '__Do you really want to remove this member'
-Remove: __Remove
-No: __No
-Help: __Help
-Contact: __Contact
-'Edit profile': '__Edit profile'
-'Change password': '__Change password'
-'Sign Out': '__Sign Out'
+'Do you really want to remove this member': 'Voulez-vous vraiment retirer ce membre'
+Remove: Enlever
+No: Non
+Help: Aide
+Contact: Contact
+'Edit profile': 'Editer votre profil'
+'Change password': 'Changer votre mot de passe'
+'Sign Out': 'Déconnexion'
 'Sprint %name%': '__Sprint %name%'
-Taskboard: __Taskboard
-Start: __Start
-Reports: __Reports
-Review: __Review
-Retrospective: __Retrospective
-Re-start: __Re-start
-'Project admin': '__Project admin'
-Edition: __Edition
-Features: __Features
-Releases: __Releases
-Team: __Team
-Deletion: __Deletion
-Dashboard: __Dashboard
-Backlog: __Backlog
-Sprints: __Sprints
-Admin: __Admin
+Edition: Edition
+Taskboard: Taskboard
+Start: Commencer
+Review: Revue
+Retrospective: Retrospective
+Re-start: Re-commencer
+'Project admin': 'Projet administration'
+Features: Fonctionnalités
+Releases: Releases
+Team: Equipe
+Deletion: Suppression
+Dashboard: 'Tableau de bord'
+Backlog: Backlog
+Sprints: Sprints
+Admin: Admin
 'Review creation:': '__Review creation:'
 'Sprint review:': '__Sprint review:'
 'NeblionScrum %project_name% project notification': '__NeblionScrum %project_name% project notification'
@@ -68,40 +76,39 @@ Hello: __Hello
 'In confirming your registration by clicking on the previous link, you acknowledge having read and accepted our General Terms and Conditions.': '__In confirming your registration by clicking on the previous link, you acknowledge having read and accepted our General Terms and Conditions.'
 'We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.': '__We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.'
 'In order to confirm your invitation, please login on NeblionScrum and accept invitation.': '__In order to confirm your invitation, please login on NeblionScrum and accept invitation.'
-'Sign in': '__Sign in'
+'Sign in': 'Connexion'
 'Sprint creation:': '__Sprint creation:'
-'Current Release': '__Current Release'
-Stories: __Stories
-'Story estimate': '__Story estimate'
-'Remaining hours': '__Remaining hours'
-Story: __Story
-ToDo: __ToDo
-'In Progress': '__In Progress'
-Done: __Done
+'Current Release': 'Release courante'
+Stories: Stories
+'Create storyless task': 'Créer une tâche storyless'
+'Story estimate': 'Estimation de la story'
+'Remaining hours': 'Heures restantes'
+Story: Story
+ToDo: 'A faire'
+'In Progress': 'En cours'
+Done: Fait
 'Are you sure you want close this sprint ?': '__Are you sure you want close this sprint ?'
 'Member could not edit their task and retrospective and sprint review edition will be close.': '__Member could not edit their task and retrospective and sprint review edition will be close.'
-Name: __Name
-Release: __Release
-Status: __Status
-'Start > End': '__Start > End'
-Estimate: __Estimate
-View: __View
-'No sprint': '__No sprint'
+Name: Nom
+Status: Statut
+'Start > End': 'Début > Fin'
+View: Voir
+'No sprint': 'Pas de sprint'
 'Do you really want to delete this sprint: %sprint% ?': '__Do you really want to delete this sprint: %sprint% ?'
-Actions: __Actions
-'No release': '__No release'
+Actions: Actions
+'No release': 'Pas de release'
 'New release': '__New release'
 'Do you really want to delete this release: %release% ?': '__Do you really want to delete this release: %release% ?'
-Lastname: __Lastname
-Firstname: __Firstname
-username: __username
-Role: __Role
-Administrator: __Administrator
-Enabled: __Enabled
-Me: __Me
-Yes: __Yes
+Lastname: Nom
+Firstname: Prénon
+username: __Username
+Role: Rôle
+Administrator: Administrateur
+Enabled: Activé
+Me: Moi
+Yes: Oui
 Invit: __Invit
-'No Member': '__No Member'
+'No Member': 'Pas de membre'
 'Invit a new Member': '__Invit a new Member'
 'Welcome on Neblion Scrum!': '__Welcome on Neblion Scrum!'
 'Hello %username%,': '__Hello %username%,'
@@ -110,14 +117,16 @@ Register: __Register
 'Sprint retro:': '__Sprint retro:'
 'Profile creation:': '__Profile creation:'
 'Profile edition:': '__Profile edition:'
-Feature: __Feature
-'Add task': '__Add task'
-'Create a new story': '__Create a new story'
+Feature: Feature
+'Add task': 'Ajouter une tâche'
+'Create a new story': 'Creér une nouvelle story'
 'Story estimate edition:': '__Story estimate edition:'
 'Do you really want to delete this story: %story% ?': '__Do you really want to delete this story: %story% ?'
 'This field is required': '__This field is required'
 'Feature creation:': '__Feature creation:'
-'No feature': '__No feature'
-'New feature': '__New feature'
+'No feature': 'Pas de fonctionnalité'
+'New feature': 'Nouvelle fonctionnalité'
 'Do you really want to delete this feature: %feature% ?': '__Do you really want to delete this feature: %feature% ?'
+'Task hours remaining edition:': 'Edition des heures restantes'
+'Create a new task:': 'Créer une nouvelle tâche'
 'Symfony2 is great': 'J''aime Symfony2'
