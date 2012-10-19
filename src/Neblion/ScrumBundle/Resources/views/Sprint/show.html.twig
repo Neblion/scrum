@@ -1,28 +1,5 @@
 {% extends '::base.html.twig' %}
 
-{% block stylesheets %}
-     {{ parent() }}
-     
-    <style type="text/css">
-        .story-box { 
-            border: 1px solid black;
-            padding: 3px; margin: 3px; 
-        }
-        
-        .task-box { 
-            border: 1px solid black;
-            padding: 3px; margin: 3px;
-        }
-        /*
-        .sprint-view-column {
-            border-top: 3px solid #005580;
-            border-right: 3px solid #005580;
-            border-left: 3px solid #005580;
-        }
-        */
-    </style>
-{% endblock stylesheets %}
-
 {% block body %}
     <div class="modal hide" id="myModal">
         <div id="modal-content"></div>
@@ -39,7 +16,7 @@
     <div class="row">
         <div class="span3"><a href="{{ path('task_new_storyless', { 'id': sprint.id }) }}" id="new-task-storyless" class="btn btn-success">{{ 'Create storyless task'|trans }}</a></div>
         <div class="span3">
-            <p>{{ 'Story estimate'|trans }}: <span id="total-sprint-estimate">{{ sprintInfos.estimate.done }}</span> / {{ sprintInfos.estimate.todo }}</span></p>
+            <p>{{ 'Story estimate'|trans }}: <span id="sprint-estimate-done">{{ sprintInfos.estimate.done }}</span> / <span id="sprint-estimate-todo">{{ sprintInfos.estimate.todo }}</span></span></p>
         </div>
         <div class="span6">
             <div class="progress progress-striped">
@@ -81,72 +58,74 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="text/javascript">
-        $('.dropdown-toggle').dropdown();
-        $("a[rel=popover]").popover().click(function(e) {
-            e.preventDefault()
-        });
-        
-        $("a.task-hours").live("click", function() {
-            var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
-            var url         = $(this).attr('href');    
-        
-            $.ajax({
-                url: url,
-                success: function(data){
-                    //$(data).insertAfter("#task-hours-upd-" + task_id);
-                    $("#modal-content").html(data);
-                    $('#myModal').modal('toggle')
-                }
+        $(document).ready(function() {
+            $('.dropdown-toggle').dropdown();
+            $("a[rel=popover]").popover().click(function(e) {
+                e.preventDefault()
             });
-        
-            return false;
-        });
-        
-        $("a.story-add-task").live("click", function() {
-            //var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
-            var url         = $(this).attr('href');    
-        
-            $.ajax({
-                url: url,
-                success: function(data){
-                    //$(data).insertAfter("#task-hours-upd-" + task_id);
-                    $("#modal-content").html(data);
-                    $('#myModal').modal('toggle')
-                }
+
+            $("a.task-hours").live("click", function() {
+                var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
+                var url         = $(this).attr('href');    
+
+                $.ajax({
+                    url: url,
+                    success: function(data){
+                        //$(data).insertAfter("#task-hours-upd-" + task_id);
+                        $("#modal-content").html(data);
+                        $('#myModal').modal('toggle')
+                    }
+                });
+
+                return false;
             });
-        
-            return false;
-        });
-        
-        $("a#new-task-storyless").live("click", function() {
-            //var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
-            var url         = $(this).attr('href');    
-        
-            $.ajax({
-                url: url,
-                success: function(data){
-                    //$(data).insertAfter("#task-hours-upd-" + task_id);
-                    $("#modal-content").html(data);
-                    $('#myModal').modal('toggle')
-                }
+
+            $("a.story-add-task").live("click", function() {
+                //var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
+                var url         = $(this).attr('href');    
+
+                $.ajax({
+                    url: url,
+                    success: function(data){
+                        //$(data).insertAfter("#task-hours-upd-" + task_id);
+                        $("#modal-content").html(data);
+                        $('#myModal').modal('toggle')
+                    }
+                });
+
+                return false;
             });
-        
-            return false;
-        });
-        
-        $("#modal-submit-form").live("click", function() {
-            var form = $("#modal-form");
-        
-            $.ajax({
-                url: form.attr('action'),
-                type: form.attr('method'),
-                data: form.serialize(),
-                success: function(data){
-                    $("#modal-content").html(data);
-                }
+
+            $("a#new-task-storyless").live("click", function() {
+                //var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
+                var url         = $(this).attr('href');    
+
+                $.ajax({
+                    url: url,
+                    success: function(data){
+                        //$(data).insertAfter("#task-hours-upd-" + task_id);
+                        $("#modal-content").html(data);
+                        $('#myModal').modal('toggle')
+                    }
+                });
+
+                return false;
             });
-        
-            return false;
+
+            $("#modal-submit-form").live("click", function() {
+                var form = $("#modal-form");
+
+                $.ajax({
+                    url: form.attr('action'),
+                    type: form.attr('method'),
+                    data: form.serialize(),
+                    success: function(data){
+                        $("#modal-content").html(data);
+                    }
+                });
+
+                return false;
+            });
         });
     </script>
 {% endblock javascripts %}

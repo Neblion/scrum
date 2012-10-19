@@ -1,7 +1,7 @@
 <div id="story-box-{{ story.id }}" class="story-box" {% if story.type.id != 4%}style="background-color: {{ story.feature.color }}{% endif %}">
-    <span class="story-estimate">{{ 'Estimate'|trans }}: {{ story.estimate }}</span>
+    {{ 'Estimate'|trans }}:<span id="story-estimate-{{ story.id }}" class="story-estimate">{{ story.estimate }}</span>
     {{ 'Remaining Hours'|trans }}:<span id="story-hours-remaining-{{ story.id }}" class="story-hours-remaining">{{ story.remainingHours }}</span> / <span id="story-hours-{{ story.id }}" class="story-hours">{{ story.totalHours }}</span>
-    <span class="">{{ story.status }}</span>
+    <span id="story-status-{{ story.id }}" class="story-status">{{ story.status }}</span>
     <p><a href="#" rel="popover" data-content="{{ story.description }}" data-original-title="{{ 'Description'|trans }}">{{ story.name }}</a></p>
     
     {% if sprint.status.id != 3 %}

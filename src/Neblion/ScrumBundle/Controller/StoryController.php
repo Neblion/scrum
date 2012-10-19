@@ -457,7 +457,7 @@ class StoryController extends Controller
                 }
                 $remainingHours += $taskArray['remaining_hour'];
                 $storyDetails['tasks'][$task['status']['id']][] = $taskArray;
-                $storyDetails['totalHours'] = $task['hour'];
+                $storyDetails['totalHours'] += $task['hour'];
         }
         $storyDetails['remainingHours'] = $remainingHours;
         

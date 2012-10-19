@@ -32,44 +32,43 @@
     {% endif %}
 </div>
 
-
 {% if success %}
     <script type="text/javascript">
-        {% if task.status.id == 3 %}
-            $("#sprint-story-row-{{ task.story.id }}").load("{{ path('story_tasks', { 'id': task.story.id }) }}", function (){
-                // Update total hours remaining
-                var remaining = 0;
-                $(".task-hours-remaining").each(function(index) {
-                    remaining += parseInt($(this).text());
+        $(document).ready(function() {
+            {% if task.status.id == 3 %}
+                $("#sprint-story-row-{{ task.story.id }}").load("{{ path('story_tasks', { 'id': task.story.id }) }}", function (){
+                    // Update sprint total hours remaining
+                    $("#total-hours-remaining").refreshCumul(".task-hours-remaining");
+                    
+                    // Refresh sprint-estimate-done
+                    var done = 0;
+                    $(".story-box").each(function() {
+                        var strid = $(this).attr("id");
+                        var id = strid.replace("story-box-", "");
+                        var status = $("#story-status-" + id).text();
+                        if (status == 'Done') {
+                            done += parseInt($("#story-estimate-" + id).text());
+                        }
+                    }); 
+                    $("#sprint-estimate-done").text(done);
+                    
+                    // Update progress bar sprint-estimate
+                    $("#progress-bar-sprint-estimate").refreshProgressBar("#sprint-estimate-done", "#sprint-estimate-todo");
                 });
-                $("#total-hours-remaining").text(remaining);
+            {% else %}
+                // Update task hours remaining
+                $("#task-hours-remaining-{{ task.id }}").text("{{ remainingHours }}");
 
-                // Update progress-bar-hours
-                var sprintTotalHours = $("#sprint-total-hours").text();
-                var width = Math.floor(remaining / sprintTotalHours * 100);
-                $("#progress-bar-hours-remaining").css("width", width + '%');
-             });
-        {% else %}
-            $("#task-hours-remaining-{{ task.id }}").text("{{ remainingHours }}");
-            
-            var remainingStory = 0;
-            $("div#sprint-story-row-{{ task.story.id }} .task-hours-remaining").each(function(index) {
-            remainingStory += parseInt($(this).text());
-            });
-            $("#story-hours-remaining-{{ task.story.id }}").text(remainingStory);
-        
-            // Update total hours remaining
-            var remaining = 0;
-            $(".task-hours-remaining").each(function(index) {
-                remaining += parseInt($(this).text());
-            });
-            alert('remaining:' + remaining);
-            $("#total-hours-remaining").text(remaining);
+                // Update story total hours remaining
+                $("#story-hours-remaining-{{ task.story.id }}").refreshCumul("div#sprint-story-row-{{ task.story.id }} .task-hours-remaining");
 
+                // Update sprint total hours remaining
+                $("#total-hours-remaining").refreshCumul(".task-hours-remaining");
+            {% endif %}
             // Update progress-bar-hours
-            var sprintTotalHours = $("#sprint-total-hours").text();
-            var width = Math.floor(remaining / sprintTotalHours * 100);
-            $("#progress-bar-hours-remaining").css("width", width + '%');
-        {% endif %}
+            $("#progress-bar-hours-remaining").refreshProgressBar("#total-hours-remaining", "#sprint-total-hours");
+            
+            
+        });
     </script>
 {% endif %}

@@ -3,6 +3,19 @@ body {
     padding-bottom: 40px;
 }
 
+/* Taskboard */
+.story-box { 
+    border: 1px solid black;
+    padding: 3px; margin: 3px; 
+}
+
+.task-box { 
+    border: 1px solid black;
+    padding: 3px; margin: 3px;
+}
+
+
+/* Widget styles */
 .widget-box {
     background: none repeat scroll 0 0 #F9F9F9;
     border: 1px solid #CDCDCD;
