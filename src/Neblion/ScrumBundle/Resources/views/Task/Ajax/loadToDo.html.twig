@@ -16,7 +16,12 @@
         // Update story total hours remaining
         $("#story-hours-remaining-{{ story.id }}").refreshCumul("div#sprint-story-row-{{ story.id }} .task-hours-remaining");
         
-        // Update story total hours
+        // Update story total hours if necessary
         $("#story-hours-{{ story.id }}").refreshCumul("div#sprint-story-row-{{ story.id }} .task-hours");
+        
+        // Update story status
+        if ($("#story-status-{{ story.id }}").text() == "Done") {
+            $("#story-status-{{ story.id }}").text("{{ story.status.name }}");
+        }
     });
 </script>
