@@ -1126,7 +1126,7 @@ class TaskController extends Controller
         }
         
         return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Task/Ajax:loadToDo.html.twig', array(
-            'tasks' => $resultTasks, 'sprint' => $sprint
+            'tasks' => $resultTasks, 'sprint' => $sprint, 'story' => $story
         ));
     }
     

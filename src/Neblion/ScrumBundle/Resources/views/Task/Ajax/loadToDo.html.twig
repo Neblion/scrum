@@ -3,39 +3,20 @@
 {% endfor %}
 
 <script type="text/javascript">
-    // Update total hours remaining
-    var remaining = 0;
-    $(".task-hours-remaining").each(function(index) {
-        remaining += parseInt($(this).text());
-    });
-    $("#total-hours-remaining").text(remaining);
-    
-    // Update sprint total hours
-    var sprintTotalHours = 0;
-    $(".task-hours").each(function(index) {
-        sprintTotalHours += parseInt($(this).text());
-    });
-    $("#sprint-total-hours").text(sprintTotalHours);
-    
-    // Update hours remaining in story box
-    $(".story-box").each(function(item) {
-        var story_id    = $(this).attr('id').replace('story-box-', '');
-        var storyRemainingHours = 0;
+    $(document).ready(function() {
+        // Update sprint total hours remaining
+        $("#total-hours-remaining").refreshCumul(".task-hours-remaining");
+
+        // Update sprint total hours
+        $("#sprint-total-hours").refreshCumul(".task-hours");
         
-        $("#tasks-todo-" + story_id + " span.task-hours-remaining").each(function(item) {
-            storyRemainingHours += parseInt($(this).text());
-        });
+        // Update progress-bar-hours
+        $("#progress-bar-hours-remaining").refreshProgressBar("#total-hours-remaining", "#sprint-total-hours");
+
+        // Update story total hours remaining
+        $("#story-hours-remaining-{{ story.id }}").refreshCumul("div#sprint-story-row-{{ story.id }} .task-hours-remaining");
         
-        $("#tasks-inprogress-" + story_id + " span.task-hours-remaining").each(function(item) {
-            storyRemainingHours += parseInt($(this).text());
-        });
-        
-        var storyTotalHours = storyRemainingHours;
-        $("#tasks-done-" + story_id + " span.task-hours").each(function(item) {
-            storyTotalHours += parseInt($(this).text());
-        });
-        
-        $("#story-hours-remaining-" + story_id).text(storyRemainingHours);
-        $("#story-hours-" + story_id).text(storyTotalHours);
+        // Update story total hours
+        $("#story-hours-{{ story.id }}").refreshCumul("div#sprint-story-row-{{ story.id }} .task-hours");
     });
 </script>
