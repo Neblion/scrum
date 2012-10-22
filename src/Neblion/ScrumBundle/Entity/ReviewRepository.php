@@ -16,10 +16,12 @@ class ReviewRepository extends EntityRepository
     {
         return $this->getEntityManager()
                 ->createQuery(
-                    'SELECT r, s, sp, p, f
+                    'SELECT r, s, sp, p, f, pr, ss
                     FROM NeblionScrumBundle:Review r
                     INNER JOIN r.story s
+                    INNER JOIN s.status ss
                     INNER JOIN s.sprint sp
+                    INNER JOIN sp.projectRelease pr
                     INNER JOIN s.project p
                     INNER JOIN s.feature f
                     WHERE r.id = :id'

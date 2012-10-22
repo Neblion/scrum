@@ -3,24 +3,66 @@
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
 
 {% block body %}
-<div class="page-header">
-    <h1>{{ 'Review creation:'|trans }} {{ project.name }}</h1>
-</div>
+    <div class="row">
+       {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': review.story.project, 'active': 'sprints'} %}
+    </div><!--/row-->
+    
+    <div class="row">
+       {% include 'NeblionScrumBundle:Layout:navbar-sprint.html.twig' with { 'sprint': review.story.sprint, 'active': 'review'} %}
+    </div><!--/row-->
 
-<div class="row-fluid">
-    <div class="span3">
-        
-    </div><!--/span-->
-    
-    
-    <div class="span9">
-        <form action="{{ path('review_create', {'id': project.id}) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
-            {{ form_widget(form) }}
-            <div class="form-actions">
-                <button type="submit" class="btn btn-primary">{{ 'Create'|trans }}</button>
+    <div class="row">
+        <div class="span3">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Project description'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    <p>{{ review.story.project.description }}</p>
+                </div>
             </div>
-        </form>
-    </div><!--/span-->
-</div><!--/row-->
+
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Release description'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    <p>{{ review.story.sprint.projectRelease.description }}</p>
+                </div>
+            </div>
+
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Sprint description'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    <p>{{ review.story.sprint.description }}</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="span9">
+            <div class="widget-box review-story">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Review creation'|trans }}: {{ review.story.name }}</h5>
+                </div>
+
+                <div class="widget-content">
+                    <p><strong>{{ 'Story description'|trans }}:</strong> {{ review.story.description }}</p>
+                    <p><span class="badge badge-info">{{ 'Effort'|trans }}: {{ review.story.estimate }}</span> {% if review.story.status.id == 3 %}<span class="badge badge-success">{{ 'Done'|trans}}{% else %}<span class="badge badge-important">{{ 'Not done'|trans }}{% endif %}</span></p>
+                    <form action="{{ path('review_create', {'id': project.id}) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                        {{ form_widget(form) }}
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">{{ 'Create'|trans }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!--/span-->
+    </div><!--/row-->
 
 {% endblock body %}
