@@ -11,23 +11,39 @@
     
     <div class="row">
         <div class="span3">
-            <p>Help...</p>
+            <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Project description'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p>{{ project.description }}</p>
+               </div>
+           </div>
         </div>
 
         <div class="span9">
-            {% if member.account.profile is defined %}
-                <h2>{{ member.account.profile.firstname }} {{ member.account.profile.lastname }}</h2>
-                <p>{{ member.account.username }}</p>
-            {% else %}
-                <h2>{{ member.account.username }}</h2>
-            {% endif %}
-            <form action="{{ path('member_update', { 'id': member.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
-                {{ form_widget(form) }}
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
-                    <a class="btn btn-primary" href="{{ path('team_show', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+            <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Member edition'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                    {% if member.account.profile is defined %}
+                        <h2>{{ member.account.profile.firstname }} {{ member.account.profile.lastname }}</h2>
+                        <p>{{ member.account.username }}</p>
+                    {% else %}
+                        <h2>{{ member.account.username }}</h2>
+                    {% endif %}
+                    <form action="{{ path('member_update', { 'id': member.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                        {{ form_widget(form) }}
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
+                            <a class="btn btn-primary" href="{{ path('team_show', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div><!--widget-box-->
         </div>
     </div><!--/row-->   
 {% endblock body %}
