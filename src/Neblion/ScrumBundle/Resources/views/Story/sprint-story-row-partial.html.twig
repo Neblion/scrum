@@ -7,7 +7,7 @@
     {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
 {% endfor %}
 </div><!-- ToDo -->
-<div id="tasks-inprogress-{{ story.id }}" class="span3"><!-- In Progress -->
+<div id="tasks-inprogress-{{ story.id }}" class="span3"><!-- In progress -->
 {% for task in story.tasks.2 %}
     {% include 'NeblionScrumBundle:Task:task-box-partial.html.twig' with { 'task': task, 'sprint': sprint } %}
 {% endfor %}

@@ -16,7 +16,7 @@
     <div class="row">
         <div class="span3"><a href="{{ path('task_new_storyless', { 'id': sprint.id }) }}" id="new-task-storyless" class="btn btn-success">{{ 'Create storyless task'|trans }}</a></div>
         <div class="span3">
-            <p>{{ 'Story estimate'|trans }}: <span id="sprint-estimate-done">{{ sprintInfos.estimate.done }}</span> / <span id="sprint-estimate-todo">{{ sprintInfos.estimate.todo }}</span></span></p>
+            <p>{{ 'Effort'|trans }}: <span id="sprint-estimate-done">{{ sprintInfos.estimate.done }}</span> / <span id="sprint-estimate-todo">{{ sprintInfos.estimate.todo }}</span></span></p>
         </div>
         <div class="span6">
             <div class="progress progress-striped">
@@ -44,12 +44,12 @@
     <div id="row-column-label" class="row">
         <div class="span3 sprint-view-column"><h3>{{ 'Story'|trans }}</h3></div>
         <div class="span3 sprint-view-column"><h3>{{ 'ToDo'|trans }}</h3></div>
-        <div class="span3 sprint-view-column"><h3>{{ 'In Progress'|trans }}</h3></div>
+        <div class="span3 sprint-view-column"><h3>{{ 'In progress'|trans }}</h3></div>
         <div class="span3 sprint-view-column"><h3>{{ 'Done'|trans }}</h3></div>
     </div><!--/row-->
 
     {% for story in storyAndTasksByStatus %}
-        <div id="sprint-story-row-{{ story.id }}" class="row-fluid sprint-story-row" style="border: 1px solid black; margin-bottom: 3px;">
+        <div id="sprint-story-row-{{ story.id }}" class="row-fluid sprint-story-row" style="border: 2px solid {% if story.feature.color is defined %}{{ story.feature.color }}{% else %}#CACACA{% endif %}; margin-bottom: 3px;">
             {% include 'NeblionScrumBundle:Story:sprint-story-row-partial.html.twig' with { 'story': story, 'sprint': sprint } %}
         </div><!--/row-->
     {% endfor %}
@@ -64,7 +64,7 @@
                 e.preventDefault()
             });
 
-            $("a.task-hours").live("click", function() {
+            $("button.update-task-hours").live("click", function() {
                 var task_id     = $(this).attr('id').replace('task-hours-upd-', '');
                 var url         = $(this).attr('href');    
 

@@ -4,14 +4,29 @@ body {
 }
 
 /* Taskboard */
+ul.story-box-actions.nav, ul.task-box-actions.nav {
+    margin-bottom: 0px;
+}
+ul.story-box-actions.nav-pills > li { float: right; }
+
 .story-box { 
-    border: 1px solid black;
+    border-top: 1px solid #CACACA;
+    border-bottom: 1px solid #CACACA;
+    border-right:  1px solid #CACACA;
     padding: 3px; margin: 3px; 
 }
+.story-box p {
+    margin-bottom: 2px;
+}
+
+.sprint-story-row .badge { margin-right: 2px; }
 
 .task-box { 
-    border: 1px solid black;
+    border: 1px solid #CACACA;
     padding: 3px; margin: 3px;
+}
+.task-box p {
+    margin-bottom: 2px;
 }
 
 

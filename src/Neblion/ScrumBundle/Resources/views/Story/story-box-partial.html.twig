@@ -1,8 +1,17 @@
-<div id="story-box-{{ story.id }}" class="story-box" {% if story.type.id != 4%}style="background-color: {{ story.feature.color }}{% endif %}">
-    {{ 'Estimate'|trans }}:<span id="story-estimate-{{ story.id }}" class="story-estimate">{{ story.estimate }}</span>
-    {{ 'Remaining Hours'|trans }}:<span id="story-hours-remaining-{{ story.id }}" class="story-hours-remaining">{{ story.remainingHours }}</span> / <span id="story-hours-{{ story.id }}" class="story-hours">{{ story.totalHours }}</span>
-    <span id="story-status-{{ story.id }}" class="story-status">{{ story.status }}</span>
-    <p><a href="#" rel="popover" data-content="{{ story.description }}" data-original-title="{{ 'Description'|trans }}">{{ story.name }}</a></p>
+<div id="story-box-{{ story.id }}" class="story-box" style="border-left: 6px solid {% if story.type.id != 4%}{{ story.feature.color }}{% else %}#CACACA{% endif %}">
+    <p class="story-name">
+        <span class="badge">#{{ story.id }} </span><a href="#" rel="popover" data-content="{{ story.description }}" data-original-title="{{ 'Description'|trans }}">{{ story.name }}</a>
+    </p>
+    
+    <p><span class="badge badge-info">{{ 'Effort'|trans }}: <span id="story-estimate-{{ story.id }}" class="story-estimate ">{{ story.estimate }}</span></span></p>
+    
+    <p><span class="badge badge-success">{{ 'Remaining hours'|trans }}: <span id="story-hours-remaining-{{ story.id }}" class="story-hours-remaining">{{ story.remainingHours }}</span> / <span id="story-hours-{{ story.id }}" class="story-hours">{{ story.totalHours }}</span></span></p>
+    
+    {% if story.feature.name is defined %}
+        <p class="story-feature">{{ 'Feature'|trans }}: {{ story.feature.name }}</p>
+    {% endif %}
+        
+    <p><span id="story-status-{{ story.id }}" class="story-status">{{ story.status|trans }}</span></p>
     
     {% if sprint.status.id != 3 %}
         <ul class="story-box-actions nav nav-pills">
