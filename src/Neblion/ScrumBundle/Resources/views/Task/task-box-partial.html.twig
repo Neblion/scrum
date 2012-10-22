@@ -8,19 +8,19 @@
         {% endif %}
     </p>
     
-    {% if sprint.status.id != 3 %}
-        <ul class="task-box-actions nav nav-pills">
-            <li>
-                {% if task.status.id == 2 %}
-                    <button id="task-hours-upd-{{ task.id }}" class="btn btn-primary task-hours update-task-hours" href="{{ path('task_hours', { 'id': task.id }) }}">
-                {% else %}
-                    <button id="task-hours-upd-{{ task.id }}" class="btn btn-info task-hours" href="#">
-                {% endif %}
-                    {{ 'Hours'|trans }}:
-                    <span id="task-hours-remaining-{{ task.id }}" class="task-hours-remaining">{% if task.remaining_hour is defined %}{{ task.remaining_hour }}{% else %}{{ task.hour }}{% endif %}</span> /
-                    <span id="task-hours-{{ task.id }}" class="task-hours">{{ task.hour }}</span>
-                </button>
-            </li>
+    <ul class="task-box-actions nav nav-pills">
+        <li>
+            {% if task.status.id == 2 %}
+                <button id="task-hours-upd-{{ task.id }}" class="btn btn-primary task-hours update-task-hours" href="{{ path('task_hours', { 'id': task.id }) }}">
+            {% else %}
+                <button id="task-hours-upd-{{ task.id }}" class="btn btn-info task-hours" href="#">
+            {% endif %}
+                {{ 'Hours'|trans }}:
+                <span id="task-hours-remaining-{{ task.id }}" class="task-hours-remaining">{% if task.remaining_hour is defined %}{{ task.remaining_hour }}{% else %}{{ task.hour }}{% endif %}</span> /
+                <span id="task-hours-{{ task.id }}" class="task-hours">{{ task.hour }}</span>
+            </button>
+         </li>
+            {% if sprint.status.id != 3 %}
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Actions <b class="caret"></b></a>
                 <ul id="menu1" class="dropdown-menu">
@@ -47,6 +47,7 @@
                     {% endif %}
                 </ul>
             </li>
+            {% endif %}
         </ul>
-    {% endif %}
+    
 </div>
