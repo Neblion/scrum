@@ -20,12 +20,27 @@
 
     <div class="row">
         <div class="span3">
-           <p>{{ sprint.description }}</p>
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Project description'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p>{{ project.description }}</p>
+               </div>
+           </div>
         </div><!--/span-->
 
-
         <div class="span9">
-            <div id="chartdiv" style="height:400px;width:600px; "></div>
+            <div class="widget-box">
+                <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Sprint reports'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    <div id="chartdiv" style="height:400px;width:600px; "></div>
+                </div>
+            </div><!--widget-box-->
         </div><!--/span-->
     </div><!--/row-->
 {% endblock body %}
@@ -44,7 +59,7 @@
         var burndown_hours  = [{{ strHours|raw }}];
         var burndown_ideal  = [['{{ sprint.start|date('Y-m-d') }}',{{ estimateInitialHours }}],['{{ sprint.end|date('Y-m-d') }}',0]];
         $.jqplot('chartdiv', [burndown_ideal, burndown_hours], {
-            title: 'Burndown hours chart',
+            title: '{{ 'Burndown hours chart'|trans }}',
             //seriesColors: [ "#cccccc", "#eeeeee"],
             //series: [ { label: 'toto' }, { label: 'titi' } ],
             axes:{

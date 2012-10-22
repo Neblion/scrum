@@ -20,17 +20,33 @@
     
     <div class="row">
         <div class="span3">
-            <p>Help...</p>
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Project description'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    <p>{{ project.description }}</p>
+                </div>
+            </div>
         </div><!--/span-->
 
         <div class="span9">
-            <form action="{{ path('release_create', { 'id': project.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
-                {{ form_widget(form) }}
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-success"><i class="icon-plus-sign icon-white"></i> {{ 'Create'|trans }}</button>
-                    <a class="btn btn-primary" href="{{ path('release_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Release creation'|trans }}</h5>
                 </div>
-            </form>
+                <div class="widget-content">
+                    <form action="{{ path('release_create', { 'id': project.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                        {{ form_widget(form) }}
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success"><i class="icon-plus-sign icon-white"></i> {{ 'Create'|trans }}</button>
+                            <a class="btn btn-primary" href="{{ path('release_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div><!--/span-->
     </div><!--/row-->
 {% endblock body %}

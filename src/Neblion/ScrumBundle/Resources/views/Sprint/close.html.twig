@@ -13,23 +13,38 @@
 
     <div class="row">
         <div class="span3">
-            <p>Sprint infos</p>
+            <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Project description'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p>{{ project.description }}</p>
+               </div>
+           </div>
         </div><!--/span-->
 
-
         <div class="span9">
-            <div class="alert alert-warning">
-                <p>{{ 'Are you sure you want close this sprint ?'|trans }}</p>
-                <p>{{ 'Member could not edit their task and retrospective and sprint review edition will be close.'|trans }}</p>
-                <p>Velocity will be {{ currentVelocity }} (max: {{ maxVelocity }}) stories done {{ storiesDone }} / {{ storiesTotal }}</p>
-            </div>
-            <form action="{{ path('sprint_close', { 'id': sprint.id }) }}" method="post">
-                {{ form_widget(form) }}
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-warning"><i class="icon-stop icon-white"></i> {{ 'Close'|trans }}</button>
-                    <a class="btn btn-primary" href="{{ path('sprint_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+            <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Close the sprint'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                    <div class="alert alert-warning">
+                        <p>{{ 'Are you sure you want close this sprint ?'|trans }}</p>
+                        <p>{{ 'Member could not edit their task and retrospective and sprint review edition will be close.'|trans }}</p>
+                        <p>Velocity will be {{ currentVelocity }} (max: {{ maxVelocity }}) stories done {{ storiesDone }} / {{ storiesTotal }}</p>
+                    </div>
+                    <form action="{{ path('sprint_close', { 'id': sprint.id }) }}" method="post" class="form-horizontal">
+                        {{ form_widget(form) }}
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-warning"><i class="icon-stop icon-white"></i> {{ 'Close'|trans }}</button>
+                            <a class="btn btn-primary" href="{{ path('sprint_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div><!--widget-box-->
         </div><!--/span-->
     </div><!--/row-->
 {% endblock body %}
