@@ -20,6 +20,26 @@
                    <p>{{ project.description }}</p>
                </div>
            </div>
+                
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Release description'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p>{{ sprint.projectRelease.description }}</p>
+               </div>
+           </div>
+                
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Sprint description'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p>{{ sprint.description }}</p>
+               </div>
+           </div>
         </div>
 
         <div class="span9">
@@ -31,16 +51,22 @@
                     </div>
                         
                     <div class="widget-content">
-                        <p>Estimate: {{ story.estimate }} Status: {% if story.status.id == 3 %}Done{% else %}Not done{% endif %}</p>
+                        <p><strong>{{ 'Story description'|trans }}:</strong> {{ story.description }}</p>
+                        <p><span class="badge badge-info">{{ 'Effort'|trans }}: {{ story.estimate }}</span> {% if story.status.id == 3 %}<span class="badge badge-success">{{ 'Done'|trans}}{% else %}<span class="badge badge-important">{{ 'Not done'|trans }}{% endif %}</span></p>
                         {% set form = forms[story.id] %}
+                        {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
                         {% if story.review.id is defined %}
-                            <form action="{{ path('review_update', { 'id': story.review.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                            <form action="{{ path('review_update', { 'id': story.review.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
                             {{ form_widget(form) }}
-                            <button type="submit" class="btn btn-primary">{{ 'Update'|trans }}</button>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">{{ 'Update'|trans }}</button>
+                            </div>
                         {% else  %}
-                            <form action="{{ path('review_create', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                            <form action="{{ path('review_create', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
                             {{ form_widget(form) }}
-                            <button type="submit" class="btn btn-primary">{{ 'Create'|trans }}</button>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">{{ 'Create'|trans }}</button>
+                            </div>
                         {% endif %}
                         </form>
                     </div>

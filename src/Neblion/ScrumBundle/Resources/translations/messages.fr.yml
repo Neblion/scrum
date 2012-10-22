@@ -23,7 +23,7 @@ Sprint: Sprint
 No: Non
 'Your projects': 'Vos projets'
 'Create project': 'Créer un projet'
-'Project creation': "Création d'un projet"
+'Project creation': 'Création d''un projet'
 Velocity: Vélocité
 'Current average velocity is': 'La vélocité moyenne courante est de'
 'Add a story': 'Ajouter une story'
@@ -33,8 +33,8 @@ Help: Aide
 'Save story sort order': '__Save story sort order'
 'Latest activities': 'Activités récentes'
 Reports: Rapports
-'Project edition': "Edition d'un projet"
-'Project deletion': "Suppression d'un projet"
+'Project edition': 'Edition d''un projet'
+'Project deletion': 'Suppression d''un projet'
 'Do you really want to remove this project': 'Voulez-vous vraiment supprimer ce projet'
 'If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !': 'En confirmant, tous les éléments liés à ce projet (sprint, stories, tâches, ...) seront définitivement supprimés !'
 'Delete this project': 'Supprimer ce projet'
@@ -46,8 +46,8 @@ Estimate: Points
 'Create next sprint': 'Créer le prochain sprint'
 Backlog: Backlog
 'Invit member': 'Inviter un nouveau membre'
-'Member edition': "Edition des informations d'un membre"
-'Remove a member from the team': "Retirer un membre de l'équipe"
+'Member edition': 'Edition des informations d''un membre'
+'Remove a member from the team': 'Retirer un membre de l''équipe'
 'Do you really want to remove this member': 'Voulez-vous vraiment retirer ce membre'
 Remove: Enlever
 Contact: Contact
@@ -69,7 +69,13 @@ Deletion: Suppression
 Dashboard: 'Tableau de bord'
 Sprints: Sprints
 Admin: Admin
-'Review creation:': "Création d'une revue:"
+'Review creation:': 'Création d''une revue:'
+'Release description': 'Description de la release'
+'Sprint description': 'Description du sprint'
+'Story description': 'Description de la story'
+Effort: Effort
+Done: Fait
+'Not done': 'Non terminé'
 'Sprint review:': 'Revue de sprint:'
 'NeblionScrum %project_name% project notification': '__NeblionScrum %project_name% project notification'
 Hello: __Hello
@@ -84,18 +90,16 @@ Hello: __Hello
 'We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.': '__We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.'
 'In order to confirm your invitation, please login on NeblionScrum and accept invitation.': '__In order to confirm your invitation, please login on NeblionScrum and accept invitation.'
 'Sign in': Connexion
-'Sprint creation:': "Création d'un sprint:"
+'Sprint creation:': 'Création d''un sprint:'
 'Current Release': 'Release courante'
 Stories: Stories
 'Sprint reports': 'Rapports de sprint'
 'Burndown hours chart': 'Burndown heures'
 'Create storyless task': 'Créer une tâche storyless'
-Effort: Effort
 'Remaining hours': 'Heures restantes'
 Story: Story
 ToDo: 'A faire'
 'In progress': 'En cours'
-Done: Fait
 'Close the sprint': 'Clore le sprint'
 'Are you sure you want close this sprint ?': 'Voulez-vous vraiment clore ce sprint ?'
 'Member could not edit their task and retrospective and sprint review edition will be close.': '__Member could not edit their task and retrospective and sprint review edition will be close.'
@@ -105,17 +109,17 @@ Status: Statut
 'Start > End': 'Début > Fin'
 View: Voir
 'No sprint': 'Pas de sprint'
-'Sprint edition': "Edition d'un sprint"
+'Sprint edition': 'Edition d''un sprint'
 'Do you really want to delete this sprint: %sprint% ?': '__Do you really want to delete this sprint: %sprint% ?'
-'Release creation': "Création d'une release"
+'Release creation': 'Création d''une release'
 'Releases list': 'Liste des releases'
 Actions: Actions
 'No release': 'Pas de release'
 'New release': 'Nouvelle release'
-'Release edition': "Edition d'une release"
-'Release deletion': "Suppression d'une release"
+'Release edition': 'Edition d''une release'
+'Release deletion': 'Suppression d''une release'
 'Do you really want to delete this release: %release% ?': 'Voulez-vous vraiment supprimer cette release: %release% ?'
-'Team members': "Membres de l'équipe"
+'Team members': 'Membres de l''équipe'
 Lastname: Nom
 Firstname: Prénon
 username: __Username
@@ -131,27 +135,26 @@ Invit: Inviter
 'Invit a new Member': 'Inviter un nouveau membre'
 'Welcome on Neblion Scrum!': 'Bienvenue sur Neblion Scrum!'
 'Hello %username%,': '__Hello %username%,'
-Register: "Enregistrez-vous"
+Register: Enregistrez-vous
 'Sprint retrospective:': 'Retrospective de sprint:'
-'Release description': 'Description de la release'
 'Sprint retro:': '__Sprint retro:'
-'Profile creation:': "Création d'un profil"
-'Profile edition:': "Edition d'un profil"
+'Profile creation:': 'Création d''un profil'
+'Profile edition:': 'Edition d''un profil'
 Feature: Feature
 'Story estimate': 'Estimation de la story'
 'Add task': 'Ajouter une tâche'
 'Create a new story': 'Creér une nouvelle story'
 'Story estimate edition:': '__Story estimate edition:'
 Informations: Informations
-'Story edition': "Edition d'une story"
+'Story edition': 'Edition d''une story'
 'Do you really want to delete this story: %story% ?': 'Voulez-vous vraiment supprimer cette story: %story% ?'
 'This field is required': 'Ce champ est requis'
-'Feature creation': "Création d'une fonctionnalité"
+'Feature creation': 'Création d''une fonctionnalité'
 'Feature creation:': '__Feature creation:'
 'Features list': 'Liste des fonctionnalités'
 'No feature': 'Pas de fonctionnalité'
 'New feature': 'Nouvelle fonctionnalité'
-'Feature edition': "Edition d'une fonctionnalité"
+'Feature edition': 'Edition d''une fonctionnalité'
 'Feature deletion': '__Feature deletion'
 'Do you really want to delete this feature: %feature% ?': '__Do you really want to delete this feature: %feature% ?'
 'hours remaining': 'heures restantes'
