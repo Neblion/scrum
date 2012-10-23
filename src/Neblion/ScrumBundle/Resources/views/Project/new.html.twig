@@ -23,7 +23,7 @@
                 <h5>{{ 'Project creation'|trans }}</h5>
             </div>
             <div class="widget-content">
-                <form action="{{ path('project_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                <form action="{{ path('project_create') }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
                     {{ form_widget(form) }}
                     <div class="form-actions">
                         <button id="submit" type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> {{ 'Create'|trans }}</button>

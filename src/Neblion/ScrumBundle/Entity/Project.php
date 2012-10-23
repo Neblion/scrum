@@ -47,6 +47,7 @@ class Project
      * @var string $name
      *
      * @ORM\Column(name="name", type="string", length=50)
+     * @Assert\NotBlank()
      * @Assert\MaxLength(50)
      */
     private $name;
@@ -55,6 +56,8 @@ class Project
      * @var text $description
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\NotBlank()
+     * @Assert\MaxLength(250)
      */
     private $description;
     
@@ -62,6 +65,7 @@ class Project
      * @var smallint $sprint_start_day
      *
      * @ORM\Column(name="sprint_start_day", type="smallint")
+     * @Assert\NotBlank()
      */
     private $sprint_start_day;
     
@@ -69,6 +73,9 @@ class Project
      * @var smallint $sprint_duration
      *
      * @ORM\Column(name="sprint_duration", type="smallint")
+     * @Assert\NotBlank()
+     * @Assert\Min(limit = "1")
+     * @Assert\Max(limit = "35")
      */
     private $sprint_duration;
     
