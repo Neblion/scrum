@@ -46,7 +46,7 @@
                         var strid = $(this).attr("id");
                         var id = strid.replace("story-box-", "");
                         var status = $("#story-status-" + id).text();
-                        if (status == 'Done') {
+                        if (status == '{{ 'Done'|trans }}') {
                             done += parseInt($("#story-estimate-" + id).text());
                         }
                     }); 
