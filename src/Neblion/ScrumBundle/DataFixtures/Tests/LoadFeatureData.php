@@ -56,7 +56,7 @@ class LoadFeatureData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 4; 
+        return 5; 
     }
     
     private function newEntity($params)
