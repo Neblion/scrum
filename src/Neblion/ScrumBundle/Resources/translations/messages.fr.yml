@@ -14,6 +14,7 @@ Close: Fermer
 'Save changes': 'Enregistrer les modifications'
 'Task hours remaining edition': 'Edition des heures restantes'
 Success: Succès
+Done: Fait
 Cancel: Annuler
 Edit: Editer
 'Project description': 'Description du projet'
@@ -23,11 +24,11 @@ Sprint: Sprint
 No: Non
 'Your projects': 'Vos projets'
 'Create project': 'Créer un projet'
+Help: Aide
 'Project creation': 'Création d''un projet'
 Velocity: Vélocité
 'Current average velocity is': 'La vélocité moyenne courante est de'
 'Add a story': 'Ajouter une story'
-Help: Aide
 'Priorize stories with drag''n drop.': '__Priorize stories with drag''n drop.'
 'Estimate stories by clicking ....': '__Estimate stories by clicking ....'
 'Save story sort order': '__Save story sort order'
@@ -69,14 +70,13 @@ Deletion: Suppression
 Dashboard: 'Tableau de bord'
 Sprints: Sprints
 Admin: Admin
-'Review creation:': 'Création d''une revue:'
 'Release description': 'Description de la release'
 'Sprint description': 'Description du sprint'
+'Review creation': '__Review creation'
 'Story description': 'Description de la story'
 Effort: Effort
-Done: Fait
 'Not done': 'Non terminé'
-'Sprint review:': 'Revue de sprint:'
+'Review edition': '__Review edition'
 'NeblionScrum %project_name% project notification': '__NeblionScrum %project_name% project notification'
 Hello: __Hello
 'You receive this email because %firstname% %lastname% (%email%) decide to remove you as a member on project %project_name%': '__You receive this email because %firstname% %lastname% (%email%) decide to remove you as a member on project %project_name%'
@@ -157,6 +157,8 @@ Informations: Informations
 'Feature edition': 'Edition d''une fonctionnalité'
 'Feature deletion': '__Feature deletion'
 'Do you really want to delete this feature: %feature% ?': '__Do you really want to delete this feature: %feature% ?'
+'Review creation:': 'Création d''une revue:'
+'Sprint review:': 'Revue de sprint:'
 'hours remaining': 'heures restantes'
 'No invitation': 'Aucune invitation'
 'In Progress': 'En cours'
@@ -167,3 +169,12 @@ Informations: Informations
 'Task hours remaining edition:': 'Edition des heures restantes'
 'Create a new task:': 'Créer une nouvelle tâche'
 'Symfony2 is great': 'J''aime Symfony2'
+'Sprint start day': 'Début de sprint le'
+'Sprint duration': 'Durée de sprint'
+Sunday: Dimanche
+Monday: Lundi
+Tuesday: Mardi
+Wednesday: Mercredi
+Thursday: Jeudi
+Friday: Vendredi
+Saturday: Samedi

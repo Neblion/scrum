@@ -249,8 +249,10 @@ class ProjectController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
         
+        $translator = $this->get('translator');
+        
         $entity = new Project();
-        $form   = $this->createForm(new ProjectType(), $entity);
+        $form   = $this->createForm(new ProjectType($translator), $entity);
 
         return array(
             'entity' => $entity,
