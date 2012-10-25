@@ -303,7 +303,9 @@ class FeatureController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $project->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            throw new AccessDeniedException();
+            if (!$member->getAdmin()) {
+                throw new AccessDeniedException();
+            }
         }
         
         $stories = $em->getRepository('NeblionScrumBundle:Story')->findByFeature($feature->getId());
