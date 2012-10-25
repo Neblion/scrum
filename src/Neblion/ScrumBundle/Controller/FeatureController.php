@@ -288,16 +288,13 @@ class FeatureController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
 
-        $feature = $em->getRepository('NeblionScrumBundle:Feature')->find($id);
+        $feature = $em->getRepository('NeblionScrumBundle:Feature')->load($id);
         if (!$feature) {
             throw $this->createNotFoundException('Unable to find Feature entity.');
         }
         
         // Load current project
-        $project = $em->getRepository('NeblionScrumBundle:Project')->find($feature->getProject()->getId());
-        if (!$project) {
-            throw $this->createNotFoundException('Unable to find Project entity.');
-        }
+        $project = $feature->getProject();
         
         // Check if user is really a member of this project
         $member = $em->getRepository('NeblionScrumBundle:Member')
@@ -308,7 +305,7 @@ class FeatureController extends Controller
             }
         }
         
-        $stories = $em->getRepository('NeblionScrumBundle:Story')->findByFeature($feature->getId());
+        $stories = $feature->getStories();
         if (count($stories) != 0) {
             // Set flash message
             $this->get('session')->setFlash('notice', 'You could not delete this Feature, stories associated with it!');

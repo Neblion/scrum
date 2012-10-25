@@ -12,6 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class FeatureRepository extends EntityRepository
 {
+    public function load($id)
+    {
+        return $this->getEntityManager()
+                ->createQuery(
+                    'SELECT f, p, s
+                    FROM NeblionScrumBundle:Feature f
+                    INNER JOIN f.project p
+                    INNER JOIN f.stories s
+                    WHERE f.id = :id'
+                )
+                ->setParameter('id', $id)
+                ->getOneOrNullResult();
+    }
+    
     public function getListForProject($project_id, $returnQuery = false)
     {
         $query = $this->getEntityManager()

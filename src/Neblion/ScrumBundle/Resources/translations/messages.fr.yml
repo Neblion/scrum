@@ -184,3 +184,4 @@ Saturday: Samedi
 'Feature was created with success!': 'La fonctionnalité a été créé avec succès !'
 'Feature was updated with success!': 'La fonctionnalité a été modifié avec succès !'
 'Feature was deleted with success!': 'La fonctionnalité a été supprimé avec succès !'
+'You could not delete this Feature, stories associated with it!': 'Vous ne pouvez supprimer cette fonctionnalité, une ou des stories lui sont associées !'
