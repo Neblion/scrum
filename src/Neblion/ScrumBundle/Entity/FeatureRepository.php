@@ -19,7 +19,7 @@ class FeatureRepository extends EntityRepository
                     'SELECT f, p, s
                     FROM NeblionScrumBundle:Feature f
                     INNER JOIN f.project p
-                    INNER JOIN f.stories s
+                    LEFT JOIN f.stories s
                     WHERE f.id = :id'
                 )
                 ->setParameter('id', $id)
