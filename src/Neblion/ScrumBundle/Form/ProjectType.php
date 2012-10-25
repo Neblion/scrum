@@ -10,7 +10,7 @@ class ProjectType extends AbstractType
 {
     private $translator;
     
-    public function __construct(Translator $translator = null)
+    public function __construct(Translator $translator)
     {
         $this->translator = $translator;
     }

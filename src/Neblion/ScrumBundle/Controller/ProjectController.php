@@ -249,10 +249,8 @@ class ProjectController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
         
-        $translator = $this->get('translator');
-        
         $entity = new Project();
-        $form   = $this->createForm(new ProjectType($translator), $entity);
+        $form   = $this->createForm(new ProjectType($this->get('translator')), $entity);
 
         return array(
             'entity' => $entity,
@@ -271,7 +269,7 @@ class ProjectController extends Controller
     {
         $entity  = new Project();
         $request = $this->getRequest();
-        $form    = $this->createForm(new ProjectType(), $entity);
+        $form    = $this->createForm(new ProjectType($this->get('translator')), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -348,7 +346,7 @@ class ProjectController extends Controller
             throw $this->createNotFoundException('Unable to find Project entity.');
         }
 
-        $editForm = $this->createForm(new ProjectType(), $project);
+        $editForm = $this->createForm(new ProjectType($this->get('translator')), $project);
 
         return array(
             'project'     => $project,
@@ -377,7 +375,7 @@ class ProjectController extends Controller
             throw $this->createNotFoundException('Unable to find Project entity.');
         }
 
-        $editForm   = $this->createForm(new ProjectType(), $entity);
+        $editForm   = $this->createForm(new ProjectType($this->get('translator')), $entity);
         $request = $this->getRequest();
         $editForm->bindRequest($request);
 
