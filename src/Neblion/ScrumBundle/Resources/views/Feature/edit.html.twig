@@ -41,7 +41,7 @@
                     <form action="{{ path('feature_update', { 'id': feature.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
                         {{ form_widget(form) }}
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
+                            <button id="submit" type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
                             <a class="btn btn-primary" href="{{ path('feature_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
                         </div>
                     </form>
