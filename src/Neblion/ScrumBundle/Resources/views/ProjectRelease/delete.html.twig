@@ -34,7 +34,7 @@
                     <form action="{{ path('release_delete', { 'id': release.id }) }}" method="post" class="form-horizontal">
                         {{ form_widget(form) }}
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Delete'|trans }}</button>
+                            <button id="submit" type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Delete'|trans }}</button>
                             <a class="btn btn-primary" href="{{ path('release_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
                         </div>
                     </form>

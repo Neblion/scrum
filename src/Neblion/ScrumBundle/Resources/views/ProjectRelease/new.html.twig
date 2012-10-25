@@ -41,7 +41,7 @@
                     <form action="{{ path('release_create', { 'id': project.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
                         {{ form_widget(form) }}
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-success"><i class="icon-plus-sign icon-white"></i> {{ 'Create'|trans }}</button>
+                            <button id="submit" type="submit" class="btn btn-success"><i class="icon-plus-sign icon-white"></i> {{ 'Create'|trans }}</button>
                             <a class="btn btn-primary" href="{{ path('release_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
                         </div>
                     </form>
