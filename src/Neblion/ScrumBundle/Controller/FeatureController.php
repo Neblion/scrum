@@ -59,6 +59,9 @@ class FeatureController extends Controller
 
     /**
      * Displays a form to create a new Feature entity.
+     * 
+     * Only scrumaster and product owner or admin of project
+     * could add a new feature.
      *
      * @Route("/{id}/new", name="feature_new")
      * @Template()
@@ -94,21 +97,12 @@ class FeatureController extends Controller
         $feature->setProject($project);
         $form   = $this->createForm(new FeatureType(), $feature);
         
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Feature:new.html.twig', array(
-                'project'   => $project,
-                'feature'   => $feature,
-                'form'      => $form->createView(),
-                'success'   => $success,
-            ));   
-        } else {
-            return array(
-                'project'   => $project,
-                'feature'   => $feature,
-                'form'      => $form->createView(),
-                'success'   => $success,
-            );
-        }
+        return array(
+            'project' => $project,
+            'feature' => $feature,
+            'form' => $form->createView(),
+            'success' => $success,
+        );
     }
 
     /**
