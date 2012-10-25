@@ -133,7 +133,9 @@ class FeatureController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $project->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            throw new AccessDeniedException();
+            if (!$member->getAdmin()) {
+                throw new AccessDeniedException();
+            }
         }
         
         $success = false;
@@ -157,21 +159,12 @@ class FeatureController extends Controller
             }
         }
 
-        if ($this->getRequest()->isXmlHttpRequest()) {
-            return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Feature/Ajax:new.html.twig', array(
-                'project'   => $project,
-                'feature'   => $feature,
-                'form'      => $form->createView(),
-                 'success'  => $success,
-            ));  
-        } else {
-            return array(
-                'project'   => $project,
-                'feature'   => $feature,
-                'form'      => $form->createView(),
-                'success'   => $success,
-            );
-        }
+        return array(
+            'project' => $project,
+            'feature' => $feature,
+            'form' => $form->createView(),
+            'success' => $success,
+        );
     }
 
     /**
