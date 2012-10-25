@@ -185,3 +185,7 @@ Saturday: Samedi
 'Feature was updated with success!': 'La fonctionnalité a été modifié avec succès !'
 'Feature was deleted with success!': 'La fonctionnalité a été supprimé avec succès !'
 'You could not delete this Feature, stories associated with it!': 'Vous ne pouvez supprimer cette fonctionnalité, une ou des stories lui sont associées !'
+'Release was created with success!': 'La release a été créé avec succès !'
+'Release was updated with success!': 'La release a été modifié avec succès !'
+'Release was deleted with success!': 'La release a été supprimé avec succès !'
+'Impossible to delete this release, there is at least a sprint attached to it!': 'Vous ne pouvez supprimer cette release, au moins un sprint lui est associée !'
