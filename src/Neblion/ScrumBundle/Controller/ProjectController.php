@@ -318,7 +318,9 @@ class ProjectController extends Controller
             
             $em->flush();
 
-            return $this->redirect($this->generateUrl('project_dashboard', array('id' => $entity->getId())));
+            // Set flash message
+            $this->get('session')->setFlash('success', 'Project was successfully created!');
+            return $this->redirect($this->generateUrl('project_edit', array('id' => $entity->getId())));
         }
 
         return array(
@@ -385,7 +387,7 @@ class ProjectController extends Controller
 
             // Set flash message
             $this->get('session')->setFlash('success', 'Project was successfully updated!');
-            return $this->redirect($this->generateUrl('project_dashboard', array('id' => $id)));
+            return $this->redirect($this->generateUrl('project_edit', array('id' => $id)));
         }
 
         return array(
