@@ -33,9 +33,6 @@ class FeatureController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
         
-        $role = $em->getRepository('NeblionScrumBundle:Account')
-                ->getRoleForAccountAndProject($user->getId(), $id);
-        
         // Load project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
         if (!$project) {
@@ -54,7 +51,6 @@ class FeatureController extends Controller
         
         return array(
             'project'       => $project,
-            'role'          => $role,
             'features'      => $features,
         );
     }
