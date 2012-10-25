@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Neblion\ScrumBundle\Entity\Feature;
 use Neblion\ScrumBundle\Form\FeatureType;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 /**
  * Feature controller.
  *
