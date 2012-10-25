@@ -140,7 +140,7 @@ class ProjectReleaseController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $project->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            if ($member->getAdmin()) {
+            if (!$member->getAdmin()) {
                 throw new AccessDeniedException();
             }
         }
@@ -212,7 +212,7 @@ class ProjectReleaseController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $release->getProject()->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            if ($member->getAdmin()) {
+            if (!$member->getAdmin()) {
                 throw new AccessDeniedException();
             }
         }
@@ -254,7 +254,7 @@ class ProjectReleaseController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $release->getProject()->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            if ($member->getAdmin()) {
+            if (!$member->getAdmin()) {
                 throw new AccessDeniedException();
             }
         }
@@ -310,7 +310,7 @@ class ProjectReleaseController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $release->getProject()->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            if ($member->getAdmin()) {
+            if (!$member->getAdmin()) {
                 throw new AccessDeniedException();
             }
         }
