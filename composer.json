@@ -1,6 +1,14 @@
 {
     "name": "neblion/scrum",
     "description": "Neblion scrum symfony app",
+    "license": "AGPL-3.0",
+    "authors": [
+      {
+          "name": "Thomas Bibard",
+          "email": "thomas.bibard@neblion.net",
+          "role": "Developer"
+      }  
+    ],
     "autoload": {
         "psr-0": { "": "src/" }
     },
