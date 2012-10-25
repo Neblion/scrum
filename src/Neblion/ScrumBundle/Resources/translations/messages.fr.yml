@@ -153,10 +153,10 @@ Informations: Informations
 'Feature creation:': '__Feature creation:'
 'Features list': 'Liste des fonctionnalités'
 'No feature': 'Pas de fonctionnalité'
-'New feature': 'Nouvelle fonctionnalité'
-'Feature edition': 'Edition d''une fonctionnalité'
-'Feature deletion': '__Feature deletion'
-'Do you really want to delete this feature: %feature% ?': '__Do you really want to delete this feature: %feature% ?'
+'New feature': 'Ajouter une fonctionnalité'
+'Feature edition': "Edition d'une fonctionnalité"
+'Feature deletion': "Suppression d'une fonctionnalité"
+'Do you really want to delete this feature: %feature% ?': 'Voulez-vous vraiment supprimer cette fonctionnalité: %feature% ?'
 'Review creation:': 'Création d''une revue:'
 'Sprint review:': 'Revue de sprint:'
 'hours remaining': 'heures restantes'
@@ -181,3 +181,6 @@ Saturday: Samedi
 'Project was successfully created!': 'Le projet a été créé avec succès !'
 'Project was successfully updated!': 'Le projet a été modifié avec succès !'
 'Project was successfully deleted!': 'Le projet a été supprimé avec succès !'
+'Feature was created with success!': 'La fonctionnalité a été créé avec succès !'
+'Feature was updated with success!': 'La fonctionnalité a été modifié avec succès !'
+'Feature was deleted with success!': 'La fonctionnalité a été supprimé avec succès !'
