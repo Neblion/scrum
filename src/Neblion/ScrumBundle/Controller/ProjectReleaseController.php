@@ -10,6 +10,8 @@ use Neblion\ScrumBundle\Entity\ProjectRelease;
 use Neblion\ScrumBundle\Form\ProjectReleaseType;
 use Symfony\Component\Form\FormError;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 /**
  * ProjectRelease controller.
  *
@@ -58,6 +60,9 @@ class ProjectReleaseController extends Controller
 
     /**
      * Displays a form to create a new ProjectRelease entity.
+     * 
+     * Only PO, SM and admin could add new release.
+     * You could not add a new release if a release with no due date exists.
      *
      * @Route("/{id}/new", name="release_new")
      * @Template()
@@ -83,7 +88,7 @@ class ProjectReleaseController extends Controller
         $member = $em->getRepository('NeblionScrumBundle:Member')
                 ->isMemberOfProject($user->getId(), $project->getId());
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            if ($member->getAdmin()) {
+            if (!$member->getAdmin()) {
                 throw new AccessDeniedException();
             }
         }
