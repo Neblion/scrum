@@ -7,12 +7,9 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 use Neblion\ScrumBundle\Entity\Project;
-use Neblion\ScrumBundle\Entity\ProcessStatus;
-use Neblion\ScrumBundle\Entity\Team;
-use Neblion\ScrumBundle\Entity\ProjectRelease;
 use Neblion\ScrumBundle\Entity\Feature;
 
-class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
+class LoadFeatureData extends AbstractFixture implements OrderedFixtureInterface
 {
     private $manager; 
     
@@ -23,12 +20,27 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
     {
         $this->manager = $manager;
         
+        // Load project
+        $project = $this->manager->getRepository('NeblionScrumBundle:Project')->find(1);
+        
         $entities = array(
             array(
-                'name'              => 'Test', 
-                'description'       => 'This is a test.', 
-                'sprint_start_day'  => 3,
-                'sprint_duration'   => 14,
+                'name'              => 'Feature-1', 
+                'description'       => 'Feature-1 description',
+                'color'             => '#111111',
+                'project'           => $project,
+            ),
+            array(
+                'name'              => 'Feature-2', 
+                'description'       => 'Feature-2 description',
+                'color'             => '#222222',
+                'project'           => $project,
+            ),
+            array(
+                'name'              => 'Feature-3', 
+                'description'       => 'Feature-3 description',
+                'color'             => '#333333',
+                'project'           => $project,
             ),
         );
      
@@ -49,37 +61,11 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
     
     private function newEntity($params)
     {
-        // Create project
-        $entity = new Project();
-        $entity->setName($params['name']);
-        $entity->setDescription($params['description']);
-        $entity->setSprintStartDay($params['sprint_start_day']);
-        $entity->setSprintDuration($params['sprint_duration']);
-        $this->manager->persist($entity);
-        
-        // Create team
-        $team = new Team();
-        $team->setName($entity->getName());
-        $team->setProject($entity);
-        $this->manager->persist($team);
-        
-        // Create default release
-        $releaseStatus = $this->manager->getRepository('NeblionScrumBundle:ProcessStatus')->find(3);
-        $release = new ProjectRelease();
-        $release->setProject($entity);
-        $release->setName('Default');
-        $release->setDescription('Default release');
-        $release->setStart(new \DateTime('2012-09-01'));
-        $release->setEnd(new \DateTime('2012-10-02'));
-        $release->setStatus($releaseStatus);
-        $this->manager->persist($release);
-        
-        // Create default feature
         $feature = new Feature();
-        $feature->setProject($entity);
-        $feature->setName('Default');
-        $feature->setDescription('Default feature');
-        $feature->setColor('#ffffff');
+        $feature->setProject($params['project']);
+        $feature->setName($params['name']);
+        $feature->setDescription($params['description']);
+        $feature->setColor($params['color']);
         $this->manager->persist($feature);
     }
     
