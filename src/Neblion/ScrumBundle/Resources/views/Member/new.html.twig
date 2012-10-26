@@ -32,7 +32,7 @@
                    <form action="{{ path('member_create', { 'id': team.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
                         {{ form_widget(form) }}
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> {{ 'Invit member'|trans }}</button>
+                            <button id="submit" type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> {{ 'Invit member'|trans }}</button>
                             <a class="btn btn-primary" href="{{ path('team_show', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
                         </div>
                    </form>

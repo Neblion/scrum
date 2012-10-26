@@ -40,7 +40,7 @@
                     <form action="{{ path('member_remove', { 'id': member.id }) }}" method="post">
                         {{ form_widget(form) }}
                         <div class="form-actions">
-                            <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Remove'|trans }}</button>
+                            <button id="submit" type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Remove'|trans }}</button>
                             <a class="btn btn-primary" href="{{ path('team_show', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
                         </div>
                     </form>
