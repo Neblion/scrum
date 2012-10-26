@@ -24,12 +24,11 @@ see the following documentation: [Apache](http://httpd.apache.org/docs/current/m
 
         composer create-project neblion/scrum <your-installation-path>
 
-*   Create you vhost and configure DocumentRoot to --> `<your-path>/web`
-    Check your config: http://`<your-host>`/config.php
+2.   Create you vhost and configure DocumentRoot to --> `<your-path>/web` and check your config: http://`<your-host>`/config.php
 
-*   Set permission on file system see [Symfony2 install](http://symfony.com/doc/current/book/installation.html#configuration-and-setup).
+3.   Set permission on file system see [Symfony2 install](http://symfony.com/doc/current/book/installation.html#configuration-and-setup).
 
-*   Create your DB and a user DB:
+4.   Create your DB and a user DB:
 
         mysql -uroot -p
         <enter_mysql_root_pass>
@@ -37,9 +36,11 @@ see the following documentation: [Apache](http://httpd.apache.org/docs/current/m
         grant all privileges on <DB-NAME>.* to '<YOUR-USERNAME>'@'localhost' identified by 'YOUR-PASSWORD' with grant option;
         flush privileges;
 
-*   Set your parmeters.yml
+5.   Set your parameters.yml
 
-*   Run commands
+    Copy the distribution file parameters.yml.dist to parameters.yml and edit it.
+
+6.   Run commands
 
         cd <your-installation-path>
         php app/console doctrine:schema:update --force
@@ -47,10 +48,15 @@ see the following documentation: [Apache](http://httpd.apache.org/docs/current/m
         php app/console assets:install
         php app/console assetic:dump
 
+7.  All done, test it!
 
 Documentation
 -------------
 Work in progress...
+
+Support and contact
+-------------------
+scrum@neblion.net
 
 Tests
 -----
