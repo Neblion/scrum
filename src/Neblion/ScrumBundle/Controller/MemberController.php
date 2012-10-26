@@ -21,45 +21,6 @@ class MemberController extends Controller
 {
 
     /**
-     * Finds and displays a Member entity.
-     *
-     * @Route("/{id}/show", name="member_show")
-     * @Template()
-     * @param integer $id Member id
-     */
-    public function showAction($id)
-    {
-        // Check if user is authorized
-        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            throw new AccessDeniedException();
-        }
-        
-        $user = $this->get('security.context')->getToken()->getUser();
-        
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $member = $em->getRepository('NeblionScrumBundle:Member')->load($id);
-        if (!$member) {
-            throw $this->createNotFoundException('Unable to find Member entity.');
-        }
-        
-        $project = $member->getTeam()->getProject();
-
-        // Check if current user is authorize to edit this member
-        // Check if user is really a member of this project
-        $currentMember = $em->getRepository('NeblionScrumBundle:Member')
-                ->isMemberOfProject($user->getId(), $project->getId());
-        if (!$currentMember) {
-            throw new AccessDeniedException();
-        }
-        
-        return array(
-            'project'   => $project,
-            'member'    => $member,
-        );
-    }
-
-    /**
      * Displays a form to create a new Member entity.
      * 
      * Only administrator could be invit/create new member.
