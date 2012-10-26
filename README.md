@@ -21,7 +21,8 @@ see the following documentation: [Apache](http://httpd.apache.org/docs/current/m
 
 ### Step by step installation
 1.  Install via composer and packagist
-        composer create-project neblion/scrum <your-path>
+
+        composer create-project neblion/scrum <your-installation-path>
 
 *   Create you vhost and configure DocumentRoot to --> `<your-path>/web`
     Check your config: http://`<your-host>`/config.php
