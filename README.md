@@ -23,8 +23,8 @@ For information on configuring your specific web server document root,
 see the following documentation: [Apache](http://httpd.apache.org/docs/current/mod/core.html#documentroot).
 
 ### Step by step installation
-*   Install via composer and packagist
-    ``composer create-project neblion/scrum <your-path>``
+1.  Install via composer and packagist
+        composer create-project neblion/scrum <your-path>
 
 *   Create you vhost and configure DocumentRoot to --> <your-path>/web
     Check your config: http://<your-host>/config.php
@@ -36,13 +36,11 @@ see the following documentation: [Apache](http://httpd.apache.org/docs/current/m
 *   Set your parmeters.yml
 
 *   Run commands
-    ``
-    cd <your-installation-path>
-    php app/console doctrine:schema:update --force
-    php app/console doctrine:load:fixtures --fixtures=./src/Neblion/ScrumBundle/DataFixtures/Init
-    php app/console assets:install
-    php app/console assetic:dump
-    ``
+        cd <your-installation-path>
+        php app/console doctrine:schema:update --force
+        php app/console doctrine:load:fixtures --fixtures=./src/Neblion/ScrumBundle/DataFixtures/Init
+        php app/console assets:install
+        php app/console assetic:dump
 
 
 Documentation
