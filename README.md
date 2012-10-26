@@ -38,17 +38,17 @@ see the following documentation: [Apache](http://httpd.apache.org/docs/current/m
 
 5.   Set your parameters.yml
 
-    Copy the distribution file parameters.yml.dist to parameters.yml and edit it.
-
 6.   Run commands
 
         cd <your-installation-path>
         php app/console doctrine:schema:update --force
-        php app/console doctrine:load:fixtures --fixtures=./src/Neblion/ScrumBundle/DataFixtures
+        php app/console doctrine:fixtures:load --fixtures=./src/Neblion/ScrumBundle/DataFixtures
         php app/console assets:install
         php app/console assetic:dump
 
 7.  All done, test it!
+    
+    Sample data are include and you can sign in with admin/test
 
 Documentation
 -------------
