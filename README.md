@@ -5,9 +5,6 @@ Neblion/Scrum is a Symfony 2 scrum app.
 
 [![Build Status](https://secure.travis-ci.org/Neblion/scrum.png)](http://travis-ci.org/Neblion/scrum)
 
-Feature Overview
-----------------
-
 
 Installation
 ------------
@@ -26,26 +23,37 @@ see the following documentation: [Apache](http://httpd.apache.org/docs/current/m
 1.  Install via composer and packagist
         composer create-project neblion/scrum <your-path>
 
-*   Create you vhost and configure DocumentRoot to --> <your-path>/web
-    Check your config: http://<your-host>/config.php
+*   Create you vhost and configure DocumentRoot to --> `<your-path>/web`
+    Check your config: http://`<your-host>`/config.php
 
 *   Set permission on file system see [Symfony2 install](http://symfony.com/doc/current/book/installation.html#configuration-and-setup).
 
-*   Create your DB and a user DB.
+*   Create your DB and a user DB:
+
+        mysql -uroot -p
+        <enter_mysql_root_pass>
+        create database <DB_NAME>;
+        grant all privileges on <DB-NAME>.* to '<YOUR-USERNAME>'@'localhost' identified by 'YOUR-PASSWORD' with grant option;
+        flush privileges;
 
 *   Set your parmeters.yml
 
 *   Run commands
+
         cd <your-installation-path>
         php app/console doctrine:schema:update --force
-        php app/console doctrine:load:fixtures --fixtures=./src/Neblion/ScrumBundle/DataFixtures/Init
+        php app/console doctrine:load:fixtures --fixtures=./src/Neblion/ScrumBundle/DataFixtures
         php app/console assets:install
         php app/console assetic:dump
 
 
 Documentation
 -------------
+Work in progress...
 
+Tests
+-----
+    phpunit -c app
 
 License
 -------
