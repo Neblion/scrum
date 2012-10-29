@@ -33,12 +33,45 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
     {
         $this->manager = $manager;
         
+        // Load team
+        $team = $this->manager->getRepository('NeblionScrumBundle:Team')->find(1);
+        // Load role
+        $roles = $this->loadRoles();
+        // Load status
+        $status = $this->loadStatus();
+                
         $entities = array(
-            array('name' => 'admin', 'team' => 1, 'role' => 4, 'admin' => true),
-            array('name' => 'productowner', 'team' => 1, 'role' => 1, 'admin' => false),
-            array('name' => 'scrumaster', 'team' => 1, 'role' => 2, 'admin' => false),
-            array('name' => 'developer', 'team' => 1, 'role' => 3, 'admin' => false),
-            array('name' => 'member', 'team' => 1, 'role' => 4, 'admin' => false)
+            array(
+                'name'      => 'admin', 
+                'team'      => $team, 
+                'role'      => $roles[4],
+                'status'    => $status[2],
+                'admin' => true),
+            array(
+                'name'      => 'productowner', 
+                'team'      => $team, 
+                'role'      => $roles[1], 
+                'status'    => $status[2],
+                'admin'     => false),
+            array(
+                'name'      => 'scrumaster', 
+                'team'      => $team, 
+                'role'      => $roles[2], 
+                'status'    => $status[2],
+                'admin'     => false),
+            array(
+                'name'      => 'developer', 
+                'team'      => $team, 
+                'role'      => $roles[3], 
+                'status'    => $status[2],
+                'admin'     => false),
+            array(
+                'name'      => 'member', 
+                'team'      => $team, 
+                'role'      => $roles[4], 
+                'status'    => $status[2],
+                'admin'     => false),
+            
         );
         
         foreach ($entities as $entity) {
@@ -47,6 +80,31 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
         
         $this->manager->flush();
         
+        // Load sender for invitation
+        $sender = $this->manager->getRepository('NeblionScrumBundle:Member')->find(1);
+        // Load invit
+        $entities = array(
+            array(
+                'name'      => 'invit-accepted', 
+                'team'      => $team, 
+                'role'      => $roles[4], 
+                'status'    => $status[1],
+                'sender'    => $sender,
+                'admin'     => false),
+            array(
+                'name'      => 'invit-refused', 
+                'team'      => $team, 
+                'role'      => $roles[4], 
+                'status'    => $status[1],
+                'sender'    => $sender,
+                'admin'     => false),
+        );
+                
+        foreach ($entities as $entity) {
+            $this->newEntity($entity);
+        }
+        
+        $this->manager->flush();
     }
     
     /**
@@ -55,6 +113,24 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
     public function getOrder()
     {
         return 5; 
+    }
+    
+    private function loadRoles()
+    {
+        $roles = array();
+        foreach ($this->manager->getRepository('NeblionScrumBundle:Role')->findAll() as $role) {
+            $roles[$role->getId()] = $role;
+        }
+        return $roles;
+    }
+    
+    private function loadStatus()
+    {
+        $results = array();
+        foreach ($this->manager->getRepository('NeblionScrumBundle:MemberStatus')->findAll() as $status) {
+            $results[$status->getId()] = $status;
+        }
+        return $results;
     }
     
     private function newEntity($params)
@@ -74,21 +150,18 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
         $profile->setAccount($user);
         $profile->setFirstname($params['name']);
         $profile->setLastname($params['name']);
-        $profile->setLocation($params['name']);
+        //$profile->setLocation($params['name']);
         $this->manager->persist($profile);
         
         // Create member
-        // Load team
-        $team = $this->manager->getRepository('NeblionScrumBundle:Team')->find($params['team']);
-        // Load role
-        $role = $this->manager->getRepository('NeblionScrumBundle:Role')->find($params['role']);
-        // Load status
-        $status = $this->manager->getRepository('NeblionScrumBundle:MemberStatus')->find(2);
         $member = new Member();
         $member->setAccount($user);
-        $member->setTeam($team);
-        $member->setRole($role);
-        $member->setStatus($status);
+        $member->setTeam($params['team']);
+        $member->setRole($params['role']);
+        $member->setStatus($params['status']);
+        if ($params['status']->getId() == 1) {
+            $member->setSender($params['sender']->getAccount());
+        }
         $member->setAdmin($params['admin']);
         $this->manager->persist($member);
     }

@@ -4,160 +4,125 @@ namespace Neblion\ScrumBundle\Tests\Controller;
 
 use Neblion\ScrumBundle\Tests\WebTestCase;
 
-class ProjectReleaseControllerTest extends WebTestCase
+class MemberControllerTest extends WebTestCase
 {
-    public function testIndex()
-    {
-        $client = $this->login('admin', 'test');
-        $crawler = $client->request('GET', '/release/1');
-        // Test html template
-        // Title of main widget-box
-        $this->assertTrue($crawler->filter('html:contains("Releases list")')->count() == 1);
-        // 2 tr => 2 releases for project->id = 1
-        $this->assertEquals(2, $crawler->filter('table tbody tr')->count());
-    }
-    
-    
     public function testNew()
     {
-        // Test that simple member could not add a feature
+        // Test that simple member could not add a member
         $client = $this->login('member', 'test');
-        $crawler = $client->request('GET', '/release/1/new');
+        $crawler = $client->request('GET', '/member/1/new');
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
         
-        // Test that developer member could not add a feature
+        // Test that developer member could not add a member
         $client = $this->login('member', 'test');
-        $crawler = $client->request('GET', '/release/1/new');
+        $crawler = $client->request('GET', '/member/1/new');
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
         
-        // Test that scrumaster member could add a feature
+        // Test that scrumaster member could not add a member
         $client = $this->login('scrumaster', 'test');
-        $crawler = $client->request('GET', '/release/1/new');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $crawler = $client->request('GET', '/member/1/new');
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
         
-        // Test that productowner member could add a feature
+        // Test that productowner member could not add a member
         $client = $this->login('productowner', 'test');
-        $crawler = $client->request('GET', '/release/1/new');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $crawler = $client->request('GET', '/member/1/new');
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
         
-        // Test that admin member could add a feature
+        // Test that admin member could add a member
         $client = $this->login('admin', 'test');
-        $crawler = $client->request('GET', '/release/1/new');
+        $crawler = $client->request('GET', '/member/1/new');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         
         // Test form: empty fields
         $form = $crawler->selectButton('submit')->form();
         $crawler = $client->submit($form, array());
         
-        // Test project name empty
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_name ~ span.help-inline')->reduce(function ($node, $i) {
+        // Test email empty
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_membertype_email ~ span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should not be blank.') {
                 return false;
             }
         })->count() == 1);
-        // Test project description empty
-        $this->assertTrue($crawler->filter('textarea#neblion_scrumbundle_projectreleasetype_description ~ span.help-inline')->reduce(function ($node, $i) {
-            if ($node->nodeValue != 'This value should not be blank.') {
-                return false;
-            }
-        })->count() == 1);
-        // Test project sprint_duration empty
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_start ~ span.help-inline')->reduce(function ($node, $i) {
-            if ($node->nodeValue != 'This value should not be blank.') {
-                return false;
-            }
-        })->count() == 1);
-        
-        // Test form: name field length > 50 and color not hexa code
+ 
+        // Test form: email invalid
         $form = $crawler->selectButton('submit')->form();
         $crawler = $client->submit($form, array(
-            'neblion_scrumbundle_projectreleasetype[name]'             => '012345678901234567890123456789012345678901234567890123456789',
-            'neblion_scrumbundle_projectreleasetype[description]'      => 'description',
-            'neblion_scrumbundle_projectreleasetype[start]'            => 'start',
-            'neblion_scrumbundle_projectreleasetype[end]'              => 'end',
+            'neblion_scrumbundle_membertype[email]' => 'email',
         ));
-        // name.length > 50
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_name ~ span.help-inline')->reduce(function ($node, $i) {
-            if ($node->nodeValue != 'This value is too long. It should have 50 character or less.|This value is too long. It should have 50 characters or less.') {
+        // email invalid
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_membertype_email ~ span.help-inline')->reduce(function ($node, $i) {
+            if ($node->nodeValue != 'Invalid email address') {
                 return false;
             }
         })->count() == 1);
-        // start is not a date value
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_start ~ span.help-inline')->reduce(function ($node, $i) {
-            if ($node->nodeValue != 'This value is not valid.') {
-                return false;
-            }
-        })->count() == 1);
-        // end is not a date value
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_end ~ span.help-inline')->reduce(function ($node, $i) {
-            if ($node->nodeValue != 'This value is not valid.') {
-                return false;
-            }
-        })->count() == 1);
-        
-        // Test form with start date in an another release
-        $form = $crawler->selectButton('submit')->form();
-        $crawler = $client->submit($form, array(
-            'neblion_scrumbundle_projectreleasetype[name]'             => 'release-test',
-            'neblion_scrumbundle_projectreleasetype[description]'      => 'description',
-            'neblion_scrumbundle_projectreleasetype[start]'            => '04/10/2012',
-        ));
-        $this->assertTrue($crawler->filter('html:contains("The release\'s dates overlap (Release-1)")')->count() == 1);
     }
-    
+
     public function testCreate()
     {
-        // Test that productowner member could not add a feature
-        $client = $this->login('productowner', 'test');
-        $crawler = $client->request('GET', '/release/1/new');
+        // Test that scrumaster member could not add a member
+        $client = $this->login('scrumaster', 'test');
+        $crawler = $client->request('GET', '/member/1/new');
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+
+        // Test creation
+        $client = $this->login('admin', 'test');
+        $crawler = $client->request('GET', '/member/1/new');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
         
         // Test form
         // Test form with start date in an another release
         $form = $crawler->selectButton('submit')->form();
         $crawler = $client->submit($form, array(
-            'neblion_scrumbundle_projectreleasetype[name]'             => 'release-test',
-            'neblion_scrumbundle_projectreleasetype[description]'      => 'description',
-            'neblion_scrumbundle_projectreleasetype[start]'            => '17/10/2012',
+            'neblion_scrumbundle_membertype[email]' => 'new-member@test.com',
         ));
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
-        $this->assertTrue($crawler->filter('html:contains("Release was created with success!")')->count() == 1);
-        $this->assertEquals(3, $crawler->filter('table tbody tr')->count());
+        $this->assertTrue($crawler->filter('html:contains("Your invitation was sent successfully!")')->count() == 1);
+        $this->assertEquals(3, $crawler->filter('table#not-validated-members tbody tr')->count());
     }
-    
+
     public function testEdit()
     {
-        // Test that simple member could not add a feature
+        // Test that simple member could not edit a member
         $client = $this->login('member', 'test');
-        $crawler = $client->request('GET', '/release/1/edit');
+        $crawler = $client->request('GET', '/member/1/edit');
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
         
-        // Test that developer member could not add a feature
+        // Test that developer member could not edit a member
         $client = $this->login('member', 'test');
-        $crawler = $client->request('GET', '/release/1/edit');
+        $crawler = $client->request('GET', '/member/1/edit');
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
         
-        // Test that scrumaster member could edit a feature
+        // Test that scrumaster member could not edit a member
         $client = $this->login('scrumaster', 'test');
-        $crawler = $client->request('GET', '/release/1/edit');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $crawler = $client->request('GET', '/member/1/edit');
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
         
-        // Test that productowner member could edit a feature
+        // Test that productowner member could not edit a member
         $client = $this->login('productowner', 'test');
-        $crawler = $client->request('GET', '/release/1/edit');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $crawler = $client->request('GET', '/member/1/edit');
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
         
-        // Test that productowner member could edit a feature
+        // Test edition of a member that was not enabled
         $client = $this->login('admin', 'test');
-        $crawler = $client->request('GET', '/release/1/edit');
+        $crawler = $client->request('GET', '/member/6/edit');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $crawler = $client->followRedirect();
+        $this->assertTrue($crawler->filter('html:contains("You could not edit this member, he was not enabled!")')->count() == 1);
+        
+        // Test that admin member could edit a member
+        $client = $this->login('admin', 'test');
+        $crawler = $client->request('GET', '/member/1/edit');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
+    /*
     public function testUpdate()
     {
+        
+        // Test that admin member could edit a member
         $client = $this->login('admin', 'test');
-        $crawler = $client->request('GET', '/release/4/edit');
+        $crawler = $client->request('GET', '/member/1/edit');
         
         // Test form
         $form = $crawler->selectButton('submit')->form();
@@ -170,9 +135,10 @@ class ProjectReleaseControllerTest extends WebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
         $this->assertTrue($crawler->filter('html:contains("Release was updated with success!")')->count() == 1);
-        
     }
-    
+    */
+
+    /*
     public function testDelete()
     {
         $client = $this->login('admin', 'test');
@@ -197,5 +163,36 @@ class ProjectReleaseControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
         // Test alert msg that confirm deletion
         $this->assertTrue($crawler->filter('html:contains("Impossible to delete this release, there is at least a sprint attached to it!")')->count() == 1);
+    }
+     */
+    
+    public function testInvitation()
+    {
+        $client = $this->login('admin', 'test');
+        $crawler = $client->request('GET', '/member/invitation');
+        $this->assertTrue($crawler->filter('html:contains("No invitation")')->count() == 1);
+        
+        $client = $this->login('invit-accepted', 'test');
+        $crawler = $client->request('GET', '/member/invitation');
+        $this->assertEquals(1, $crawler->filter('table tbody tr')->count());
+    }
+    
+    public function testAccept()
+    {
+        $client = $this->login('invit-accepted', 'test');
+        $crawler = $client->request('GET', '/member/6/accept');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $crawler = $client->followRedirect();
+        $this->assertTrue($crawler->filter('html:contains("You have successfully accepted invitation to this team !")')->count() == 1);
+        $this->assertEquals(6, $crawler->filter('table#validated-members tbody tr')->count());
+    }
+    
+    public function testRefuse()
+    {
+        $client = $this->login('invit-refused', 'test');
+        $crawler = $client->request('GET', '/member/7/refuse');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $crawler = $client->followRedirect();
+        $this->assertTrue($crawler->filter('html:contains("You have successfully refused invitation to this team !")')->count() == 1);
     }
 }
