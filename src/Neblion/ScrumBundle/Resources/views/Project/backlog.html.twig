@@ -141,7 +141,7 @@
             //alert('id: ' + splitter[2]);
         });
         
-        $("a.add-story").click(function() {
+        $("a.add-story").live("click", function() {
             var url = $(this).attr('href');    
 
             $.ajax({
