@@ -80,6 +80,11 @@ class Project
     private $sprint_duration;
     
     /**
+     * @ORM\Column(name="is_public", type="boolean")
+     */
+    private $is_public = true;
+    
+    /**
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created", type="datetime")
      */
@@ -368,5 +373,28 @@ class Project
     public function getSprintDuration()
     {
         return $this->sprint_duration;
+    }
+
+    /**
+     * Set is_public
+     *
+     * @param boolean $isPublic
+     * @return Project
+     */
+    public function setIsPublic($isPublic)
+    {
+        $this->is_public = $isPublic;
+    
+        return $this;
+    }
+
+    /**
+     * Get is_public
+     *
+     * @return boolean 
+     */
+    public function getIsPublic()
+    {
+        return $this->is_public;
     }
 }
