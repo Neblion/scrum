@@ -13,7 +13,7 @@
             {% if task.status.id == 2 %}
                 <button id="task-hours-upd-{{ task.id }}" class="btn btn-primary task-hours update-task-hours" href="{{ path('task_hours', { 'id': task.id }) }}">
             {% else %}
-                <button id="task-hours-upd-{{ task.id }}" class="btn btn-info task-hours" href="#">
+                <button id="task-hours-upd-{{ task.id }}" class="btn btn-info" href="#">
             {% endif %}
                 {{ 'Hours'|trans }}:
                 <span id="task-hours-remaining-{{ task.id }}" class="task-hours-remaining">{% if task.remaining_hour is defined %}{{ task.remaining_hour }}{% else %}{{ task.hour }}{% endif %}</span> /
