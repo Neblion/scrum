@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="span3">
+            <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>Title</h5>
+               </div>
+               <div class="widget-content">
+                   <p>description</p>
+               </div>
+           </div>
+        </div>
+
+        <div class="span9">
+            <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Invitation to collaborate on project'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                    <table class="table table-striped table-bordered">
+                    <tbody>
+                    {% for member in invitations %}
+                        <tr>
+                            <td>{{ member.sender.profile.firstname }} {{ member.sender.profile.lastname }} invit you to be a member of {{ member.team.project.name }} project.</td>
+                            <td>
+                                <a href="{{ path('member_invitation_accept', { 'id': member.id } ) }}" class="btn btn-success">{{ 'Accept'|trans }}</a>
+                                <a href="{{ path('member_invitation_refuse', { 'id': member.id } ) }}" class="btn btn-danger">{{ 'Refuse'|trans }}</a>
+                            </td>
+                        </tr>
+                    {% else  %}
+                        <tr><td colspan="3">{{ 'No invitation'|trans }}</td></tr>
+                    {% endfor %}
+                    </tbody>
+                    </table>
+                </div>
+            </div><!--widget-box-->
+        </div>
+    </div><!--/row-->   
+{% endblock body %}

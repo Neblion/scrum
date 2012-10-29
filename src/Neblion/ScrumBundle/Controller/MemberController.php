@@ -335,18 +335,13 @@ class MemberController extends Controller
         $user = $this->get('security.context')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getEntityManager();
-
-        $em = $this->getDoctrine()->getEntityManager();
         
         // Load invitations
         $invitations = $em->getRepository('NeblionScrumBundle:Member')
                 ->loadInvitations($user);
         
-        $hash = md5('thomas.bibard@neblion.net');
-        
         return array(
             'invitations'   => $invitations,
-            'hash'          => $hash,
         );
     }
     
