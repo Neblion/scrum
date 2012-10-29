@@ -14,6 +14,6 @@ class TeamControllerTest extends WebTestCase
         // Title of main widget-box
         $this->assertTrue($crawler->filter('html:contains("Team members")')->count() == 1);
         // 5 tr => 5 members for project->id = 1
-        $this->assertEquals(5, $crawler->filter('table tbody tr')->count());
+        $this->assertEquals(5, $crawler->filter('table#validated-members tbody tr')->count());
     }
 }
