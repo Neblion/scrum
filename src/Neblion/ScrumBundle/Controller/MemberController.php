@@ -187,6 +187,8 @@ class MemberController extends Controller
 
     /**
      * Displays a form to edit an existing Member entity.
+     * 
+     * Only administrator could be invit/create new member.
      *
      * @Route("/{id}/edit", name="member_edit")
      * @Template()
@@ -217,6 +219,13 @@ class MemberController extends Controller
             throw new AccessDeniedException();
         }
         
+        // Check if the member is enabled
+        if ($member->getStatus()->getId() != 2) {
+            // Set flash message
+            $this->get('session')->setFlash('success', 'You could not edit this member, he was not enabled!');
+            return $this->redirect($this->generateUrl('team_show', array('id' => $project->getId())));
+        }
+        
         $editForm = $this->createForm(new MemberType(), $member);
 
         return array(
@@ -228,6 +237,8 @@ class MemberController extends Controller
 
     /**
      * Edits an existing Member entity.
+     * 
+     * Only administrator could be invit/create new member.
      *
      * @Route("/{id}/update", name="member_update")
      * @Method("post")
