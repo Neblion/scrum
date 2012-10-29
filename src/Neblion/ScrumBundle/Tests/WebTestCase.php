@@ -19,7 +19,6 @@ abstract class WebTestCase extends BaseWebTestCase
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $client->followRedirect();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
         return $client;
     }
 }
