@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+     <div class="row">
+       <div class="span3">
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Search help'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p></p>
+               </div>
+           </div>
+               
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5></h5>
+               </div>
+               <div class="widget-content">
+                   <p></p>
+               </div>
+           </div>
+       </div>
+            
+       <div class="span9">
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Search'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <form action="{{ path('project_search') }}" class="" method="post">
+                       <input type="text" name="search-string" class="" placeholder="{{ 'Search projects'|trans }}">
+                   </form>
+               </div>
+           </div>
+               
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Search results'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <table>
+                   {% for project in projects %}
+                       <tr>
+                           <td>{{ project.name }}</td>
+                           <td>{{ project.description }}</td>
+                       </tr>
+                   {% else %}
+                       <tr>
+                           <td colspan="2">{{ 'No result'|trans }}</td>
+                       </tr>
+                   {% endfor %}
+                   </table>
+               </div>
+           </div>
+       </div>
+    </div><!--/row-->
+{% endblock body %}

@@ -14,7 +14,7 @@
                     <li><a href="#">{{ 'Help'|trans }}</a></li>
                     <li><a href="#">{{ 'Contact'|trans }}</a></li>
                 </ul>
-
+                    
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                     <ul class="nav pull-right">
                         <li><a href="{{ path('project_list') }}">{{ 'Your projects'|trans }}</a></li>
@@ -35,6 +35,14 @@
                         <a class="btn btn-success" href="{{ path('fos_user_registration_register') }}">{{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
                     </div>
                 {% endif %}
+                    
+                <ul class="nav pull-right">    
+                    <li><a href="{{ path('project_search') }}"><i class="icon-zoom-in icon-white"></i></a></li>
+                </ul>
+                    
+                <form action="{{ path('project_search') }}" class="navbar-search pull-right" method="post">
+                    <input type="text" name="search-string" class="search-query" placeholder="{{ 'Search projects'|trans }}">
+                </form>
             </div><!--/.nav-collapse -->
         </div><!-- /.container -->
     </div><!-- /.navbar-inner -->

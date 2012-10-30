@@ -137,4 +137,16 @@ class ProjectRepository extends EntityRepository
             'ticks' => $ticks
         );
     }
+    
+    public function search($searchString)
+    {
+        $search = '%' . $searchString . '%';
+        return $this->getEntityManager()
+                ->createQuery('SELECT p
+                    FROM NeblionScrumBundle:Project p
+                    WHERE p.name LIKE :search
+                    OR p.description LIKE :search')
+                ->setParameter('search', $search)
+                ->getArrayResult();
+    }
 }

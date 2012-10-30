@@ -548,4 +548,24 @@ class ProjectController extends Controller
             }
         }
     }
+    
+    /**
+     * @Route("/search", name="project_search")
+     * @Template()
+     */
+    public function searchAction()
+    {
+        $request = $this->getRequest();
+        $projects = array();
+        
+        if ($request->getMethod() == 'POST') {
+            $searchString = $request->request->get('search-string');
+        
+            $em = $this->getDoctrine()->getEntityManager();
+        
+            $projects = $em->getRepository('NeblionScrumBundle:Project')->search($searchString);
+        }
+        
+        return array('projects' => $projects);
+    }
 }
