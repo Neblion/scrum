@@ -59,6 +59,11 @@ class Story
     private $tasks;
     
     /**
+     * @ORM\OneToMany(targetEntity="Neblion\ScrumBundle\Entity\StoryComment", mappedBy="story", cascade={"remove"})
+     */
+    private $comments;
+    
+    /**
      * @ORM\OneToOne(targetEntity="Neblion\ScrumBundle\Entity\Review", mappedBy="story", cascade={"remove"})
      */
     private $review;
@@ -396,5 +401,38 @@ class Story
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param Neblion\ScrumBundle\Entity\StoryComment $comments
+     * @return Story
+     */
+    public function addComment(\Neblion\ScrumBundle\Entity\StoryComment $comments)
+    {
+        $this->comments[] = $comments;
+    
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param Neblion\ScrumBundle\Entity\StoryComment $comments
+     */
+    public function removeComment(\Neblion\ScrumBundle\Entity\StoryComment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

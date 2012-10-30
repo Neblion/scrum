@@ -44,6 +44,11 @@ class Account extends BaseUser
      * @ORM\OneToMany(targetEntity="Neblion\ScrumBundle\Entity\Retrospective", mappedBy="user")
      */
     private $retrospectives;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Neblion\ScrumBundle\Entity\StoryComment", mappedBy="user")
+     */
+    private $storyComments;
 
     public function __construct()
     {
@@ -193,5 +198,38 @@ class Account extends BaseUser
     public function removeRetrospective(\Neblion\ScrumBundle\Entity\Retrospective $retrospectives)
     {
         $this->retrospectives->removeElement($retrospectives);
+    }
+
+    /**
+     * Add storyComments
+     *
+     * @param Neblion\ScrumBundle\Entity\StoryComment $storyComments
+     * @return Account
+     */
+    public function addStoryComment(\Neblion\ScrumBundle\Entity\StoryComment $storyComments)
+    {
+        $this->storyComments[] = $storyComments;
+    
+        return $this;
+    }
+
+    /**
+     * Remove storyComments
+     *
+     * @param Neblion\ScrumBundle\Entity\StoryComment $storyComments
+     */
+    public function removeStoryComment(\Neblion\ScrumBundle\Entity\StoryComment $storyComments)
+    {
+        $this->storyComments->removeElement($storyComments);
+    }
+
+    /**
+     * Get storyComments
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getStoryComments()
+    {
+        return $this->storyComments;
     }
 }
