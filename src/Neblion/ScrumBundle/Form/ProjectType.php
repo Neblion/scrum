@@ -31,6 +31,12 @@ class ProjectType extends AbstractType
                     6 => $this->translator->trans('Saturday'))
             ))
             ->add('sprint_duration')
+            ->add('is_public', 'choice', array(
+                'choices' => array(
+                    1 => 'Public',
+                    0 => 'Private',
+                ),
+            ))
         ;
     }
 
