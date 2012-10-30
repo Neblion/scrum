@@ -32,7 +32,7 @@
                </div>
                <div class="widget-content">
                    <form action="{{ path('project_search') }}" class="" method="post">
-                       <input type="text" name="search-string" class="" placeholder="{{ 'Search projects'|trans }}">
+                       <input type="text" name="search-string" class="" placeholder="{% if searchString != '' %}{{ searchString }}{% else %}{{ 'Search projects'|trans }}{% endif %}">
                    </form>
                </div>
            </div>

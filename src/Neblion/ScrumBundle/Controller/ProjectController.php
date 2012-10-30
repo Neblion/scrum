@@ -558,6 +558,7 @@ class ProjectController extends Controller
         $request = $this->getRequest();
         $projects = array();
         
+        $searchString = '';
         if ($request->getMethod() == 'POST') {
             $searchString = $request->request->get('search-string');
         
@@ -566,6 +567,9 @@ class ProjectController extends Controller
             $projects = $em->getRepository('NeblionScrumBundle:Project')->search($searchString);
         }
         
-        return array('projects' => $projects);
+        return array(
+            'searchString'  => $searchString,
+            'projects'      => $projects
+        );
     }
 }

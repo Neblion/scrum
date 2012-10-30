@@ -138,15 +138,102 @@ class ProjectRepository extends EntityRepository
         );
     }
     
+    /**
+     * search
+     * 
+     * Execute a search in public project
+     * 
+     * @param type $searchString
+     * @return type 
+     */
     public function search($searchString)
     {
+        $filtersList = array('name', 'description', 'user',
+            'productowner', 'scrumaster', 'developer', 'member'
+        );
+        
+        if (strstr($searchString, ':')) {
+            $spaces = explode(' ', $searchString);
+            $filters = array();
+            foreach ($spaces as $space) {
+                $filter = strstr($space, ':', true);
+                if (!empty($filter) and in_array($filter, $filtersList)) {
+                    $filters[$filter] = str_replace($filter . ':', '', $space);
+                }
+            }
+        } else {
+            $filters = array(
+                'name'          => $searchString,
+                'description'   => $searchString,
+            );
+        }
+        
+        /*
+        echo '<pre>';
+        print_r($filters);
+        echo '</pre>';
+        */
+        
         $search = '%' . $searchString . '%';
-        return $this->getEntityManager()
-                ->createQuery('SELECT p
+        $where = false;
+        $queryString = 'SELECT distinct p
                     FROM NeblionScrumBundle:Project p
-                    WHERE p.name LIKE :search
-                    OR p.description LIKE :search')
-                ->setParameter('search', $search)
-                ->getArrayResult();
+                    INNER JOIN p.team t
+                    INNER JOIN t.members m
+                    INNER JOIN m.role r 
+                    INNER JOIN m.account a
+                    INNER JOIN a.profile pr ';
+        
+        if (!empty($filters)) {
+            // Create query limitation
+            foreach ($filters as $filterKey => $filterValue) {
+                if ($where) {
+                    $queryString .= 'AND ';
+                } else {
+                    $queryString .= 'WHERE ';
+                    $where = true;
+                }
+                switch ($filterKey) {
+                    case 'name':
+                        $queryString .= 'p.name LIKE :name ';
+                        break;
+                
+                    case 'description':
+                        $queryString .= 'p.description LIKE :description ';
+                        break;
+                    
+                    case 'user':
+                        $queryString .= 'a.username = :user ';
+                        break;
+                    
+                    case 'productowner':
+                        $queryString .= "a.username = :productowner AND r.name = 'Product owner' ";
+                        break;
+                    
+                    case 'scrumaster':
+                        $queryString .= "a.username = :scrumaster AND r.name = 'Scrumaster' ";
+                        break;
+                    
+                    case 'developer':
+                        $queryString .= "a.username = :developer AND r.name = 'Developer' ";
+                        break;
+                    
+                    case 'member':
+                        $queryString .= "a.username = :member AND r.name = 'Member' ";
+                        break;
+                }
+            }
+            $query = $this->getEntityManager()
+                ->createQuery($queryString);
+            // Add parameters values
+            foreach ($filters as $filterKey => $filterValue) {
+                if (in_array($filterKey, array('name', 'description'))) {
+                    $filterValue = '%' . $filterValue . '%'; 
+                }
+                $query->setParameter($filterKey, $filterValue);
+            }
+        
+            return $query->getArrayResult();
+        }
     }
 }
