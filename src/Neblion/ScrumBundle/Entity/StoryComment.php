@@ -3,6 +3,8 @@
 namespace Neblion\ScrumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Neblion\ScrumBundle\Entity\StoryComment
@@ -39,6 +41,18 @@ class StoryComment
      * @ORM\Column(name="comment", type="text")
      */
     private $comment;
+    
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created", type="datetime")
+     */
+    private $created;
+
+    /**
+     * @ORM\Column(name="updated", type="datetime")
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updated;
 
 
     /**
