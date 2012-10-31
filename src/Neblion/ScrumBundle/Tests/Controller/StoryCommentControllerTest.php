@@ -6,6 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class StoryCommentControllerTest extends WebTestCase
 {
+    public function testIndex()
+    {
+        
+    }
     /*
     public function testCompleteScenario()
     {
