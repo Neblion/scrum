@@ -1,6 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
+{% form_theme commentForm 'NeblionScrumBundle:Form:fields.html.twig' %}
 
 {% block body %}
     <div class="row">
@@ -48,6 +49,45 @@
                             {% endif %}
                         </div>
                     </form>
+                </div>
+            </div><!--/widget-box-->
+            
+            <div class="page-header"><h3>{{ 'Comments'|trans }}</h3></div>
+            
+            {% for comment in comments %}
+                <div class="row">
+                    <div class="span1"><img src="{{ gravatar(comment.member.account.email, 50) }}" alt="" /></div>
+                    <div class="span8">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                                <span class="icon"><i class="icon-file"></i></span>
+                                <h5>{{ comment.member.account.username }} - {{ comment.updated|date('d/m/Y') }}</h5>
+                            </div>
+                            <div class="widget-content">
+                                <p>{{ comment.comment }}</p>
+                            </div>
+                        </div><!--/widget-box-->
+                    </div>
+                </div>
+            {% endfor %}
+            
+            <div class="row">
+                <div class="span1"><img src="{{ gravatar(app.user.email, 50) }}" alt="" /></div>
+                <div class="span8">
+                    <div class="widget-box">
+                        <div class="widget-title">
+                            <span class="icon"><i class="icon-file"></i></span>
+                            <h5>{{ 'Story add comment'|trans }}</h5>
+                        </div>
+                        <div class="widget-content">
+                            <form action="{{ path('storycomment_create', { 'id': story.id }) }}" method="post" {{ form_enctype(commentForm) }} class="form-horizontal">
+                                {{ form_widget(commentForm) }}
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> {{ 'Add comment'|trans }}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!--/widget-box-->
                 </div>
             </div>
         </div><!--/span-->

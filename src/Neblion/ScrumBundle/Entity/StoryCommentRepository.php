@@ -12,4 +12,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class StoryCommentRepository extends EntityRepository
 {
+    public function loadForStory(\Neblion\ScrumBundle\Entity\Story $story)
+    {
+        return $this->getEntityManager()
+                ->createQuery(
+                    'SELECT st, s, m, a, p
+                    FROM NeblionScrumBundle:StoryComment st
+                    INNER JOIN st.story s
+                    INNER JOIN st.member m
+                    INNER JOIN m.account a
+                    INNER JOIN a.profile p
+                    WHERE s.id = :story_id
+                    ORDER BY st.created'
+                )
+                ->setParameter('story_id', $story->getId())
+                ->getResult();
+    }
 }

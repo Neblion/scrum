@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Neblion\ScrumBundle\Entity\Story;
 use Neblion\ScrumBundle\Form\StoryType;
+use Neblion\ScrumBundle\Form\StoryCommentType;
 use Neblion\ScrumBundle\Form\EstimateType;
 
 use Doctrine\ORM\Query;
@@ -173,12 +174,20 @@ class StoryController extends Controller
             throw new AccessDeniedException();
         }
 
+        // Create forms instance
         $editForm = $this->createForm(new StoryType($project->getId()), $story);
+        $commentForm = $this->createForm(new StoryCommentType($story));
+        
+        // Load comments
+        $comments = $em->getRepository('NeblionScrumBundle:StoryComment')
+                ->loadForStory($story);
 
         return array(
-            'project'   => $project,
-            'story'     => $story,
-            'form'      => $editForm->createView(),
+            'project'       => $project,
+            'story'         => $story,
+            'form'          => $editForm->createView(),
+            'commentForm'   => $commentForm->createView(),
+            'comments'      => $comments,
         );
     }
 
