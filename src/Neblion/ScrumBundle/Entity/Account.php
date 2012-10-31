@@ -45,11 +45,6 @@ class Account extends BaseUser
      */
     private $retrospectives;
     
-    /**
-     * @ORM\OneToMany(targetEntity="Neblion\ScrumBundle\Entity\StoryComment", mappedBy="user")
-     */
-    private $storyComments;
-
     public function __construct()
     {
         parent::__construct();

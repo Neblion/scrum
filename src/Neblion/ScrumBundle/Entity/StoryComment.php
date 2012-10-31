@@ -28,10 +28,10 @@ class StoryComment
     private $story;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\Account", inversedBy="storyComments")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\Member", inversedBy="storyComments")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
      */
-    private $user;
+    private $member;
 
     /**
      * @var string $comment
@@ -118,5 +118,28 @@ class StoryComment
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set member
+     *
+     * @param Neblion\ScrumBundle\Entity\Member $member
+     * @return StoryComment
+     */
+    public function setMember(\Neblion\ScrumBundle\Entity\Member $member = null)
+    {
+        $this->member = $member;
+    
+        return $this;
+    }
+
+    /**
+     * Get member
+     *
+     * @return Neblion\ScrumBundle\Entity\Member 
+     */
+    public function getMember()
+    {
+        return $this->member;
     }
 }

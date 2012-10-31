@@ -53,6 +53,11 @@ class Member
     private $tasks;
     
     /**
+     * @ORM\OneToMany(targetEntity="Neblion\ScrumBundle\Entity\StoryComment", mappedBy="member")
+     */
+    private $storyComments;
+    
+    /**
      * @var boolean $admin
      * @ORM\Column(name="admin", type="boolean", nullable=false)
      */
@@ -309,5 +314,38 @@ class Member
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Add storyComments
+     *
+     * @param Neblion\ScrumBundle\Entity\StoryComment $storyComments
+     * @return Member
+     */
+    public function addStoryComment(\Neblion\ScrumBundle\Entity\StoryComment $storyComments)
+    {
+        $this->storyComments[] = $storyComments;
+    
+        return $this;
+    }
+
+    /**
+     * Remove storyComments
+     *
+     * @param Neblion\ScrumBundle\Entity\StoryComment $storyComments
+     */
+    public function removeStoryComment(\Neblion\ScrumBundle\Entity\StoryComment $storyComments)
+    {
+        $this->storyComments->removeElement($storyComments);
+    }
+
+    /**
+     * Get storyComments
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getStoryComments()
+    {
+        return $this->storyComments;
     }
 }
