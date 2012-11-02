@@ -110,13 +110,14 @@ class ReviewController extends Controller
         }
         
         $review  = new Review();
-        $review->setStory($story);
         $request = $this->getRequest();
         $form    = $this->createForm(new ReviewType(), $review);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
             $em->persist($review);
+            $story->setReview($review);
+            
             $em->flush();
 
             // Set flash message

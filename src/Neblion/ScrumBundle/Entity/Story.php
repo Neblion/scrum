@@ -64,7 +64,7 @@ class Story
     private $comments;
     
     /**
-     * @ORM\OneToOne(targetEntity="Neblion\ScrumBundle\Entity\Review", mappedBy="story", cascade={"remove"})
+     * @ORM\OneToOne(targetEntity="Neblion\ScrumBundle\Entity\Review", cascade={"remove"})
      */
     private $review;
 

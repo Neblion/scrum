@@ -24,12 +24,6 @@ class Review
     private $id;
     
     /**
-     * @ORM\OneToOne(targetEntity="Neblion\ScrumBundle\Entity\Story", inversedBy="review")
-     * @ORM\JoinColumn(name="story_id", referencedColumnName="id")
-     */
-    private $story;
-
-    /**
      * @var text $comment
      *
      * @ORM\Column(name="comment", type="text")
