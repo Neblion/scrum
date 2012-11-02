@@ -51,14 +51,6 @@ class ProjectController extends Controller
         $projects = $em->getRepository('NeblionScrumBundle:Project')
                 ->getListForUser($user->getId());
         
-        /*
-        $query = $em->getRepository('NeblionScrumBundle:Project')->getQueryToPaginate();
-        $pager = new Pagerfanta(new DoctrineORMAdapter($query));
-        $page = $this->getRequest()->get('page', 1);
-        $pager->setMaxPerPage(4);
-        $pager->setCurrentPage($page);
-        */
-        
         // Set the locale (preferred language only)
         // FIXME: we dont have to make it every time !!!!
         //$this->get('session')->setLocale($user->getProfile()->getPreferredLanguage()->getIso2());
@@ -80,7 +72,6 @@ class ProjectController extends Controller
         return array(
             'projects' => $projects,
             'user'      => $user,
-            //'pager' => $pager,
         );
     }
     
@@ -219,9 +210,6 @@ class ProjectController extends Controller
         print_r($datas);
         echo '</pre>';
         */
-        echo '<pre>';
-        print_r($this->getRequest()->attributes->get('_route_params'));
-        echo '</pre>';
         
         $strTotal = $strDone = '';
         foreach ($datas['data'] as $sprint => $values) {
@@ -573,18 +561,18 @@ class ProjectController extends Controller
         $request = $this->getRequest();
         $projects = array();
         
-        $searchString = '';
-        if ($request->getMethod() == 'POST') {
-            $searchString = $request->request->get('search-string');
-        
-            $em = $this->getDoctrine()->getEntityManager();
-        
-            $projects = $em->getRepository('NeblionScrumBundle:Project')->search($searchString);
-        }
+        $em = $this->getDoctrine()->getEntityManager();
+        $searchString = $request->query->get('query');
+        $query = $em->getRepository('NeblionScrumBundle:Project')->search($searchString);
+        $pager = new Pagerfanta(new DoctrineORMAdapter($query));
+        $page = $this->getRequest()->get('page', 1);
+        $pager->setMaxPerPage(5);
+        $pager->setCurrentPage($page);
         
         return array(
             'searchString'  => $searchString,
-            'projects'      => $projects
+            'projects'      => $projects,
+            'pager'         => $pager,
         );
     }
 }

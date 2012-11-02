@@ -14,15 +14,6 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ProjectRepository extends EntityRepository
 {
-    
-    public function getQueryToPaginate()
-    {
-        return $this->getEntityManager()
-                ->createQuery('SELECT p 
-                        FROM NeblionScrumBundle:Project p
-                        ORDER BY p.id');
-    }
-    
     /**
      * getList
      * 
@@ -243,7 +234,7 @@ class ProjectRepository extends EntityRepository
                 $query->setParameter($filterKey, $filterValue);
             }
         
-            return $query->getArrayResult();
+            return $query;
         }
     }
 }

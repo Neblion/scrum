@@ -31,8 +31,8 @@
                    <h5>{{ 'Search'|trans }}</h5>
                </div>
                <div class="widget-content">
-                   <form action="{{ path('project_search') }}" class="" method="post">
-                       <input type="text" name="search-string" class="" placeholder="{% if searchString != '' %}{{ searchString }}{% else %}{{ 'Search projects'|trans }}{% endif %}">
+                   <form action="{{ path('project_search') }}" class="" method="get">
+                       <input type="text" name="query" class="" placeholder="{% if searchString != '' %}{{ searchString }}{% else %}{{ 'Search projects'|trans }}{% endif %}">
                    </form>
                </div>
            </div>
@@ -43,18 +43,21 @@
                    <h5>{{ 'Search results'|trans }}</h5>
                </div>
                <div class="widget-content">
-                   <table>
-                   {% for project in projects %}
-                       <tr>
-                           <td>{{ project.name }}</td>
-                           <td>{{ project.description }}</td>
-                       </tr>
-                   {% else %}
-                       <tr>
-                           <td colspan="2">{{ 'No result'|trans }}</td>
-                       </tr>
-                   {% endfor %}
-                   </table>
+                   {% if pager.haveToPaginate %}
+                        <table>
+                        {% for project in pager.getCurrentPageResults %}
+                           <tr>
+                                <td>{{ project.name }}</td>
+                                <td>{{ project.description }}</td>
+                           </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="2">{{ 'No result'|trans }}</td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                        {{ pagerfanta(pager, 'twitter_bootstrap') }}
+                   {% endif %}
                </div>
            </div>
        </div>
