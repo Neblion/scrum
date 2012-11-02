@@ -4,6 +4,7 @@ namespace Neblion\ScrumBundle\Entity;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * ProjectRepository
@@ -13,6 +14,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProjectRepository extends EntityRepository
 {
+    
+    public function getQueryToPaginate()
+    {
+        return $this->getEntityManager()
+                ->createQuery('SELECT p 
+                        FROM NeblionScrumBundle:Project p
+                        ORDER BY p.id');
+    }
+    
     /**
      * getList
      * 
