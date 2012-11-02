@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Ornicar\GravatarBundle\OrnicarGravatarBundle(),
+            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Neblion\ScrumBundle\NeblionScrumBundle(),
         );
 
