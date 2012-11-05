@@ -19,6 +19,56 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class MemberController extends Controller
 {
+    /**
+     * Lists member sof a project.
+     *
+     * @Route("/{id}/list", name="member_list")
+     * @Template()
+     */
+    public function indexAction($id)
+    {
+        // Check if user is authorized
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw new AccessDeniedException();
+        }
+        
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        // Load project
+        $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
+        if (!$project) {
+            throw $this->createNotFoundException('Unable to find Project entity.');
+        }
+        
+        // Check if user is really a member of this project
+        $member = $em->getRepository('NeblionScrumBundle:Member')
+                ->isMemberOfProject($user->getId(), $project->getId());
+        if (!$member) {
+            throw new AccessDeniedException();
+        }
+        
+        $admin = false;
+        
+        if ($member->getAdmin()) {
+            $admin = true;
+            // Get Members of the team
+            $membersDisabled = $em->getRepository('NeblionScrumBundle:Member')
+                    ->getTeamMembersNotEnabled($project);
+        }
+
+        // Get Members of the team
+        $members = $em->getRepository('NeblionScrumBundle:Member')
+                ->getTeamMembers($project);
+        
+        return array(
+            'project'           => $project,
+            'members'           => $members,
+            'membersDisabled'   => $membersDisabled,
+            'admin'             => $admin,
+        );
+    }
 
     /**
      * Displays a form to create a new Member entity.

@@ -5,7 +5,7 @@
             <li {% if active == 'edition' %}class="active"{% endif %}><a href="{{ path('project_edit', { 'id': project.id }) }}">{{ 'Edition'|trans }}</a></li>
             <li {% if active == 'features' %}class="active"{% endif %}><a href="{{ path('feature_list', { 'id': project.id }) }}">{{ 'Features'|trans }}</a></li>
             <li {% if active == 'releases' %}class="active"{% endif %}><a href="{{ path('release_list', { 'id': project.id }) }}">{{ 'Releases'|trans }}</a></li>
-            <li {% if active == 'team' %}class="active"{% endif %}><a href="{{ path('team_show', { 'id': project.id }) }}">{{ 'Team'|trans }}</a></li>
+            <li {% if active == 'team' %}class="active"{% endif %}><a href="{{ path('member_list', { 'id': project.id }) }}">{{ 'Team'|trans }}</a></li>
             <li {% if active == 'deletion' %}class="active"{% endif %}><a href="{{ path('project_delete', { 'id': project.id }) }}">{{ 'Deletion'|trans }}</a></li>
         </ul>
     </div><!--/navbar-inner-->
