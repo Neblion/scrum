@@ -41,7 +41,7 @@
                         {{ form_widget(form) }}
                         <div class="form-actions">
                             <button id="submit" type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Remove'|trans }}</button>
-                            <a class="btn btn-primary" href="{{ path('team_show', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
+                            <a class="btn btn-primary" href="{{ path('member_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
                         </div>
                     </form>
                 </div>

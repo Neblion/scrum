@@ -29,11 +29,11 @@
                    <h5>{{ 'Invit member'|trans }}</h5>
                </div>
                <div class="widget-content">
-                   <form action="{{ path('member_create', { 'id': team.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                   <form action="{{ path('member_create', { 'id': project.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
                         {{ form_widget(form) }}
                         <div class="form-actions">
                             <button id="submit" type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> {{ 'Invit member'|trans }}</button>
-                            <a class="btn btn-primary" href="{{ path('team_show', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
+                            <a class="btn btn-primary" href="{{ path('member_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'Cancel'|trans }}</a>
                         </div>
                    </form>
                </div>

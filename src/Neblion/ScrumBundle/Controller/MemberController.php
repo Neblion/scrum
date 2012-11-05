@@ -50,6 +50,7 @@ class MemberController extends Controller
         }
         
         $admin = false;
+        $membersDisabled = array();
         
         if ($member->getAdmin()) {
             $admin = true;
@@ -90,12 +91,10 @@ class MemberController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
 
-        $team = $em->getRepository('NeblionScrumBundle:Team')->load($id);
-        if (!$team) {
-            throw $this->createNotFoundException('Unable to find Team entity.');
+        $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
+        if (!$project) {
+            throw $this->createNotFoundException('Unable to find Project entity.');
         }
-        
-        $project = $team->getProject();
         
         // Check if user is really a member of this project
         $member = $em->getRepository('NeblionScrumBundle:Member')
@@ -104,13 +103,10 @@ class MemberController extends Controller
             throw new AccessDeniedException();
         }
         
-        //$userManager = $this->container->get('fos_user.user_manager');
-        //$account = $userManager->createUser();
         $form = $this->createForm(new InvitationType());
         
         return array(
             'project'   => $project,
-            'team'      => $team,
             'form'      => $form->createView()
         );
     }
@@ -137,12 +133,10 @@ class MemberController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
 
-        $team = $em->getRepository('NeblionScrumBundle:Team')->load($id);
-        if (!$team) {
-            throw $this->createNotFoundException('Unable to find Team entity.');
+        $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
+        if (!$project) {
+            throw $this->createNotFoundException('Unable to find Project entity.');
         }
-        
-        $project = $team->getProject();
         
         // Check if user is really a member of this project
         $member = $em->getRepository('NeblionScrumBundle:Member')
@@ -196,9 +190,10 @@ class MemberController extends Controller
                 
                 // Create new Member
                 $member = new Member();
-                $member->setTeam($team);
+                $member->setProject($project);
                 $member->setAccount($account);
                 $member->setRole($role);
+                $member->setAdmin(false);
                 $member->setStatus($status);
                 $member->setSender($user);
                 $em->persist($member);
@@ -206,10 +201,11 @@ class MemberController extends Controller
                 $existAccount = true;
                 // Create new Member
                 $member = new Member();
-                $member->setTeam($team);
+                $member->setProject($project);
                 $member->setAccount($account);
                 $member->setSender($user);
                 $member->setRole($role);
+                $member->setAdmin(false);
                 $member->setStatus($status);
                 $em->persist($member);
             }
@@ -225,12 +221,11 @@ class MemberController extends Controller
             
             // Set flash message
             $this->get('session')->setFlash('success', 'Your invitation was sent successfully!');
-            return $this->redirect($this->generateUrl('team_show', array('id' => $project->getId())));
+            return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
         }
 
         return array(
             'project'           => $project,
-            'team'              => $team,
             'form'              => $form->createView(),
         );
     }
@@ -259,7 +254,7 @@ class MemberController extends Controller
             throw $this->createNotFoundException('Unable to find Member entity.');
         }
         
-        $project = $member->getTeam()->getProject();
+        $project = $member->getProject();
 
         // Check if current user is authorize to edit this member
         // Check if user is really a member of this project
@@ -273,7 +268,7 @@ class MemberController extends Controller
         if ($member->getStatus()->getId() != 2) {
             // Set flash message
             $this->get('session')->setFlash('success', 'You could not edit this member, he was not enabled!');
-            return $this->redirect($this->generateUrl('team_show', array('id' => $project->getId())));
+            return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
         }
         
         $editForm = $this->createForm(new MemberType(), $member);
@@ -310,7 +305,7 @@ class MemberController extends Controller
             throw $this->createNotFoundException('Unable to find Member entity.');
         }
         
-        $project = $member->getTeam()->getProject();
+        $project = $member->getProject();
 
         // Check if current user is authorize to edit this member
         // Check if user is really a member of this project
@@ -389,7 +384,7 @@ class MemberController extends Controller
             throw $this->createNotFoundException('Unable to find Member entity.');
         }
         
-        $project = $member->getTeam()->getProject();
+        $project = $member->getProject();
 
         // Check if member and user are the same account
         if ($member->getAccount()->getId() != $user->getId()) {
@@ -404,7 +399,7 @@ class MemberController extends Controller
         
         // Set flash message
         $this->get('session')->setFlash('success', 'You have successfully accepted invitation to this team !');
-        return $this->redirect($this->generateUrl('team_show', array('id' => $project->getId())));
+        return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
     }
     
     /**
@@ -429,7 +424,7 @@ class MemberController extends Controller
             throw $this->createNotFoundException('Unable to find Member entity.');
         }
         
-        $project = $member->getTeam()->getProject();
+        $project = $member->getProject();
 
         // Check if member and user are the same account
         if ($member->getAccount()->getId() != $user->getId()) {
@@ -469,7 +464,7 @@ class MemberController extends Controller
             throw $this->createNotFoundException('Unable to find Member entity.');
         }
         
-        $project = $member->getTeam()->getProject();
+        $project = $member->getProject();
 
         // Check if current user is authorize to edit this member
         // Check if user is really a member of this project
@@ -491,7 +486,7 @@ class MemberController extends Controller
         
         // Set flash message
         $this->get('session')->setFlash('success', 'You have successfully renew invitation to this member !');
-        return $this->redirect($this->generateUrl('team_show', array('id' => $project->getId())));
+        return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
     }
     
     /**
@@ -519,13 +514,13 @@ class MemberController extends Controller
             throw $this->createNotFoundException('Unable to find Member entity.');
         }
         
-        $project = $member->getTeam()->getProject();
+        $project = $member->getProject();
         
         // Check if current user try to remove himself !
         if ($member->getAccount()->getId() == $user->getId()) {
             // Set flash message
             $this->get('session')->setFlash('error', 'You could not remove yourself from the team !');
-            return $this->redirect($this->generateUrl('team_show', array('id' => $project->getId())));
+            return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
         }
 
         // Check if current user is authorize to edit this member
@@ -543,7 +538,7 @@ class MemberController extends Controller
         if (!empty($tasks)) {
             // Set flash message
             $this->get('session')->setFlash('error', 'Member could not be remove from team, there are tasks associated to him !');
-            return $this->redirect($this->generateUrl('team_show', array('id' => $project->getId())));
+            return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
         }
         
         $form = $this->createDeleteForm($id);
@@ -561,7 +556,7 @@ class MemberController extends Controller
             
                 // Set flash message
                 $this->get('session')->setFlash('success', 'Member was removed from team with success!');
-                return $this->redirect($this->generateUrl('team_show', array('id' => $project->getId())));
+                return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
             }
         }
 

@@ -25,7 +25,7 @@
                     <tbody>
                     {% for member in invitations %}
                         <tr>
-                            <td>{{ member.sender.profile.firstname }} {{ member.sender.profile.lastname }} invit you to be a member of {{ member.team.project.name }} project.</td>
+                            <td>{{ member.sender.profile.firstname }} {{ member.sender.profile.lastname }} invit you to be a member of {{ member.project.name }} project.</td>
                             <td>
                                 <a href="{{ path('member_invitation_accept', { 'id': member.id } ) }}" class="btn btn-success">{{ 'Accept'|trans }}</a>
                                 <a href="{{ path('member_invitation_refuse', { 'id': member.id } ) }}" class="btn btn-danger">{{ 'Refuse'|trans }}</a>
