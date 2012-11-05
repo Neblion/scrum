@@ -283,18 +283,13 @@ class ProjectController extends Controller
                        
             // Create project
             $em->persist($entity);
-            // Create team related to project
-            $team = new \Neblion\ScrumBundle\Entity\Team();
-            $team->setProject($entity);
-            $team->setName($entity->getName());
-            $em->persist($team);
-            
-            // Create team member
+                        
+            // Create member
             // Add current user to new team and set him admin role
             $status = $em->getRepository('NeblionScrumBundle:MemberStatus')->find(2);
             $role   = $em->getRepository('NeblionScrumBundle:Role')->find(1);
             $member = new \Neblion\ScrumBundle\Entity\Member();
-            $member->setTeam($team);
+            $member->setProject($entity);
             $member->setStatus($status);
             $member->setAccount($user);
             $member->setRole($role);
