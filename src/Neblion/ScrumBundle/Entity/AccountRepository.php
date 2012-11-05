@@ -19,8 +19,7 @@ class AccountRepository extends EntityRepository
                     FROM NeblionScrumBundle:Member m
                     INNER JOIN m.role r
                     INNER JOIN m.account a
-                    INNER JOIN m.team t
-                    INNER JOIN t.project p
+                    INNER JOIN m.project p
                     WHERE p.id = :project_id
                     AND a.id = :account_id'
                 )

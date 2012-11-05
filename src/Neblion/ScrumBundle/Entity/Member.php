@@ -82,11 +82,16 @@ class Member
     private $updated;
     
     
+    
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        $this->admin    = false;
+        $this->tasks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->storyComments = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
+    
     /**
      * Get id
      *
@@ -98,93 +103,16 @@ class Member
     }
 
     /**
-     * Set team
-     *
-     * @param Neblion\ScrumBundle\Entity\Team $team
-     */
-    public function setTeam(\Neblion\ScrumBundle\Entity\Team $team)
-    {
-        $this->team = $team;
-    }
-
-    /**
-     * Get team
-     *
-     * @return Neblion\ScrumBundle\Entity\Team 
-     */
-    public function getTeam()
-    {
-        return $this->team;
-    }
-
-    /**
-     * Set account
-     *
-     * @param Neblion\ScrumBundle\Entity\Account $account
-     */
-    public function setAccount(\Neblion\ScrumBundle\Entity\Account $account)
-    {
-        $this->account = $account;
-    }
-
-    /**
-     * Get account
-     *
-     * @return Neblion\ScrumBundle\Entity\Account 
-     */
-    public function getAccount()
-    {
-        return $this->account;
-    }
-
-    /**
-     * Set role
-     *
-     * @param Neblion\ScrumBundle\Entity\Role $role
-     */
-    public function setRole(\Neblion\ScrumBundle\Entity\Role $role)
-    {
-        $this->role = $role;
-    }
-
-    /**
-     * Get role
-     *
-     * @return Neblion\ScrumBundle\Entity\Role 
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * Set status
-     *
-     * @param Neblion\ScrumBundle\Entity\MemberStatus $status
-     */
-    public function setStatus(\Neblion\ScrumBundle\Entity\MemberStatus $status)
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * Get status
-     *
-     * @return Neblion\ScrumBundle\Entity\MemberStatus 
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
      * Set admin
      *
      * @param boolean $admin
+     * @return Member
      */
     public function setAdmin($admin)
     {
         $this->admin = $admin;
+    
+        return $this;
     }
 
     /**
@@ -195,79 +123,6 @@ class Member
     public function getAdmin()
     {
         return $this->admin;
-    }
-
-    /**
-     * Set enabled
-     *
-     * @param boolean $enabled
-     */
-    public function setEnabled($enabled)
-    {
-        $this->enabled = $enabled;
-    }
-
-    /**
-     * Get enabled
-     *
-     * @return boolean 
-     */
-    public function getEnabled()
-    {
-        return $this->enabled;
-    }
-
-    /**
-     * Add tasks
-     *
-     * @param Neblion\ScrumBundle\Entity\Task $tasks
-     */
-    public function addTask(\Neblion\ScrumBundle\Entity\Task $tasks)
-    {
-        $this->tasks[] = $tasks;
-    }
-
-    /**
-     * Get tasks
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getTasks()
-    {
-        return $this->tasks;
-    }
-
-    /**
-     * Remove tasks
-     *
-     * @param Neblion\ScrumBundle\Entity\Task $tasks
-     */
-    public function removeTask(\Neblion\ScrumBundle\Entity\Task $tasks)
-    {
-        $this->tasks->removeElement($tasks);
-    }
-
-    /**
-     * Set sender
-     *
-     * @param Neblion\ScrumBundle\Entity\Account $sender
-     * @return Member
-     */
-    public function setSender(\Neblion\ScrumBundle\Entity\Account $sender = null)
-    {
-        $this->sender = $sender;
-    
-        return $this;
-    }
-
-    /**
-     * Get sender
-     *
-     * @return Neblion\ScrumBundle\Entity\Account 
-     */
-    public function getSender()
-    {
-        return $this->sender;
     }
 
     /**
@@ -317,6 +172,131 @@ class Member
     }
 
     /**
+     * Set project
+     *
+     * @param Neblion\ScrumBundle\Entity\Project $project
+     * @return Member
+     */
+    public function setProject(\Neblion\ScrumBundle\Entity\Project $project = null)
+    {
+        $this->project = $project;
+    
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return Neblion\ScrumBundle\Entity\Project 
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * Set account
+     *
+     * @param Neblion\ScrumBundle\Entity\Account $account
+     * @return Member
+     */
+    public function setAccount(\Neblion\ScrumBundle\Entity\Account $account = null)
+    {
+        $this->account = $account;
+    
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return Neblion\ScrumBundle\Entity\Account 
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Set role
+     *
+     * @param Neblion\ScrumBundle\Entity\Role $role
+     * @return Member
+     */
+    public function setRole(\Neblion\ScrumBundle\Entity\Role $role = null)
+    {
+        $this->role = $role;
+    
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return Neblion\ScrumBundle\Entity\Role 
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Set status
+     *
+     * @param Neblion\ScrumBundle\Entity\MemberStatus $status
+     * @return Member
+     */
+    public function setStatus(\Neblion\ScrumBundle\Entity\MemberStatus $status = null)
+    {
+        $this->status = $status;
+    
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return Neblion\ScrumBundle\Entity\MemberStatus 
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Add tasks
+     *
+     * @param Neblion\ScrumBundle\Entity\Task $tasks
+     * @return Member
+     */
+    public function addTask(\Neblion\ScrumBundle\Entity\Task $tasks)
+    {
+        $this->tasks[] = $tasks;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tasks
+     *
+     * @param Neblion\ScrumBundle\Entity\Task $tasks
+     */
+    public function removeTask(\Neblion\ScrumBundle\Entity\Task $tasks)
+    {
+        $this->tasks->removeElement($tasks);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
+
+    /**
      * Add storyComments
      *
      * @param Neblion\ScrumBundle\Entity\StoryComment $storyComments
@@ -350,25 +330,25 @@ class Member
     }
 
     /**
-     * Set project
+     * Set sender
      *
-     * @param Neblion\ScrumBundle\Entity\Project $project
+     * @param Neblion\ScrumBundle\Entity\Account $sender
      * @return Member
      */
-    public function setProject(\Neblion\ScrumBundle\Entity\Project $project = null)
+    public function setSender(\Neblion\ScrumBundle\Entity\Account $sender = null)
     {
-        $this->project = $project;
+        $this->sender = $sender;
     
         return $this;
     }
 
     /**
-     * Get project
+     * Get sender
      *
-     * @return Neblion\ScrumBundle\Entity\Project 
+     * @return Neblion\ScrumBundle\Entity\Account 
      */
-    public function getProject()
+    public function getSender()
     {
-        return $this->project;
+        return $this->sender;
     }
 }

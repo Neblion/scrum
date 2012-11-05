@@ -24,8 +24,7 @@ class ProjectRepository extends EntityRepository
         return $this->getEntityManager()->createQuery(
                 'SELECT p 
                     FROM NeblionScrumBundle:Project p
-                    INNER JOIN p.team t
-                    INNER JOIN t.members m
+                    INNER JOIN p.members m
                     INNER JOIN m.status s
                     INNER JOIN m.account a
                     WHERE a.id = :account_id
@@ -42,8 +41,7 @@ class ProjectRepository extends EntityRepository
                     'SELECT m, r, a, p
                     FROM NeblionScrumBundle:Member m
                     INNER JOIN m.role r
-                    INNER JOIN m.team t
-                    INNER JOIN t.project pj
+                    INNER JOIN m.project pj
                     INNER JOIN m.account a
                     LEFT JOIN a.profile p
                     WHERE pj.id = :project_id
@@ -179,8 +177,7 @@ class ProjectRepository extends EntityRepository
         $where = false;
         $queryString = 'SELECT distinct p
                     FROM NeblionScrumBundle:Project p
-                    INNER JOIN p.team t
-                    INNER JOIN t.members m
+                    INNER JOIN p.members m
                     INNER JOIN m.role r 
                     INNER JOIN m.account a
                     INNER JOIN a.profile pr ';

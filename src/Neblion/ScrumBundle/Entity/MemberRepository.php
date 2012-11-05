@@ -15,41 +15,41 @@ use Doctrine\ORM\EntityRepository;
 class MemberRepository extends EntityRepository
 {
     
-    public function getTeamMembers($team_id, $hydrate_mode = Query::HYDRATE_OBJECT)
+    public function getTeamMembers($project, $hydrate_mode = Query::HYDRATE_OBJECT)
     {
         return $this->getEntityManager()
                 ->createQuery(
                     'SELECT m, s, r, a, p
                     FROM NeblionScrumBundle:Member m
+                    INNER JOIN m.project pr
                     INNER JOIN m.status s
                     INNER JOIN m.role r
-                    INNER JOIN m.team t
                     INNER JOIN m.account a
                     LEFT JOIN a.profile p
-                    WHERE t.id = :team_id
+                    WHERE pr.id = :project_id
                     AND s.id = 2
                     ORDER BY p.lastname, p.firstname, a.username'
                 )
-                ->setParameter('team_id', $team_id)
+                ->setParameter('project_id', $project->getId())
                 ->getResult($hydrate_mode);
     }
     
-    public function getTeamMembersNotEnabled($team_id, $hydrate_mode = Query::HYDRATE_OBJECT)
+    public function getTeamMembersNotEnabled($project, $hydrate_mode = Query::HYDRATE_OBJECT)
     {
         return $this->getEntityManager()
                 ->createQuery(
                     'SELECT m, s, r, a, p
                     FROM NeblionScrumBundle:Member m
+                    INNER JOIN m.project pr
                     INNER JOIN m.status s
                     INNER JOIN m.role r
-                    INNER JOIN m.team t
                     INNER JOIN m.account a
                     LEFT JOIN a.profile p
-                    WHERE t.id = :team_id
+                    WHERE pr.id = :project_id
                     AND s.id != 2
                     ORDER BY p.lastname, p.firstname, a.username'
                 )
-                ->setParameter('team_id', $team_id)
+                ->setParameter('project_id', $project->getId())
                 ->getResult($hydrate_mode);
     }
     
@@ -62,8 +62,7 @@ class MemberRepository extends EntityRepository
                     INNER JOIN m.status s
                     INNER JOIN m.role r
                     INNER JOIN m.account a
-                    INNER JOIN m.team t
-                    INNER JOIN t.project p
+                    INNER JOIN m.project p
                     WHERE a.id = :account_id
                     AND p.id = :project_id
                     AND s.id = 2'
@@ -77,12 +76,11 @@ class MemberRepository extends EntityRepository
     {
         return $this->getEntityManager()
                 ->createQuery(
-                    'SELECT m, r, t, p, a, pf, s, sp
+                    'SELECT m, r, p, a, pf, s, sp
                     FROM NeblionScrumBundle:Member m
                     INNER JOIN m.role r
                     INNER JOIN m.account a
-                    INNER JOIN m.team t
-                    INNER JOIN t.project p
+                    INNER JOIN m.project p
                     LEFT JOIN a.profile pf
                     LEFT JOIN m.sender s
                     LEFT JOIN s.profile sp
@@ -100,8 +98,7 @@ class MemberRepository extends EntityRepository
                     FROM NeblionScrumBundle:Member m
                     INNER JOIN m.role r
                     INNER JOIN m.account a
-                    INNER JOIN m.team t
-                    INNER JOIN t.project p
+                    INNER JOIN m.project p
                     INNER JOIN a.profile pf
                     WHERE p.id = :id'
                 )
@@ -133,13 +130,12 @@ class MemberRepository extends EntityRepository
     {
         return $this->getEntityManager()
                 ->createQuery(
-                    'SELECT m, ms, r, t, p, a, pr, s
+                    'SELECT m, ms, r, p, a, pr, s
                     FROM NeblionScrumBundle:Member m
                     INNER JOIN m.status ms
                     INNER JOIN m.role r
                     INNER JOIN m.account a
-                    INNER JOIN m.team t
-                    INNER JOIN t.project p
+                    INNER JOIN m.project p
                     INNER JOIN m.sender s
                     INNER JOIN s.profile pr
                     WHERE a.id = :id
