@@ -24,9 +24,9 @@ class Project
     private $id;
     
     /**
-     * @ORM\OneToOne(targetEntity="Neblion\ScrumBundle\Entity\Team", mappedBy="project", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Neblion\ScrumBundle\Entity\Member", mappedBy="project", cascade={"remove"})
      */
-    private $team;
+    private $members;
     
     /**
      * @ORM\OneToMany(targetEntity="Neblion\ScrumBundle\Entity\ProjectRelease", mappedBy="project", cascade={"remove"})
@@ -396,5 +396,38 @@ class Project
     public function getIsPublic()
     {
         return $this->is_public;
+    }
+
+    /**
+     * Add members
+     *
+     * @param Neblion\ScrumBundle\Entity\Member $members
+     * @return Project
+     */
+    public function addMember(\Neblion\ScrumBundle\Entity\Member $members)
+    {
+        $this->members[] = $members;
+    
+        return $this;
+    }
+
+    /**
+     * Remove members
+     *
+     * @param Neblion\ScrumBundle\Entity\Member $members
+     */
+    public function removeMember(\Neblion\ScrumBundle\Entity\Member $members)
+    {
+        $this->members->removeElement($members);
+    }
+
+    /**
+     * Get members
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getMembers()
+    {
+        return $this->members;
     }
 }

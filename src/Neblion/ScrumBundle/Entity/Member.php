@@ -24,10 +24,10 @@ class Member
     private $id;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\Team", inversedBy="members")
-     * @ORM\JoinColumn(name="team_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\Project", inversedBy="members")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
      */
-    private $team;
+    private $project;
     
     /**
      * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\Account", inversedBy="members")
@@ -347,5 +347,28 @@ class Member
     public function getStoryComments()
     {
         return $this->storyComments;
+    }
+
+    /**
+     * Set project
+     *
+     * @param Neblion\ScrumBundle\Entity\Project $project
+     * @return Member
+     */
+    public function setProject(\Neblion\ScrumBundle\Entity\Project $project = null)
+    {
+        $this->project = $project;
+    
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return Neblion\ScrumBundle\Entity\Project 
+     */
+    public function getProject()
+    {
+        return $this->project;
     }
 }
