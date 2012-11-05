@@ -51,7 +51,7 @@ class RetrospectiveController extends Controller
         
         // Get Members of the team
         $members = $em->getRepository('NeblionScrumBundle:Member')
-                    ->getTeamMembers($project->getTeam()->getId());
+                    ->getTeamMembers($project->getId());
         
         $retrospectives = $em->getRepository('NeblionScrumBundle:Retrospective')
                 ->getForSprint($sprint->getId());
