@@ -57,12 +57,6 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
         $entity->setSprintDuration($params['sprint_duration']);
         $this->manager->persist($entity);
         
-        // Create team
-        $team = new Team();
-        $team->setName($entity->getName());
-        $team->setProject($entity);
-        $this->manager->persist($team);
-        
         // Create default release
         $releaseStatus = $this->manager->getRepository('NeblionScrumBundle:ProcessStatus')->find(3);
         $release = new ProjectRelease();

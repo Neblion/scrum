@@ -33,8 +33,8 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
     {
         $this->manager = $manager;
         
-        // Load team
-        $team = $this->manager->getRepository('NeblionScrumBundle:Team')->find(1);
+        // Load project
+        $project = $this->manager->getRepository('NeblionScrumBundle:Project')->find(1);
         // Load role
         $roles = $this->loadRoles();
         // Load status
@@ -43,31 +43,31 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
         $entities = array(
             array(
                 'name'      => 'admin', 
-                'team'      => $team, 
+                'project'   => $project,
                 'role'      => $roles[4],
                 'status'    => $status[2],
                 'admin' => true),
             array(
                 'name'      => 'productowner', 
-                'team'      => $team, 
+                'project'   => $project,
                 'role'      => $roles[1], 
                 'status'    => $status[2],
                 'admin'     => false),
             array(
                 'name'      => 'scrumaster', 
-                'team'      => $team, 
+                'project'   => $project,
                 'role'      => $roles[2], 
                 'status'    => $status[2],
                 'admin'     => false),
             array(
                 'name'      => 'developer', 
-                'team'      => $team, 
+                'project'   => $project,
                 'role'      => $roles[3], 
                 'status'    => $status[2],
                 'admin'     => false),
             array(
                 'name'      => 'member', 
-                'team'      => $team, 
+                'project'   => $project,
                 'role'      => $roles[4], 
                 'status'    => $status[2],
                 'admin'     => false),
@@ -86,14 +86,14 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
         $entities = array(
             array(
                 'name'      => 'invit-accepted', 
-                'team'      => $team, 
+                'project'   => $project,
                 'role'      => $roles[4], 
                 'status'    => $status[1],
                 'sender'    => $sender,
                 'admin'     => false),
             array(
                 'name'      => 'invit-refused', 
-                'team'      => $team, 
+                'project'   => $project,
                 'role'      => $roles[4], 
                 'status'    => $status[1],
                 'sender'    => $sender,
@@ -156,7 +156,7 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
         // Create member
         $member = new Member();
         $member->setAccount($user);
-        $member->setTeam($params['team']);
+        $member->setProject($params['project']);
         $member->setRole($params['role']);
         $member->setStatus($params['status']);
         if ($params['status']->getId() == 1) {
