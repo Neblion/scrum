@@ -195,4 +195,16 @@ class MemberControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
         $this->assertTrue($crawler->filter('html:contains("You have successfully refused invitation to this team !")')->count() == 1);
     }
+    
+    public function testList()
+    {
+        $client = $this->login('admin', 'test');
+        $crawler = $client->request('GET', '/member/1/list');
+        
+        // Not validated members = 2
+        $this->assertEquals(2, $crawler->filter('table#not-validated-members tbody tr')->count());
+        
+        // Validated members = 6
+        $this->assertEquals(6, $crawler->filter('table#validated-members tbody tr')->count());
+    }
 }
