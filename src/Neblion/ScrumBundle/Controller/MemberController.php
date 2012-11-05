@@ -78,7 +78,7 @@ class MemberController extends Controller
      *
      * @Route("/{id}/new", name="member_new")
      * @Template()
-     * @param integer $id Team id
+     * @param integer $id Project id
      */
     public function newAction($id)
     {
@@ -120,7 +120,7 @@ class MemberController extends Controller
      * @Route("/{id}/create", name="member_create")
      * @Method("post")
      * @Template("NeblionScrumBundle:Member:new.html.twig")
-     * @param integer $id Team id
+     * @param integer $id Project id
      */
     public function createAction($id)
     {
