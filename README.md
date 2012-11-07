@@ -42,7 +42,7 @@ see the following documentation: [Apache](http://httpd.apache.org/docs/current/m
 
         cd <your-installation-path>
         php app/console doctrine:schema:update --force
-        php app/console doctrine:fixtures:load --fixtures=./src/Neblion/ScrumBundle/DataFixtures
+        php app/console doctrine:fixtures:load --fixtures=./src/Neblion/ScrumBundle/DataFixtures/Install
         php app/console assets:install
         php app/console assetic:dump
 
