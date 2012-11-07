@@ -8,7 +8,6 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 use Neblion\ScrumBundle\Entity\Project;
 use Neblion\ScrumBundle\Entity\ProcessStatus;
-use Neblion\ScrumBundle\Entity\Team;
 use Neblion\ScrumBundle\Entity\ProjectRelease;
 use Neblion\ScrumBundle\Entity\Feature;
 
