@@ -36,10 +36,10 @@ Reports: Rapports
 'Project edition': 'Edition d''un projet'
 'Search help': '__Search help'
 Search: __Search
-'Search projects': '__Search projects'
-'Search results': '__Search results'
-'No result': '__No result'
-'Project deletion': 'Suppression d''un projet'
+'Search projects': 'Recherche de projets'
+'Search results': 'Résultats de la recherche'
+'No result': 'Aucun résultat'
+'Project deletion': "Suppression d'un projet"
 'Do you really want to remove this project': 'Voulez-vous vraiment supprimer ce projet'
 'If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !': 'En confirmant, tous les éléments liés à ce projet (sprint, stories, tâches, ...) seront définitivement supprimés !'
 'Delete this project': 'Supprimer ce projet'
@@ -58,7 +58,7 @@ Refuse: Refuser
 'Team members': 'Membres de l''équipe'
 Lastname: Nom
 Firstname: Prénon
-username: __Username
+username: username
 Role: Rôle
 Administrator: Administrateur
 Enabled: Activé
@@ -83,7 +83,7 @@ Start: Commencer
 Review: Revue
 Retrospective: Retrospective
 Re-start: Re-commencer
-'Project admin': 'Projet administration'
+'Project admin': 'Administration du projet'
 Features: Fonctionnalités
 Releases: Releases
 Team: Equipe
@@ -93,11 +93,11 @@ Sprints: Sprints
 Admin: Admin
 'Release description': 'Description de la release'
 'Sprint description': 'Description du sprint'
-'Review creation': '__Review creation'
+'Review creation': "Création d'une revue"
 'Story description': 'Description de la story'
 Effort: Effort
 'Not done': 'Non terminé'
-'Review edition': '__Review edition'
+'Review edition': 'Edition de la revue'
 'NeblionScrum %project_name% project notification': '__NeblionScrum %project_name% project notification'
 Hello: __Hello
 'You receive this email because %firstname% %lastname% (%email%) decide to remove you as a member on project %project_name%': '__You receive this email because %firstname% %lastname% (%email%) decide to remove you as a member on project %project_name%'
@@ -124,15 +124,15 @@ ToDo: 'A faire'
 'Close the sprint': 'Clore le sprint'
 'Are you sure you want close this sprint ?': 'Voulez-vous vraiment clore ce sprint ?'
 'Member could not edit their task and retrospective and sprint review edition will be close.': '__Member could not edit their task and retrospective and sprint review edition will be close.'
-'Sprint list': 'Sprint list'
+'Sprint list': 'Liste des sprints'
 Name: Nom
 Status: Statut
 'Start > End': 'Début > Fin'
 View: Voir
 'No sprint': 'Pas de sprint'
 'Sprint edition': 'Edition d''un sprint'
-'Do you really want to delete this sprint: %sprint% ?': '__Do you really want to delete this sprint: %sprint% ?'
-'Release creation': 'Création d''une release'
+'Do you really want to delete this sprint: %sprint% ?': 'Voulez-vous vraiment supprimer ce sprint: %sprint% ?'
+'Release creation': "Création d'une release"
 'Releases list': 'Liste des releases'
 'No release': 'Pas de release'
 'New release': 'Nouvelle release'
@@ -140,22 +140,23 @@ View: Voir
 'Release deletion': 'Suppression d''une release'
 'Do you really want to delete this release: %release% ?': 'Voulez-vous vraiment supprimer cette release: %release% ?'
 'Welcome on Neblion Scrum!': 'Bienvenue sur Neblion Scrum!'
-'Hello %username%,': '__Hello %username%,'
+'Hello %username%,': 'Bonjour %username%,'
 Register: Enregistrez-vous
 'Sprint retrospective:': 'Retrospective de sprint:'
 'Sprint retro:': '__Sprint retro:'
 'Profile creation:': 'Création d''un profil'
 'Profile edition:': 'Edition d''un profil'
-Feature: Feature
+Feature: Fonctionnalité
 'Story estimate': 'Estimation de la story'
 'Add task': 'Ajouter une tâche'
 'Create a new story': 'Creér une nouvelle story'
-'Story estimate edition:': '__Story estimate edition:'
+'Story estimate edition': 'Edition de l''estimation de la story'
+'Estimate was updated with success!': 'L''estimation a été mise à jour avec succès !'
 Informations: Informations
 'Story edition': 'Edition d''une story'
 Comments: __Comments
-'Story add comment': '__Story add comment'
-'Add comment': '__Add comment'
+'Story add comment': 'Ajouter un commentaire sur la story'
+'Add comment': 'Ajouter un commentaire'
 'Do you really want to delete this story: %story% ?': 'Voulez-vous vraiment supprimer cette story: %story% ?'
 'This field is required': 'Ce champ est requis'
 'Feature creation': 'Création d''une fonctionnalité'
@@ -165,8 +166,6 @@ Comments: __Comments
 'Feature edition': 'Edition d''une fonctionnalité'
 'Feature deletion': 'Suppression d''une fonctionnalité'
 'Do you really want to delete this feature: %feature% ?': 'Voulez-vous vraiment supprimer cette fonctionnalité: %feature% ?'
-'Task creation:': '__Task creation:'
-'Feature creation:': '__Feature creation:'
 'Review creation:': 'Création d''une revue:'
 'Sprint review:': 'Revue de sprint:'
 'hours remaining': 'heures restantes'
