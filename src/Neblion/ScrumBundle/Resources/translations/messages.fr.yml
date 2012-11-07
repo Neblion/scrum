@@ -5,9 +5,8 @@ Hours: Heures
 Update: 'Mettre à jour'
 Take: Prendre
 Delete: Supprimer
-'Task creation:': '__Task creation:'
-Create: Créer
 'Create a new task': 'Créer une nouvelle tâche'
+Create: Créer
 Success!: __Success!
 '': __
 Close: Fermer
@@ -35,6 +34,11 @@ Velocity: Vélocité
 'Latest activities': 'Activités récentes'
 Reports: Rapports
 'Project edition': 'Edition d''un projet'
+'Search help': '__Search help'
+Search: __Search
+'Search projects': '__Search projects'
+'Search results': '__Search results'
+'No result': '__No result'
 'Project deletion': 'Suppression d''un projet'
 'Do you really want to remove this project': 'Voulez-vous vraiment supprimer ce projet'
 'If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !': 'En confirmant, tous les éléments liés à ce projet (sprint, stories, tâches, ...) seront définitivement supprimés !'
@@ -47,10 +51,27 @@ Estimate: Points
 'Create next sprint': 'Créer le prochain sprint'
 Backlog: Backlog
 'Invit member': 'Inviter un nouveau membre'
+'Invitation to collaborate on project': '__Invitation to collaborate on project'
+Accept: Accepter
+Refuse: Refuser
+'No invitation': 'Aucune invitation'
+'Team members': 'Membres de l''équipe'
+Lastname: Nom
+Firstname: Prénon
+username: __Username
+Role: Rôle
+Administrator: Administrateur
+Enabled: Activé
+Actions: Actions
+Me: Moi
+Yes: Oui
+Remove: Enlever
+Invit: Inviter
+'No Member': 'Pas de membre'
+'Invit a new Member': 'Inviter un nouveau membre'
 'Member edition': 'Edition des informations d''un membre'
 'Remove a member from the team': 'Retirer un membre de l''équipe'
 'Do you really want to remove this member': 'Voulez-vous vraiment retirer ce membre'
-Remove: Enlever
 Contact: Contact
 'Edit profile': 'Editer votre profil'
 'Change password': 'Changer votre mot de passe'
@@ -113,26 +134,11 @@ View: Voir
 'Do you really want to delete this sprint: %sprint% ?': '__Do you really want to delete this sprint: %sprint% ?'
 'Release creation': 'Création d''une release'
 'Releases list': 'Liste des releases'
-Actions: Actions
 'No release': 'Pas de release'
 'New release': 'Nouvelle release'
 'Release edition': 'Edition d''une release'
 'Release deletion': 'Suppression d''une release'
 'Do you really want to delete this release: %release% ?': 'Voulez-vous vraiment supprimer cette release: %release% ?'
-'Team members': 'Membres de l''équipe'
-Lastname: Nom
-Firstname: Prénon
-username: __Username
-Role: Rôle
-Administrator: Administrateur
-Enabled: Activé
-Me: Moi
-Yes: Oui
-Accept: Accepter
-Refuse: Refuser
-Invit: Inviter
-'No Member': 'Pas de membre'
-'Invit a new Member': 'Inviter un nouveau membre'
 'Welcome on Neblion Scrum!': 'Bienvenue sur Neblion Scrum!'
 'Hello %username%,': '__Hello %username%,'
 Register: Enregistrez-vous
@@ -147,20 +153,23 @@ Feature: Feature
 'Story estimate edition:': '__Story estimate edition:'
 Informations: Informations
 'Story edition': 'Edition d''une story'
+Comments: __Comments
+'Story add comment': '__Story add comment'
+'Add comment': '__Add comment'
 'Do you really want to delete this story: %story% ?': 'Voulez-vous vraiment supprimer cette story: %story% ?'
 'This field is required': 'Ce champ est requis'
 'Feature creation': 'Création d''une fonctionnalité'
-'Feature creation:': '__Feature creation:'
 'Features list': 'Liste des fonctionnalités'
 'No feature': 'Pas de fonctionnalité'
 'New feature': 'Ajouter une fonctionnalité'
-'Feature edition': "Edition d'une fonctionnalité"
-'Feature deletion': "Suppression d'une fonctionnalité"
+'Feature edition': 'Edition d''une fonctionnalité'
+'Feature deletion': 'Suppression d''une fonctionnalité'
 'Do you really want to delete this feature: %feature% ?': 'Voulez-vous vraiment supprimer cette fonctionnalité: %feature% ?'
+'Task creation:': '__Task creation:'
+'Feature creation:': '__Feature creation:'
 'Review creation:': 'Création d''une revue:'
 'Sprint review:': 'Revue de sprint:'
 'hours remaining': 'heures restantes'
-'No invitation': 'Aucune invitation'
 'In Progress': 'En cours'
 'Remaining Hours': '__Remaining Hours'
 'Current velocity': 'Vélocité actuelle'
