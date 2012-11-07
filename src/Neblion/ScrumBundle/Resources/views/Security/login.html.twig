@@ -2,10 +2,10 @@
 
 {% block body %}
 <div class="row">
-    <div class="span3">
+    <div class="span4">
     </div><!--/span-->
     
-    <div class="span9">
+    <div class="span8">
         <h2>{{ 'Sign in'|trans }}</h2>
             <div id="login">
 
@@ -27,7 +27,7 @@
                         <div class="control-group">
                             <label class="control-label" for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
                             <div class="controls">
-                                <input type="password" id="password" name="_password" /> <a href="{{ path("fos_user_resetting_request") }}" class="btn btn-success">Forgot your password ?</a>
+                                <input type="password" id="password" name="_password" /> <a href="{{ path("fos_user_resetting_request") }}" class="btn btn-success">{{ 'Forgot your password ?'|trans }}</a>
                             </div>
                         </div>
                         

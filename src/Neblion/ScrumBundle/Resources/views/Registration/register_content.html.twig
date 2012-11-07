@@ -1,7 +1,9 @@
-{% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
+{# form_theme form 'NeblionScrumBundle:Form:fields.html.twig' #}
 
 <div class="row">
-    <div class="span6">
+    <div class="span4">
+    </div>
+    <div class="span8">
         <h2>{{'Register' | trans}}</h2>
         <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register well">
             {{ form_widget(form) }}
@@ -10,7 +12,5 @@
             </div>
         </form>
     </div>
-    <div class="span6">
-        
-    </div>
+    
 </div>
