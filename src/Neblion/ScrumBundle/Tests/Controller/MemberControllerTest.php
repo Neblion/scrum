@@ -116,27 +116,43 @@ class MemberControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    /*
     public function testUpdate()
     {
         
         // Test that admin member could edit a member
         $client = $this->login('admin', 'test');
-        $crawler = $client->request('GET', '/member/1/edit');
         
+        // Test classic update
+        $crawler = $client->request('GET', '/member/3/edit');
         // Test form
         $form = $crawler->selectButton('submit')->form();
-        $crawler = $client->submit($form, array(
-            'neblion_scrumbundle_projectreleasetype[name]'             => 'release-test-update',
-            'neblion_scrumbundle_projectreleasetype[description]'      => 'description-update',
-            'neblion_scrumbundle_projectreleasetype[start]'            => '17/10/2012',
-        ));
-        
+        $form['neblion_scrumbundle_membertype[admin]']->tick();
+        $form['neblion_scrumbundle_membertype[role]'] = 2;
+        $crawler = $client->submit($form);
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
         $crawler = $client->followRedirect();
-        $this->assertTrue($crawler->filter('html:contains("Release was updated with success!")')->count() == 1);
+        $this->assertTrue($crawler->filter('html:contains("Member was successfully updated !")')->count() == 1);
+        
+        // Test remove admin privilege where not only one admin
+        $crawler = $client->request('GET', '/member/3/edit');
+        // Test form
+        $form = $crawler->selectButton('submit')->form();
+        $form['neblion_scrumbundle_membertype[admin]']->untick();
+        $crawler = $client->submit($form);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $crawler = $client->followRedirect();
+        $this->assertTrue($crawler->filter('html:contains("Member was successfully updated !")')->count() == 1);
+        
+        // Test remove admin privilege where only one admin
+        $crawler = $client->request('GET', '/member/1/edit');
+        // Test form
+        $form = $crawler->selectButton('submit')->form();
+        $form['neblion_scrumbundle_membertype[admin]']->untick();
+        $crawler = $client->submit($form);
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $crawler = $client->followRedirect();
+        $this->assertTrue($crawler->filter('html:contains("Member was the last admin fot the project, you can not remove his admin privilege !")')->count() == 1);
     }
-    */
 
     /*
     public function testDelete()

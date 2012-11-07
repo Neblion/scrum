@@ -322,6 +322,18 @@ class MemberController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
+            // Check if member and currentMember are the same users
+            // and if currentMember remove admin privilege
+            if ($member->getId() == $currentMember->getId()) {
+                if (!$member->getAdmin() and $em->getRepository('NeblionScrumBundle:Member')->isLastAdmin($member)) {
+                    // Set flash message
+                    $this->get('session')->setFlash('error', 'Member was the last admin fot the project, you can not remove his admin privilege !');
+                    return $this->redirect($this->generateUrl('member_edit', array('id' => $member->getId())));
+                }
+            }
+            
+            
+            
             $em->persist($member);
             $em->flush();
 

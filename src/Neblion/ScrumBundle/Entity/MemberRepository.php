@@ -145,4 +145,27 @@ class MemberRepository extends EntityRepository
                 ->getArrayResult();
     }
     
+    public function isLastAdmin($member)
+    {
+        $result = $this->getEntityManager()
+                ->createQuery(
+                    'SELECT m
+                    FROM NeblionScrumBundle:Member m
+                    INNER JOIN m.project p
+                    WHERE m.id != :id
+                    AND m.admin = 1
+                    AND p.id = :project_id'
+                )
+                ->setParameter('id', $member->getId())
+                ->setParameter('project_id', $member->getProject()->getId())
+                ->getResult();
+        
+        if (count($result) == 0) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    
 }
