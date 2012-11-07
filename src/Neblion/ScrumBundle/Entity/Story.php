@@ -31,7 +31,7 @@ class Story
     
     /**
      * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\StoryType", inversedBy="stories")
-     * @ORM\JoinColumn(name="story_type_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="story_type_id", referencedColumnName="id", nullable=false)
      */
     private $type;
     

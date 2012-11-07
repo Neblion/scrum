@@ -41,7 +41,7 @@ class ProjectRelease
     
     /**
      * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\ProcessStatus", inversedBy="releases")
-     * @ORM\JoinColumn(name="status_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=false)
      */
     private $status;
 

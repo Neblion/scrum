@@ -37,7 +37,7 @@ class Member
 
     /**
      * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\Role", inversedBy="members")
-     * @ORM\JoinColumn(name="role_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="role_id", referencedColumnName="id", nullable=false)
      */
     private $role;
     
