@@ -45,16 +45,19 @@ class LoadStoryData extends AbstractFixture implements OrderedFixtureInterface
             $status[$item->getId()] = $item;
         }
         
+        // Load story type
+        $storyType = $this->manager->getRepository('NeblionScrumBundle:StoryType')->find(1);
+        
         $entities = array(
-            array('name' => 'Story 1A', 'project' => $projects[1], 'feature' => $features[1], 'sprint' => $sprints[1], 'status' => $status[3], 'estimate' => 1, 'position' => 1),
-            array('name' => 'Story 1B', 'project' => $projects[1], 'feature' => $features[1], 'sprint' => $sprints[1], 'status' => $status[3], 'estimate' => 3, 'position' => 2),
-            array('name' => 'Story 1C', 'project' => $projects[1], 'feature' => $features[1], 'sprint' => $sprints[1], 'status' => $status[3], 'estimate' => 5, 'position' => 3),
-            array('name' => 'Story 1D', 'project' => $projects[1], 'feature' => $features[1], 'sprint' => $sprints[1], 'status' => $status[3], 'estimate' => 2, 'position' => 4),
-            array('name' => 'Story 1E', 'project' => $projects[1], 'feature' => $features[1], 'sprint' => $sprints[2], 'status' => $status[3], 'estimate' => 8, 'position' => 1),
-            array('name' => 'Story 1F', 'project' => $projects[1], 'feature' => $features[1], 'sprint' => $sprints[2], 'status' => $status[3], 'estimate' => 13, 'position' => 2),
-            array('name' => 'Story 1G', 'project' => $projects[1], 'feature' => $features[1], 'sprint' => $sprints[2], 'status' => $status[3], 'estimate' => 2, 'position' => 3),
-            array('name' => 'Story 1H', 'project' => $projects[1], 'feature' => $features[1], 'sprint' => $sprints[2], 'status' => $status[2], 'estimate' => 8, 'position' => 4),
-            array('name' => 'Story 1I', 'project' => $projects[1], 'feature' => $features[1], 'sprint' => false, 'status' => $status[1], 'estimate' => 5, 'position' => 1),
+            array('name' => 'Story 1A', 'project' => $projects[1], 'type' => $storyType, 'feature' => $features[1], 'sprint' => $sprints[1], 'status' => $status[3], 'estimate' => 1, 'position' => 1),
+            array('name' => 'Story 1B', 'project' => $projects[1], 'type' => $storyType, 'feature' => $features[1], 'sprint' => $sprints[1], 'status' => $status[3], 'estimate' => 3, 'position' => 2),
+            array('name' => 'Story 1C', 'project' => $projects[1], 'type' => $storyType, 'feature' => $features[1], 'sprint' => $sprints[1], 'status' => $status[3], 'estimate' => 5, 'position' => 3),
+            array('name' => 'Story 1D', 'project' => $projects[1], 'type' => $storyType, 'feature' => $features[1], 'sprint' => $sprints[1], 'status' => $status[3], 'estimate' => 2, 'position' => 4),
+            array('name' => 'Story 1E', 'project' => $projects[1], 'type' => $storyType, 'feature' => $features[1], 'sprint' => $sprints[2], 'status' => $status[3], 'estimate' => 8, 'position' => 1),
+            array('name' => 'Story 1F', 'project' => $projects[1], 'type' => $storyType, 'feature' => $features[1], 'sprint' => $sprints[2], 'status' => $status[3], 'estimate' => 13, 'position' => 2),
+            array('name' => 'Story 1G', 'project' => $projects[1], 'type' => $storyType, 'feature' => $features[1], 'sprint' => $sprints[2], 'status' => $status[3], 'estimate' => 2, 'position' => 3),
+            array('name' => 'Story 1H', 'project' => $projects[1], 'type' => $storyType, 'feature' => $features[1], 'sprint' => $sprints[2], 'status' => $status[2], 'estimate' => 8, 'position' => 4),
+            array('name' => 'Story 1I', 'project' => $projects[1], 'type' => $storyType, 'feature' => $features[1], 'sprint' => false, 'status' => $status[1], 'estimate' => 5, 'position' => 1),
         );
      
         foreach ($entities as $entity) {
@@ -82,6 +85,7 @@ class LoadStoryData extends AbstractFixture implements OrderedFixtureInterface
             $entity->setSprint($params['sprint']);
         }
         $entity->setStatus($params['status']);
+        $entity->setType($params['type']);
         $entity->setName($params['name']);
         $entity->setDescription($params['name'] . ' description');
         $entity->setPosition($params['position']);
