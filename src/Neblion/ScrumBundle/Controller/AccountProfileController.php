@@ -175,6 +175,40 @@ class AccountProfileController extends Controller
             'form_account'      => $form_account->createView()
         );
     }
+    
+    /**
+     * Displays a form to edit username or email.
+     *
+     * @Route("/username-email", name="profile_username_email")
+     * @Template()
+     */
+    public function usernameEmailAction()
+    {
+        // Check if user is authorized
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw new AccessDeniedException();
+        }
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $account = $this->get('security.context')->getToken()->getUser();
+        $profile = $account->getProfile();
+        
+        // Check if the user has already a profile
+        if (!$profile) {
+            // Set flash message
+            $this->get('session')->setFlash('notice', 'You have not a profile, create it!');
+            return $this->redirect($this->generateUrl('profile_new'));
+        }
+        
+        $form   = $this->container->get('fos_user.profile.form');
+        $formHandler = $this->container->get('fos_user.profile.form.handler');
+        $process = $formHandler->process($account);
+
+        return array(
+            'form'      => $form->createView(),
+        );
+    }
 
     /**
      * Edits an existing Profile entity.

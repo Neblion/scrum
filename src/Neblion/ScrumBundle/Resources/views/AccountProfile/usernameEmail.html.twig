@@ -12,8 +12,8 @@
                 </div>
                 <div class="widget-content">
                     <ul class="nav nav-tabs nav-stacked">
-                        <li class="active"><a href="{{ path('profile_edit') }}">{{ 'Profile'|trans }}</a></li>
-                        <li><a href="{{ path('profile_username_email') }}">{{ 'Username and email'|trans }}</a></li>
+                        <li><a href="{{ path('profile_edit') }}">{{ 'Profile'|trans }}</a></li>
+                        <li class="active"><a href="{{ path('profile_username_email') }}">{{ 'Username and email'|trans }}</a></li>
                         <li><a href="#">{{ 'Password'|trans }}</a></li>
                     </ul>
                 </div>
@@ -24,10 +24,10 @@
             <div class="widget-box">
                 <div class="widget-title">
                     <span class="icon"><i class="icon-file"></i></span>
-                    <h5>{{ 'Profile'|trans }}</h5>
+                    <h5>{{ 'Username and email'|trans }}</h5>
                 </div>
                 <div class="widget-content">
-                    <form action="{{ path('profile_update') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                    <form action="{{ path('fos_user_profile_edit') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
                         {{ form_widget(form) }}
                         <div class="form-actions">
                             <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
