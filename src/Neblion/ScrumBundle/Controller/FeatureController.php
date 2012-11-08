@@ -336,7 +336,7 @@ class FeatureController extends Controller
                 // store activity            
                 $this->get('scrum_activity')->add($project, $user, 'delete feature ' . $feature->getName(), 
                     $this->generateUrl('feature_list', array('id' => $project->getId())),
-                    'Project #' . $feature->getId() . ' features');
+                    'Project #' . $project->getId() . ' features');
                 
                 $em->flush();
             }
