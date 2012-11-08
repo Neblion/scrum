@@ -416,4 +416,37 @@ class Project
     {
         return $this->stories;
     }
+
+    /**
+     * Add activities
+     *
+     * @param Neblion\ScrumBundle\Entity\Activity $activities
+     * @return Project
+     */
+    public function addActivitie(\Neblion\ScrumBundle\Entity\Activity $activities)
+    {
+        $this->activities[] = $activities;
+    
+        return $this;
+    }
+
+    /**
+     * Remove activities
+     *
+     * @param Neblion\ScrumBundle\Entity\Activity $activities
+     */
+    public function removeActivitie(\Neblion\ScrumBundle\Entity\Activity $activities)
+    {
+        $this->activities->removeElement($activities);
+    }
+
+    /**
+     * Get activities
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
 }

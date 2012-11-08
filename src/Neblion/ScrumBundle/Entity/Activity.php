@@ -3,6 +3,8 @@
 namespace Neblion\ScrumBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Neblion\ScrumBundle\Entity\Activity
@@ -53,6 +55,18 @@ class Activity
      * @ORM\Column(name="link_text", type="string", length=255)
      */
     private $link_text;
+    
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(name="created", type="datetime")
+     */
+    private $created;
+
+    /**
+     * @ORM\Column(name="updated", type="datetime")
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updated;
 
 
     /**
@@ -132,5 +146,97 @@ class Activity
     public function getLinkText()
     {
         return $this->link_text;
+    }
+
+    /**
+     * Set project
+     *
+     * @param Neblion\ScrumBundle\Entity\Project $project
+     * @return Activity
+     */
+    public function setProject(\Neblion\ScrumBundle\Entity\Project $project = null)
+    {
+        $this->project = $project;
+    
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return Neblion\ScrumBundle\Entity\Project 
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * Set account
+     *
+     * @param Neblion\ScrumBundle\Entity\Account $account
+     * @return Activity
+     */
+    public function setAccount(\Neblion\ScrumBundle\Entity\Account $account = null)
+    {
+        $this->account = $account;
+    
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return Neblion\ScrumBundle\Entity\Account 
+     */
+    public function getAccount()
+    {
+        return $this->account;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Activity
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     * @return Activity
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+    
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 }
