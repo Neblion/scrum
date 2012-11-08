@@ -147,91 +147,81 @@ class ProjectRepository extends EntityRepository
      */
     public function search($searchString)
     {
+        $filters = array();
         $filtersList = array('name', 'description', 'user',
             'productowner', 'scrumaster', 'developer', 'member'
         );
         
-        if (strstr($searchString, ':')) {
-            $spaces = explode(' ', $searchString);
-            $filters = array();
-            foreach ($spaces as $space) {
-                $filter = strstr($space, ':', true);
-                if (!empty($filter) and in_array($filter, $filtersList)) {
-                    $filters[$filter] = str_replace($filter . ':', '', $space);
+        if (!empty($searchString)) {
+            if (strstr($searchString, ':')) {
+                $spaces = explode(' ', $searchString);
+                foreach ($spaces as $space) {
+                    $filter = strstr($space, ':', true);
+                    if (!empty($filter) and in_array($filter, $filtersList)) {
+                        $filters[$filter] = str_replace($filter . ':', '', $space);
+                    }
                 }
+            } else {
+                $filters = array(
+                    'name'          => $searchString,
+                    'description'   => $searchString,
+                );
             }
-        } else {
-            $filters = array(
-                'name'          => $searchString,
-                'description'   => $searchString,
-            );
         }
         
-        /*
-        echo '<pre>';
-        print_r($filters);
-        echo '</pre>';
-        */
-        
         $search = '%' . $searchString . '%';
-        $where = false;
         $queryString = 'SELECT distinct p
                     FROM NeblionScrumBundle:Project p
                     INNER JOIN p.members m
                     INNER JOIN m.role r 
                     INNER JOIN m.account a
-                    INNER JOIN a.profile pr ';
+                    INNER JOIN a.profile pr 
+                    WHERE p.is_public = 1 ';
         
         if (!empty($filters)) {
             // Create query limitation
             foreach ($filters as $filterKey => $filterValue) {
-                if ($where) {
-                    $queryString .= 'AND ';
-                } else {
-                    $queryString .= 'WHERE ';
-                    $where = true;
-                }
                 switch ($filterKey) {
                     case 'name':
-                        $queryString .= 'p.name LIKE :name ';
+                        $queryString .= 'AND p.name LIKE :name ';
                         break;
                 
                     case 'description':
-                        $queryString .= 'p.description LIKE :description ';
+                        $queryString .= 'AND p.description LIKE :description ';
                         break;
                     
                     case 'user':
-                        $queryString .= 'a.username = :user ';
+                        $queryString .= 'AND a.username = :user ';
                         break;
                     
                     case 'productowner':
-                        $queryString .= "a.username = :productowner AND r.name = 'Product owner' ";
+                        $queryString .= "AND a.username = :productowner AND r.name = 'Product owner' ";
                         break;
                     
                     case 'scrumaster':
-                        $queryString .= "a.username = :scrumaster AND r.name = 'Scrumaster' ";
+                        $queryString .= "AND a.username = :scrumaster AND r.name = 'Scrumaster' ";
                         break;
                     
                     case 'developer':
-                        $queryString .= "a.username = :developer AND r.name = 'Developer' ";
+                        $queryString .= "AND a.username = :developer AND r.name = 'Developer' ";
                         break;
                     
                     case 'member':
-                        $queryString .= "a.username = :member AND r.name = 'Member' ";
+                        $queryString .= "AND a.username = :member AND r.name = 'Member' ";
                         break;
                 }
             }
-            $query = $this->getEntityManager()
-                ->createQuery($queryString);
-            // Add parameters values
-            foreach ($filters as $filterKey => $filterValue) {
-                if (in_array($filterKey, array('name', 'description'))) {
-                    $filterValue = '%' . $filterValue . '%'; 
-                }
-                $query->setParameter($filterKey, $filterValue);
-            }
-        
-            return $query;
         }
+        
+        $query = $this->getEntityManager()->createQuery($queryString);
+        // Add parameters values
+        foreach ($filters as $filterKey => $filterValue) {
+            if (in_array($filterKey, array('name', 'description'))) {
+                $filterValue = '%' . $filterValue . '%';
+            }
+            $query->setParameter($filterKey, $filterValue);
+        }
+
+        return $query;
     }
 }
