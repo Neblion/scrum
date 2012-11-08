@@ -148,6 +148,12 @@ class FeatureController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($feature);
+            
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'create feature ' . $feature->getName(), 
+                    $this->generateUrl('feature_list', array('id' => $project->getId())),
+                    'Project #' . $project->getId() . '  features');
+            
             $em->flush();
             
             $success = true;
@@ -257,6 +263,12 @@ class FeatureController extends Controller
 
         if ($editForm->isValid()) {
             $em->persist($feature);
+            
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'update feature', 
+                    $this->generateUrl('feature_edit', array('id' => $feature->getId())),
+                    'Feature #' . $feature->getId());
+            
             $em->flush();
 
             // Set flash message
@@ -320,6 +332,12 @@ class FeatureController extends Controller
 
             if ($form->isValid()) {
                 $em->remove($feature);
+                
+                // store activity            
+                $this->get('scrum_activity')->add($project, $user, 'delete feature ' . $feature->getName(), 
+                    $this->generateUrl('feature_list', array('id' => $project->getId())),
+                    'Project #' . $feature->getId() . ' features');
+                
                 $em->flush();
             }
 
