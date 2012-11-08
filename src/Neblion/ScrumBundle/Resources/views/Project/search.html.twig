@@ -43,7 +43,6 @@
                    <h5>{{ 'Search results'|trans }}</h5>
                </div>
                <div class="widget-content">
-                   {% if pager.haveToPaginate %}
                         <table>
                         {% for project in pager.getCurrentPageResults %}
                            <tr>
@@ -56,6 +55,7 @@
                             </tr>
                         {% endfor %}
                         </table>
+                   {% if pager.haveToPaginate %}
                         {{ pagerfanta(pager, 'twitter_bootstrap') }}
                    {% endif %}
                </div>

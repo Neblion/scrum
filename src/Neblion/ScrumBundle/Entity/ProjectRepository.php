@@ -164,13 +164,12 @@ class ProjectRepository extends EntityRepository
             } else {
                 $filters = array(
                     'name'          => $searchString,
-                    'description'   => $searchString,
                 );
             }
         }
         
         $search = '%' . $searchString . '%';
-        $queryString = 'SELECT distinct p
+        $queryString = 'SELECT p
                     FROM NeblionScrumBundle:Project p
                     INNER JOIN p.members m
                     INNER JOIN m.role r 
@@ -221,7 +220,6 @@ class ProjectRepository extends EntityRepository
             }
             $query->setParameter($filterKey, $filterValue);
         }
-
         return $query;
     }
 }

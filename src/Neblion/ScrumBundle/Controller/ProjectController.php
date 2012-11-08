@@ -554,19 +554,17 @@ class ProjectController extends Controller
     public function searchAction()
     {
         $request = $this->getRequest();
-        $projects = array();
         
         $em = $this->getDoctrine()->getEntityManager();
         $searchString = $request->query->get('query');
         $query = $em->getRepository('NeblionScrumBundle:Project')->search($searchString);
         $pager = new Pagerfanta(new DoctrineORMAdapter($query));
-        $page = $this->getRequest()->get('page', 1);
+        $page = $request->get('page', 1);
         $pager->setMaxPerPage(5);
         $pager->setCurrentPage($page);
         
         return array(
             'searchString'  => $searchString,
-            'projects'      => $projects,
             'pager'         => $pager,
         );
     }
