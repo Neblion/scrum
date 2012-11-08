@@ -204,6 +204,11 @@ class AccountProfileController extends Controller
         $form   = $this->container->get('fos_user.profile.form');
         $formHandler = $this->container->get('fos_user.profile.form.handler');
         $process = $formHandler->process($account);
+        if ($process) {
+            // set flash message and redirect
+            $this->get('session')->setFlash('success', 'Username and/or email was updated with success !');
+            return $this->redirect($this->generateUrl('profile_username_email'));
+        }
 
         return array(
             'form'      => $form->createView(),

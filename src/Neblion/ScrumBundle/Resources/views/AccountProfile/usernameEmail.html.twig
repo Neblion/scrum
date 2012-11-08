@@ -27,7 +27,7 @@
                     <h5>{{ 'Username and email'|trans }}</h5>
                 </div>
                 <div class="widget-content">
-                    <form action="{{ path('fos_user_profile_edit') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                    <form action="{{ path('profile_username_email') }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
                         {{ form_widget(form) }}
                         <div class="form-actions">
                             <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
