@@ -172,6 +172,12 @@ class ProjectReleaseController extends Controller
 
         if ($form->isValid()) {
             $em->persist($release);
+            
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'create release ' . $release->getName(), 
+                    $this->generateUrl('release_list', array('id' => $project->getId())),
+                    'Project #' . $project->getId() . '  releases');
+            
             $em->flush();
 
             // Set flash message
@@ -270,6 +276,11 @@ class ProjectReleaseController extends Controller
                 $release->setEnd(new \DateTime());
             }
             
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'update release', 
+                    $this->generateUrl('release_edit', array('id' => $release->getId())),
+                    'Release #' . $release->getId());
+            
             $em->flush();
 
             // Set flash message
@@ -331,6 +342,12 @@ class ProjectReleaseController extends Controller
 
             if ($form->isValid()) {
                 $em->remove($release);
+                
+                // store activity            
+                $this->get('scrum_activity')->add($project, $user, 'delete release ' . $release->getName(), 
+                    $this->generateUrl('release_list', array('id' => $project->getId())),
+                    'Project #' . $project->getId() . ' releases');
+                
                 $em->flush();
                 
                 // Set flash message
