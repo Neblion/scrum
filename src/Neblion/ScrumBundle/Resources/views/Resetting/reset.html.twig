@@ -1,5 +1,34 @@
 {% extends "::base.html.twig" %}
 
-{% block fos_user_content %}
-{% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
-{% endblock fos_user_content %}
+{% block body %}
+    <div class="row">
+        <div class="span3">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Resetting request'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    
+                </div>
+            </div>
+        </div><!--/span-->
+
+        <div class="span9">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Resetting request'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+                        {{ form_widget(form) }}
+                        <div>
+                            <input type="submit" value="{{ 'resetting.reset.submit'|trans({}, 'FOSUserBundle') }}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
