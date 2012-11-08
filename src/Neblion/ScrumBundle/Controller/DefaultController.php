@@ -10,6 +10,8 @@ use Symfony\Component\Form\FormError;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
+use Symfony\Component\Validator\Constraints\Email;
+
 class DefaultController extends Controller
 {
     
@@ -25,11 +27,21 @@ class DefaultController extends Controller
             // Check if the user has a profile, if not redirect to profile_new
             $user = $this->get('security.context')->getToken()->getUser();
             $em = $this->getDoctrine()->getEntityManager();
+            
             // Check if user has a profile
             if (!$user->getProfile()) {
                 return $this->redirect($this->generateUrl('profile_new'));
             }
             
+            // Check if username of user is an email
+            $emailConstraint = new Email();
+            // use the validator to validate the value
+            $errorList = $this->get('validator')->validateValue($user->getUsername(), $emailConstraint);
+            if (count($errorList) == 0) {
+                // Set flash message
+                $this->get('session')->setFlash('notice', 'You should change your username, username should not be an email !');
+                return $this->redirect($this->generateUrl('profile_username_email'));
+            }
             
             return $this->forward('NeblionScrumBundle:Project:projects');
         }
