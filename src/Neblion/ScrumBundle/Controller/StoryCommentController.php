@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Neblion\ScrumBundle\Entity\StoryComment;
+use Neblion\ScrumBundle\Entity\Activity;
 use Neblion\ScrumBundle\Form\StoryCommentType;
 
 use Doctrine\ORM\Query;
@@ -80,6 +81,12 @@ class StoryCommentController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
+            
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'add comment on', 
+                    $this->generateUrl('story_edit', array('id' => $story->getId())),
+                    'Story #' . $story->getId());
+            
             $em->flush();
 
             return $this->redirect($this->generateUrl('story_edit', array('id' => $story->getId())));
