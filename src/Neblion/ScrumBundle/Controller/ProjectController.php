@@ -314,6 +314,13 @@ class ProjectController extends Controller
             $feature->setColor('#ffffff');
             $em->persist($feature);
             
+            if ($entity->getIsPublic()) {
+                // store activity            
+                $this->get('scrum_activity')->add($entity, $user, 'create project ' . $entity->getName(), 
+                    $this->generateUrl('project_search') . '?query=' . $entity->getName(),
+                    'Project ' . $entity->getName());
+            }
+            
             $em->flush();
 
             // Set flash message
@@ -368,6 +375,8 @@ class ProjectController extends Controller
             throw new AccessDeniedException();
         }
         
+        $user = $this->get('security.context')->getToken()->getUser();
+        
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -381,6 +390,12 @@ class ProjectController extends Controller
 
         if ($editForm->isValid()) {
             $em->persist($entity);
+            
+            // store activity            
+            $this->get('scrum_activity')->add($entity, $user, 'update project ' . $entity->getName(), 
+                    $this->generateUrl('project_dashboard', array('id' => $entity->getId())), 
+                    'Project #' . $entity->getId());
+            
             $em->flush();
 
             // Set flash message
@@ -446,6 +461,12 @@ class ProjectController extends Controller
 
             if ($form->isValid()) {
                 $em->remove($project);
+                
+                // store activity            
+                $this->get('scrum_activity')->add($project, $user, 'remove project', 
+                    $this->generateUrl('project_search'), 
+                    'Project #' . $project->getId() . ' ' . $project->getName());
+                
                 $em->flush();
         
                 // Set flash message

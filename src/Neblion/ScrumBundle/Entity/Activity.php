@@ -25,7 +25,7 @@ class Activity
     
     /**
      * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\Project", inversedBy="activities")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", nullable=true)
      */
     private $project;
     

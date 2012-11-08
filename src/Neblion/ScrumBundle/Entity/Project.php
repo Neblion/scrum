@@ -29,7 +29,7 @@ class Project
     private $members;
     
     /**
-     * @ORM\OneToMany(targetEntity="Neblion\ScrumBundle\Entity\Activity", mappedBy="project", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Neblion\ScrumBundle\Entity\Activity", mappedBy="project")
      */
     private $activities;
     
