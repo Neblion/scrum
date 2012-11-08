@@ -1,5 +1,29 @@
 {% extends '::base.html.twig' %}
 
-{% block fos_user_content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
-{% endblock fos_user_content %}
+{% block body %}
+    <div class="row">
+        <div class="span5">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Register'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    
+                </div>
+            </div>
+        </div><!--/span-->
+
+        <div class="span7">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Register'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    <p>{{ 'registration.check_email'|trans({'%email%': user.email}, 'FOSUserBundle') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
