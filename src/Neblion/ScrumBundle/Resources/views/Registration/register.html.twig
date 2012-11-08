@@ -1,9 +1,34 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <div id="login">
-        <div id="block-login">
-            {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+    <div class="row">
+        <div class="span5">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Register'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    
+                </div>
+            </div>
+        </div><!--/span-->
+
+        <div class="span7">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Register'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register well">
+                        {{ form_widget(form) }}
+                        <div>
+                            <input type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock body %}
