@@ -35,6 +35,11 @@ class Account extends BaseUser
     private $members;
     
     /**
+     * @ORM\OneToMany(targetEntity="Neblion\ScrumBundle\Entity\Activity", mappedBy="account")
+     */
+    private $activities;
+    
+    /**
      * @ORM\OneToMany(targetEntity="Neblion\ScrumBundle\Entity\Member", mappedBy="sender")
      */
     private $invitations;
