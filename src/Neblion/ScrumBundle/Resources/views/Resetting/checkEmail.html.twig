@@ -1,7 +1,31 @@
 {% extends "::base.html.twig" %}
 
-{% block fos_user_content %}
-<p>
-{{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}
-</p>
+{% block body %}
+    <div class="row">
+        <div class="span3">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Resetting request'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    
+                </div>
+            </div>
+        </div><!--/span-->
+
+        <div class="span9">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-file"></i></span>
+                    <h5>{{ 'Resetting request'|trans }}</h5>
+                </div>
+                <div class="widget-content">
+                    <p>{{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 {% endblock %}
