@@ -462,11 +462,13 @@ class ProjectController extends Controller
             if ($form->isValid()) {
                 $em->remove($project);
                 
+                /*
                 // store activity            
                 $this->get('scrum_activity')->add($project, $user, 'remove project', 
                     $this->generateUrl('project_search'), 
                     'Project #' . $project->getId() . ' ' . $project->getName());
-                
+                */
+
                 $em->flush();
         
                 // Set flash message
