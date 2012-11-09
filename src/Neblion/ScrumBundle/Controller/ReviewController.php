@@ -118,6 +118,11 @@ class ReviewController extends Controller
             $em->persist($review);
             $story->setReview($review);
             
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'create review', 
+                    $this->generateUrl('review_list', array('id' => $story->getId())), 
+                    'Story #' . $story->getId());
+            
             $em->flush();
 
             // Set flash message
@@ -210,6 +215,12 @@ class ReviewController extends Controller
 
         if ($editForm->isValid()) {
             $em->persist($review);
+            
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'update review', 
+                    $this->generateUrl('review_list', array('id' => $story->getId())), 
+                    'Story #' . $story->getId());
+            
             $em->flush();
             
             // Set flash message
