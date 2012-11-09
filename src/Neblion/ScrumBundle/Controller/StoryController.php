@@ -117,6 +117,12 @@ class StoryController extends Controller
             $story->setPosition($position + 1);
             $story->setStatus($status);
             $em->persist($story);
+            
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'create story', 
+                    $this->generateUrl('project_backlog'), 
+                    'Project #' . $project->getId() . ' ' . $story->getName());
+            
             $em->flush();
             
             $success = true;
@@ -228,6 +234,12 @@ class StoryController extends Controller
 
         if ($editForm->isValid()) {
             $em->persist($story);
+            
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'update story', 
+                    $this->generateUrl('story_edit'), 
+                    'Story #' . $story->getId());
+            
             $em->flush();
             
             // Set flash message
@@ -285,6 +297,12 @@ class StoryController extends Controller
 
             if ($form->isValid()) {
                 $em->persist($story);
+                
+                // store activity            
+                $this->get('scrum_activity')->add($project, $user, 'estimate story', 
+                    $this->generateUrl('story_edit'), 
+                    'Story #' . $story->getId());
+                
                 $em->flush();
                 
                 $success = true;
@@ -364,6 +382,12 @@ class StoryController extends Controller
 
             if ($form->isValid()) {
                 $em->remove($story);
+                
+                // store activity            
+                $this->get('scrum_activity')->add($project, $user, 'delete story', 
+                    $this->generateUrl('project_backlog'), 
+                    'Story #' . $story->getId());
+                
                 $em->flush();
             }
 
