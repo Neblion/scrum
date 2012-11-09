@@ -277,7 +277,7 @@ class ProjectReleaseController extends Controller
             }
             
             // store activity            
-            $this->get('scrum_activity')->add($project, $user, 'update release', 
+            $this->get('scrum_activity')->add($release->getProject(), $user, 'update release', 
                     $this->generateUrl('release_edit', array('id' => $release->getId())),
                     'Release #' . $release->getId());
             
@@ -344,9 +344,9 @@ class ProjectReleaseController extends Controller
                 $em->remove($release);
                 
                 // store activity            
-                $this->get('scrum_activity')->add($project, $user, 'delete release ' . $release->getName(), 
-                    $this->generateUrl('release_list', array('id' => $project->getId())),
-                    'Project #' . $project->getId() . ' releases');
+                $this->get('scrum_activity')->add($release->getProject(), $user, 'delete release ' . $release->getName(), 
+                    $this->generateUrl('release_list', array('id' => $release->getProject()->getId())),
+                    'Project #' . $release->getProject()->getId() . ' releases');
                 
                 $em->flush();
                 
