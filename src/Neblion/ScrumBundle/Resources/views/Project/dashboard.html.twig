@@ -62,11 +62,11 @@
                </div>
                <div class="widget-content">
                    {% for activity in activities %}
-                       <p><span class="activity-date">{{ activity.created|date('d/m/Y H:i') }}</span> <span class="activity-account">{{ activity.account.profile.firstname }} {{ activity.account.profile.lastname }}</span> {{ activity.text }} <a href="{{ activity.link_url }}">{{ activity.link_text }}</a></p>
+                       {% include 'NeblionScrumBundle:Activity:project-activity-partial.html.twig' with { 'activity': activity } %}
                    {% else %}
                        <p>{{ 'No activity'|trans }}</p>
                    {% endfor %}
-                   <p><a href="#">{{ 'More activities'|trans }}</a></p>
+                   <p><a href="{{ path('project_activity', { 'id': project.id }) }}">{{ 'More activities'|trans }}</a></p>
                </div>
            </div>
        </div>

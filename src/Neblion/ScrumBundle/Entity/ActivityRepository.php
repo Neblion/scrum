@@ -28,7 +28,7 @@ class ActivityRepository extends EntityRepository
             return $query;
         }
 
-        return $query->setMaxResults($max)->getArrayResult();
+        return $query->setMaxResults($max)->getResult();
     }
     
     public function loadForAccount(\Neblion\ScrumBundle\Entity\Account $account, $returnQuery = false, $max = 8)

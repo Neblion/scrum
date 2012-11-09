@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {% stylesheets 
+        '%kernel.root_dir%/../vendor/cleonello/jqplot/jquery.jqplot.min.css' 
+    %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock stylesheets %}
+
+{% block body %}
+    <div class="row">
+       {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'activity'} %}
+    </div>
+
+    <div class="row">
+       <div class="span4">
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Project description'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   <p>{{ project.description }}</p>
+               </div>
+           </div>
+       </div>
+            
+       <div class="span8">
+           <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Activities'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                   {% for activity in pager.getCurrentPageResults %}
+                       {% include 'NeblionScrumBundle:Activity:project-activity-partial.html.twig' with { 'activity': activity } %}
+                   {% else %}
+                       <p>{{ 'No activity'|trans }}</p>
+                   {% endfor %}
+                       
+                   {% if pager.haveToPaginate %}
+                        {{ pagerfanta(pager, 'twitter_bootstrap') }}
+                   {% endif %}
+               </div>
+           </div>
+       </div>
+    </div><!--/row-->
+{% endblock body %}
+
+

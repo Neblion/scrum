@@ -601,4 +601,49 @@ class ProjectController extends Controller
             'pager'         => $pager,
         );
     }
+    
+    /**
+     * @Route("/{id}/activity", name="project_activity")
+     * @Template()
+     */
+    public function activityAction($id)
+    {
+        // Check if user is authorized
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw new AccessDeniedException();
+        }
+        
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        // Load project
+        $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
+        if (!$project) {
+            throw $this->createNotFoundException('Unable to find Project entity.');
+        }
+        
+        if (!$project->getIsPublic()) {
+            // Check if user is really a member of this project
+            $member = $em->getRepository('NeblionScrumBundle:Member')
+                    ->isMemberOfProject($user->getId(), $project->getId());
+            if (!$member) {
+                throw new AccessDeniedException();
+            }
+        }
+        
+        $request = $this->getRequest();
+        
+        $query = $em->getRepository('NeblionScrumBundle:Activity')
+                ->loadForProject($project, true);
+        $pager = new Pagerfanta(new DoctrineORMAdapter($query));
+        $page = $request->get('page', 1);
+        $pager->setMaxPerPage(10);
+        $pager->setCurrentPage($page);
+        
+        return array(
+            'project'   => $project,
+            'pager'     => $pager,
+        );
+    }
 }
