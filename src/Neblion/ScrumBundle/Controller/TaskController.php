@@ -162,6 +162,11 @@ class TaskController extends Controller
                 $story->setStatus($status);
             }
             
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'create task', 
+                    $this->generateUrl('sprint_show', array('id' => $sprint->getId())), 
+                    'Sprint #' . $sprint->getId() . ' ' . $task->getName());
+            
             $em->flush();
 
             $success = true;
@@ -341,6 +346,11 @@ class TaskController extends Controller
                 $status = $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(2);
                 $storyless->setStatus($status);
             }
+            
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'create storyless task', 
+                    $this->generateUrl('sprint_show', array('id' => $sprint->getId())), 
+                    'Sprint #' . $sprint->getId() . ' ' . $task->getName());
             
             $em->flush();
 
@@ -523,6 +533,11 @@ class TaskController extends Controller
                 }
             }
             
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'update task', 
+                    $this->generateUrl('task_edit', array('id' => $task->getId())), 
+                    'Task #' . $task->getId());
+            
             $em->flush();
 
             // Set flash message
@@ -652,6 +667,11 @@ class TaskController extends Controller
                     }
                 }
                 
+                // store activity            
+                $this->get('scrum_activity')->add($project, $user, 'update task\'hours', 
+                    $this->generateUrl('task_edit', array('id' => $task->getId())), 
+                    'Task #' . $task->getId());
+                
                 $em->flush();
                 
                 $success = true;
@@ -768,6 +788,12 @@ class TaskController extends Controller
         // When take a task, task automatically become in progress
         $task->setStatus($status);
         $task->setMember($member);
+        
+        // store activity            
+        $this->get('scrum_activity')->add($project, $user, 'take task', 
+                    $this->generateUrl('task_edit', array('id' => $task->getId())), 
+                    'Task #' . $task->getId());
+        
         $em->flush();
 
         // Set flash message
@@ -864,6 +890,11 @@ class TaskController extends Controller
             $story->setStatus($status);
         }
         
+        // store activity            
+        $this->get('scrum_activity')->add($project, $user, 'set task in progress', 
+                    $this->generateUrl('task_edit', array('id' => $task->getId())), 
+                    'Task #' . $task->getId());
+        
         $em->flush();
 
         // Set flash message
@@ -959,6 +990,11 @@ class TaskController extends Controller
             $story->setStatus($status);
         }
         
+        // store activity            
+        $this->get('scrum_activity')->add($project, $user, 'set task done', 
+                    $this->generateUrl('task_edit', array('id' => $task->getId())), 
+                    'Task #' . $task->getId());
+        
         $em->flush();
 
         // Set flash message
@@ -1039,6 +1075,11 @@ class TaskController extends Controller
                 }
                 
                 $em->remove($task);
+                
+                // store activity            
+                $this->get('scrum_activity')->add($project, $user, 'delete task', 
+                    $this->generateUrl('sprint_show', array('id' => $task->getId())), 
+                    'Task #' . $task->getId());
                 
                 $em->flush();
             }
