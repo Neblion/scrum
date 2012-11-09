@@ -124,6 +124,12 @@ class RetrospectiveController extends Controller
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($retrospective);
+            
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'create retrospective', 
+                    $this->generateUrl('retrospective_list', array('id' => $story->getId())), 
+                    'Story #' . $story->getId());
+            
             $em->flush();
 
             // Set flash message
@@ -221,6 +227,12 @@ class RetrospectiveController extends Controller
 
         if ($editForm->isValid()) {
             $em->persist($retrospective);
+            
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'update retrospective', 
+                    $this->generateUrl('retrospective_list', array('id' => $story->getId())), 
+                    'Story #' . $story->getId());
+            
             $em->flush();
 
             // Set flash message
