@@ -371,6 +371,11 @@ class SprintController extends Controller
                 $position++;
             }
             
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'create sprint', 
+                    $this->generateUrl('sprint_list'), 
+                    'Project #' . $project->getId() . ' ' . $sprint->getName());
+            
             $em->flush();
 
             // Set flash message
@@ -475,8 +480,13 @@ class SprintController extends Controller
         }
         
         if ($editForm->isValid()) {
-            
             $em->persist($sprint);
+            
+            // store activity            
+            $this->get('scrum_activity')->add($project, $user, 'update sprint', 
+                    $this->generateUrl('sprint_show'), 
+                    'Sprint #' . $sprint->getId());
+            
             $em->flush();
 
             // Set flash message
@@ -563,6 +573,11 @@ class SprintController extends Controller
         $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(2);
         $sprint->setStatus($status);
         
+        // store activity            
+        $this->get('scrum_activity')->add($project, $user, 'start sprint', 
+                    $this->generateUrl('sprint_show'), 
+                    'Sprint #' . $sprint->getId());
+        
         $em->flush();
         
         // Set flash message
@@ -644,6 +659,11 @@ class SprintController extends Controller
                 $sprint->setVelocity($velocity);
                 $sprint->setStatus($status);
                 
+                // store activity            
+                $this->get('scrum_activity')->add($project, $user, 'close sprint', 
+                    $this->generateUrl('sprint_show'), 
+                    'Sprint #' . $sprint->getId());
+                
                 $em->flush();
             }
 
@@ -704,11 +724,6 @@ class SprintController extends Controller
             }
         }
         
-        /*
-        echo '<pre>';
-        print_r($backlog);
-        echo '</pre>';
-         */      
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -736,8 +751,13 @@ class SprintController extends Controller
                     
                     
                 }
-                //echo 'stories: ' . $stories;
                 $em->remove($sprint);
+                
+                // store activity            
+                $this->get('scrum_activity')->add($project, $user, 'delete sprint', 
+                    $this->generateUrl('sprint_list'), 
+                    'Sprint #' . $sprint->getId());
+                
                 $em->flush();
             }
 
