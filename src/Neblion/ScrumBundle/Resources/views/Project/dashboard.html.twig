@@ -61,7 +61,12 @@
                    <h5>{{ 'Latest activities'|trans }}</h5>
                </div>
                <div class="widget-content">
-                   <p></p>
+                   {% for activity in activities %}
+                       <p><span class="activity-date">{{ activity.created|date('d/m/Y H:i') }}</span> <span class="activity-account">{{ activity.account.profile.firstname }} {{ activity.account.profile.lastname }}</span> {{ activity.text }} <a href="{{ activity.link_url }}">{{ activity.link_text }}</a></p>
+                   {% else %}
+                       <p>{{ 'No activity'|trans }}</p>
+                   {% endfor %}
+                   <p><a href="#">{{ 'More activities'|trans }}</a></p>
                </div>
            </div>
        </div>

@@ -12,4 +12,36 @@ use Doctrine\ORM\EntityRepository;
  */
 class ActivityRepository extends EntityRepository
 {
+    public function loadForProject(\Neblion\ScrumBundle\Entity\Project $project, $returnQuery = false, $max = 8)
+    {
+        $query = $this->getEntityManager()->createQuery(
+                'SELECT a, p, ac, pr 
+                    FROM NeblionScrumBundle:Activity a
+                    INNER JOIN a.project p
+                    INNER JOIN a.account ac
+                    INNER JOIN ac.profile pr
+                    WHERE p.id = :project_id
+                    ORDER BY a.created DESC')
+                ->setParameter('project_id', $project->getId());
+        
+        if ($returnQuery) {
+            return $query;
+        }
+
+        return $query->setMaxResults($max)->getArrayResult();
+    }
+    
+    public function loadForAccount(\Neblion\ScrumBundle\Entity\Account $account, $returnQuery = false, $max = 8)
+    {
+        return $this->getEntityManager()->createQuery(
+                'SELECT a, p, ac, pr 
+                    FROM NeblionScrumBundle:Activity a
+                    INNER JOIN a.project p
+                    INNER JOIN a.account ac
+                    INNER JOIN ac.profile pr
+                    WHERE ac.id = :account_id
+                    ORDER BY a.created DESC')
+                ->setParameter('account_id', $account->getId())
+                ->getArrayResult();;
+    }
 }

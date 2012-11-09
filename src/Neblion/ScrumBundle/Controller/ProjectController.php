@@ -228,12 +228,22 @@ class ProjectController extends Controller
             $strXTicks .= '[' . $value . ',\'' . $label . '\']';
         }
         
+        // Load activities
+        $activities = $em->getRepository('NeblionScrumBundle:Activity')
+                ->loadForProject($project);
+        /*
+        echo '<pre>';
+        print_r($activities);
+        echo '</pre>';
+        */
+        
         return array(
             'project'       => $project,
             //'currentSprint' => $currentSprint,
             'strDone'   => $strDone,
             'strTotal'   => $strTotal,
             'strXTicks' => $strXTicks,
+            'activities' => $activities,
         );
     }
 
