@@ -2,6 +2,7 @@ Neblion/Scrum Symfony scrum app
 ===============================
 
 Neblion/Scrum is a Symfony 2 scrum app.
+Working in progress, no stable release yet.....
 
 [![Build Status](https://secure.travis-ci.org/Neblion/scrum.png)](http://travis-ci.org/Neblion/scrum)
 
@@ -61,6 +62,7 @@ scrum@neblion.net
 Tests
 -----
     phpunit -c app
+    Continuous Integration On Travis-ci Platform...[![Build Status](https://secure.travis-ci.org/Neblion/scrum.png)](http://travis-ci.org/Neblion/scrum)
 
 License
 -------
