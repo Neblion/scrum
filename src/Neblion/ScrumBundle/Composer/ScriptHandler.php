@@ -41,7 +41,7 @@ class ScriptHandler
     public static function CopyImgJqueryUIToWebCss($event)
     {
         if (!is_dir('web/css/images')) {
-            mkdir('web/css/images');
+            mkdir('web/css/images', 0777, true);
         }
         
         foreach (glob('src/Neblion/ScrumBundle/Resources/public/css/ui-lightness/images/*') as $file) {
