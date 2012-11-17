@@ -84,6 +84,8 @@
     ],
     "scripts": {
         "post-install-cmd": [
+            "Neblion\\ScrumBundle\\Composer\\ScriptHandler::CopyImgTwitterBootstrapToWebImg",
+            "Neblion\\ScrumBundle\\Composer\\ScriptHandler::CopyImgJqueryUIToWebCss",
             "Neblion\\ScrumBundle\\Composer\\ScriptHandler::installParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
