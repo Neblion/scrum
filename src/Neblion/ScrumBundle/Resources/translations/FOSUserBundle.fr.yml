@@ -9,13 +9,13 @@ registration.check_email: 'Un e-mail a été envoyé à l''adresse %email%. Il c
 registration.submit: Enregistrer
 registration.confirmed: 'Félicitations %username%, votre compte est maintenant activé.'
 registration.back: 'Retour à la page d''origine.'
-resetting.request.invalid_username: 'Le nom d''utilisateur ou l''adresse e-mail "%username%" n''existe pas.'
-resetting.request.username: 'Nom d''utilisateur ou adresse e-mail :'
-resetting.request.submit: 'Réinitialiser le mot de passe'
 resetting.email.subject: 'Réinitialisation de votre mot de passe'
 resetting.email.message: "Bonjour %username% !\n\nPour réinitialiser votre mot de passe, merci de vous rendre sur %confirmationUrl%\n\nCordialement,\nL'équipe.\n"
 resetting.check_email: 'Un e-mail a été envoyé à l''adresse %email%. Il contient un lien sur lequel il vous faudra cliquer afin de réinitialiser votre mot de passe.'
 resetting.password_already_requested: 'Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.'
+resetting.request.invalid_username: 'Le nom d''utilisateur ou l''adresse e-mail "%username%" n''existe pas.'
+resetting.request.username: 'Nom d''utilisateur ou adresse e-mail :'
+resetting.request.submit: 'Réinitialiser le mot de passe'
 resetting.reset.submit: 'Modifier le mot de passe'
 'Bad credentials': 'Nom d''utilisateur ou mot de passe incorrect'
 group.edit.submit: 'Mettre à jour le groupe'

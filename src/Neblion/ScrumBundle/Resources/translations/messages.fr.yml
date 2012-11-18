@@ -1,3 +1,6 @@
+Profile: Profil
+'Username and email': '__Username and email'
+'Change password': 'Changer votre mot de passe'
 Description: Description
 Hours: Heures
 'Set Done': Fait
@@ -7,10 +10,11 @@ Take: Prendre
 Delete: Supprimer
 'Create a new task': 'Créer une nouvelle tâche'
 Create: Créer
-Success!: __Success!
-'': __
+'Task was created with success!': '__Task was created with success!'
 Close: Fermer
 'Save changes': 'Enregistrer les modifications'
+Success!: __Success!
+'': __
 'Task hours remaining edition': 'Edition des heures restantes'
 Success: Succès
 Done: Fait
@@ -32,6 +36,8 @@ Velocity: Vélocité
 'Estimate stories by clicking ....': '__Estimate stories by clicking ....'
 'Save story sort order': '__Save story sort order'
 'Latest activities': 'Activités récentes'
+'No activity': 'Aucune activité'
+'More activities': '__More activities'
 Reports: Rapports
 'Project edition': 'Edition d''un projet'
 'Search help': '__Search help'
@@ -39,10 +45,11 @@ Search: __Search
 'Search projects': 'Recherche de projets'
 'Search results': 'Résultats de la recherche'
 'No result': 'Aucun résultat'
-'Project deletion': "Suppression d'un projet"
+'Project deletion': 'Suppression d''un projet'
 'Do you really want to remove this project': 'Voulez-vous vraiment supprimer ce projet'
 'If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !': 'En confirmant, tous les éléments liés à ce projet (sprint, stories, tâches, ...) seront définitivement supprimés !'
 'Delete this project': 'Supprimer ce projet'
+Activities: __Activities
 'Next Sprint': 'Prochain sprint'
 Release: Release
 Duration: Durée
@@ -74,7 +81,6 @@ Invit: Inviter
 'Do you really want to remove this member': 'Voulez-vous vraiment retirer ce membre'
 Contact: Contact
 'Edit profile': 'Editer votre profil'
-'Change password': 'Changer votre mot de passe'
 'Sign Out': Déconnexion
 'Sprint %name%': 'Sprint %name%'
 Edition: Edition
@@ -90,10 +96,11 @@ Team: Equipe
 Deletion: Suppression
 Dashboard: 'Tableau de bord'
 Sprints: Sprints
+Activity: Activité
 Admin: Admin
 'Release description': 'Description de la release'
 'Sprint description': 'Description du sprint'
-'Review creation': "Création d'une revue"
+'Review creation': 'Création d''une revue'
 'Story description': 'Description de la story'
 Effort: Effort
 'Not done': 'Non terminé'
@@ -111,6 +118,7 @@ Hello: __Hello
 'We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.': '__We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.'
 'In order to confirm your invitation, please login on NeblionScrum and accept invitation.': '__In order to confirm your invitation, please login on NeblionScrum and accept invitation.'
 'Sign in': Connexion
+'Forgot your password ?': '__Forgot your password ?'
 'Sprint creation:': 'Création d''un sprint:'
 'Current Release': 'Release courante'
 Stories: Stories
@@ -132,7 +140,7 @@ View: Voir
 'No sprint': 'Pas de sprint'
 'Sprint edition': 'Edition d''un sprint'
 'Do you really want to delete this sprint: %sprint% ?': 'Voulez-vous vraiment supprimer ce sprint: %sprint% ?'
-'Release creation': "Création d'une release"
+'Release creation': 'Création d''une release'
 'Releases list': 'Liste des releases'
 'No release': 'Pas de release'
 'New release': 'Nouvelle release'
@@ -144,13 +152,13 @@ View: Voir
 Register: Enregistrez-vous
 'Sprint retrospective:': 'Retrospective de sprint:'
 'Sprint retro:': '__Sprint retro:'
+'Resetting request': '__Resetting request'
 'Profile creation:': 'Création d''un profil'
-'Profile edition:': 'Edition d''un profil'
 Feature: Fonctionnalité
 'Story estimate': 'Estimation de la story'
 'Add task': 'Ajouter une tâche'
 'Create a new story': 'Creér une nouvelle story'
-'Story estimate edition': 'Edition de l''estimation de la story'
+'Story estimate edition:': '__Story estimate edition:'
 'Estimate was updated with success!': 'L''estimation a été mise à jour avec succès !'
 Informations: Informations
 'Story edition': 'Edition d''une story'
@@ -166,6 +174,8 @@ Comments: __Comments
 'Feature edition': 'Edition d''une fonctionnalité'
 'Feature deletion': 'Suppression d''une fonctionnalité'
 'Do you really want to delete this feature: %feature% ?': 'Voulez-vous vraiment supprimer cette fonctionnalité: %feature% ?'
+'Profile edition:': 'Edition d''un profil'
+'Story estimate edition': 'Edition de l''estimation de la story'
 'Review creation:': 'Création d''une revue:'
 'Sprint review:': 'Revue de sprint:'
 'hours remaining': 'heures restantes'
