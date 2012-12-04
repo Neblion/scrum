@@ -1,5 +1,5 @@
 Profile: Profil
-'Username and email': '__Username and email'
+'Username and email': 'Nom d''utilisateur et email'
 'Change password': 'Changer votre mot de passe'
 Description: Description
 Hours: Heures
@@ -10,13 +10,12 @@ Take: Prendre
 Delete: Supprimer
 'Create a new task': 'Créer une nouvelle tâche'
 Create: Créer
-'Task was created with success!': '__Task was created with success!'
+'Task was created with success!': 'La tâche a été créé avec succès !'
 Close: Fermer
 'Save changes': 'Enregistrer les modifications'
-Success!: __Success!
-'': __
+'Storyless task was created with success !': 'La tâche storyless a été créé avec succès !'
 'Task hours remaining edition': 'Edition des heures restantes'
-Success: Succès
+'Remaining hours was updated with success !': '__Remaining hours was updated with success !'
 Done: Fait
 Cancel: Annuler
 Edit: Editer
@@ -32,16 +31,16 @@ Help: Aide
 Velocity: Vélocité
 'Current average velocity is': 'La vélocité moyenne courante est de'
 'Add a story': 'Ajouter une story'
-'Priorize stories with drag''n drop.': '__Priorize stories with drag''n drop.'
+'Priorize stories with drag''n drop.': 'Ordonner les stories en utilisant le glisser/déposer.'
 'Estimate stories by clicking ....': '__Estimate stories by clicking ....'
 'Save story sort order': '__Save story sort order'
 'Latest activities': 'Activités récentes'
 'No activity': 'Aucune activité'
-'More activities': '__More activities'
+'More activities': 'Voir plus d''activités'
 Reports: Rapports
 'Project edition': 'Edition d''un projet'
 'Search help': '__Search help'
-Search: __Search
+Search: Recherche
 'Search projects': 'Recherche de projets'
 'Search results': 'Résultats de la recherche'
 'No result': 'Aucun résultat'
@@ -49,7 +48,7 @@ Search: __Search
 'Do you really want to remove this project': 'Voulez-vous vraiment supprimer ce projet'
 'If you confirm, the project and all items (sprint, stories, tasks, ...) associated to it will be finally remove !': 'En confirmant, tous les éléments liés à ce projet (sprint, stories, tâches, ...) seront définitivement supprimés !'
 'Delete this project': 'Supprimer ce projet'
-Activities: __Activities
+Activities: Activités
 'Next Sprint': 'Prochain sprint'
 Release: Release
 Duration: Durée
@@ -118,7 +117,7 @@ Hello: __Hello
 'We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.': '__We would value your feedback as a Neblion Scrum user and would appreciate any comments, so please do hesitate to get back to us.'
 'In order to confirm your invitation, please login on NeblionScrum and accept invitation.': '__In order to confirm your invitation, please login on NeblionScrum and accept invitation.'
 'Sign in': Connexion
-'Forgot your password ?': '__Forgot your password ?'
+'Forgot your password ?': 'Mot de passe oublié ?'
 'Sprint creation:': 'Création d''un sprint:'
 'Current Release': 'Release courante'
 Stories: Stories
@@ -158,11 +157,12 @@ Feature: Fonctionnalité
 'Story estimate': 'Estimation de la story'
 'Add task': 'Ajouter une tâche'
 'Create a new story': 'Creér une nouvelle story'
+'Story was created with success!': '__Story was created with success!'
 'Story estimate edition:': '__Story estimate edition:'
 'Estimate was updated with success!': 'L''estimation a été mise à jour avec succès !'
 Informations: Informations
 'Story edition': 'Edition d''une story'
-Comments: __Comments
+Comments: Commentaires
 'Story add comment': 'Ajouter un commentaire sur la story'
 'Add comment': 'Ajouter un commentaire'
 'Do you really want to delete this story: %story% ?': 'Voulez-vous vraiment supprimer cette story: %story% ?'
@@ -174,13 +174,15 @@ Comments: __Comments
 'Feature edition': 'Edition d''une fonctionnalité'
 'Feature deletion': 'Suppression d''une fonctionnalité'
 'Do you really want to delete this feature: %feature% ?': 'Voulez-vous vraiment supprimer cette fonctionnalité: %feature% ?'
+'Remaining hours was updated with success': '__Remaining hours was updated with success'
+Success: Succès
 'Profile edition:': 'Edition d''un profil'
 'Story estimate edition': 'Edition de l''estimation de la story'
 'Review creation:': 'Création d''une revue:'
 'Sprint review:': 'Revue de sprint:'
 'hours remaining': 'heures restantes'
 'In Progress': 'En cours'
-'Remaining Hours': '__Remaining Hours'
+'Remaining Hours': 'Heures restantes'
 'Current velocity': 'Vélocité actuelle'
 'Create Next Sprint': 'Créer le prochain sprint'
 'Backlog - Estimate: <span id="other-stories-estimate">%backlog_estimate%': '__Backlog - Estimate: <span id="other-stories-estimate">%backlog_estimate%'
