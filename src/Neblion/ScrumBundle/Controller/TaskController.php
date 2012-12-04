@@ -165,7 +165,7 @@ class TaskController extends Controller
             // store activity            
             $this->get('scrum_activity')->add($project, $user, 'create task', 
                     $this->generateUrl('sprint_show', array('id' => $sprint->getId())), 
-                    'Sprint #' . $sprint->getId() . ' ' . $task->getName());
+                    'Sprint #' . $sprint->getId() . ' ' . $entity->getName());
             
             $em->flush();
 
