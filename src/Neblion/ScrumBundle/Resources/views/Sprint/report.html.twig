@@ -49,6 +49,8 @@
     {{ parent() }}
     {% javascripts
         '%kernel.root_dir%/../vendor/cleonello/jqplot/jquery.jqplot.min.js'
+        '%kernel.root_dir%/../vendor/cleonello/jqplot/plugins/jqplot.canvasTextRenderer.min.js'
+        '%kernel.root_dir%/../vendor/cleonello/jqplot/plugins/jqplot.canvasAxisTickRenderer.min.js'
         '%kernel.root_dir%/../vendor/cleonello/jqplot/plugins/jqplot.dateAxisRenderer.min.js'
         '%kernel.root_dir%/../vendor/cleonello/jqplot/plugins/jqplot.highlighter.min.js'
     %}
@@ -62,10 +64,23 @@
             title: '{{ 'Burndown hours chart'|trans }}',
             //seriesColors: [ "#cccccc", "#eeeeee"],
             //series: [ { label: 'toto' }, { label: 'titi' } ],
+            series:[{label:'Ideal'},{label:'Works'}],
+            legend: {
+                show: true,
+                placement: 'outsideGrid'
+            },
+            axesDefaults: {
+                tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
+                tickOptions: {
+                    //fontFamily: 'Georgia',
+                    //fontSize: '10pt',
+                    angle: -30
+                }
+            },
             axes:{
                 xaxis:{
-                    min: "{{ sprint.start|date_modify("-1 day")|date("Y-m-d") }}",
-                    max: "{{ sprint.end|date_modify("+1 day")|date("Y-m-d") }}",
+                    //min: "{# sprint.start|date_modify("-1 day")|date("Y-m-d") #}",
+                    //max: "{# sprint.end|date_modify("+1 day")|date("Y-m-d") #}",
                     renderer:$.jqplot.DateAxisRenderer,
                     tickOptions:{formatString:'%Y-%m-%d'},
                 },
