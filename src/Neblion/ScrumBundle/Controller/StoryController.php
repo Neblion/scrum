@@ -300,7 +300,7 @@ class StoryController extends Controller
                 
                 // store activity            
                 $this->get('scrum_activity')->add($project, $user, 'estimate story', 
-                    $this->generateUrl('story_edit'), 
+                    $this->generateUrl('story_edit', array('id' => $story->getId())), 
                     'Story #' . $story->getId());
                 
                 $em->flush();
