@@ -36,6 +36,12 @@ class ScriptHandler
             }
         }
         
+        foreach (glob('vendor/eyecon/bootstrap-colorpicker/img/*') as $file) {
+            if (is_file($file)) {
+                copy($file, 'web/img/' . basename($file));
+            }
+        }
+        
     }
     
     public static function CopyImgJqueryUIToWebCss($event)
