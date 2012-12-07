@@ -18,9 +18,9 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/');
         //var_dump($client->getResponse()->getContent());
         $this->assertTrue($crawler->filter('html:contains("Your projects")')->count() == 1);
-        // Test number of project => 1 project but 2 li
-        $this->assertTrue($crawler->filter('ul.project-list li')->count() == 2);
+        // Test number of project => 1
+        $this->assertTrue($crawler->filter('ul.projects-list > li')->count() == 1);
         // Test name of first project => Test
-        $this->assertTrue($crawler->filter('ul.project-list li')->eq(1)->text() == 'Test');
+        //$this->assertTrue($crawler->filter('ul.projects-list a')->first()->text() == 'Test');
     }
 }
