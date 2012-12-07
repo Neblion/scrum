@@ -56,12 +56,21 @@ class DefaultController extends Controller
     public function activityAction()
     {
         // Check if user is authorized
-        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-            // Check if the user has a profile, if not redirect to profile_new
-            $user = $this->get('security.context')->getToken()->getUser();
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw new AccessDeniedException();
         }
         
-        return array();
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        // Load user's related activities
+        $activities = $em->getRepository('NeblionScrumBundle:Activity')->loadRelatedForAccount($user, false, 20);
+        
+        return array(
+            'activities'    => $activities,
+            'user'          => $user,
+        );
     }
     
     /**

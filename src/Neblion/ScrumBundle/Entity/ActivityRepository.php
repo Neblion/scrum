@@ -33,7 +33,7 @@ class ActivityRepository extends EntityRepository
     
     public function loadForAccount(\Neblion\ScrumBundle\Entity\Account $account, $returnQuery = false, $max = 8)
     {
-        return $this->getEntityManager()->createQuery(
+        $query = $this->getEntityManager()->createQuery(
                 'SELECT a, p, ac, pr 
                     FROM NeblionScrumBundle:Activity a
                     INNER JOIN a.project p
@@ -41,7 +41,34 @@ class ActivityRepository extends EntityRepository
                     INNER JOIN ac.profile pr
                     WHERE ac.id = :account_id
                     ORDER BY a.created DESC')
-                ->setParameter('account_id', $account->getId())
-                ->getArrayResult();;
+                ->setParameter('account_id', $account->getId());
+        
+        if ($returnQuery) {
+            return $query;
+        }
+
+        return $query->setMaxResults($max)->getResult();
+    }
+    
+    public function loadRelatedForAccount(\Neblion\ScrumBundle\Entity\Account $account, $returnQuery = false, $max = 8)
+    {
+        $query = $this->getEntityManager()->createQuery(
+                'SELECT a, p, ac, pr 
+                    FROM NeblionScrumBundle:Activity a
+                    INNER JOIN a.project p WITH p.id IN 
+                        (SELECT subp.id FROM NeblionScrumBundle:Project subp 
+                        INNER JOIN subp.members subm 
+                        INNER JOIN subm.account suba 
+                        WHERE suba.id = :account_id)
+                    INNER JOIN a.account ac
+                    INNER JOIN ac.profile pr
+                    ORDER BY a.created DESC')
+                ->setParameter('account_id', $account->getId());
+        
+        if ($returnQuery) {
+            return $query;
+        }
+
+        return $query->setMaxResults($max)->getResult();
     }
 }

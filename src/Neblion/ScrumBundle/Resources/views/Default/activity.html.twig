@@ -3,6 +3,17 @@
 {% block body %}
      <div class="row">
         <div class="span3">
+            <div class="user-profile">
+                <ul class="thumbnails">
+                    <li class="span3">
+                        <div class="thumbnail">
+                            <img src="{{ gravatar(user.email, 210) }}" alt="" />
+                            <h3>{{ user.profile.firstname }} {{ user.profile.lastname }}</h3>
+                            <p>{{ user.username }}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div><!--/span-->
         <div class="span9">
             <ul class="nav nav-tabs">
@@ -11,5 +22,11 @@
                 </li>
                 <li class="active"><a href="{{ path('activity') }}">{{ 'Activity'|trans }}</a></li>
             </ul>
+                
+            <div class="activity-list">
+                {% for activity in activities %}
+                    {% include 'NeblionScrumBundle:Activity:project-activity-partial.html.twig' with { 'activity': activity } %}
+                {% endfor %}
+            </div>
       </div><!--/row-->
 {% endblock body %}
