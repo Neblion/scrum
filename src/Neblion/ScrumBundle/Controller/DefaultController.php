@@ -50,6 +50,21 @@ class DefaultController extends Controller
     }
     
     /**
+     * @Route("/activity", name="activity")
+     * @Template()
+     */
+    public function activityAction()
+    {
+        // Check if user is authorized
+        if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            // Check if the user has a profile, if not redirect to profile_new
+            $user = $this->get('security.context')->getToken()->getUser();
+        }
+        
+        return array();
+    }
+    
+    /**
      * @Route("/invitation/confirm/{token}", name="scrum_invitation_confirm")
      * @Template()
      */

@@ -14,18 +14,35 @@
                     </li>
                 </ul>
             </div>
-                
-            <ul class="nav nav-tabs nav-stacked project-list">
-                <li class="active"><a href="#">{{ 'Your projects'|trans }}</a></li>
-                {% for project in projects %}
-                    <li><a href="{{ path('project_dashboard', { 'id': project.id }) }}">{{ project.name }}</a></a></li>
-                {% endfor %}
-            </ul>
-                
-            <a href="{{ path('project_new') }}"><button class="btn btn-success"> <i class="icon-plus-sign icon-white"></i> {{ 'Create project'|trans }}</button></a>
+            <p><a href="{{ path('project_new') }}"><button class="btn btn-success"> <i class="icon-plus-sign icon-white"></i> {{ 'Create project'|trans }}</button></a></p>
         </div><!--/span3 -->
         
         <div class="span9">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="{{ path('project_list') }}">{{ 'Your projects'|trans }}</a>
+                </li>
+                <li><a href="{{ path('activity') }}">{{ 'Activity'|trans }}</a></li>
+            </ul>
+            
+            <ul class="projects-list">
+                {% for project in projects %}
+                    <li class="">
+                        <ul class="project-actions">
+                            <li><a class="btn btn-mini" href="{{ path('project_dashboard', { 'id': project.id }) }}">{{ 'Dashboard'|trans }}</a></li>
+                            <li><a class="btn btn-mini" href="{{ path('project_backlog', { 'id': project.id }) }}">{{ 'Backlog'|trans }}</a></li>
+                            <li><a class="btn btn-mini" href="{{ path('sprint_list', { 'id': project.id }) }}">{{ 'Sprints'|trans }}</a></li>
+                            <li><a class="btn btn-mini" href="{{ path('project_edit', { 'id': project.id }) }}">{{ 'Admin'|trans }}</a></li>
+                        </ul>
+                        <h3>
+                            <span class=""></span>
+                            <a href="{{ path('project_dashboard', { 'id': project.id }) }}">{{ project.name }}</a>
+                        </h3>
+                        <p>{{ project.description }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+            
         </div><!--/span9 -->
       </div><!--/row-->
 {% endblock body %}
