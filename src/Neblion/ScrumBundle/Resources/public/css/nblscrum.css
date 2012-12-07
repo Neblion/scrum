@@ -73,3 +73,47 @@ ul.story-box-actions.nav-pills > li { float: right; }
 .widget-content {
     padding: 12px 15px;
 }
+
+ul.projects-list {
+}
+
+ul.projects-list h3 {
+    font-size: 20px;
+    letter-spacing: -1px;
+    line-height: 32px;
+    height: 32px;
+    margin: 0 0 1px;
+    white-space: nowrap;
+}
+
+ul.projects-list > li {
+    border-bottom: 1px solid #ccc;
+    padding: 0 0 20px 0;
+    position: relative;
+    min-height: 66px;
+    overflow: hidden;
+    margin: 0 0 20px 0;
+    list-style-type: none;
+}
+
+ul.projects-list ul.project-actions {
+    display: inline-block;
+    position: relative;
+    float: right;
+    border: none;
+    padding-left: 15px;
+}
+
+ul.projects-list ul.project-actions li {
+    border: none;
+    color: #666;
+    line-height: 21px;
+    list-style-type: none;
+    display: block;
+    margin: 0 !important;
+    float: left;
+}
+
+ul.project-actions li a {
+    margin-left: 10px !important;
+}
