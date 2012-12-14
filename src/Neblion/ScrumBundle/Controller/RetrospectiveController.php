@@ -51,7 +51,7 @@ class RetrospectiveController extends Controller
         
         // Get Members of the team
         $members = $em->getRepository('NeblionScrumBundle:Member')
-                    ->getTeamMembers($project->getId());
+                    ->getTeamMembers($project);
         
         $retrospectives = $em->getRepository('NeblionScrumBundle:Retrospective')
                 ->getForSprint($sprint->getId());
@@ -127,8 +127,8 @@ class RetrospectiveController extends Controller
             
             // store activity            
             $this->get('scrum_activity')->add($project, $user, 'create retrospective', 
-                    $this->generateUrl('retrospective_list', array('id' => $story->getId())), 
-                    'Story #' . $story->getId());
+                    $this->generateUrl('retrospective_list', array('id' => $sprint->getId())), 
+                    'Sprint #' . $sprint->getId());
             
             $em->flush();
 
@@ -230,8 +230,8 @@ class RetrospectiveController extends Controller
             
             // store activity            
             $this->get('scrum_activity')->add($project, $user, 'update retrospective', 
-                    $this->generateUrl('retrospective_list', array('id' => $story->getId())), 
-                    'Story #' . $story->getId());
+                    $this->generateUrl('retrospective_list', array('id' => $retrospective->getSprint()->getId())), 
+                    'Sprint #' . $retrospective->getSprint()->getId());
             
             $em->flush();
 
