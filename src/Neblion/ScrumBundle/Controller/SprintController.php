@@ -661,7 +661,7 @@ class SprintController extends Controller
                 
                 // store activity            
                 $this->get('scrum_activity')->add($project, $user, 'close sprint', 
-                    $this->generateUrl('sprint_show'), 
+                    $this->generateUrl('sprint_show', array('id' => $sprint->getId())), 
                     'Sprint #' . $sprint->getId());
                 
                 $em->flush();
