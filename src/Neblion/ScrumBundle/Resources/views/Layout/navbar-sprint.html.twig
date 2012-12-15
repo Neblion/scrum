@@ -13,7 +13,7 @@
                 {% if sprint.status.id == 2 %}
                     <li {% if active == 'close' %}class="active"{% endif %}><a href="{{ path('sprint_close', { 'id': sprint.id }) }}">{{ 'Close'|trans }}</a></li>
                 {% else %}
-                    <li {% if active == 'restart' %}class="active"{% endif %}><a href="#">{{ 'Re-start'|trans }}</a></li>
+                    <li {% if active == 'restart' %}class="active"{% endif %}><a href="{{ path('sprint_start', { 'id': sprint.id }) }}">{{ 'Re-start'|trans }}</a></li>
                 {% endif %}
             {% endif %}
         </ul>

@@ -531,8 +531,8 @@ class SprintController extends Controller
         }
         
         // If status is different than ToDo, you can start this sprint
-        if ($sprint->getStatus()->getId() != 1) {
-            $this->get('session')->setFlash('error', 'This sprint is not in ToDo status, so you can not start it !');
+        if ($sprint->getStatus()->getId() == 2) {
+            $this->get('session')->setFlash('error', 'This sprint is In Progress status, so you can not start it !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $sprint->getId())));
         }
         
