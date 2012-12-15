@@ -34,7 +34,7 @@
                     <div class="alert alert-warning">
                         <p>{{ 'Are you sure you want close this sprint ?'|trans }}</p>
                         <p>{{ 'Member could not edit their task and retrospective and sprint review edition will be close.'|trans }}</p>
-                        <p>Velocity will be {{ currentVelocity }} (max: {{ maxVelocity }}) stories done {{ storiesDone }} / {{ storiesTotal }}</p>
+                        <p>{{ 'Velocity will be %currentVelocity% (max: %maxVelocity%) stories done %storiesDone% / %storiesTotal%'|trans({ '%currentVelocity%': currentVelocity, '%maxVelocity%': maxVelocity, '%storiesDone%': storiesDone, '%storiesTotal%': storiesTotal }) }}</p>
                     </div>
                     <form action="{{ path('sprint_close', { 'id': sprint.id }) }}" method="post" class="form-horizontal">
                         {{ form_widget(form) }}

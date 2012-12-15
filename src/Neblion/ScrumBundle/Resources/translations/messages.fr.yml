@@ -130,7 +130,7 @@ Stories: Stories
 Story: Story
 ToDo: 'A faire'
 'In progress': 'En cours'
-'Close the sprint': 'Clore le sprint'
+'Close the sprint': 'Fermer le sprint'
 'Are you sure you want close this sprint ?': 'Voulez-vous vraiment clore ce sprint ?'
 'Member could not edit their task and retrospective and sprint review edition will be close.': '__Member could not edit their task and retrospective and sprint review edition will be close.'
 'Sprint list': 'Liste des sprints'
@@ -219,3 +219,5 @@ Saturday: Samedi
 'Review was updated with success!': 'La revue a été modifié avec succès !'
 'Retrospective was created with success!': 'La retrospective a été créé avec succès !'
 'Retrospective was updated with success!': 'La retrospective a été modifié avec succès !'
+'Member could not edit their task and retrospective and sprint review edition will be close.': 'Les membres ne pourront plus éditer les tâches, revues et retrospectives.'
+'Velocity will be %currentVelocity% (max: %maxVelocity%) stories done %storiesDone% / %storiesTotal%': 'La vélocité sera de %currentVelocity% (max: %maxVelocity%) story terminées %storiesDone% / %storiesTotal%'

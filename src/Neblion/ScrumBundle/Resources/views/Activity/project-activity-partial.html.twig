@@ -1,7 +1,7 @@
 <p>
     <span class="activity-date">{{ activity.created|date('d/m/Y H:i') }}</span> 
     <span class="activity-account">{{ activity.account.profile.firstname }} {{ activity.account.profile.lastname }}</span> 
-    {{ activity.text }} 
+    {{ activity.text|trans }} 
     <a href="{{ activity.linkUrl }}">{{ activity.linkText }}</a>
-    on <a href="{{ path('project_dashboard', { 'id': activity.project.id } ) }}">{{ activity.project.name }}</a>
+    {{ 'on'|trans }} <a href="{{ path('project_dashboard', { 'id': activity.project.id } ) }}">{{ activity.project.name }}</a>
 </p>
