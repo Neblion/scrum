@@ -9,7 +9,9 @@ class RetrospectiveType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('comment');
+        $builder->add('comment', 'textarea', array(
+            'attr' => array('rows' => 5),
+        ));
     }
 
     public function getName()

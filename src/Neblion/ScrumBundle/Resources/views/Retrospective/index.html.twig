@@ -1,5 +1,7 @@
 {% extends '::base.html.twig' %}
 
+{% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
+
 {% block body %}
 <div class="row">
        {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'sprints'} %}
@@ -27,7 +29,7 @@
                    <h5>{{ 'Release description'|trans }}</h5>
                </div>
                <div class="widget-content">
-                   <p>fgfgfdgs fgsdfgsdf fgsdfg fgsdfg fgsdfgsdf</p>
+                   <p>{{ sprint.projectRelease.description }}</p>
                </div>
            </div>
         </div>
@@ -37,32 +39,37 @@
                 <div class="widget-box sprint-retrospective">
                     <div class="widget-title">
                         <span class="icon"><i class="icon-file"></i></span>
-                        <h5>{{ member.account.profile.firstname }} {{ member.account.profile.lastname }}</h5>
+                        <h5>{{ member.account.profile.firstname }} {{ member.account.profile.lastname }} {{ 'as a'|trans }} {{ member.role.name }}</h5>
                     </div>
                     <div class="widget-content">
                         <div class="review-header">
                             <img src="{{ gravatar(member.account.email, 60) }}" class="pull-left" />
-                            <h3>{{ member.role.name }}</h3>
                         </div>
-                        {% if app.user.id == member.account.id %}
-                            {% if retrospectives[member.account.id] is defined %}
-                                <form action="{{ path('retrospective_update', { 'id': retrospectives[member.account.id].id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
-                                    {{ form_widget(form) }}
-                                    <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
-                                </form>
+                        <div class="review-content" style="margin-left: 75px; min-height: 60px;">
+                            {% if app.user.id == member.account.id %}
+                                {% if retrospectives[member.account.id] is defined %}
+                                    <form action="{{ path('retrospective_update', { 'id': retrospectives[member.account.id].id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                                        {{ form_widget(form) }}
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-warning"><i class="icon-edit icon-white"></i> {{ 'Update'|trans }}</button>
+                                        </div>
+                                    </form>
+                                {% else %}
+                                    <form action="{{ path('retrospective_create', { 'id': sprint.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                                        {{ form_widget(form) }}
+                                        <div class="form-actions">
+                                            <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> {{ 'Create'|trans }}</button>
+                                        </div>
+                                    </form>
+                                {% endif %}
                             {% else %}
-                                <form action="{{ path('retrospective_create', { 'id': sprint.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
-                                    {{ form_widget(form) }}
-                                    <button type="submit" class="btn btn-success"><i class="icon-plus icon-white"></i> {{ 'Create'|trans }}</button>
-                                </form>
+                                {% if retrospectives[member.account.id] is defined %}
+                                    <p>{{ retrospectives[member.account.id].comment }}</p>
+                                {% else %}
+                                    <p>{{ member.account.profile.firstname }} {{ 'did not write a retrospective comment for the time.'|trans }}</p>
+                                {% endif %}
                             {% endif %}
-                        {% else %}
-                            {% if retrospectives[member.account.id] is defined %}
-                                <p>{{ retrospectives[member.account.id].comment }}</p>
-                            {% else %}
-                                <p>no comment...</p>
-                            {% endif %}
-                        {% endif %}
+                        </div>
                     </div>
                 </div>
             {% endfor %}
