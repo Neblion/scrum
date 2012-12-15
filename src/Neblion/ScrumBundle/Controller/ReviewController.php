@@ -9,6 +9,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Neblion\ScrumBundle\Entity\Review;
 use Neblion\ScrumBundle\Form\ReviewType;
 
+use Doctrine\ORM\Query;
+
 /**
  * Review controller.
  *
@@ -195,12 +197,12 @@ class ReviewController extends Controller
         
         $em = $this->getDoctrine()->getEntityManager();
         
-        $review = $em->getRepository('NeblionScrumBundle:Review')->load($id);
-        if (!$review) {
-            throw $this->createNotFoundException('Unable to find Review entity.');
+        $story = $em->getRepository('NeblionScrumBundle:Story')->load($id, Query::HYDRATE_OBJECT);
+        if (!$story) {
+            throw $this->createNotFoundException('Unable to find Story entity.');
         }
         
-        $project = $review->getStory()->getProject();
+        $project = $story->getProject();
         
         // Check if user is really a member of this project
         $member = $em->getRepository('NeblionScrumBundle:Member')
@@ -208,6 +210,8 @@ class ReviewController extends Controller
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
             throw new AccessDeniedException();
         }
+        
+        $review = $story->getReview();
 
         $editForm   = $this->createForm(new ReviewType(), $review);
         $request = $this->getRequest();
@@ -226,7 +230,7 @@ class ReviewController extends Controller
             // Set flash message
             $this->get('session')->setFlash('success', 'Review was updated with success!');
             return $this->redirect($this->generateUrl('review_list', 
-                    array('id' => $review->getStory()->getSprint()->getId())));
+                    array('id' => $story->getSprint()->getId())));
         }
 
         return array(

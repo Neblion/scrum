@@ -56,7 +56,7 @@
                         {% set form = forms[story.id] %}
                         {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
                         {% if story.review.id is defined %}
-                        <form action="{{ path('review_update', { 'id': story.review.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                        <form action="{{ path('review_update', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
                             {{ form_widget(form) }}
                             <div class="form-actions">
                                 <button type="submit" class="btn btn-primary">{{ 'Update'|trans }}</button>
