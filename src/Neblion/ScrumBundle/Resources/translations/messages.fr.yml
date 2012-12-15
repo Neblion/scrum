@@ -3,6 +3,7 @@ Profile: Profil
 'Change password': 'Changer votre mot de passe'
 Description: Description
 Hours: Heures
+Hour: Heure
 'Set Done': Fait
 'Set In Progress': 'En cours'
 Update: 'Mettre à jour'
@@ -85,6 +86,7 @@ Contact: Contact
 Edition: Edition
 Taskboard: Taskboard
 Start: Commencer
+End: Fin
 Review: Revue
 Retrospective: Retrospective
 Re-start: Re-commencer
@@ -209,3 +211,7 @@ Saturday: Samedi
 'Release was updated with success!': 'La release a été modifié avec succès !'
 'Release was deleted with success!': 'La release a été supprimé avec succès !'
 'Impossible to delete this release, there is at least a sprint attached to it!': 'Vous ne pouvez supprimer cette release, au moins un sprint lui est associée !'
+'Sprint was updated with success!': 'Le sprint a été modifié avec succès !'
+'Task was successfully updated!': 'La tâche a été modifié avec succès !'
+'Remaining hours was updated with success !': 'Les heures restantes ont été modifié avec succès !'
+'Story was updated with success!': 'La story a été modifié avec succès !'
