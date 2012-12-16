@@ -211,6 +211,7 @@ Saturday: Samedi
 'Release was updated with success!': 'La release a été modifié avec succès !'
 'Release was deleted with success!': 'La release a été supprimé avec succès !'
 'Impossible to delete this release, there is at least a sprint attached to it!': 'Vous ne pouvez supprimer cette release, au moins un sprint lui est associée !'
+'Sprint was created successfully!': 'Le sprint a été créé avec succès !'
 'Sprint was updated with success!': 'Le sprint a été modifié avec succès !'
 'Sprint was started with success!': 'Le sprint a été lancé avec succès !'
 'Sprint was closed with success!': 'Le sprint a été fermé avec succès !'
@@ -223,3 +224,4 @@ Saturday: Samedi
 'Retrospective was updated with success!': 'La retrospective a été modifié avec succès !'
 'Member could not edit their task and retrospective and sprint review edition will be close.': 'Les membres ne pourront plus éditer les tâches, revues et retrospectives.'
 'Velocity will be %currentVelocity% (max: %maxVelocity%) stories done %storiesDone% / %storiesTotal%': 'La vélocité sera de %currentVelocity% (max: %maxVelocity%) story terminées %storiesDone% / %storiesTotal%'
+'There is at least one story with no task!': 'Il y a au moins une story sans tâche définie !'
