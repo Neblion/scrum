@@ -212,6 +212,8 @@ Saturday: Samedi
 'Release was deleted with success!': 'La release a été supprimé avec succès !'
 'Impossible to delete this release, there is at least a sprint attached to it!': 'Vous ne pouvez supprimer cette release, au moins un sprint lui est associée !'
 'Sprint was updated with success!': 'Le sprint a été modifié avec succès !'
+'Sprint was started with success!': 'Le sprint a été lancé avec succès !'
+'Sprint was closed with success!': 'Le sprint a été fermé avec succès !'
 'Task was successfully updated!': 'La tâche a été modifié avec succès !'
 'Remaining hours was updated with success !': 'Les heures restantes ont été modifié avec succès !'
 'Story was updated with success!': 'La story a été modifié avec succès !'
