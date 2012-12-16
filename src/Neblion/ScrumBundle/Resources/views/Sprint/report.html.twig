@@ -62,31 +62,22 @@
         var burndown_ideal  = [['{{ sprint.start|date('Y-m-d') }}',{{ estimateInitialHours }}],['{{ sprint.end|date('Y-m-d') }}',0]];
         $.jqplot('chartdiv', [burndown_ideal, burndown_hours], {
             title: '{{ 'Burndown hours chart'|trans }}',
-            //seriesColors: [ "#cccccc", "#eeeeee"],
-            //series: [ { label: 'toto' }, { label: 'titi' } ],
-            series:[{label:'Ideal'},{label:'Works'}],
+            series:[{label:'Ideal sprint'},{label:'Real sprint'}],
             legend: {
                 show: true,
                 placement: 'outsideGrid'
             },
             axesDefaults: {
-                tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
-                tickOptions: {
-                    //fontFamily: 'Georgia',
-                    //fontSize: '10pt',
-                    angle: -30
-                }
+                tickRenderer: $.jqplot.CanvasAxisTickRenderer,
+                tickOptions: { angle: -30 }
             },
             axes:{
                 xaxis:{
-                    //min: "{# sprint.start|date_modify("-1 day")|date("Y-m-d") #}",
-                    //max: "{# sprint.end|date_modify("+1 day")|date("Y-m-d") #}",
                     renderer:$.jqplot.DateAxisRenderer,
-                    tickOptions:{formatString:'%Y-%m-%d'},
+                    tickOptions:{formatString:'%d/%m'},
                 },
                 yaxis: {
                     min: 0,
-                    ticks: {{ strTickY|raw }},
                 }
             },
             highlighter: {

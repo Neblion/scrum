@@ -871,27 +871,13 @@ class SprintController extends Controller
             $strHours .= '[\'' . $date . '\',' . $el['cumul'] . ']';
         }
         
-        // Create string for Yaxis
         $estimateInitialHours = array_sum($initialHours);
-        $pas = floor($estimateInitialHours / 10);
-        $maxY = ($pas - ($estimateInitialHours % $pas)) + $estimateInitialHours;
-        $i = 0;
-        $strTickY = '[';
-        while ($i <= $maxY) {
-            if ($strTickY != '[') {
-                $strTickY .= ',';
-            }
-            $strTickY .= $i;
-            $i = $i + $pas;
-        }
-        $strTickY .= ']';
-         
+
         return array(
             'project'               => $sprint->getProjectRelease()->getProject(),
             'sprint'                => $sprint,
             'estimateInitialHours'  => $estimateInitialHours,
             'strHours'              => $strHours,
-            'strTickY'              => $strTickY,
         );
     }
 }
