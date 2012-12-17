@@ -41,8 +41,7 @@ Velocity: Vélocité
 Reports: Rapports
 'Project edition': 'Edition d''un projet'
 'Search help': '__Search help'
-Search: Recherche
-'Search projects': 'Recherche de projets'
+'Search': Recherche
 'Search results': 'Résultats de la recherche'
 'No result': 'Aucun résultat'
 'Project deletion': 'Suppression d''un projet'
@@ -65,7 +64,7 @@ Refuse: Refuser
 'Team members': 'Membres de l''équipe'
 Lastname: Nom
 Firstname: Prénom
-username: username
+Username: "Nom d'utilisateur"
 Role: Rôle
 Administrator: Administrateur
 Enabled: Activé
@@ -158,9 +157,6 @@ Register: Enregistrez-vous
 Feature: Fonctionnalité
 'Story estimate': 'Estimation de la story'
 'Add task': 'Ajouter une tâche'
-'Create a new story': 'Creér une nouvelle story'
-'Story was created with success!': '__Story was created with success!'
-'Story estimate edition:': '__Story estimate edition:'
 'Estimate was updated with success!': 'L''estimation a été mise à jour avec succès !'
 Informations: Informations
 'Story edition': 'Edition d''une story'
@@ -217,6 +213,9 @@ Saturday: Samedi
 'Sprint was closed with success!': 'Le sprint a été fermé avec succès !'
 'Task was successfully updated!': 'La tâche a été modifié avec succès !'
 'Remaining hours was updated with success !': 'Les heures restantes ont été modifié avec succès !'
+'Create a new story': 'Creér une nouvelle story'
+'Story was created with success!': 'La story a été créé avec succès !'
+'Story estimate edition:': 'Estimation de la story:'
 'Story was updated with success!': 'La story a été modifié avec succès !'
 'Review was created with success!': 'La revue a été créé avec succès !'
 'Review was updated with success!': 'La revue a été modifié avec succès !'
@@ -225,3 +224,12 @@ Saturday: Samedi
 'Member could not edit their task and retrospective and sprint review edition will be close.': 'Les membres ne pourront plus éditer les tâches, revues et retrospectives.'
 'Velocity will be %currentVelocity% (max: %maxVelocity%) stories done %storiesDone% / %storiesTotal%': 'La vélocité sera de %currentVelocity% (max: %maxVelocity%) story terminées %storiesDone% / %storiesTotal%'
 'There is at least one story with no task!': 'Il y a au moins une story sans tâche définie !'
+'Profile was successfully created!': 'Le profil a été créé avec succès !'
+'Profile was successfully updated!': 'Le profil a été mis à jour avec succès !'
+'Current password': 'Mot de passe courant'
+'Username and/or email was updated with success !': "Le nom d'utilisateur et/ou l'email ont été modifié avec succès !"
+'The password was updated with success !': 'Le mot de passe a été modifié avec succès !'
+'Color': 'Couleur'
+'Comment': 'Commentaire'
+'A release with no due date is in progress, you could not create a new one!': 'Une release sans date de fin est en cours, vous ne pouvez donc créer une nouvelle release !'
+'You can not start this sprint, start date is later than today !': 'Vous ne pouvez démarer ce sprint, la date de début est différente de la date du jour !'
