@@ -26,5 +26,6 @@
 {% if success %}
     <script type="text/javascript">
         $("#tasks-todo-{{ story.id }}").load("{{ path('task_todo', { 'id': story.id }) }}");
+        $('#modal-submit-form').hide();
     </script>
 {% endif %}
