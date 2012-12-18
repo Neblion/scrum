@@ -24,12 +24,12 @@ class Mailer
     {
         $template = 'NeblionScrumBundle:Mailer:invitation.txt.twig';
         
-        //$url = $this->router->generate('fos_user_registration_confirm', array('token' => $user->getConfirmationToken()), true);
+        $url = $this->router->generate('fos_user_registration_register', array(), true);
         $rendered = $this->templating->render($template, array(
             'user'              => $account,
             'from'              => $user,
             'project'           => $project,
-            //'confirmationUrl'   => $url,
+            'registrationUrl'   => $url,
         ));
         $this->sendEmailMessage($rendered, $this->parameters['from_email'], $email);
     }

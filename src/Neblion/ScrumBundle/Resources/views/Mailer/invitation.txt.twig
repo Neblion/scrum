@@ -6,11 +6,22 @@
 
 {% block body_text %}
 {% autoescape false %}
-{{ 'Hello'|trans }}
+{% if account.id is defined %}
+    {% if account.profile.id is defined %}
+ {{ 'Hello'|trans }} {{ account.profile.firstname }},
+    {% else %}
+ {{ 'Hello'|trans }} {{ account.username }},
+    {% endif %}
+ {% else %}
+ {{ 'Hello'|trans }}
+ {% endif %}
 
-{{ 'You receive this email because %firstname% %lastname% (%email%) invit you to join his team as a member on project %project_name%'|trans({'%firstname%': from.profile.firstname, '%lastname%': from.profile.lastname, '%email%': from.email, '%project_name%': project.name }) }}
+{{ 'You receive this email because %firstname% %lastname% (%email%) invit you to join his team as a member on project %project_name%'|trans({'%firstname%': from.profile.firstname, '%lastname%': from.profile.lastname, '%email%': from.email, '%project_name%': project.name }) }}.
 
-{{ 'In order to confirm your invitation, please login on NeblionScrum and accept invitation.'|trans }}
+{{ 'In order to confirm your invitation, please login on NeblionScrum and accept invitation.'|trans }}.
+{% if account.id is not defined %}
+{{ 'If you do not have an account yet, you can create one on %url%'|trans({ '%url%': registrationUrl }) }}
+{% endif %}
 
 {{ 'See you soon on Neblion Scrum!'|trans }}
 
