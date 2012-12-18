@@ -165,33 +165,12 @@ class MemberController extends Controller
             // Load default status (pending confirmation);
             $status = $em->getRepository('NeblionScrumBundle:MemberStatus')->find(1);
             
-            // If there is an existing account create only a member entity
-            // if not create a default account and a member entity
-            $existAccount = $confirmationUrl = false;
             if (!$account) {
-                $account = $userManager->createUser();
-                $account->setEmail($email);
-                $account->setUsername($email);
-                
-                // Generate a default password
-                $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-                $password = '';
-                for ($i = 0; $i <= 8; $i++) {
-                    $password .= $chars[mt_rand(0, 61)];
-                }
-                $account->setPlainPassword($password);
-                //$userManager->updatePassword($account);
-                if (null === $account->getConfirmationToken()) {
-                    $tokenGenerator = $this->container->get('fos_user.util.token_generator');
-                    $account->setConfirmationToken($tokenGenerator->generateToken());
-                }
-                $userManager->updateUser($account, false);
-                $confirmationUrl = $this->get('router')->generate('fos_user_registration_confirm', array('token' => $account->getConfirmationToken()), true);;
-                
                 // Create new Member
                 $member = new Member();
                 $member->setProject($project);
-                $member->setAccount($account);
+                $member->setAccount(null);
+                $member->setEmail($email);
                 $member->setRole($role);
                 $member->setAdmin(false);
                 $member->setStatus($status);
@@ -203,6 +182,7 @@ class MemberController extends Controller
                 $member = new Member();
                 $member->setProject($project);
                 $member->setAccount($account);
+                $member->setEmail($email);
                 $member->setSender($user);
                 $member->setRole($role);
                 $member->setAdmin(false);
@@ -213,11 +193,7 @@ class MemberController extends Controller
             $em->flush();
             
             // Send an email notification to the new member
-            if (!$existAccount) {
-                $this->get('neblion_mailer')->sendInvitationEmailMessage($account, $user, $project);
-            } else {
-                $this->get('neblion_mailer')->sendInvitationEmailMessage($account, $user, $project);
-            }
+            $this->get('neblion_mailer')->sendInvitationEmailMessage($email, $user, $project, $account);
             
             // Set flash message
             $this->get('session')->setFlash('success', 'Your invitation was sent successfully!');
@@ -398,14 +374,15 @@ class MemberController extends Controller
         
         $project = $member->getProject();
 
-        // Check if member and user are the same account
-        if ($member->getAccount()->getId() != $user->getId()) {
+        // Check if member invitation and user have the same email
+        if ($member->getEmail() != $user->getEmail()) {
             throw new AccessDeniedException();
         }
         
         // Load Enabled status
         $status = $em->getRepository('NeblionScrumBundle:MemberStatus')->find(2);
         $member->setStatus($status);
+        $member->setAccount($user);
         
         $em->flush();
         
@@ -438,14 +415,15 @@ class MemberController extends Controller
         
         $project = $member->getProject();
 
-        // Check if member and user are the same account
-        if ($member->getAccount()->getId() != $user->getId()) {
+        // Check if member invitation and user have the same email
+        if ($member->getEmail() != $user->getEmail()) {
             throw new AccessDeniedException();
         }
         
         // Load Invitation refused status
         $status = $em->getRepository('NeblionScrumBundle:MemberStatus')->find(4);
         $member->setStatus($status);
+        $member->setAccount($user);
         
         $em->flush();
         

@@ -43,7 +43,7 @@ class MemberRepository extends EntityRepository
                     INNER JOIN m.project pr
                     INNER JOIN m.status s
                     INNER JOIN m.role r
-                    INNER JOIN m.account a
+                    LEFT JOIN m.account a
                     LEFT JOIN a.profile p
                     WHERE pr.id = :project_id
                     AND s.id != 2
@@ -79,7 +79,7 @@ class MemberRepository extends EntityRepository
                     'SELECT m, r, p, a, pf, s, sp
                     FROM NeblionScrumBundle:Member m
                     INNER JOIN m.role r
-                    INNER JOIN m.account a
+                    LEFT JOIN m.account a
                     INNER JOIN m.project p
                     LEFT JOIN a.profile pf
                     LEFT JOIN m.sender s
@@ -112,12 +112,13 @@ class MemberRepository extends EntityRepository
                 ->createQuery(
                     'SELECT m
                     FROM NeblionScrumBundle:Member m
-                    INNER JOIN m.account a
+                    LEFT JOIN m.account a
                     INNER JOIN m.status ms
-                    WHERE a.id = :id
+                    WHERE (a.id = :id OR m.email = :email)
                     AND ms.id = 1'
                 )
                 ->setParameter('id', $user->getId())
+                ->setParameter('email', $user->getEmail())
                 ->getOneOrNullResult();
          if ($result) {
              return true;
@@ -134,14 +135,15 @@ class MemberRepository extends EntityRepository
                     FROM NeblionScrumBundle:Member m
                     INNER JOIN m.status ms
                     INNER JOIN m.role r
-                    INNER JOIN m.account a
+                    LEFT JOIN m.account a
                     INNER JOIN m.project p
                     INNER JOIN m.sender s
                     INNER JOIN s.profile pr
-                    WHERE a.id = :id
+                    WHERE (a.id = :id OR m.email = :email)
                     AND ms.id = 1'
                 )
                 ->setParameter('id', $user->getId())
+                ->setParameter('email', $user->getEmail())
                 ->getArrayResult();
     }
     

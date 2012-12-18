@@ -31,7 +31,7 @@ class Member
     
     /**
      * @ORM\ManyToOne(targetEntity="Neblion\ScrumBundle\Entity\Account", inversedBy="members")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="id", nullable=true)
      */
     private $account;
 
@@ -68,6 +68,19 @@ class Member
      * @ORM\JoinColumn(name="sender_id", referencedColumnName="id", nullable=true)
      */
     private $sender;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\MaxLength(255)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     *     checkMX = true
+     * )
+     */
+    private $email;
     
     /**
      * @Gedmo\Timestampable(on="create")
@@ -350,5 +363,28 @@ class Member
     public function getSender()
     {
         return $this->sender;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Member
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

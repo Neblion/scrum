@@ -20,22 +20,18 @@ class Mailer
         $this->parameters = $parameters;
     }
 
-    public function sendInvitationEmailMessage($user, $from, $project)
+    public function sendInvitationEmailMessage($email, $user, $project, $account)
     {
-        if ($user->isEnabled()) {
-            $template = 'NeblionScrumBundle:Mailer:invitation.txt.twig';
-        } else {
-            $template = 'NeblionScrumBundle:Mailer:invitation-new-account.txt.twig';
-        }
+        $template = 'NeblionScrumBundle:Mailer:invitation.txt.twig';
         
-        $url = $this->router->generate('fos_user_registration_confirm', array('token' => $user->getConfirmationToken()), true);
+        //$url = $this->router->generate('fos_user_registration_confirm', array('token' => $user->getConfirmationToken()), true);
         $rendered = $this->templating->render($template, array(
-            'user'              => $user,
-            'from'              => $from,
+            'user'              => $account,
+            'from'              => $user,
             'project'           => $project,
-            'confirmationUrl'   => $url,
+            //'confirmationUrl'   => $url,
         ));
-        $this->sendEmailMessage($rendered, $this->parameters['from_email'], $user->getEmail());
+        $this->sendEmailMessage($rendered, $this->parameters['from_email'], $email);
     }
     
     public function sendMemberRemoveNotification($member, $from, $project)
