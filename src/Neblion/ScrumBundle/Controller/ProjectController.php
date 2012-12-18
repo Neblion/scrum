@@ -51,24 +51,6 @@ class ProjectController extends Controller
         $projects = $em->getRepository('NeblionScrumBundle:Project')
                 ->getListForUser($user->getId());
         
-        // Set the locale (preferred language only)
-        // FIXME: we dont have to make it every time !!!!
-        //$this->get('session')->setLocale($user->getProfile()->getPreferredLanguage()->getIso2());
-        
-        /*
-        $dql = "SELECT r FROM NeblionScrumBundle:Role r ORDER BY r.id";
-        $query = $em->createQuery($dql)
-                       ->setFirstResult(2)
-                       ->setMaxResults(2);
-        
-        $paginator = new Paginator($query, $fetchJoinCollection = false);
-        
-        echo 'count:' . count($paginator) . '<br />';
-        foreach ($paginator as $post) {
-            echo $post->getName() . "<br />";
-        }
-        */
-        
         return array(
             'projects' => $projects,
             'user'      => $user,
