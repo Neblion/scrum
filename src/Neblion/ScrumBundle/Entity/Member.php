@@ -72,7 +72,7 @@ class Member
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      * @Assert\MaxLength(255)
      * @Assert\Email(
