@@ -73,46 +73,4 @@ class DefaultController extends Controller
         );
     }
     
-    /**
-     * @Route("/invitation/confirm/{token}", name="scrum_invitation_confirm")
-     * @Template()
-     */
-    public function confirmInvitationAction($token)
-    {
-        $user = $this->container->get('fos_user.user_manager')->findUserByConfirmationToken($token);
-
-        if (null === $user) {
-            throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
-        }
-        
-        $form = $this->container->get('fos_user.registration.form');
-        $form->setData($user);
-        
-        if ('POST' === $this->getRequest()->getMethod()) {
-            $form->bindRequest($this->getRequest());
-            
-            if ($user->getUsername() == $user->getEmail()) {
-                $form->addError(new FormError('username = email'));
-            }
-
-            if ($form->isValid()) {
-                $user->setConfirmationToken(null);
-                $user->setEnabled(true);
-                $user->setLastLogin(new \DateTime());
-
-                $this->container->get('fos_user.user_manager')->updateUser($user);
-                $this->authenticateUser($user);
-                
-                // Set flash message
-                return $this->redirect($this->generateUrl('neblion_scrum_dashboard'));
-            }
-        }
-        
-        return array(
-            'form' => $form->createView(),
-            'token' => $token,
-            'theme' => $this->container->getParameter('fos_user.template.theme'),
-        );
-    }
-    
 }
