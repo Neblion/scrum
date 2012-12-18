@@ -13,15 +13,7 @@
 
     <div class="row">
         <div class="span3">
-            <div class="widget-box">
-               <div class="widget-title">
-                   <span class="icon"><i class="icon-file"></i></span>
-                   <h5>{{ 'Project description'|trans }}</h5>
-               </div>
-               <div class="widget-content">
-                   <p>{{ project.description }}</p>
-               </div>
-           </div>
+            {% include 'NeblionScrumBundle:Sprint:partial-sprint-left-col.html.twig' with { 'sprint': sprint } %}
         </div><!--/span-->
 
         <div class="span9">

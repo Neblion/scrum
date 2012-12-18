@@ -6,21 +6,33 @@
     <div class="row">
        {% include 'NeblionScrumBundle:Layout:navtabs.html.twig' with { 'project': project, 'active': 'sprints'} %}
     </div><!--/row-->
+    
+    <div class="row">
+       {% include 'NeblionScrumBundle:Layout:navbar-sprint.html.twig' with { 'sprint': sprint, 'active': 'deletion'} %}
+    </div><!--/row-->
 
     <div class="row">
         <div class="span3">
-            <p>Help...</p>
+            {% include 'NeblionScrumBundle:Sprint:partial-sprint-left-col.html.twig' with { 'sprint': sprint } %}
         </div><!--/span-->
 
         <div class="span9">
-            <div class="alert alert-danger">{{ 'Do you really want to delete this sprint: %sprint% ?'|trans({ '%sprint%': sprint.name }) }}</div>
-            <form action="{{ path('sprint_delete', { 'id': sprint.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
-                {{ form_widget(form) }}
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Delete'|trans }}</button>
-                    <a class="btn btn-primary" href="{{ path('sprint_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
-                </div>
-            </form>
+            <div class="widget-box">
+               <div class="widget-title">
+                   <span class="icon"><i class="icon-file"></i></span>
+                   <h5>{{ 'Delete the sprint'|trans }}</h5>
+               </div>
+               <div class="widget-content">
+                    <div class="alert alert-danger">{{ 'Do you really want to delete this sprint: %sprint% ?'|trans({ '%sprint%': sprint.name }) }}</div>
+                    <form action="{{ path('sprint_delete', { 'id': sprint.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal">
+                        {{ form_widget(form) }}
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-danger"><i class="icon-trash icon-white"></i> {{ 'Delete'|trans }}</button>
+                            <a class="btn btn-primary" href="{{ path('sprint_list', {'id': project.id}) }}"><i class="icon-repeat icon-white"></i> {{ 'No'|trans }}</a>
+                        </div>
+                    </form>
+               </div>
+            </div>
         </div><!--/span-->
     </div><!--/row-->
 

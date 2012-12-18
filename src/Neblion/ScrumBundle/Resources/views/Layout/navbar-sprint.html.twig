@@ -1,6 +1,6 @@
 <div class="navbar">
     <div class="navbar-inner">
-        <a class="brand" href="#">{{ 'Sprint %name%'|trans({ '%name%': sprint.name }) }} {{ sprint.start|date('d/m/Y') }} > {{ sprint.end|date('d/m/Y') }}</a>
+        <a class="brand" href="#">{{ sprint.name }}</a>
         <ul class="nav">
             <li {% if active == 'edition' %}class="active"{% endif %}><a href="{{ path('sprint_edit', { 'id': sprint.id }) }}">{{ 'Edition'|trans }}</a></li>
             <li {% if active == 'taskboard' %}class="active"{% endif %}><a href="{{ path('sprint_show', { 'id': sprint.id }) }}">{{ 'Taskboard'|trans }}</a></li>
@@ -16,6 +16,7 @@
                     <li {% if active == 'restart' %}class="active"{% endif %}><a href="{{ path('sprint_start', { 'id': sprint.id }) }}">{{ 'Re-start'|trans }}</a></li>
                 {% endif %}
             {% endif %}
+            <li {% if active == 'deletion' %}class="active"{% endif %}><a href="{{ path('sprint_delete', { 'id': sprint.id }) }}">{{ 'Deletion'|trans }}</a></li>
         </ul>
     </div><!--/navbar-inner-->
 </div><!--/navbar-->

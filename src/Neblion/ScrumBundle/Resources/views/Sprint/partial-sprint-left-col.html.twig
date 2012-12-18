@@ -1,0 +1,31 @@
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon"><i class="icon-file"></i></span>
+        <h5>{{ 'Sprint description'|trans }}</h5>
+    </div>
+    <div class="widget-content">
+        <p>{{ sprint.description }}</p>
+        <p>{{ 'from'|trans }}: {{ sprint.start|date('d/m/Y') }} {{ 'to'|trans }} {{ sprint.end|date('d/m/Y') }}</p>
+    </div>
+</div>
+
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon"><i class="icon-file"></i></span>
+        <h5>{{ 'Release'|trans }}: {{ sprint.projectRelease.name }}</h5>
+    </div>
+    <div class="widget-content">
+        <p>{{ sprint.projectRelease.description }}</p>
+    </div>
+</div>
+
+<div class="widget-box">
+    <div class="widget-title">
+        <span class="icon"><i class="icon-file"></i></span>
+        <h5>{{ 'Project description'|trans }}</h5>
+    </div>
+    <div class="widget-content">
+        <p>{{ project.description }}</p>
+    </div>
+</div>
+
