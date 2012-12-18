@@ -1,4 +1,4 @@
-{% block field_rows %}
+{% block form_rows %}
 {% spaceless %}
     {% if form.vars.errors|length > 0 %}
         <div class="alert alert-error">{{ form_errors(form) }}</div>
@@ -7,9 +7,10 @@
         {{ form_row(child) }}
     {% endfor %}
 {% endspaceless %}
-{% endblock field_rows %}
+{% endblock form_rows %}
 
-{% block field_row %}
+{% block form_row %}
+{% spaceless %}
     {% if form.vars.errors|length > 0 %}
         <div class="control-group error">
     {% else %}
@@ -21,26 +22,42 @@
         {{ form_errors(form) }}
     </div>
     </div>
-{% endblock field_row %}
+{% endspaceless %}
+{% endblock form_row %}                
                 
-{% block field_label %}
-    {# custom field label output #}
-    {% spaceless %}
-        <label class="control-label{% if required %} required{% endif %}" for="{{ id }}">
-            {{ name|replace({'_':' '})|capitalize|trans }}
-            {% if required %}
-                <span class="required" title="{{ 'This field is required'|trans }}">*</span>
-            {% endif %}
-        </label>
-    {% endspaceless %}
-{% endblock field_label %}
-        
-{% block field_errors %}
-    {% spaceless %}
-    {% if errors is defined and errors|length > 0 %}
-        {% for error in errors %}
-            <span class="help-inline">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</span>
-        {% endfor %}
+{% block form_label %}
+{% spaceless %}
+    {% set label_attr = label_attr|merge({'class': 'control-label'}) %}
+    {% if not compound %}
+        {% set label_attr = label_attr|merge({'for': id}) %}
     {% endif %}
-    {% endspaceless %}
-{% endblock field_errors %}
+    {% if required %}
+        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+    {% endif %}
+    {% if label is empty %}
+        {% set label = name|humanize %}
+    {% endif %}
+    <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        {{ label|trans({}, translation_domain) }}
+        {% if required %}
+            <span class="required" title="{{ 'This field is required'|trans }}">*</span>
+        {% endif %}
+    </label>
+{% endspaceless %}
+{% endblock form_label %}
+        
+{% block form_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    <ul>
+        {% for error in errors %}
+            <li><span class="help-inline">{{
+                error.messagePluralization is null
+                    ? error.messageTemplate|trans(error.messageParameters, 'validators')
+                    : error.messageTemplate|transchoice(error.messagePluralization, error.messageParameters, 'validators')
+            }}</span></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_errors %}
