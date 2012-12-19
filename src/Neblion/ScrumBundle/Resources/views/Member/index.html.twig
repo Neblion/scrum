@@ -52,16 +52,16 @@
                                     <td>{% if member.admin %}{{ 'Yes'|trans }}{% else %}{{ 'No'|trans }}{% endif %}</td>
                                     <td>{{ member.status.name|trans }}</td>
                                     <td>
-                                        {% if member.status.id == 1 %}
-                                            {% if member.email == app.user.email %}
-                                                <a class="btn btn-mini btn-success" href="{{ path('member_invitation_accept', { 'id': member.id }) }}"><i class="icon-ok icon-white"></i> {{ 'Accept'|trans }}</a>
-                                                <a class="btn btn-mini btn-inverse" href="{{ path('member_invitation_refuse', { 'id': member.id }) }}"><i class="icon-minus-sign icon-white"></i> {{ 'Refuse'|trans }}</a>
-                                            {% else %}
-                                                <a class="btn btn-mini btn-danger" href="{{ path('member_remove', { 'id': member.id }) }}"><i class="icon-trash icon-white"></i> {{ 'Remove'|trans }}</a>
+                                            {% if member.status.id == 1 %}
+                                                {% if member.email == app.user.email %}
+                                                    <a class="btn btn-mini btn-success" href="{{ path('member_invitation_accept', { 'id': member.id }) }}"><i class="icon-ok icon-white"></i> {{ 'Accept'|trans }}</a>
+                                                    <a class="btn btn-mini btn-inverse" href="{{ path('member_invitation_refuse', { 'id': member.id }) }}"><i class="icon-minus-sign icon-white"></i> {{ 'Refuse'|trans }}</a>
+                                                {% else %}
+                                                    <a class="btn btn-mini btn-danger" href="{{ path('member_remove', { 'id': member.id }) }}"><i class="icon-trash icon-white"></i> {{ 'Remove'|trans }}</a>
+                                                {% endif %}
+                                            {% elseif member.status.id != 2 %}
+                                                <a class="btn btn-mini btn-primary" href="{{ path('member_invitation_renew', { 'id': member.id }) }}"><i class="icon-plus icon-white"></i> {{ 'Invit'|trans }}</a>
                                             {% endif %}
-                                        {% elseif member.status.id != 2 %}
-                                            <a class="btn btn-mini btn-primary" href="{{ path('member_invitation_renew', { 'id': member.id }) }}"><i class="icon-plus icon-white"></i> {{ 'Invit'|trans }}</a>
-                                        {% endif %}
                                     </td>
                                 </tr>
                             {% else  %}
@@ -98,14 +98,16 @@
                                     <td>{% if member.admin %}{{ 'Yes'|trans }}{% else %}{{ 'No'|trans }}{% endif %}</td>
                                     <td>{{ member.status.name|trans }}</td>
                                     <td>
-                                        {% if member.status.id == 2 %}
-                                            <!--<a class="btn btn-mini btn-info" href="{# path('member_show', { 'id': member.id }) #}"><i class="icon-eye-open icon-white"></i> {# 'Show'|trans #}</a>-->
-                                            <a class="btn btn-mini btn-primary" href="{{ path('member_edit', { 'id': member.id }) }}"><i class="icon-edit icon-white"></i> {{ 'Edit'|trans }}</a>
-                                            {% if member.account.id != app.user.id %}<a class="btn btn-mini btn-danger" href="{{ path('member_remove', { 'id': member.id }) }}"><i class="icon-trash icon-white"></i> {{ 'Remove'|trans }}</a>{% endif %}
-                                        {% elseif member.status.id == 1 and member.account.id == app.user.id %}
-                                            <a class="btn btn-mini btn-success" href="{{ path('member_invitation_accept', { 'id': member.id }) }}"><i class="icon-ok icon-white"></i> {{ 'Accept'|trans }}</a>
-                                            <a class="btn btn-mini btn-inverse" href="{{ path('member_invitation_refuse', { 'id': member.id }) }}"><i class="icon-minus-sign icon-white"></i> {{ 'Refuse'|trans }}</a>
-                                            <strong>Invitation ?</strong>
+                                        {% if admin %}
+                                            {% if member.status.id == 2 %}
+                                                <!--<a class="btn btn-mini btn-info" href="{# path('member_show', { 'id': member.id }) #}"><i class="icon-eye-open icon-white"></i> {# 'Show'|trans #}</a>-->
+                                                <a class="btn btn-mini btn-primary" href="{{ path('member_edit', { 'id': member.id }) }}"><i class="icon-edit icon-white"></i> {{ 'Edit'|trans }}</a>
+                                                {% if member.account.id != app.user.id %}<a class="btn btn-mini btn-danger" href="{{ path('member_remove', { 'id': member.id }) }}"><i class="icon-trash icon-white"></i> {{ 'Remove'|trans }}</a>{% endif %}
+                                            {% elseif member.status.id == 1 and member.account.id == app.user.id %}
+                                                <a class="btn btn-mini btn-success" href="{{ path('member_invitation_accept', { 'id': member.id }) }}"><i class="icon-ok icon-white"></i> {{ 'Accept'|trans }}</a>
+                                                <a class="btn btn-mini btn-inverse" href="{{ path('member_invitation_refuse', { 'id': member.id }) }}"><i class="icon-minus-sign icon-white"></i> {{ 'Refuse'|trans }}</a>
+                                                <strong>Invitation ?</strong>
+                                            {% endif %}
                                         {% endif %}
                                     </td>
                                 </tr>

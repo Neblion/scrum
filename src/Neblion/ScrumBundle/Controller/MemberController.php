@@ -52,7 +52,7 @@ class MemberController extends Controller
         $admin = false;
         $membersDisabled = array();
         
-        if ($member->getAdmin()) {
+        if ($member->getAdmin() or $member->getRole()->getId() == 2) {
             $admin = true;
             // Get Members of the team
             $membersDisabled = $em->getRepository('NeblionScrumBundle:Member')
