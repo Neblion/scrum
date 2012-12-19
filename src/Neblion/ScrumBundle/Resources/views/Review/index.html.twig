@@ -25,22 +25,30 @@
                     <div class="widget-content">
                         <p><strong>{{ 'Story description'|trans }}:</strong> {{ story.description }}</p>
                         <p><span class="badge badge-info">{{ 'Effort'|trans }}: {{ story.estimate }}</span> {% if story.status.id == 3 %}<span class="badge badge-success">{{ 'Done'|trans}}{% else %}<span class="badge badge-important">{{ 'Not done'|trans }}{% endif %}</span></p>
-                        {% set form = forms[story.id] %}
-                        {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
-                        {% if story.review.id is defined %}
-                        <form action="{{ path('review_update', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
-                            {{ form_widget(form) }}
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">{{ 'Update'|trans }}</button>
-                            </div>
-                        {% else  %}
-                            <form action="{{ path('review_create', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
-                            {{ form_widget(form) }}
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">{{ 'Create'|trans }}</button>
-                            </div>
+                        {% if member.role.id == 1 or member.admin %}
+                            {% set form = forms[story.id] %}
+                            {% form_theme form 'NeblionScrumBundle:Form:fields.html.twig' %}
+                            {% if story.review.id is defined %}
+                            <form action="{{ path('review_update', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                                {{ form_widget(form) }}
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">{{ 'Update'|trans }}</button>
+                                </div>
+                            {% else  %}
+                                <form action="{{ path('review_create', { 'id': story.id }) }}" method="post" {{ form_enctype(form) }} class="form-horizontal" novalidate>
+                                {{ form_widget(form) }}
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">{{ 'Create'|trans }}</button>
+                                </div>
+                            {% endif %}
+                            </form>
+                        {% else %}
+                            {% if story.review.id is defined %}
+                                <p>{{ story.review.comment }}</p>
+                            {% else %}
+                                <p>{{ 'There is no review comment for the time.'|trans }}</p>
+                            {% endif %}
                         {% endif %}
-                        </form>
                     </div>
                 </div>
             {% endfor %}

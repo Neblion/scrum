@@ -49,33 +49,30 @@ class ReviewController extends Controller
             throw new AccessDeniedException();
         }
         
-        // Check if user is really a member of this project
-        $member = $em->getRepository('NeblionScrumBundle:Member')
-                ->isMemberOfProject($user->getId(), $project->getId());
-        if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
-            throw new AccessDeniedException();
-        }
-        
         // Load stories for this sprint
         $stories = $em->getRepository('NeblionScrumBundle:Story')
                 ->getSprintDetails($sprint->getId(), true);
         
         $forms = array();
-        foreach ($stories as $story) {
-            if ($story->getReview()) {
-                $review = $story->getReview();
-            } else {
-                $review = new \Neblion\ScrumBundle\Entity\Review();
-            }
-            $forms[$story->getId()] = $this->createForm(new ReviewType(), $review)->createView();
-        }
         
+        if ($member->getRole()->getId() == 1 or $member->getAdmin()) {
+            foreach ($stories as $story) {
+                if ($story->getReview()) {
+                    $review = $story->getReview();
+                } else {
+                    $review = new \Neblion\ScrumBundle\Entity\Review();
+                }
+                $forms[$story->getId()] = $this->createForm(new ReviewType(), $review)->createView();
+            }
+        }
+            
         return array(
             'project'       => $project,
             'sprint'        => $sprint,
-            'review'        => $review,
+            //'review'        => $review,
             'stories'       => $stories,
             'forms'         => $forms,
+            'member'        => $member,
         );
     }
 
