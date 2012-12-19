@@ -131,6 +131,7 @@ class ProjectController extends Controller
         if ($this->getRequest()->isXmlHttpRequest()) {
             return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Project/Ajax:backlog.html.twig', array(
                 'project'           => $project,
+                'member'            => $member,
                 'projectRelease'    => $projectRelease,
                 'nextSprint'        => $nextSprint,
                 'backlog'           => $backlog,
@@ -142,6 +143,7 @@ class ProjectController extends Controller
         } else {
             return array(
                 'project'           => $project,
+                'member'            => $member,
                 'projectRelease'    => $projectRelease,
                 'nextSprint'        => $nextSprint,
                 'backlog'           => $backlog,
@@ -187,11 +189,6 @@ class ProjectController extends Controller
         
         // Get Data for burn up points / sprint chart
         $datas = $em->getRepository('NeblionScrumBundle:Project')->getDataBurnUpPoints($project);
-        /*
-        echo '<pre>';
-        print_r($datas);
-        echo '</pre>';
-        */
         
         $strTotal = $strDone = '';
         foreach ($datas['data'] as $sprint => $values) {
@@ -213,19 +210,13 @@ class ProjectController extends Controller
         // Load activities
         $activities = $em->getRepository('NeblionScrumBundle:Activity')
                 ->loadForProject($project);
-        /*
-        echo '<pre>';
-        print_r($activities);
-        echo '</pre>';
-        */
         
         return array(
             'project'       => $project,
-            //'currentSprint' => $currentSprint,
-            'strDone'   => $strDone,
-            'strTotal'   => $strTotal,
-            'strXTicks' => $strXTicks,
-            'activities' => $activities,
+            'strDone'       => $strDone,
+            'strTotal'      => $strTotal,
+            'strXTicks'     => $strXTicks,
+            'activities'    => $activities,
         );
     }
 
@@ -339,10 +330,21 @@ class ProjectController extends Controller
             throw new AccessDeniedException();
         }
         
+        // Get the current user
+        $user = $this->get('security.context')->getToken()->getUser();
+        
         $em = $this->getDoctrine()->getEntityManager();
+        
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
         if (!$project) {
             throw $this->createNotFoundException('Unable to find Project entity.');
+        }
+        
+        // Check if user is really a member of this project
+        $member = $em->getRepository('NeblionScrumBundle:Member')
+                ->isMemberOfProject($user->getId(), $project->getId());
+        if (!$member or !$member->getAdmin()) {
+            throw new AccessDeniedException();
         }
 
         $editForm = $this->createForm(new ProjectType($this->get('translator')), $project);
@@ -367,6 +369,7 @@ class ProjectController extends Controller
             throw new AccessDeniedException();
         }
         
+        // Get the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getEntityManager();
@@ -374,6 +377,13 @@ class ProjectController extends Controller
         $entity = $em->getRepository('NeblionScrumBundle:Project')->find($id);
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Project entity.');
+        }
+        
+        // Check if user is really a member of this project
+        $member = $em->getRepository('NeblionScrumBundle:Member')
+                ->isMemberOfProject($user->getId(), $entity->getId());
+        if (!$member or !$member->getAdmin()) {
+            throw new AccessDeniedException();
         }
 
         $editForm   = $this->createForm(new ProjectType($this->get('translator')), $entity);
@@ -439,12 +449,6 @@ class ProjectController extends Controller
             throw new AccessDeniedException();
         }
         
-        // Check if ther are more than one administrator for this project
-        /*
-        $admins = $em->getRepository('NeblionScrumBundle:Member')
-                ->getAdminsForProject($project->getId());
-        */
-        
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -471,7 +475,6 @@ class ProjectController extends Controller
 
         return array(
             'project'   => $project,
-            //'admins'    => $admins,
             'form'      => $form->createView(),
         );
     }
@@ -509,6 +512,14 @@ class ProjectController extends Controller
         if (!$project) {
             throw $this->createNotFoundException('Unable to find Project entity.');
         }
+        
+        // Check if user is really a member of this project and if this user 
+        // is an admin user
+        $member = $em->getRepository('NeblionScrumBundle:Member')
+                ->isMemberOfProject($user->getId(), $project->getId());
+        if (!$member or !$member->getAdmin()) {
+            throw new AccessDeniedException();
+        }
 
         // Load backlog stories for check
         $stories = $em->getRepository('NeblionScrumBundle:Story')->getBacklogStories($project);
@@ -524,10 +535,8 @@ class ProjectController extends Controller
             if ($request->request->has('story-sort-order')) {
                 $storySortOrder = $request->request->get('story-sort-order');
             }
-            //echo 'storySortOrder: ' . $storySortOrder . '<br />';
             
             if (empty($storySortOrder)) {
-                // redirect + flash mesg + log
                 // Set flash message
                 $this->get('session')->setFlash('notice', 'Noting to sort in the Backlog!');
                 return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));

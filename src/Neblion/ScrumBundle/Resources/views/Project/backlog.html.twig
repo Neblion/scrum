@@ -77,12 +77,13 @@
             containment: "#backlog",
             cursor: "move",
             stop:function(event, ui) {
-                // Check where story has been drop (nextsprint or otherstories)
-                if (ui.item.parent().attr('id') == 'next-sprint-stories' && ui.item.attr('value') == 0) {
-                    alert('You can not add a story not estimate in next sprint !');
-                    $(ui.sender).sortable('cancel');
-                    return false;
-                }
+                {% if member.role.id == 1 or member.admin %}
+                    // Check where story has been drop (nextsprint or otherstories)
+                    if (ui.item.parent().attr('id') == 'next-sprint-stories' && ui.item.attr('value') == 0) {
+                        alert('You can not add a story not estimate in next sprint !');
+                        $(ui.sender).sortable('cancel');
+                        return false;
+                    }
                 
                     var nextestimate = 0;
                     var otherestimate = 0;
@@ -117,16 +118,17 @@
                             $("#start-next-sprint").attr("href", link.replace(/\d+$/, lastStory));
                         }
                     });
-                    
-                }
+                {% else %}
+                    alert('You can not priorize stories, only Product owner and administrator of the project could be do it !');
+                    $(ui.sender).sortable('cancel');
+                    return false;
+                {% endif %}
+            }
         });
     
         $("a.story-estimate").live("click", function() {
             //var story_id    = $(this).attr('id').replace('story-estimate-', '');
             var url         = $(this).attr('href');    
-
-            //alert(story_id);
-            //alert(url);
 
             $.ajax({
                 url: url,
@@ -137,8 +139,6 @@
             });
 
             return false;
-            //var splitter = $(this).attr('id').split('-');
-            //alert('id: ' + splitter[2]);
         });
         
         $("a.add-story").live("click", function() {
@@ -157,8 +157,6 @@
 
         $("#modal-submit-form").live("click", function() {
             var form = $("#modal-form");
-            //alert(form.attr('action'));
-            //alert('totototototo');
 
             $.ajax({
                 url: form.attr('action'),
