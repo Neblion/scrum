@@ -4,6 +4,7 @@
         <li{% if active == 'backlog' %} class="active"{% endif %}><a href="{{ path ('project_backlog', { 'id': project.id }) }}">{{ 'Backlog'|trans }}</a></li>
         <li{% if active == 'sprints' %} class="active"{% endif %}><a href="{{ path('sprint_list', { 'id': project.id }) }}">{{ 'Sprints'|trans }}</a></li>
         <li{% if active == 'activity' %} class="active"{% endif %}><a href="{{ path('project_activity', { 'id': project.id }) }}">{{ 'Activity'|trans }}</a></li>
+        <li{% if active == 'team' %} class="active"{% endif %}><a href="{{ path('member_list', { 'id': project.id }) }}">{{ 'Team'|trans }}</a></li>
         <li{% if active == 'admin' %} class="active"{% endif %}><a href="{{ path('project_edit', { 'id': project.id }) }}">{{ 'Admin'|trans }}</a></li>
     </ul><!-- /.nav-tabs -->
 </div><!--/.tabbable -->
