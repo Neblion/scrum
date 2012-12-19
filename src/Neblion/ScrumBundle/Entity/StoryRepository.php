@@ -51,8 +51,9 @@ class StoryRepository extends EntityRepository
     {
         return $this->getEntityManager()
                 ->createQuery(
-                    'SELECT s, f FROM NeblionScrumBundle:Story s
+                    'SELECT s, ss, f FROM NeblionScrumBundle:Story s
                     INNER JOIN s.project p
+                    INNER JOIN s.status ss
                     LEFT JOIN s.feature f
                     LEFT JOIN s.sprint sp
                     WHERE s.project = :project

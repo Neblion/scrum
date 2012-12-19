@@ -259,6 +259,53 @@ class StoryController extends Controller
     }
     
     /**
+     * Validate existing Story entity.
+     *
+     * @Route("/{id}/validate", name="story_validate")
+     * @Template()
+     */
+    public function validateAction($id)
+    {
+        // Check if user is authorized
+        if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            throw new AccessDeniedException();
+        }
+        
+        $user = $this->get('security.context')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        
+        $story = $em->getRepository('NeblionScrumBundle:Story')->find($id);
+        if (!$story) {
+            throw $this->createNotFoundException('Unable to find Story entity.');
+        }
+        $project = $story->getProject();
+        
+        // Check if user is really a member of this project
+        $member = $em->getRepository('NeblionScrumBundle:Member')
+                ->isMemberOfProject($user->getId(), $project->getId());
+        if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
+            throw new AccessDeniedException();
+        }
+        
+        // Load To do status
+        $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(1);
+        
+        $story->setStatus($status);
+        
+        // store activity            
+        $this->get('scrum_activity')->add($project, $user, 'validate story', 
+           $this->generateUrl('story_edit', array('id' => $story->getId())), 
+            'Story #' . $story->getId());
+                
+        $em->flush();
+
+        // Set flash message
+        $this->get('session')->setFlash('success', 'Story was validated with success!');
+        return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
+    }
+    
+    /**
      * Displays a form to edit estimate of an existing Story entity.
      *
      * @Route("/{id}/estimate", name="story_estimate")

@@ -7,6 +7,10 @@
         <!--<div style="float:right; width: 25px; height: 25px; background-color: {# story.feature.color #};"></div>-->
         <a href="{{ path('story_edit', { 'id': story.id }) }}"><i class="icon-edit"></i></a>
         <a href="{{ path('story_delete', { 'id': story.id }) }}"><i class="icon-trash"></i></a>
-        <a href="{{ path('story_estimate', { 'id': story.id }) }}" id="story-estimate-{{ story.id }}" class="story-estimate">{{ story.estimate }}</a>
+        {% if story.status.id == 1 %}
+            <a href="{{ path('story_estimate', { 'id': story.id }) }}" id="story-estimate-{{ story.id }}" class="story-estimate">{{ story.estimate }}</a>
+        {% else %}
+            <a href="{{ path('story_validate', { 'id': story.id }) }}" class="story-to-validate"><i class="icon-thumbs-up"></i></a>
+        {% endif %}
     </div>
 </li>
