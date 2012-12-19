@@ -108,8 +108,8 @@ class StoryController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            // Load default sprint status
-            $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(1);
+            // Load default story status (To validate)
+            $status = $em->getRepository('NeblionScrumBundle:ProcessStatus')->find(4);
             
             // Get last position for story
             $position = $em->getRepository('NeblionScrumBundle:Story')
