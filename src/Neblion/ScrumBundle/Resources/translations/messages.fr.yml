@@ -1,7 +1,7 @@
 Profile: Profil
 'Username and email': 'Nom d''utilisateur et email'
 'Change password': 'Changer votre mot de passe'
-on: __on
+on: sur
 Description: Description
 Hours: Heures
 'Set Done': Fait
@@ -12,6 +12,7 @@ Delete: Supprimer
 'Create a new task': 'Créer une nouvelle tâche'
 Create: Créer
 'Task was created with success!': 'La tâche a été créé avec succès !'
+'Task was deleted with success!': 'La tâche a été supprimé avec succès !'
 Close: Fermer
 'Save changes': 'Enregistrer les modifications'
 'Storyless task was created with success !': 'La tâche storyless a été créé avec succès !'
@@ -47,7 +48,6 @@ Reports: Rapports
 'Project edition': 'Edition d''un projet'
 'Search help': '__Search help'
 Search: Recherche
-'Search projects': '__Search projects'
 'Search results': 'Résultats de la recherche'
 'No result': 'Aucun résultat'
 'Project deletion': 'Suppression d''un projet'
@@ -91,7 +91,7 @@ Contact: Contact
 'Sign Out': Déconnexion
 Edition: Edition
 Taskboard: Taskboard
-Start: Commencer
+Start: Début
 Review: Revue
 Retrospective: Retrospective
 Re-start: Re-commencer
@@ -122,7 +122,7 @@ Hello: Bonjour
 'If you do not have an account yet, you can create one on %url%': "Si vous n'avez pas encore de compte, il vous suffit d'en créer un à l'adresse suivante %url%"
 'Sign in': Connexion
 'Forgot your password ?': 'Mot de passe oublié ?'
-'Sprint creation': '__Sprint creation'
+'Sprint creation': "Création d'un sprint"
 'Sprint reports': 'Rapports de sprint'
 'Burndown hours chart': 'Burndown heures'
 'Create storyless task': 'Créer une tâche storyless'
@@ -158,9 +158,9 @@ View: Voir
 Register: Enregistrez-vous
 'Sprint retrospective:': 'Retrospective de sprint:'
 'as a': '__as a'
-'did not write a retrospective comment for the time.': '__did not write a retrospective comment for the time.'
+'did not write a retrospective comment for the time.': "n'a pas encore écrit de retrospective pour le moment."
 'Sprint retro:': '__Sprint retro:'
-'Resetting request': '__Resetting request'
+'Resetting request': 'Renouvellement du mot de passe'
 'Profile creation:': 'Création d''un profil'
 Feature: Fonctionnalité
 'Story estimate': 'Estimation de la story'
@@ -187,12 +187,12 @@ Hour: Heure
 Username: 'Nom d''utilisateur'
 'Sprint %name%': 'Sprint %name%'
 End: Fin
-'Sprint creation:': 'Création d''un sprint:'
+'Sprint creation:': "Création d'un sprint:"
 'Current Release': 'Release courante'
-'Remaining hours was updated with success': '__Remaining hours was updated with success'
+'Remaining hours was updated with success': 'Les heures restantes ont été mise à jour avec succès !'
 Success: Succès
 'Profile edition:': 'Edition d''un profil'
-'Story estimate edition': 'Edition de l''estimation de la story'
+'Story estimate edition': "Edition de l'estimation de la story"
 'Review creation:': 'Création d''une revue:'
 'Sprint review:': 'Revue de sprint:'
 'hours remaining': 'heures restantes'
@@ -228,8 +228,10 @@ Saturday: Samedi
 'Sprint was updated with success!': 'Le sprint a été modifié avec succès !'
 'Sprint was started with success!': 'Le sprint a été lancé avec succès !'
 'Sprint was closed with success!': 'Le sprint a été fermé avec succès !'
+'Sprint was deleted with success!': 'Le sprint a été supprimé avec succès !'
 'Task was successfully updated!': 'La tâche a été modifié avec succès !'
 'Story was updated with success!': 'La story a été modifié avec succès !'
+'Story was validated with success!': 'La story a été validé avec succès !'
 'Review was created with success!': 'La revue a été créé avec succès !'
 'Review was updated with success!': 'La revue a été modifié avec succès !'
 'Retrospective was created with success!': 'La retrospective a été créé avec succès !'
@@ -251,3 +253,23 @@ Comment: Commentaire
 'Developer': 'Développeur'
 'Product owner': 'Product owner'
 'Scrumaster': 'Scrumaster'
+'Member was successfully updated !': 'Le membre a été modifié avec succès !'
+'Member was removed from team with success!': "Le membre a été retiré de l'équipe avec succès !"
+'created sprint': 'a créé le sprint'
+'updated sprint': 'a mis à jour le sprint'
+'started sprint': 'a commencé le sprint'
+'closed sprint': 'a fermé le sprint'
+'deleted sprint': 'a suprimé le sprint'
+'created story': 'a créé la story'
+'updated story': 'a modifié la story'
+'deleted story': 'a supprimé la story'
+'validated story': 'a validé la story'
+'estimated story': 'a estimé la story'
+'created task': 'a créé la tâche'
+'updated task': 'a modifié la tâche'
+'deleted task': 'a supprimé la tâche'
+'created storyless task': 'a crée la tâche storyless'
+"updated task's hours": "a modifié les heures restantes de la tâche"
+'took task': 'a pris la tâche'
+'set task in progress': 'a définit la tâche comme en cours'
+'set task done': 'a définit la tâche comme fini'

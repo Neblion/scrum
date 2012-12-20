@@ -119,7 +119,7 @@ class StoryController extends Controller
             $em->persist($story);
             
             // store activity            
-            $this->get('scrum_activity')->add($project, $user, 'create story', 
+            $this->get('scrum_activity')->add($project, $user, 'created story', 
                     $this->generateUrl('project_backlog', array('id' => $project->getId())), 
                     'Project #' . $project->getId() . ' ' . $story->getName());
             
@@ -236,9 +236,9 @@ class StoryController extends Controller
             $em->persist($story);
             
             // store activity            
-            $this->get('scrum_activity')->add($project, $user, 'update story', 
+            $this->get('scrum_activity')->add($project, $user, 'updated story', 
                     $this->generateUrl('story_edit', array('id' => $story->getId())), 
-                    'Story #' . $story->getId());
+                    'Story #' . $story->getId() . ' ' . $story->getName());
             
             $em->flush();
             
@@ -294,9 +294,9 @@ class StoryController extends Controller
         $story->setStatus($status);
         
         // store activity            
-        $this->get('scrum_activity')->add($project, $user, 'validate story', 
+        $this->get('scrum_activity')->add($project, $user, 'validated story', 
            $this->generateUrl('story_edit', array('id' => $story->getId())), 
-            'Story #' . $story->getId());
+            'Story #' . $story->getId() . ' ' . $story->getName());
                 
         $em->flush();
 
@@ -346,9 +346,9 @@ class StoryController extends Controller
                 $em->persist($story);
                 
                 // store activity            
-                $this->get('scrum_activity')->add($project, $user, 'estimate story', 
+                $this->get('scrum_activity')->add($project, $user, 'estimated story', 
                     $this->generateUrl('story_edit', array('id' => $story->getId())), 
-                    'Story #' . $story->getId());
+                    'Story #' . $story->getId() . ' ' . $story->getName());
                 
                 $em->flush();
                 
@@ -431,9 +431,9 @@ class StoryController extends Controller
                 $em->remove($story);
                 
                 // store activity            
-                $this->get('scrum_activity')->add($project, $user, 'delete story', 
+                $this->get('scrum_activity')->add($project, $user, 'deleted story', 
                     $this->generateUrl('project_backlog', array('id' => $project->getId())), 
-                    'Story #' . $story->getId());
+                    'Story #' . $story->getId() . ' ' . $story->getName());
                 
                 $em->flush();
             }

@@ -372,9 +372,9 @@ class SprintController extends Controller
             }
             
             // store activity            
-            $this->get('scrum_activity')->add($project, $user, 'create sprint', 
+            $this->get('scrum_activity')->add($project, $user, 'created sprint', 
                     $this->generateUrl('sprint_list', array('id' => $project->getId())), 
-                    'Sprint #' . $entity->getId() . ' ' . $entity->getName());
+                    $entity->getName());
             
             $em->flush();
 
@@ -483,9 +483,9 @@ class SprintController extends Controller
             $em->persist($sprint);
             
             // store activity            
-            $this->get('scrum_activity')->add($project, $user, 'update sprint', 
+            $this->get('scrum_activity')->add($project, $user, 'updated sprint', 
                     $this->generateUrl('sprint_show', array('id' => $sprint->getId())), 
-                    'Sprint #' . $sprint->getId());
+                    'Sprint #' . $sprint->getId() . ' ' . $sprint->getName());
             
             $em->flush();
 
@@ -574,7 +574,7 @@ class SprintController extends Controller
         $sprint->setStatus($status);
         
         // store activity            
-        $this->get('scrum_activity')->add($project, $user, 'start sprint', 
+        $this->get('scrum_activity')->add($project, $user, 'started sprint', 
                     $this->generateUrl('sprint_show', array('id' => $sprint->getId())), 
                     'Sprint #' . $sprint->getId());
         
@@ -660,7 +660,7 @@ class SprintController extends Controller
                 $sprint->setStatus($status);
                 
                 // store activity            
-                $this->get('scrum_activity')->add($project, $user, 'close sprint', 
+                $this->get('scrum_activity')->add($project, $user, 'closed sprint', 
                     $this->generateUrl('sprint_show', array('id' => $sprint->getId())), 
                     'Sprint #' . $sprint->getId());
                 
@@ -754,8 +754,8 @@ class SprintController extends Controller
                 $em->remove($sprint);
                 
                 // store activity            
-                $this->get('scrum_activity')->add($project, $user, 'delete sprint', 
-                    $this->generateUrl('sprint_list'), 
+                $this->get('scrum_activity')->add($project, $user, 'deleted sprint', 
+                    $this->generateUrl('sprint_list', array('id' => $project->getId())), 
                     'Sprint #' . $sprint->getId());
                 
                 $em->flush();

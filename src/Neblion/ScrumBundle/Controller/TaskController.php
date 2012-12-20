@@ -163,7 +163,7 @@ class TaskController extends Controller
             }
             
             // store activity            
-            $this->get('scrum_activity')->add($project, $user, 'create task', 
+            $this->get('scrum_activity')->add($project, $user, 'created task', 
                     $this->generateUrl('sprint_show', array('id' => $sprint->getId())), 
                     'Sprint #' . $sprint->getId() . ' ' . $entity->getName());
             
@@ -348,7 +348,7 @@ class TaskController extends Controller
             }
             
             // store activity            
-            $this->get('scrum_activity')->add($project, $user, 'create storyless task', 
+            $this->get('scrum_activity')->add($project, $user, 'created storyless task', 
                     $this->generateUrl('sprint_show', array('id' => $sprint->getId())), 
                     'Sprint #' . $sprint->getId() . ' ' . $entity->getName());
             
@@ -534,7 +534,7 @@ class TaskController extends Controller
             }
             
             // store activity            
-            $this->get('scrum_activity')->add($project, $user, 'update task', 
+            $this->get('scrum_activity')->add($project, $user, 'updated task', 
                     $this->generateUrl('task_edit', array('id' => $task->getId())), 
                     'Task #' . $task->getId());
             
@@ -668,7 +668,7 @@ class TaskController extends Controller
                 }
                 
                 // store activity            
-                $this->get('scrum_activity')->add($project, $user, 'update task\'hours', 
+                $this->get('scrum_activity')->add($project, $user, "updated task's hours", 
                     $this->generateUrl('task_edit', array('id' => $task->getId())), 
                     'Task #' . $task->getId());
                 
@@ -790,7 +790,7 @@ class TaskController extends Controller
         $task->setMember($member);
         
         // store activity            
-        $this->get('scrum_activity')->add($project, $user, 'take task', 
+        $this->get('scrum_activity')->add($project, $user, 'took task', 
                     $this->generateUrl('task_edit', array('id' => $task->getId())), 
                     'Task #' . $task->getId());
         
@@ -1077,7 +1077,7 @@ class TaskController extends Controller
                 $em->remove($task);
                 
                 // store activity            
-                $this->get('scrum_activity')->add($project, $user, 'delete task', 
+                $this->get('scrum_activity')->add($project, $user, 'deleted task', 
                     $this->generateUrl('sprint_show', array('id' => $task->getId())), 
                     'Task #' . $task->getId());
                 
