@@ -319,8 +319,9 @@ class MemberController extends Controller
         }
 
         return array(
-            'member'      => $member,
-            'edit_form'   => $editForm->createView(),
+            'project'   => $project,
+            'member'    => $member,
+            'form'      => $editForm->createView(),
         );
     }
     

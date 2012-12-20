@@ -50,19 +50,19 @@ class FeatureControllerTest extends WebTestCase
         $crawler = $client->submit($form, array());
         
         // Test project name empty
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_featuretype_name ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_featuretype_name ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should not be blank.') {
                 return false;
             }
         })->count() == 1);
         // Test project description empty
-        $this->assertTrue($crawler->filter('textarea#neblion_scrumbundle_featuretype_description ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('textarea#neblion_scrumbundle_featuretype_description ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should not be blank.') {
                 return false;
             }
         })->count() == 1);
         // Test project sprint_duration empty
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_featuretype_color ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_featuretype_color ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should not be blank.') {
                 return false;
             }
@@ -78,13 +78,13 @@ class FeatureControllerTest extends WebTestCase
         ));
         
         // name.length > 50
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_featuretype_name ~ span.help-inline')->reduce(function ($node, $i) {
-            if ($node->nodeValue != 'This value is too long. It should have 50 character or less.|This value is too long. It should have 50 characters or less.') {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_featuretype_name ~ ul li span.help-inline')->reduce(function ($node, $i) {
+            if ($node->nodeValue != 'This value is too long. It should have 50 characters or less.') {
                 return false;
             }
         })->count() == 1);
         // color not hexa code
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_featuretype_color ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_featuretype_color ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This is not a valid hexadecimal color!') {
                 return false;
             }

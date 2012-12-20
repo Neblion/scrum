@@ -38,7 +38,7 @@ class MemberControllerTest extends WebTestCase
         $crawler = $client->submit($form, array());
         
         // Test email empty
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_membertype_email ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_membertype_email ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should not be blank.') {
                 return false;
             }
@@ -50,7 +50,7 @@ class MemberControllerTest extends WebTestCase
             'neblion_scrumbundle_membertype[email]' => 'email',
         ));
         // email invalid
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_membertype_email ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_membertype_email ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'Invalid email address') {
                 return false;
             }

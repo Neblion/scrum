@@ -50,19 +50,19 @@ class ProjectReleaseControllerTest extends WebTestCase
         $crawler = $client->submit($form, array());
         
         // Test project name empty
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_name ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_name ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should not be blank.') {
                 return false;
             }
         })->count() == 1);
         // Test project description empty
-        $this->assertTrue($crawler->filter('textarea#neblion_scrumbundle_projectreleasetype_description ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('textarea#neblion_scrumbundle_projectreleasetype_description ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should not be blank.') {
                 return false;
             }
         })->count() == 1);
         // Test project sprint_duration empty
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_start ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_start ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should not be blank.') {
                 return false;
             }
@@ -77,19 +77,19 @@ class ProjectReleaseControllerTest extends WebTestCase
             'neblion_scrumbundle_projectreleasetype[end]'              => 'end',
         ));
         // name.length > 50
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_name ~ span.help-inline')->reduce(function ($node, $i) {
-            if ($node->nodeValue != 'This value is too long. It should have 50 character or less.|This value is too long. It should have 50 characters or less.') {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_name ~ ul li span.help-inline')->reduce(function ($node, $i) {
+            if ($node->nodeValue != 'This value is too long. It should have 50 characters or less.') {
                 return false;
             }
         })->count() == 1);
         // start is not a date value
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_start ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_start ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value is not valid.') {
                 return false;
             }
         })->count() == 1);
         // end is not a date value
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_end ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projectreleasetype_end ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value is not valid.') {
                 return false;
             }

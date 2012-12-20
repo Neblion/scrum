@@ -46,19 +46,19 @@ class ProjectControllerTest extends WebTestCase
         $crawler = $client->submit($form, array());
         
         // Test project name empty
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projecttype_name ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projecttype_name ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should not be blank.') {
                 return false;
             }
         })->count() == 1);
         // Test project description empty
-        $this->assertTrue($crawler->filter('textarea#neblion_scrumbundle_projecttype_description ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('textarea#neblion_scrumbundle_projecttype_description ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should not be blank.') {
                 return false;
             }
         })->count() == 1);
         // Test project sprint_duration empty
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projecttype_sprint_duration ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projecttype_sprint_duration ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should not be blank.') {
                 return false;
             }
@@ -74,13 +74,13 @@ class ProjectControllerTest extends WebTestCase
         ));
         
         // name.length > 50
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projecttype_name ~ span.help-inline')->reduce(function ($node, $i) {
-            if ($node->nodeValue != 'This value is too long. It should have 50 character or less.|This value is too long. It should have 50 characters or less.') {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projecttype_name ~ ul li span.help-inline')->reduce(function ($node, $i) {
+            if ($node->nodeValue != 'This value is too long. It should have 50 characters or less.') {
                 return false;
             }
         })->count() == 1);
         // Test project sprint_duration < 0
-        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projecttype_sprint_duration ~ span.help-inline')->reduce(function ($node, $i) {
+        $this->assertTrue($crawler->filter('input#neblion_scrumbundle_projecttype_sprint_duration ~ ul li span.help-inline')->reduce(function ($node, $i) {
             if ($node->nodeValue != 'This value should be 1 or more.') {
                 return false;
             }

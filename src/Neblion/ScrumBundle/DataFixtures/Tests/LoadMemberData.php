@@ -159,6 +159,7 @@ class LoadMemberData extends AbstractFixture implements OrderedFixtureInterface,
         $member->setProject($params['project']);
         $member->setRole($params['role']);
         $member->setStatus($params['status']);
+        $member->setEmail($params['name'] . '@test.com');
         if ($params['status']->getId() == 1) {
             $member->setSender($params['sender']->getAccount());
         }
