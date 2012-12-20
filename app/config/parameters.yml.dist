@@ -10,6 +10,8 @@ parameters:
     mailer_host:       localhost
     mailer_user:       ~
     mailer_password:   ~
+    mailer_address:    scrum@example.com
+    mailer_sender:     Scrum
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
