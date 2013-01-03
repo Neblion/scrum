@@ -273,3 +273,4 @@ Comment: Commentaire
 'took task': 'a pris la tâche'
 'set task in progress': 'a définit la tâche comme en cours'
 'set task done': 'a définit la tâche comme fini'
+'A sprint is still in progress, you can not start this one!': 'Vous ne pouvez redémarrer ce sprint, un autre sprint est en cours !'
