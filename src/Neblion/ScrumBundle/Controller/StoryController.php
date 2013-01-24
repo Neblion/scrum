@@ -179,6 +179,12 @@ class StoryController extends Controller
         if (!$member or !in_array($member->getRole()->getId(), array(1, 2))) {
             throw new AccessDeniedException();
         }
+        
+        // Block story estimate if story was not validate
+        if ($story->getStatus()->getId() == 4) {
+            // Set flash message
+            $this->get('session')->setFlash('notice', 'You can not edit estimate, because story was not validate !');
+        }
 
         // Create forms instance
         $editForm = $this->createForm(new StoryType($project->getId()), $story);
@@ -233,6 +239,13 @@ class StoryController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
+            // Block story estimate if story was not validate
+            if ($story->getStatus()->getId() == 4 and $story->getEstimate() != 0) {
+                // Set flash message
+                $this->get('session')->setFlash('notice', 'You can not edit estimate, because story was not validate !');
+                $story->setEstimate(0);
+            }
+            
             $em->persist($story);
             
             // store activity            
