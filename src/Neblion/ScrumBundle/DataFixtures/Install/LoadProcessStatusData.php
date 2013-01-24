@@ -23,6 +23,7 @@ class LoadProcessStatusData extends AbstractFixture implements OrderedFixtureInt
             array('name' => 'To Do'),
             array('name' => 'In Progress'),
             array('name' => 'Done'),
+            array('name' => 'To Validate'),
         );
      
         foreach ($entities as $entity) {
