@@ -26,7 +26,7 @@ class DefaultController extends Controller
         if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             // Check if the user has a profile, if not redirect to profile_new
             $user = $this->get('security.context')->getToken()->getUser();
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             
             // Check if user has a profile
             if (!$user->getProfile()) {
@@ -62,7 +62,7 @@ class DefaultController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load user's related activities
         $activities = $em->getRepository('NeblionScrumBundle:Activity')->loadRelatedForAccount($user, false, 20);

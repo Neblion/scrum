@@ -34,7 +34,7 @@ class MemberController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -89,7 +89,7 @@ class MemberController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
         if (!$project) {
@@ -131,7 +131,7 @@ class MemberController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
         if (!$project) {
@@ -223,7 +223,7 @@ class MemberController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $member = $em->getRepository('NeblionScrumBundle:Member')->load($id);
         if (!$member) {
@@ -274,7 +274,7 @@ class MemberController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $member = $em->getRepository('NeblionScrumBundle:Member')->load($id);
         if (!$member) {
@@ -340,7 +340,7 @@ class MemberController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load invitations
         $invitations = $em->getRepository('NeblionScrumBundle:Member')
@@ -366,7 +366,7 @@ class MemberController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $member = $em->getRepository('NeblionScrumBundle:Member')->load($id);
         if (!$member) {
@@ -407,7 +407,7 @@ class MemberController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $member = $em->getRepository('NeblionScrumBundle:Member')->load($id);
         if (!$member) {
@@ -448,7 +448,7 @@ class MemberController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $member = $em->getRepository('NeblionScrumBundle:Member')->load($id);
         if (!$member) {
@@ -498,7 +498,7 @@ class MemberController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $member = $em->getRepository('NeblionScrumBundle:Member')->load($id);
         if (!$member) {

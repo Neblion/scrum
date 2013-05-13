@@ -34,7 +34,7 @@ class ProjectReleaseController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -76,7 +76,7 @@ class ProjectReleaseController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         // Load project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -128,7 +128,7 @@ class ProjectReleaseController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         // Load project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -207,7 +207,7 @@ class ProjectReleaseController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $release = $em->getRepository('NeblionScrumBundle:ProjectRelease')->find($id);
         if (!$release) {
@@ -248,7 +248,7 @@ class ProjectReleaseController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load the release
         $release = $em->getRepository('NeblionScrumBundle:ProjectRelease')->find($id);
@@ -310,7 +310,7 @@ class ProjectReleaseController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $release = $em->getRepository('NeblionScrumBundle:ProjectRelease')->find($id);
         if (!$release) {

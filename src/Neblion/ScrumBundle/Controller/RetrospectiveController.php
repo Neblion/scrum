@@ -31,7 +31,7 @@ class RetrospectiveController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $form = null;
         
@@ -97,7 +97,7 @@ class RetrospectiveController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->find($id);
         if (!$sprint) {
@@ -122,7 +122,7 @@ class RetrospectiveController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($retrospective);
             
             // store activity            
@@ -160,7 +160,7 @@ class RetrospectiveController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $retrospective = $em->getRepository('NeblionScrumBundle:Retrospective')->load($id);
         if (!$retrospective) {
@@ -205,7 +205,7 @@ class RetrospectiveController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $retrospective = $em->getRepository('NeblionScrumBundle:Retrospective')->load($id);
         if (!$retrospective) {
@@ -263,7 +263,7 @@ class RetrospectiveController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('NeblionScrumBundle:Retrospective')->find($id);
 
             if (!$entity) {

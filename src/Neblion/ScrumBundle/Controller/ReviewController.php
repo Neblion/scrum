@@ -33,7 +33,7 @@ class ReviewController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->load($id);
         if (!$sprint) {
@@ -92,7 +92,7 @@ class ReviewController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $story = $em->getRepository('NeblionScrumBundle:Story')->find($id);
         if (!$story) {
@@ -152,7 +152,7 @@ class ReviewController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $review = $em->getRepository('NeblionScrumBundle:Review')->load($id);
         if (!$review) {
@@ -192,7 +192,7 @@ class ReviewController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $story = $em->getRepository('NeblionScrumBundle:Story')->load($id, Query::HYDRATE_OBJECT);
         if (!$story) {
@@ -250,7 +250,7 @@ class ReviewController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('NeblionScrumBundle:Review')->find($id);
 
             if (!$entity) {

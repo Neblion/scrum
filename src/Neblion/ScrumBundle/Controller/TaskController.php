@@ -37,7 +37,7 @@ class TaskController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $story = $em->getRepository('NeblionScrumBundle:Story')->load($id, Query::HYDRATE_OBJECT);
         if (!$story) {
@@ -111,7 +111,7 @@ class TaskController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $story = $em->getRepository('NeblionScrumBundle:Story')->find($id);
         if (!$story) {
@@ -214,7 +214,7 @@ class TaskController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->load($id, Query::HYDRATE_OBJECT);
         if (!$sprint) {
@@ -282,7 +282,7 @@ class TaskController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->load($id, Query::HYDRATE_OBJECT);
         if (!$sprint) {
@@ -403,7 +403,7 @@ class TaskController extends Controller
         // Load the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $task = $em->getRepository('NeblionScrumBundle:Task')->load($id);
         if (!$task) {
@@ -470,7 +470,7 @@ class TaskController extends Controller
         // Load the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $task = $em->getRepository('NeblionScrumBundle:Task')->load($id);
         if (!$task) {
@@ -575,7 +575,7 @@ class TaskController extends Controller
         // Load the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $task = $em->getRepository('NeblionScrumBundle:Task')->load($id);
         if (!$task) {
@@ -722,7 +722,7 @@ class TaskController extends Controller
         // Load the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $task = $em->getRepository('NeblionScrumBundle:Task')->load($id);
         if (!$task) {
@@ -821,7 +821,7 @@ class TaskController extends Controller
         // Load the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $task = $em->getRepository('NeblionScrumBundle:Task')->load($id);
         if (!$task) {
@@ -924,7 +924,7 @@ class TaskController extends Controller
         // Load the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $task = $em->getRepository('NeblionScrumBundle:Task')->load($id);
         if (!$task) {
@@ -1018,7 +1018,7 @@ class TaskController extends Controller
         // Load the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $task = $em->getRepository('NeblionScrumBundle:Task')->load($id);
         if (!$task) {
@@ -1120,7 +1120,7 @@ class TaskController extends Controller
         // Load the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $story = $em->getRepository('NeblionScrumBundle:Story')->load($id, Query::HYDRATE_OBJECT);
         if (!$story) {

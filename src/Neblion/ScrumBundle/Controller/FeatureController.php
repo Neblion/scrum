@@ -33,7 +33,7 @@ class FeatureController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -75,7 +75,7 @@ class FeatureController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load current project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -121,7 +121,7 @@ class FeatureController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         // Load current project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -146,7 +146,7 @@ class FeatureController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($feature);
             
             // store activity            
@@ -188,7 +188,7 @@ class FeatureController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $feature = $em->getRepository('NeblionScrumBundle:Feature')->find($id);
         if (!$feature) {
@@ -235,7 +235,7 @@ class FeatureController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $feature = $em->getRepository('NeblionScrumBundle:Feature')->find($id);
         if (!$feature) {
@@ -298,7 +298,7 @@ class FeatureController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $feature = $em->getRepository('NeblionScrumBundle:Feature')->load($id);
         if (!$feature) {

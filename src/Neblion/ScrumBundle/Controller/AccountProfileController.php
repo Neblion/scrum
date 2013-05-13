@@ -24,7 +24,7 @@ class AccountProfileController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('NeblionScrumBundle:Profile')->findAll();
 
@@ -39,7 +39,7 @@ class AccountProfileController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('NeblionScrumBundle:Profile')->find($id);
 
@@ -107,7 +107,7 @@ class AccountProfileController extends Controller
             throw new AccessDeniedException();
         }
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $account = $this->get('security.context')->getToken()->getUser();
         
@@ -152,7 +152,7 @@ class AccountProfileController extends Controller
             throw new AccessDeniedException();
         }
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $account = $this->get('security.context')->getToken()->getUser();
         $profile = $account->getProfile();
@@ -189,7 +189,7 @@ class AccountProfileController extends Controller
             throw new AccessDeniedException();
         }
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $account = $this->get('security.context')->getToken()->getUser();
         $profile = $account->getProfile();
@@ -229,7 +229,7 @@ class AccountProfileController extends Controller
             throw new AccessDeniedException();
         }
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $account = $this->get('security.context')->getToken()->getUser();
         $profile = $account->getProfile();
@@ -274,7 +274,7 @@ class AccountProfileController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('NeblionScrumBundle:Profile')->find($id);
 
             if (!$entity) {

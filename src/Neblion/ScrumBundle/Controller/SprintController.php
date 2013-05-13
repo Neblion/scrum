@@ -35,7 +35,7 @@ class SprintController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load current project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -76,7 +76,7 @@ class SprintController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->load($id);
         if (!$sprint) {
@@ -178,7 +178,7 @@ class SprintController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load current project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -271,7 +271,7 @@ class SprintController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load current project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -408,7 +408,7 @@ class SprintController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->find($id);
         if (!$sprint) {
@@ -451,7 +451,7 @@ class SprintController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->load($id);
         if (!$sprint) {
@@ -523,7 +523,7 @@ class SprintController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->load($id);
         if (!$sprint) {
@@ -605,7 +605,7 @@ class SprintController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->load($id);
         if (!$sprint) {
@@ -706,7 +706,7 @@ class SprintController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->find($id);
         if (!$sprint) {
@@ -800,7 +800,7 @@ class SprintController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $sprint = $em->getRepository('NeblionScrumBundle:Sprint')->load($id);
         if (!$sprint) {

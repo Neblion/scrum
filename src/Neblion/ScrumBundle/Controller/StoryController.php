@@ -38,7 +38,7 @@ class StoryController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -91,7 +91,7 @@ class StoryController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -165,7 +165,7 @@ class StoryController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $story = $em->getRepository('NeblionScrumBundle:Story')->find($id);
         if (!$story) {
@@ -219,7 +219,7 @@ class StoryController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $story = $em->getRepository('NeblionScrumBundle:Story')->find($id);
         if (!$story) {
@@ -286,7 +286,7 @@ class StoryController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $story = $em->getRepository('NeblionScrumBundle:Story')->find($id);
         if (!$story) {
@@ -333,7 +333,7 @@ class StoryController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $story = $em->getRepository('NeblionScrumBundle:Story')->find($id);
         if (!$story) {
@@ -409,7 +409,7 @@ class StoryController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $story = $em->getRepository('NeblionScrumBundle:Story')->find($id);
         if (!$story) {
@@ -488,7 +488,7 @@ class StoryController extends Controller
         // Load the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $story = $em->getRepository('NeblionScrumBundle:Story')->load($id, Query::HYDRATE_OBJECT);
         if (!$story) {

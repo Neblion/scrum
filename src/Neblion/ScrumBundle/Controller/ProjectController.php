@@ -33,7 +33,7 @@ class ProjectController extends Controller
             return $this->redirect($this->generateUrl('fos_user_security_login'));
         }
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $user = $this->get('security.context')->getToken()->getUser();
         
@@ -70,7 +70,7 @@ class ProjectController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -170,7 +170,7 @@ class ProjectController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
         if (!$project) {
@@ -233,7 +233,7 @@ class ProjectController extends Controller
             throw new AccessDeniedException();
         }
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $entity = new Project();
         $form   = $this->createForm(new ProjectType($this->get('translator')), $entity);
@@ -262,7 +262,7 @@ class ProjectController extends Controller
             // Get the current user
             $user = $this->get('security.context')->getToken()->getUser();
             
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
                        
             // Create project
             $em->persist($entity);
@@ -333,7 +333,7 @@ class ProjectController extends Controller
         // Get the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
         if (!$project) {
@@ -372,7 +372,7 @@ class ProjectController extends Controller
         // Get the current user
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('NeblionScrumBundle:Project')->find($id);
         if (!$entity) {
@@ -431,7 +431,7 @@ class ProjectController extends Controller
             throw new AccessDeniedException();
         }
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Get the current user
         $user = $this->get('security.context')->getToken()->getUser();
@@ -505,7 +505,7 @@ class ProjectController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
@@ -579,7 +579,7 @@ class ProjectController extends Controller
     {
         $request = $this->getRequest();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $searchString = $request->query->get('query');
         $query = $em->getRepository('NeblionScrumBundle:Project')->search($searchString);
         $pager = new Pagerfanta(new DoctrineORMAdapter($query));
@@ -606,7 +606,7 @@ class ProjectController extends Controller
         
         $user = $this->get('security.context')->getToken()->getUser();
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         // Load project
         $project = $em->getRepository('NeblionScrumBundle:Project')->find($id);
