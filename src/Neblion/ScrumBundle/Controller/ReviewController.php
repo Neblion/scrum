@@ -125,7 +125,7 @@ class ReviewController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Review was created with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Review was created with success!');
             return $this->redirect($this->generateUrl('review_list', array('id' => $story->getSprint()->getId())));
         }
 
@@ -225,7 +225,7 @@ class ReviewController extends Controller
             $em->flush();
             
             // Set flash message
-            $this->get('session')->setFlash('success', 'Review was updated with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Review was updated with success!');
             return $this->redirect($this->generateUrl('review_list', 
                     array('id' => $story->getSprint()->getId())));
         }

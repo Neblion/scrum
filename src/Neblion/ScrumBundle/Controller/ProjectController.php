@@ -39,7 +39,7 @@ class ProjectController extends Controller
         
         if (!$user->getProfile()) {
             // Set flash message
-            $this->get('session')->setFlash('notice', 'You have not completed your profile, please complete it!');
+            $this->get('session')->getFlashBag()->add('notice', 'You have not completed your profile, please complete it!');
             return $this->redirect($this->generateUrl('profile_new'));
         }
         
@@ -307,7 +307,7 @@ class ProjectController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Project was successfully created!');
+            $this->get('session')->getFlashBag()->add('success', 'Project was successfully created!');
             return $this->redirect($this->generateUrl('project_edit', array('id' => $entity->getId())));
         }
 
@@ -401,7 +401,7 @@ class ProjectController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Project was successfully updated!');
+            $this->get('session')->getFlashBag()->add('success', 'Project was successfully updated!');
             return $this->redirect($this->generateUrl('project_edit', array('id' => $id)));
         }
 
@@ -468,7 +468,7 @@ class ProjectController extends Controller
                 $em->flush();
         
                 // Set flash message
-                $this->get('session')->setFlash('success', 'Project was successfully deleted!');
+                $this->get('session')->getFlashBag()->add('success', 'Project was successfully deleted!');
                 return $this->redirect($this->generateUrl('neblion_scrum_welcome'));
             }
         }
@@ -538,7 +538,7 @@ class ProjectController extends Controller
             
             if (empty($storySortOrder)) {
                 // Set flash message
-                $this->get('session')->setFlash('notice', 'Noting to sort in the Backlog!');
+                $this->get('session')->getFlashBag()->add('notice', 'Noting to sort in the Backlog!');
                 return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
             }
             
@@ -549,7 +549,7 @@ class ProjectController extends Controller
                     // Detect a story not in backlog !!!
                     // TODO: log + alert
                     // Set flash message
-                    $this->get('session')->setFlash('error', 'You try to sort a story who not in the Backlog!');
+                    $this->get('session')->getFlashBag()->add('error', 'You try to sort a story who not in the Backlog!');
                     return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
                 }
             }
@@ -565,7 +565,7 @@ class ProjectController extends Controller
                 return $this->container->get('templating')->renderResponse('NeblionScrumBundle:Project/Ajax:backlogSortOrder.html.twig', array());   
             } else {
                 // Set flash message
-                $this->get('session')->setFlash('success', 'Backlog was successfully sorted!');
+                $this->get('session')->getFlashBag()->add('success', 'Backlog was successfully sorted!');
                 return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
             }
         }

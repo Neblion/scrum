@@ -41,32 +41,15 @@
         
         <div class="container-fluid">
         
-            {% if app.session.hasFlash('error') %}
-                <div class="alert alert-error">
-                    <button class="close" data-dismiss="alert">×</button>
-                    {{ app.session.flash('error')|trans }}
-                </div>
-            {% endif %}
-
-            {% if app.session.hasFlash('success') %}
-                <div class="alert alert-success">
-                    <button class="close" data-dismiss="alert">×</button>
-                    {{ app.session.flash('success')|trans }}
-                </div>
-            {% endif %}
-
-            {% if app.session.hasFlash('info') %}
-                <div class="alert alert-info">
-                    <button class="close" data-dismiss="alert">×</button>
-                    {{ app.session.flash('info')|trans }}
-                </div>
-            {% endif %}
-
-            {% if app.session.hasFlash('notice') %}
-                <div class="alert alert-notice">
-                    <button class="close" data-dismiss="alert">×</button>
-                    {{ app.session.flash('notice')|trans }}
-                </div>
+            {% if app.session.started %}
+                {% for type, flashMessages in app.session.flashbag.all %}
+                    {% for message in flashMessages %}
+                        <div class="alert alert-{{ type }}">
+                            <button class="close" data-dismiss="alert">×</button>
+                            {{ message|trans }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
             {% endif %}
             
             {% block fos_user_content %}{% endblock fos_user_content %}

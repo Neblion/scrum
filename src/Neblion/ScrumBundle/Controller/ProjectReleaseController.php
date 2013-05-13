@@ -98,7 +98,7 @@ class ProjectReleaseController extends Controller
                 ->hasReleaseWithNoDueDate($project->getId());
         if ($release) {
             // Set flash message
-            $this->get('session')->setFlash('notice', 'A release with no due date is in progress, you could not create a new one!');
+            $this->get('session')->getFlashBag()->add('notice', 'A release with no due date is in progress, you could not create a new one!');
             return $this->redirect($this->generateUrl('release_list', array('id' => $project->getId())));
         }
         
@@ -181,7 +181,7 @@ class ProjectReleaseController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Release was created with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Release was created with success!');
             return $this->redirect($this->generateUrl('release_list', array('id' => $project->getId())));
         }
 
@@ -284,7 +284,7 @@ class ProjectReleaseController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Release was updated with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Release was updated with success!');
             return $this->redirect($this->generateUrl('release_list', array('id' => $release->getProject()->getId())));
         }
 
@@ -330,7 +330,7 @@ class ProjectReleaseController extends Controller
         $sprints = $em->getRepository('NeblionScrumBundle:Sprint')->getForRelease($release->getId());
         if ($sprints) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Impossible to delete this release, there is at least a sprint attached to it!');
+            $this->get('session')->getFlashBag()->add('error', 'Impossible to delete this release, there is at least a sprint attached to it!');
             return $this->redirect($this->generateUrl('release_list', array('id' => $release->getProject()->getId())));
         }
         
@@ -351,7 +351,7 @@ class ProjectReleaseController extends Controller
                 $em->flush();
                 
                 // Set flash message
-                $this->get('session')->setFlash('success', 'Release was deleted with success!');
+                $this->get('session')->getFlashBag()->add('success', 'Release was deleted with success!');
                 return $this->redirect($this->generateUrl('release_list', array('id' => $release->getProject()->getId())));
             }
         }

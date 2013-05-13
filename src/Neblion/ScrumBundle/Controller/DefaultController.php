@@ -39,7 +39,7 @@ class DefaultController extends Controller
             $errorList = $this->get('validator')->validateValue($user->getUsername(), $emailConstraint);
             if (count($errorList) == 0) {
                 // Set flash message
-                $this->get('session')->setFlash('notice', 'You should change your username, username should not be an email !');
+                $this->get('session')->getFlashBag()->add('notice', 'You should change your username, username should not be an email !');
                 return $this->redirect($this->generateUrl('profile_username_email'));
             }
             

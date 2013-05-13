@@ -31,7 +31,7 @@ class ResettingController extends BaseController
      */
     protected function setFlash($action, $value)
     {
-        $this->container->get('session')->setFlash('success', 'The password was updated with success !');
+        $this->container->get('session')->getFlashBag()->add('success', 'The password was updated with success !');
     }
     
 }

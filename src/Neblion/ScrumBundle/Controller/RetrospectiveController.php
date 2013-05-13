@@ -133,7 +133,7 @@ class RetrospectiveController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Retrospective was created with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Retrospective was created with success!');
             return $this->redirect($this->generateUrl('retrospective_list', 
                     array('id' => $sprint->getId())));
             
@@ -236,7 +236,7 @@ class RetrospectiveController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Retrospective was updated with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Retrospective was updated with success!');
             return $this->redirect($this->generateUrl('retrospective_list', 
                     array('id' => $retrospective->getSprint()->getId())));
         }

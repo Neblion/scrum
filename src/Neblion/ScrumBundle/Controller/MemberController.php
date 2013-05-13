@@ -196,7 +196,7 @@ class MemberController extends Controller
             $this->get('neblion_mailer')->sendInvitationEmailMessage($email, $user, $project, $account);
             
             // Set flash message
-            $this->get('session')->setFlash('success', 'Your invitation was sent successfully!');
+            $this->get('session')->getFlashBag()->add('success', 'Your invitation was sent successfully!');
             return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
         }
 
@@ -243,7 +243,7 @@ class MemberController extends Controller
         // Check if the member is enabled
         if ($member->getStatus()->getId() != 2) {
             // Set flash message
-            $this->get('session')->setFlash('success', 'You could not edit this member, he was not enabled!');
+            $this->get('session')->getFlashBag()->add('success', 'You could not edit this member, he was not enabled!');
             return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
         }
         
@@ -303,7 +303,7 @@ class MemberController extends Controller
             if ($member->getId() == $currentMember->getId()) {
                 if (!$member->getAdmin() and $em->getRepository('NeblionScrumBundle:Member')->isLastAdmin($member)) {
                     // Set flash message
-                    $this->get('session')->setFlash('error', 'Member was the last admin fot the project, you can not remove his admin privilege !');
+                    $this->get('session')->getFlashBag()->add('error', 'Member was the last admin fot the project, you can not remove his admin privilege !');
                     return $this->redirect($this->generateUrl('member_edit', array('id' => $member->getId())));
                 }
             }
@@ -314,7 +314,7 @@ class MemberController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Member was successfully updated !');
+            $this->get('session')->getFlashBag()->add('success', 'Member was successfully updated !');
             return $this->redirect($this->generateUrl('member_edit', array('id' => $member->getId())));
         }
 
@@ -388,7 +388,7 @@ class MemberController extends Controller
         $em->flush();
         
         // Set flash message
-        $this->get('session')->setFlash('success', 'You have successfully accepted invitation to this team !');
+        $this->get('session')->getFlashBag()->add('success', 'You have successfully accepted invitation to this team !');
         return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
     }
     
@@ -429,7 +429,7 @@ class MemberController extends Controller
         $em->flush();
         
         // Set flash message
-        $this->get('session')->setFlash('success', 'You have successfully refused invitation to this team !');
+        $this->get('session')->getFlashBag()->add('success', 'You have successfully refused invitation to this team !');
         return $this->redirect($this->generateUrl('neblion_scrum_welcome'));
     }
     
@@ -476,7 +476,7 @@ class MemberController extends Controller
         $this->get('neblion_mailer')->sendInvitationEmailMessage($member->getAccount(), $user, $project);
         
         // Set flash message
-        $this->get('session')->setFlash('success', 'You have successfully renew invitation to this member !');
+        $this->get('session')->getFlashBag()->add('success', 'You have successfully renew invitation to this member !');
         return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
     }
     
@@ -510,7 +510,7 @@ class MemberController extends Controller
         // Check if current user try to remove himself !
         if ($member->getAccount()->getId() == $user->getId()) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You could not remove yourself from the team !');
+            $this->get('session')->getFlashBag()->add('error', 'You could not remove yourself from the team !');
             return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
         }
 
@@ -528,7 +528,7 @@ class MemberController extends Controller
                 ->getToDoInProgressForMember($member->getId());
         if (!empty($tasks)) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Member could not be remove from team, there are tasks associated to him !');
+            $this->get('session')->getFlashBag()->add('error', 'Member could not be remove from team, there are tasks associated to him !');
             return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
         }
         
@@ -546,7 +546,7 @@ class MemberController extends Controller
                 $this->get('neblion_mailer')->sendMemberRemoveNotification($member, $user, $project);
             
                 // Set flash message
-                $this->get('session')->setFlash('success', 'Member was removed from team with success!');
+                $this->get('session')->getFlashBag()->add('success', 'Member was removed from team with success!');
                 return $this->redirect($this->generateUrl('member_list', array('id' => $project->getId())));
             }
         }

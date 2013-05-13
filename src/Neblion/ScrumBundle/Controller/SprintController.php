@@ -196,7 +196,7 @@ class SprintController extends Controller
         // Check if there is already a current sprint
         if ($em->getRepository('NeblionScrumBundle:Sprint')->getCurrentForProject($project->getId())) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'There is already a current sprint for this project!');
+            $this->get('session')->getFlashBag()->add('error', 'There is already a current sprint for this project!');
             return $this->redirect($this->generateUrl('sprint_list', array('id' => $project->getId())));
         }
         
@@ -208,7 +208,7 @@ class SprintController extends Controller
         // Check if this story belongs to project
         if ($lastStory->getProject() != $project) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Story was not belong to this project!');
+            $this->get('session')->getFlashBag()->add('error', 'Story was not belong to this project!');
             return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         
@@ -226,7 +226,7 @@ class SprintController extends Controller
         foreach ($stories as $story) {
             if ($story->getEstimate() == 0) {
                 // Set flash message
-                $this->get('session')->setFlash('error', 'You could not start this sprint, a story was not estimated!');
+                $this->get('session')->getFlashBag()->add('error', 'You could not start this sprint, a story was not estimated!');
                 return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
             }
             $estimate += $story->getEstimate();
@@ -289,7 +289,7 @@ class SprintController extends Controller
         // Check if there is already a current sprint
         if ($em->getRepository('NeblionScrumBundle:Sprint')->getCurrentForProject($project->getId())) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'There is already a current sprint for this project!');
+            $this->get('session')->getFlashBag()->add('error', 'There is already a current sprint for this project!');
             return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         
@@ -301,7 +301,7 @@ class SprintController extends Controller
         // Check if this story belongs to project
         if ($lastStory->getProject() != $project) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Story was not belong to this project!');
+            $this->get('session')->getFlashBag()->add('error', 'Story was not belong to this project!');
             return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         
@@ -330,7 +330,7 @@ class SprintController extends Controller
         foreach ($stories as $story) {
             if ($story->getEstimate() == 0) {
                 // Set flash message
-                $this->get('session')->setFlash('error', 'You could not start this sprint, a story was not estimated!');
+                $this->get('session')->getFlashBag()->add('error', 'You could not start this sprint, a story was not estimated!');
                 return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
             }
             $estimate += $story->getEstimate();
@@ -379,7 +379,7 @@ class SprintController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Sprint was created successfully!');
+            $this->get('session')->getFlashBag()->add('success', 'Sprint was created successfully!');
             return $this->redirect($this->generateUrl('sprint_list', array('id' => $project->getId())));
         }
 
@@ -490,7 +490,7 @@ class SprintController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Sprint was updated with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Sprint was updated with success!');
             return $this->redirect($this->generateUrl('sprint_list', array('id' => $project->getId())));
         }
 
@@ -532,13 +532,13 @@ class SprintController extends Controller
         
         // If status is different than ToDo, you can start this sprint
         if ($sprint->getStatus()->getId() == 2) {
-            $this->get('session')->setFlash('error', 'This sprint is In Progress status, so you can not start it !');
+            $this->get('session')->getFlashBag()->add('error', 'This sprint is In Progress status, so you can not start it !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $sprint->getId())));
         }
         
         // Check start date (can be later than today)
         if ($sprint->getStart() > new \DateTime()) {
-            $this->get('session')->setFlash('error', 'You can not start this sprint, start date is later than today !');
+            $this->get('session')->getFlashBag()->add('error', 'You can not start this sprint, start date is later than today !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $sprint->getId())));
         }
         
@@ -557,7 +557,7 @@ class SprintController extends Controller
         // Check if another sprint is in progress
         $currentSprint = $em->getRepository('NeblionScrumBundle:Sprint')->getCurrentForProject($project->getId());
         if (!empty($currentSprint)) {
-            $this->get('session')->setFlash('error', 'A sprint is still in progress, you can not start this one!');
+            $this->get('session')->getFlashBag()->add('error', 'A sprint is still in progress, you can not start this one!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $sprint->getId())));
         }
         
@@ -565,7 +565,7 @@ class SprintController extends Controller
         $stories = $em->getRepository('NeblionScrumBundle:Story')
                 ->getStoriesWithoutTaskForSprint($sprint->getId());
         if (!empty($stories)) {
-            $this->get('session')->setFlash('error', 'There is at least one story with no task!');
+            $this->get('session')->getFlashBag()->add('error', 'There is at least one story with no task!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $sprint->getId())));
         }
         
@@ -581,7 +581,7 @@ class SprintController extends Controller
         $em->flush();
         
         // Set flash message
-        $this->get('session')->setFlash('success', 'Sprint was started with success!');
+        $this->get('session')->getFlashBag()->add('success', 'Sprint was started with success!');
         return $this->redirect($this->generateUrl('sprint_show', array('id' => $sprint->getId())));
         
         return array(
@@ -668,7 +668,7 @@ class SprintController extends Controller
             }
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Sprint was closed with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Sprint was closed with success!');
             return $this->redirect($this->generateUrl('sprint_list', array('id' => $project->getId())));
         }
         
@@ -762,7 +762,7 @@ class SprintController extends Controller
             }
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Sprint was deleted with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Sprint was deleted with success!');
             return $this->redirect($this->generateUrl('sprint_list', array('id' => $project->getId())));
         }
 

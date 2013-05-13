@@ -79,7 +79,7 @@ class AccountProfileController extends Controller
         // Check if the user has already a profile
         if ($account->getProfile()) {
             // Set flash message
-            $this->get('session')->setFlash('notice', 'You have already a profile, edit it!');
+            $this->get('session')->getFlashBag()->add('notice', 'You have already a profile, edit it!');
             return $this->redirect($this->generateUrl('profile_edit', array('id' => $account->getProfile()->getId())));
         }
         
@@ -114,7 +114,7 @@ class AccountProfileController extends Controller
         // Check if the user has already a profile
         if ($account->getProfile()) {
             // Set flash message
-            $this->get('session')->setFlash('notice', 'You have already a profile, edit it!');
+            $this->get('session')->getFlashBag()->add('notice', 'You have already a profile, edit it!');
             return $this->redirect($this->generateUrl('profile_edit', array('id' => $account->getProfile()->getId())));
         }
         
@@ -129,7 +129,7 @@ class AccountProfileController extends Controller
             $em->flush();
             
             // Set flash message
-            $this->get('session')->setFlash('success', 'Profile was successfully created!');
+            $this->get('session')->getFlashBag()->add('success', 'Profile was successfully created!');
             return $this->redirect($this->generateUrl('neblion_scrum_welcome'));
         }
 
@@ -160,7 +160,7 @@ class AccountProfileController extends Controller
         // Check if the user has already a profile
         if (!$profile) {
             // Set flash message
-            $this->get('session')->setFlash('notice', 'You have not a profile, create it!');
+            $this->get('session')->getFlashBag()->add('notice', 'You have not a profile, create it!');
             return $this->redirect($this->generateUrl('profile_new'));
         }
         
@@ -197,7 +197,7 @@ class AccountProfileController extends Controller
         // Check if the user has already a profile
         if (!$profile) {
             // Set flash message
-            $this->get('session')->setFlash('notice', 'You have not a profile, create it!');
+            $this->get('session')->getFlashBag()->add('notice', 'You have not a profile, create it!');
             return $this->redirect($this->generateUrl('profile_new'));
         }
         
@@ -206,7 +206,7 @@ class AccountProfileController extends Controller
         $process = $formHandler->process($account);
         if ($process) {
             // set flash message and redirect
-            $this->get('session')->setFlash('success', 'Username and/or email was updated with success !');
+            $this->get('session')->getFlashBag()->add('success', 'Username and/or email was updated with success !');
             return $this->redirect($this->generateUrl('profile_username_email'));
         }
 
@@ -237,7 +237,7 @@ class AccountProfileController extends Controller
         // Check if the user has already a profile
         if (!$profile) {
             // Set flash message
-            $this->get('session')->setFlash('notice', 'You have not a profile, create it!');
+            $this->get('session')->getFlashBag()->add('notice', 'You have not a profile, create it!');
             return $this->redirect($this->generateUrl('profile_new'));
         }
         
@@ -250,7 +250,7 @@ class AccountProfileController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Profile was successfully updated!');
+            $this->get('session')->getFlashBag()->add('success', 'Profile was successfully updated!');
             return $this->redirect($this->generateUrl('profile_edit'));
         }
 

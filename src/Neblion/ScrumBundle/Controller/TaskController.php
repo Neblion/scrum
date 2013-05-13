@@ -56,12 +56,12 @@ class TaskController extends Controller
         $sprint = $story->getSprint();
         if (!$sprint) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You could not add a task to this story, it was not included in a sprint!');
+            $this->get('session')->getFlashBag()->add('error', 'You could not add a task to this story, it was not included in a sprint!');
             return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         if ($sprint->getStatus()->getId() == 3) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You could not add a task to this story, the associated sprint is done !');
+            $this->get('session')->getFlashBag()->add('error', 'You could not add a task to this story, the associated sprint is done !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $sprint->getId())));
         }
         
@@ -130,7 +130,7 @@ class TaskController extends Controller
         $sprint = $story->getSprint();
         if (!$sprint) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You could not add a task to this story, it was not included in a sprint!');
+            $this->get('session')->getFlashBag()->add('error', 'You could not add a task to this story, it was not included in a sprint!');
             return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         
@@ -173,7 +173,7 @@ class TaskController extends Controller
 
             if (!$this->getRequest()->isXmlHttpRequest()) {
                 // Set flash message
-                $this->get('session')->setFlash('success', 'Task was successfully created!');
+                $this->get('session')->getFlashBag()->add('success', 'Task was successfully created!');
                 return $this->redirect($this->generateUrl('sprint_show', array('id' => $story->getSprint()->getId())));
             }
         }
@@ -232,7 +232,7 @@ class TaskController extends Controller
         // Check sprint status
         if ($sprint->getStatus()->getId() == 3) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You could not add a task to this story, the associated sprint is done !');
+            $this->get('session')->getFlashBag()->add('error', 'You could not add a task to this story, the associated sprint is done !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $sprint->getId())));
         }
         
@@ -358,7 +358,7 @@ class TaskController extends Controller
 
             if (!$this->getRequest()->isXmlHttpRequest()) {
                 // Set flash message
-                $this->get('session')->setFlash('success', 'Task was successfully created!');
+                $this->get('session')->getFlashBag()->add('success', 'Task was successfully created!');
                 return $this->redirect($this->generateUrl('sprint_show', array('id' => $story->getSprint()->getId())));
             }
         }
@@ -421,14 +421,14 @@ class TaskController extends Controller
         // Check if task is done
         if ($task->getStatus()->getId() == 3) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Task is done, you could not edit it!');
+            $this->get('session')->getFlashBag()->add('error', 'Task is done, you could not edit it!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
         // Check if associated sprint is closed
         if ($task->getStory()->getSprint()->getStatus()->getId() == 3) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Associated sprint is done, you could not edit this task !');
+            $this->get('session')->getFlashBag()->add('error', 'Associated sprint is done, you could not edit this task !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
@@ -488,14 +488,14 @@ class TaskController extends Controller
         // Check if task is done
         if ($task->getStatus()->getId() == 3) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Task is done, you could not edit it!');
+            $this->get('session')->getFlashBag()->add('error', 'Task is done, you could not edit it!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
         // Check if associated sprint is closed
         if ($task->getStory()->getSprint()->getStatus()->getId() == 3) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Associated sprint is done, you could not edit this task !');
+            $this->get('session')->getFlashBag()->add('error', 'Associated sprint is done, you could not edit this task !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
 
@@ -541,7 +541,7 @@ class TaskController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Task was successfully updated!');
+            $this->get('session')->getFlashBag()->add('success', 'Task was successfully updated!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
 
@@ -596,7 +596,7 @@ class TaskController extends Controller
                 $error = 'The associated sprint is not in progress !';
             } else {
                 // Set flash message
-                $this->get('session')->setFlash('error', 'Associtaed sprint is not assign to you, you could not edit it!');
+                $this->get('session')->getFlashBag()->add('error', 'Associtaed sprint is not assign to you, you could not edit it!');
                 return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
             }
         }
@@ -605,7 +605,7 @@ class TaskController extends Controller
         if ($task->getMember() and $task->getMember()->getAccount()->getId() != $user->getId()) {
             if (!$this->getRequest()->isXmlHttpRequest()) {
                 // Set flash message
-                $this->get('session')->setFlash('error', 'Task is not assign to you, you could not edit it!');
+                $this->get('session')->getFlashBag()->add('error', 'Task is not assign to you, you could not edit it!');
                 return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
             } else {
                 $error = 'Task is not assign to you, you could not edit it!';
@@ -616,7 +616,7 @@ class TaskController extends Controller
         if ($task->getStatus()->getId() != 2) {
             if (!$this->getRequest()->isXmlHttpRequest()) {
                 // Set flash message
-                $this->get('session')->setFlash('error', 'Task is not in progress, you could not edit their hours !');
+                $this->get('session')->getFlashBag()->add('error', 'Task is not in progress, you could not edit their hours !');
                 return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
             } else {
                 $error = 'Task is not in progress, you could not edit their hours !';
@@ -678,7 +678,7 @@ class TaskController extends Controller
 
                 if (!$this->getRequest()->isXmlHttpRequest()) {
                     // Set flash message
-                    $this->get('session')->setFlash('success', 'Task was updated with success!');
+                    $this->get('session')->getFlashBag()->add('success', 'Task was updated with success!');
                     return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
                 }
             }
@@ -740,26 +740,26 @@ class TaskController extends Controller
         // Check if the associated sprint is closed
         if ($task->getStory()->getSprint()->getStatus()->getId() == 3) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You can not take task, the sprint is closed !');
+            $this->get('session')->getFlashBag()->add('error', 'You can not take task, the sprint is closed !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
   
         // Check if the sprint is started
         if ($task->getStory()->getSprint()->getStatus()->getId() == 1) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You can not take task, the sprint is not in progress !');
+            $this->get('session')->getFlashBag()->add('error', 'You can not take task, the sprint is not in progress !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
         if ($task->getMember() and $task->getMember()->getId() == $user->getId()) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'This task is already assign to you!');
+            $this->get('session')->getFlashBag()->add('error', 'This task is already assign to you!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
         if ($task->getStatus()->getId() == 3) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You can not take this task, it was done!');
+            $this->get('session')->getFlashBag()->add('error', 'You can not take this task, it was done!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
@@ -797,7 +797,7 @@ class TaskController extends Controller
         $em->flush();
 
         // Set flash message
-        $this->get('session')->setFlash('success', 'Task was successfully updated!');
+        $this->get('session')->getFlashBag()->add('success', 'Task was successfully updated!');
         return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
     }
     
@@ -839,35 +839,35 @@ class TaskController extends Controller
         // Check if the associated sprint is closed
         if ($task->getStory()->getSprint()->getStatus()->getId() == 3) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You can not update this task, the sprint is closed !');
+            $this->get('session')->getFlashBag()->add('error', 'You can not update this task, the sprint is closed !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
         // Check if the associated sprint is in progress
         if ($task->getStory()->getSprint()->getStatus()->getId() == 1) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You can not set this task in progress, the sprint is not started !');
+            $this->get('session')->getFlashBag()->add('error', 'You can not set this task in progress, the sprint is not started !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
         // Check if the task is assigned
         if (!$task->getMember()) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Unable to change status, task is not assign!');
+            $this->get('session')->getFlashBag()->add('error', 'Unable to change status, task is not assign!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
         // Check if the task is own by the user or if user is ADMIN or SM
         if ($task->getMember()->getAccount()->getId() != $user->getId() and !in_array($member->getRole()->getId(), array(1, 3))) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Unable to change status, you do not have sufficient rights !');
+            $this->get('session')->getFlashBag()->add('error', 'Unable to change status, you do not have sufficient rights !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
         // Check if task was already in progress
         if ($task->getStatus()->getId() == 2) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Task was already in progress!');
+            $this->get('session')->getFlashBag()->add('error', 'Task was already in progress!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
@@ -898,7 +898,7 @@ class TaskController extends Controller
         $em->flush();
 
         // Set flash message
-        $this->get('session')->setFlash('success', 'Task was successfully updated!');
+        $this->get('session')->getFlashBag()->add('success', 'Task was successfully updated!');
         return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
     }
     
@@ -942,21 +942,21 @@ class TaskController extends Controller
         // Check if the associated sprint is closed
         if ($task->getStory()->getSprint()->getStatus()->getId() == 3) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You can not update this task, the sprint is closed !');
+            $this->get('session')->getFlashBag()->add('error', 'You can not update this task, the sprint is closed !');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
         // Check if the task is assigned
         if (!$task->getMember()) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Unable to change status, task is not assign!');
+            $this->get('session')->getFlashBag()->add('error', 'Unable to change status, task is not assign!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
         // Check if task was already done
         if ($task->getStatus()->getId() == 3) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Task was already done!');
+            $this->get('session')->getFlashBag()->add('error', 'Task was already done!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
@@ -998,7 +998,7 @@ class TaskController extends Controller
         $em->flush();
 
         // Set flash message
-        $this->get('session')->setFlash('success', 'Task was successfully updated!');
+        $this->get('session')->getFlashBag()->add('success', 'Task was successfully updated!');
         return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
     }
     
@@ -1036,7 +1036,7 @@ class TaskController extends Controller
         // Check if the task is own by the user or if user is ADMIN or SM
         if (!in_array($member->getRole()->getId(), array(1, 3))) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'You have not sufficient privilege to delete this task!');
+            $this->get('session')->getFlashBag()->add('error', 'You have not sufficient privilege to delete this task!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
@@ -1044,7 +1044,7 @@ class TaskController extends Controller
         // Check status
         if ($task->getStatus()->getId() != 1) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Task could not be deleted!');
+            $this->get('session')->getFlashBag()->add('error', 'Task could not be deleted!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         
@@ -1085,7 +1085,7 @@ class TaskController extends Controller
             }
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Task was deleted with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Task was deleted with success!');
             return $this->redirect($this->generateUrl('sprint_show', array('id' => $task->getStory()->getSprint()->getId())));
         }
         

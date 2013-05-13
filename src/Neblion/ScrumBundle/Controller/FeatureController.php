@@ -160,7 +160,7 @@ class FeatureController extends Controller
 
             if (!$this->getRequest()->isXmlHttpRequest()) {
                 // Set flash message
-                $this->get('session')->setFlash('success', 'Feature was created with success!');
+                $this->get('session')->getFlashBag()->add('success', 'Feature was created with success!');
                 return $this->redirect($this->generateUrl('feature_list', array('id' => $project->getId())));
             }
         }
@@ -272,7 +272,7 @@ class FeatureController extends Controller
             $em->flush();
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Feature was updated with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Feature was updated with success!');
             return $this->redirect($this->generateUrl('feature_list', array('id' => $project->getId())));
         }
 
@@ -320,7 +320,7 @@ class FeatureController extends Controller
         $stories = $feature->getStories();
         if (count($stories) != 0) {
             // Set flash message
-            $this->get('session')->setFlash('notice', 'You could not delete this Feature, stories associated with it!');
+            $this->get('session')->getFlashBag()->add('notice', 'You could not delete this Feature, stories associated with it!');
             return $this->redirect($this->generateUrl('feature_list', array('id' => $project->getId())));
         }
         
@@ -342,7 +342,7 @@ class FeatureController extends Controller
             }
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Feature was deleted with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Feature was deleted with success!');
             return $this->redirect($this->generateUrl('feature_list', array('id' => $project->getId())));
         }
         

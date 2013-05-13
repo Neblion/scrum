@@ -129,7 +129,7 @@ class StoryController extends Controller
             
             if (!$this->getRequest()->isXmlHttpRequest()) {
                 // Set flash message
-                $this->get('session')->setFlash('success', 'Story was created with success!');
+                $this->get('session')->getFlashBag()->add('success', 'Story was created with success!');
                 return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
             }
         }
@@ -183,7 +183,7 @@ class StoryController extends Controller
         // Block story estimate if story was not validate
         if ($story->getStatus()->getId() == 4) {
             // Set flash message
-            $this->get('session')->setFlash('notice', 'You can not edit estimate, because story was not validate !');
+            $this->get('session')->getFlashBag()->add('notice', 'You can not edit estimate, because story was not validate !');
         }
 
         // Create forms instance
@@ -242,7 +242,7 @@ class StoryController extends Controller
             // Block story estimate if story was not validate
             if ($story->getStatus()->getId() == 4 and $story->getEstimate() != 0) {
                 // Set flash message
-                $this->get('session')->setFlash('notice', 'You can not edit estimate, because story was not validate !');
+                $this->get('session')->getFlashBag()->add('notice', 'You can not edit estimate, because story was not validate !');
                 $story->setEstimate(0);
             }
             
@@ -256,7 +256,7 @@ class StoryController extends Controller
             $em->flush();
             
             // Set flash message
-            $this->get('session')->setFlash('success', 'Story was updated with success!');
+            $this->get('session')->getFlashBag()->add('success', 'Story was updated with success!');
             if (is_null($story->getSprint())) {
                 return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
             } else {
@@ -314,7 +314,7 @@ class StoryController extends Controller
         $em->flush();
 
         // Set flash message
-        $this->get('session')->setFlash('success', 'Story was validated with success!');
+        $this->get('session')->getFlashBag()->add('success', 'Story was validated with success!');
         return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
     }
     
@@ -369,7 +369,7 @@ class StoryController extends Controller
 
                 if (!$this->getRequest()->isXmlHttpRequest()) {
                     // Set flash message
-                    $this->get('session')->setFlash('success', 'Story was updated with success!');
+                    $this->get('session')->getFlashBag()->add('success', 'Story was updated with success!');
                     return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
                 }
             }
@@ -430,7 +430,7 @@ class StoryController extends Controller
         // Only story not assign to a sprint could be deleted
         if ($story->getSprint()) {
             // Set flash message
-            $this->get('session')->setFlash('error', 'Story could not be deleted !');
+            $this->get('session')->getFlashBag()->add('error', 'Story could not be deleted !');
             return $this->redirect($this->generateUrl('project_backlog'));
         }
         
@@ -452,7 +452,7 @@ class StoryController extends Controller
             }
 
             // Set flash message
-            $this->get('session')->setFlash('success', 'Story was deleted with success !');
+            $this->get('session')->getFlashBag()->add('success', 'Story was deleted with success !');
             return $this->redirect($this->generateUrl('project_backlog', array('id' => $project->getId())));
         }
         
